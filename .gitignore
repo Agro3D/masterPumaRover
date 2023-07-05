@@ -1,0 +1,12 @@
+# Arquivos a serem ignorados pelo git
+
+# Pasta de build do projeto
+build/
+
+
+# Arquivos de configuração do projeto
+.vscode/
+
+
+# Arquivos temporarios e de testes do servidor
+pages/temp
