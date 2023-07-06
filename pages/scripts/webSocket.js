@@ -18,48 +18,22 @@ function initWebSocket() {
     ws.onmessage = async function (event) {
         console.log('Server: ', event.data);
 
-        var status = event.data;
+        // Transform event.data to json
+        var data = JSON.parse(event.data);
+        var mensagem = data['mensagem'];
+        var valor = data['valor'];
 
-        //  verifica qual pagina o usuario esta a partir de um pedaco da url
-        if (window.location.href.indexOf("arquivos") > -1) {
-            switch(status) {
-                case 'Conectado':
-                    enableButtons();
-                    break;
-                case 'refreshStatus':
-                    await loadFiles();
-                    enableButtons();
-                    break;
-                default:
-                    console.log('Nenhuma ação definida');
-                    break;
-            }
-        } else{
-            switch(status) {
-                case 'Conectado':
-                    checkStatus();
-                    break;
-                case 'Esperando':
-                    configurarEsperando();
-                    break;
-                case 'Pesquisando':
-                    configurarPesquisando();
-                    break;
-                case 'Processando':
-                    configurarProcessando();
-                    break;
-                case 'Salvando':
-                    console.log('Salvando');
-                    break;
-
-                case 'refreshStatus':
-                checkStatus();
+        switch(mensagem) {
+            case 'cota':
+                atualizaCota(valor);
                 break;
-                
-                default:
-                    console.log('Nenhuma ação definida');
-                    break;
-            }
+            case 'statusRTK':
+                atualizaStatusRTK(valor);
+                break;
+
+            default:
+                console.log('Nenhuma ação definida');
+                break;
         }
     };
 };

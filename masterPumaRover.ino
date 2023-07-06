@@ -13,7 +13,7 @@ void setup() {
   Serial.println();
   Serial.println();
   Serial.println("============================================================");
-  Serial.println("  ----- Inicializando o Master Puma Station PPK -----  ");
+  Serial.println("  ----- Inicializando o Master Puma Rover RTK -----  ");
   // Serial.println("Versao do Arduino: " + String(ARDUINO));
 
   // Inicia o WiFi no modo AP com o SSID e a senha definidos.
