@@ -24,13 +24,13 @@ char INDEX_PAGE[] PROGMEM = R"=====(
             <h1 id="tituloPrincipal">Rover RTK</h1>
 
 
-            <div id="configuracoes" class="visivel">
+            <div id="configuracoes" class="naoVisivel">
                 <div id="configuracaoRadio" class="divs bordas">
 
                     <div id="frequenciaRadio" class="optionsRadio">
                         <p class="titulo">Frequencia do rádio</p>
                         <div id="frequenciaValor">
-                            <input type="number" class="input" min="430" max="470" value="430"> MHZ
+                            <input type="number" id="frequenciaRadioValor" class="input" min="430" max="470" value="430"> MHZ
                         </div>
                     </div>
 
@@ -53,7 +53,7 @@ char INDEX_PAGE[] PROGMEM = R"=====(
                     <div id="frequenceDiv" class="optionsDivs">
                         <p class="titulo">Frequência
                         </p>
-                        <select id="frequence" name="frequence" class="input" onchange="frequenceHandler()">
+                        <select id="frequenciaTransmissao" name="frequence" class="input">
                             <option value="1" selected>1HZ</option>
                             <option value="3">3HZ</option>
                             <option value="5">5HZ</option>
@@ -93,7 +93,7 @@ char INDEX_PAGE[] PROGMEM = R"=====(
                 </div>
 
                 <div class="button">
-                    <button onclick="sendRequest()" id="botaoNovoTrabalho">Iniciar</button>
+                    <button onclick="novoTrabalho()" id="botaoNovoTrabalho">Iniciar</button>
                 </div>
             </div>
 
@@ -102,19 +102,23 @@ char INDEX_PAGE[] PROGMEM = R"=====(
 
 
 
-            <div id="status" class="naoVisivel">
+            <div id="status" class="visivel">
                 <div id="cota" class="divs bordas">
                     <p id="tituloCota" class="titulo">Cota</p>
                     <div id="cotaQuadro">
-                        <p id="cotaValor">000 M</p>
+                        <p id="cotaValor">000,000</p>
                     </div>
                 </div>
 
                 <div id="statusRTK" class="divs">
 
                     <div id="tituloStatus">Status do RTK: </div>
-                    <div id="statusValor">FIX</div>
+                    <div id="statusRTKValor" class="verde">FIX</div>
 
+                </div>
+
+                <div class="button">
+                    <button onclick="voltar()" id="botaoCancelar">Voltar</button>
                 </div>
             </div>
 

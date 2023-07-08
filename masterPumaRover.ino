@@ -2,11 +2,10 @@
 #include "libs/common.h"              // Variáveis globais
 
 
-// Funções do Programa
-
 // Função para realizar a configuração inicial do servidor web.
 void setup() {
   Serial.begin(115200);
+  MySerialZed.begin(19200, SERIAL_8N1, RX, TX);     // Set up the hardware serial port
   delay(2000);
   
   // Imprime linhas de separação e mensagens de inicialização no console serial.
@@ -25,6 +24,7 @@ void setup() {
     delay(1000);
   }
 
+
   // Imprime informações sobre o AP no console serial.
   Serial.println("WiFi Inicializado");
   Serial.println("SSID: .................................. " + String(ssid));
@@ -35,22 +35,22 @@ void setup() {
   Serial.print("Endereco de IP do Access Point: ........ ");
   Serial.println(IP);
 
-  
-   // Iniciar o servidor WebSocket
-    Serial.println("Inicializando o servidor WebSocket");
-    webSocket.begin();
-    webSocket.onEvent(webSocketEvent);
-    Serial.println("Servidor WebSocket Inicializado");
+
+  // Iniciar o servidor WebSocket
+  Serial.println("Inicializando o servidor WebSocket");
+  webSocket.begin();
+  webSocket.onEvent(webSocketEvent);
+  Serial.println("Servidor WebSocket Inicializado");
 
 
   // Inicia o protocolo I2C como master.
   Serial.println();
   Serial.println("Iniciando Comunicação UART");
-  // MySerial.begin(480600, SERIAL_8N1, MYPORT_RX, MYPORT_TX);     // Set up the hardware serial port
+  MySerial.begin(480600, SERIAL_8N1, MYPORT_RX, MYPORT_TX);     // Set up the hardware serial port
   delay(1000);
-  // while (MySerial.available()) MySerial.read();
+  while (MySerial.available()) MySerial.read();
 
-  // Serial.println("Comunicação UART Inicializado");
+  Serial.println("Comunicação UART Inicializado");
 
 
   // Inicia o servidor web e imprime uma mensagem no console serial.
@@ -58,27 +58,13 @@ void setup() {
   Serial.println("Iniciando o servidor HTTP");
   setupServer();
   server.begin();
-  // Serial.println("Servidor HTTP iniciado em http://" + String(IP.toString()));
+  Serial.println("Servidor HTTP iniciado em http://" + String(IP.toString()));
 
 
-  // Inicia a comunicação com o escravo e imprime uma mensagem no console serial.
-  Serial.println();
-  // Serial.println("Iniciando a comunicacao com o escravo");
-
-  // Teste de comunicação com o escravo, através de um pedido de lista de arquivos.
-
-  // delay(1000);
-  // ComandoEscravo = LISTA_ARQUIVOS;          // Envia o comando de lista de arquivos para o escravo.
-  // slaveSendHandler();                       // Chama a função de manipulação de envio para o escravo.
-  // slaveReceiveHandler();                    // Chama a função de manipulação de recebimento do escravo.
-  // Recebendo a primeira mensagem do escravo, que são os arquivos de log existentes
-
-
-  Serial.println("\n\n\tMaster Puma Station PPK inicializado.");
+  Serial.println("\n\n\tMaster Puma Rover inicializado.");
 
   Serial.println();
   Serial.println("============================================================");
-  Serial.println();
   Serial.println();
   Serial.println("Servidor aguardando requisicoes...");
   Serial.println();
@@ -94,14 +80,20 @@ void loop() {
   //   slaveReceiveHandler();                        // Chama a função de manipulação de recebimento do escravo.
   // }
 
-  webSocket.loop();
-  delay(500);
 
-  // Verifique se há pelo menos um cliente conectado antes de tentar enviar uma mensagem
-  // if (webSocket.connectedClients() > 0) {
-      // webSocket.sendTXT(0, "Hello from server"); // 0 here means sending to the first client. You can loop over all clients if there are multiple.
-  //     Serial.println("Enviando mensaegm no websocket");
-  // }
+  Serial.println("Verificando mensagens na UART0...");
+  while (MySerialZed.available()) {
+    String message = MySerialZed.readStringUntil('\n');
+    
+    String cota = getAltitudeFromNMEA(message);
+    if(cota != "-1.00"){
+      Serial.println("Cota: " + String(cota));
+      webSocket.broadcastTXT(cota);
+    }
+  }
+
+  webSocket.loop();
+  delay(300);
 }
 
 
@@ -136,7 +128,7 @@ void webSocketEvent(uint8_t num, WStype_t type, uint8_t * payload, size_t length
             break;
         case WStype_CONNECTED: {
             Serial.printf("[%u] Connected from  . . .  url: 192.168.4.1%s\n", num, payload);
-            webSocket.sendTXT(num, "Conectado");
+            // webSocket.sendTXT(num, "Conectado");
         }
         break;
         case WStype_TEXT:

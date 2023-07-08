@@ -84,6 +84,21 @@ char INDEX_STYLE[] PROGMEM = R"=====(
     cursor: pointer;
 }
 
+#botaoCancelar{
+    background-color: #e81e1e;
+    width: 16vw;
+    height: 4.5vh;
+    border-radius: 10px;
+    font-size: 2vh;
+    font-weight: bold;
+    margin: 1.5vh 0;
+}
+
+#botaoCancelar:hover{
+    background-color: #b91c1c;
+    cursor: pointer;
+}
+
 #constelacoesOptions{
     column-count: 2;
 }
@@ -109,7 +124,7 @@ char INDEX_STYLE[] PROGMEM = R"=====(
 
 #cotaValor{
     margin-block: 1vh;
-    color: rebeccapurple;
+    color: #FFF;
     font-size: 12vh;
     font-weight: bold;
     font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
@@ -130,7 +145,7 @@ char INDEX_STYLE[] PROGMEM = R"=====(
     margin-right: 2vh;
 }
 
-#statusValor{
+#statusRTKValor{
     display: flex;
     align-items: center;
     justify-content: center;
@@ -176,6 +191,12 @@ char INDEX_STYLE[] PROGMEM = R"=====(
     
     #checkboxsOptions{
         column-count: 1;
+    }
+
+    #cotaQuadro{
+        padding-top: 0;
+        padding-bottom: 0;
+        margin-block: 0;
     }
 }
 

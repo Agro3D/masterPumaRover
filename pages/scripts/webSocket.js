@@ -18,22 +18,24 @@ function initWebSocket() {
     ws.onmessage = async function (event) {
         console.log('Server: ', event.data);
 
+        document.getElementById('cotaValor').innerHTML = event.data;
+
         // Transform event.data to json
-        var data = JSON.parse(event.data);
-        var mensagem = data['mensagem'];
-        var valor = data['valor'];
+        // var data = JSON.parse(event.data);
+        // var mensagem = data['mensagem'];
+        // var valor = data['valor'];
 
-        switch(mensagem) {
-            case 'cota':
-                atualizaCota(valor);
-                break;
-            case 'statusRTK':
-                atualizaStatusRTK(valor);
-                break;
+        // switch(mensagem) {
+        //     case 'cota':
+        //         atualizaCota(valor);
+        //         break;
+        //     case 'statusRTK':
+        //         atualizaStatusRTK(valor);
+        //         break;
 
-            default:
-                console.log('Nenhuma ação definida');
-                break;
-        }
+        //     default:
+        //         console.log('Nenhuma ação definida');
+        //         break;
+        // }
     };
 };

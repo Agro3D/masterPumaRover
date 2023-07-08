@@ -58,17 +58,8 @@ void slaveSendHandler() {
   case ACK_MSG:
     hasComunication = true;
     break;
-  case GET_STATUS:
-    Serial.println("\nRequisição de status enviada para o escravo");
-    break;
-  case NOVO_TRABALHO:
-    Serial.println("\nNovo trabalho enviado para o escravo");
-    break;
-  case LISTA_ARQUIVOS:
-    Serial.println("\nRequisição da Lista de arquivos enviada para o escravo");
-    break;
-  case EXCLUIR_ARQUIVOS:
-    Serial.println("\nRequisição de exclusão de arquivos enviada para o escravo");
+  case 0:
+    Serial.println("\nComando Desconhecido");
     break;
   
   default:

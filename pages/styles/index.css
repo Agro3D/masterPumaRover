@@ -189,4 +189,11 @@
     #checkboxsOptions{
         column-count: 1;
     }
+
+    #cotaQuadro{
+        padding-top: 0;
+        padding-bottom: 0;
+        margin-block: 0;
+    }
 }
+

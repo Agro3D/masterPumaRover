@@ -21,14 +21,6 @@ void setupServerScripts(){
   });
 
 
-  // Rota para o script JS da página inicial.
-  server.on("/scripts/indexNewWork.js", HTTP_GET, [](AsyncWebServerRequest *request){
-    Serial.println("\n\n##### Requisicao Recebida: /scripts/indexNewWork.js");
-    Serial.println("Enviando scriptNewWork.js ...");
-    request->send(200, "text/javascript", INDEX_SCRIPTNEWWORK);
-  });
-
-
   // Rota para o script JS da página de arquivos.
   server.on("/scripts/arquivos.js", HTTP_GET, [](AsyncWebServerRequest *request){
     Serial.println("\n\n##### Requisicao Recebida: /scripts/arquivos.js");

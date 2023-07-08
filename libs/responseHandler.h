@@ -2,44 +2,13 @@
 #define RESPONSE_HANDLER_H
 
 
-
+// Função para passo a passo da comunicação com o escravo
 void slaveReceiveHandler() {
 
   switch (ComandoEscravo)
   {
-  case LISTA_ARQUIVOS:
-    listaArquivos();
-    ComandoEscravo = 0;
-    webSocket.broadcastTXT("refreshStatus");
-    break;
-
-  case GET_STATUS:
-    getStatus();
-    ComandoEscravo = 0;
-    break;
-
-  case NOVO_TRABALHO:
-    webSocket.broadcastTXT("refreshStatus");
-    ComandoEscravo = 0;
-    break;
-
-  case CANCELAR_TRABALHO:
-    webSocket.broadcastTXT("refreshStatus");
-    ComandoEscravo = 0;
-    break;
-
-  case FINALIZAR_TRABALHO:
-    ComandoEscravo = LISTA_ARQUIVOS;
-    break;
-
-  case CANCELAR_PESQUISA:
-    webSocket.broadcastTXT("refreshStatus");
-    ComandoEscravo = 0;
-    break;
-
-  case EXCLUIR_ARQUIVOS:
-    excluirArquivos();
-    ComandoEscravo = LISTA_ARQUIVOS;
+  case 0:
+    Serial.println("Comando recebido do escravo: " + String(ComandoEscravo));
     break;
   
   default:
@@ -50,37 +19,8 @@ void slaveReceiveHandler() {
 }
 
 
-void getStatus() {
-  DynamicJsonDocument respostaStatus(1024);
-  deserializeJson(respostaStatus, slaveReceiveResponse());
-  // String status = slaveReceiveResponse();
-  int status =  respostaStatus["Mensagem"].as<int>();
-  String statusStr;
 
-  switch (status)
-  {
-  case ESPERANDO:
-    statusStr = "Esperando";
-    break;
-  case PESQUISANDO:
-    statusStr = "Pesquisando";
-    break;
-  case PROCESSANDO:
-    statusStr = "Processando";
-    break;
-  case SALVANDO:
-    statusStr = "Salvando";
-    break;
-
-  default:
-    break;
-  }
-
-  Serial.println("Status do escravo: " + statusStr);
-  webSocket.broadcastTXT(statusStr);
-}
-
-
+// Função para receber a resposta do escravo.
 void slaveListerner() {
   DynamicJsonDocument resposta(1024);
   deserializeJson(resposta, slaveReceiveResponse());
@@ -120,24 +60,5 @@ String slaveReceiveResponse() {
 }
 
 
-void listaArquivos() {
-  DynamicJsonDocument resposta(10240);
-  String slaveResponse = slaveReceiveResponse();            // Solicite a resposta do escravo
-
-  Serial.println(slaveResponse);
-  
-  deserializeJson(resposta, slaveResponse);
-  listaArquivosStr = resposta["Mensagem"].as<String>();     // Armazene a lista de arquivos do escravo
-
-  Serial.println("Resposta do escravo:");
-  serializeJsonPretty(resposta, Serial);
-  Serial.println();
-}
-
-
-void excluirArquivos() {
-  String slaveResponse = slaveReceiveResponse();            // Solicite a resposta do escravo
-  Serial.println(slaveResponse);
-}
 
 #endif // RESPONSE_HANDLER_H

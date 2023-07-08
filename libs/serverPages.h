@@ -34,15 +34,9 @@ void setupServerPages() {
   // Rota para a página inicial do servidor web. (index.html & starting.html)
   server.on("/", HTTP_GET, [](AsyncWebServerRequest *request){
     Serial.println("\n\n##### Requisicao Recebida: /");
-    if (hasComunication)
-    {
-      Serial.println("Enviando index.html ...");
-      request->send(200, "text/html", INDEX_PAGE);
-    }else
-    {
-      Serial.println("Enviando starting.html ...");
-      request->send(200, "text/html", STARTING_PAGE);
-    }
+    
+    Serial.println("Enviando index.html ...");
+    request->send(200, "text/html", INDEX_PAGE);
   });
 
 
@@ -51,14 +45,6 @@ void setupServerPages() {
     Serial.println("\n\n##### Requisicao Recebida: /header.html");
     Serial.println("Enviando header.html ...");
     request->send(200, "text/html", HEADER_PAGE);
-  });
-
-
-  // Rota para a página com a tela de espera/carregamento do servidor web. (espera.html)
-  server.on("/espera.html", HTTP_GET, [](AsyncWebServerRequest *request){
-    Serial.println("\n\n##### Requisicao Recebida: /espera.html");
-    Serial.println("Enviando espera.html ...");
-    request->send(200, "text/html", ESPERA_PAGE);
   });
 
 

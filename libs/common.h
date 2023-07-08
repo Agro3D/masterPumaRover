@@ -19,33 +19,18 @@
 #define MYPORT_TX 17                    // Porta transmissão UART
 
 // Constantes para identificar o tipo de mensagem enviada para o escravo
-#define NOVO_TRABALHO 1
-#define CANCELAR_TRABALHO 2
-#define FINALIZAR_TRABALHO 3
 
-#define CANCELAR_PESQUISA 11
-#define PULAR_PESQUISA 12
-
-#define LISTA_ARQUIVOS 21
-#define BAIXAR_ARQUIVOS 22
-#define EXCLUIR_ARQUIVOS 23
-
-
-#define GET_STATUS 98                   // Mensagem para verificar o status do trabalho realizado pelo escravo
 #define ACK_MSG 99                      // Mensagem de confirmação de comunicação com o escravo
 
 
-// Definições de Status
-#define ESPERANDO 0
-#define PESQUISANDO 1
-#define PROCESSANDO 2
-#define SALVANDO 3
 
 
 // Variáveis Globais
-char ssid[] = "PumaStation2";           // nome do AP
+char ssid[] = "PumaRover";              // nome do AP
 char password[] = "00000000";           // senha do AP
 
+
+HardwareSerial MySerialZed(0);                          // Use UART0
 AsyncWebServer server(SERVER_PORT);                     // Cria o servidor web na porta 80
 WebSocketsServer webSocket = WebSocketsServer(81);      // Cria o servidor web socket na porta 81
 HardwareSerial MySerial(1);                             // Use the 2nd hardware serial port. 0 is connected to the USB
@@ -61,9 +46,6 @@ bool verifyingComunication = false;             // Flag para controlar a verific
 
 
 // Lista de todas as funções do programa
-void excluirArquivos();
-void getStatus();
-void listaArquivos();
 void setupServer();
 void setupServerPages();
 void setupServerScripts();
@@ -75,6 +57,8 @@ void slaveSendData(String data);
 void slaveSendHandler();
 bool verifyComunication();
 void webSocketEvent(uint8_t num, WStype_t type, uint8_t * payload, size_t length);
+String getAltgetAltitudeFromNMEA(String nmea);
+String randomCota();
 
 
 
@@ -105,6 +89,7 @@ void webSocketEvent(uint8_t num, WStype_t type, uint8_t * payload, size_t length
 #include "serverScripts.h"                  // Funções dos scripts JS do servidor web
 #include "requestHandler.h"                 // Funções de comunicação com o escravo
 #include "responseHandler.h"                // Funções do servidor web socket
+#include "zedHandler.h"                     // Funções de comunicação com o escravo
 
 
 #endif

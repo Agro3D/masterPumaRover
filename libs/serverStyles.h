@@ -21,14 +21,6 @@ void setupServerStyles(){
   });
 
 
-  // Rota para o estilo CSS da página de espera. (esperaStyle.css)
-  server.on("/styles/espera.css", HTTP_GET, [](AsyncWebServerRequest *request){
-    Serial.println("\n\n##### Requisicao Recebida: /styles/espera.css");
-    Serial.println("Enviando esperaStyle.css ...");
-    request->send(200, "text/css", ESPERA_STYLE);
-  });
-
-
   // Rota para o estilo CSS da página inicial. (indexStyle.css)
   server.on("/styles/index.css", HTTP_GET, [](AsyncWebServerRequest *request){
     Serial.println("\n\n##### Requisicao Recebida: /styles/index.css");
