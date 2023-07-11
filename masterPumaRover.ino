@@ -80,15 +80,31 @@ void loop() {
   //   slaveReceiveHandler();                        // Chama a função de manipulação de recebimento do escravo.
   // }
 
+  if( MySerial.available()) {
+    mensagemStr = MySerial.readStringUntil('\n');
+    // Serial.println("Mensagem recebida do escravo: \n" + mensagemStr);
+    
+    DynamicJsonDocument doc(64);
+    deserializeJson(doc, mensagemStr);
+    
+    if(doc["Mensagem"] == "Precisao"){
+      precisaoRTK = doc["Valor"];
+    } else if (doc["Mensagem"] == "RTK"){
+      RTKAtual = doc["Valor"];
+    }
+    
+    webSocket.broadcastTXT(mensagemStr);
+  }
 
-  Serial.println("Verificando mensagens na UART0...");
+
   while (MySerialZed.available()) {
     String message = MySerialZed.readStringUntil('\n');
     
     String cota = getAltitudeFromNMEA(message);
     if(cota != "-1.00"){
       Serial.println("Cota: " + String(cota));
-      webSocket.broadcastTXT(cota);
+      webSocket.broadcastTXT("{\"Mensagem\": \"Cota\", \"Valor\": " + String(cota) + "}");
+      webSocket.broadcastTXT("{\"Mensagem\": \"Precisao\", \"Valor\": " + String(precisaoRTK) + "}");
     }
   }
 
@@ -126,10 +142,10 @@ void webSocketEvent(uint8_t num, WStype_t type, uint8_t * payload, size_t length
         case WStype_DISCONNECTED:
             Serial.printf("[%u] Disconnected!\n", num);
             break;
-        case WStype_CONNECTED: {
+        case WStype_CONNECTED:
             Serial.printf("[%u] Connected from  . . .  url: 192.168.4.1%s\n", num, payload);
-            // webSocket.sendTXT(num, "Conectado");
-        }
+            webSocket.sendTXT(num, "Conectado");
+            webSocket.sendTXT(num, "{\"Mensagem\": \"RTK\", \"Valor\": " + String(RTKAtual) + "}");
         break;
         case WStype_TEXT:
             Serial.printf("[%u] Received: %s\n", num, payload);

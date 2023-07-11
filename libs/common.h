@@ -34,12 +34,12 @@ HardwareSerial MySerialZed(0);                          // Use UART0
 AsyncWebServer server(SERVER_PORT);                     // Cria o servidor web na porta 80
 WebSocketsServer webSocket = WebSocketsServer(81);      // Cria o servidor web socket na porta 81
 HardwareSerial MySerial(1);                             // Use the 2nd hardware serial port. 0 is connected to the USB
-bool hasComunication = false;                            // Flag para controlar se a comunicação com o escravo está estabelecida
+bool hasComunication = false;                           // Flag para controlar se a comunicação com o escravo está estabelecida
 bool serverStarted = false;                             // Flag para controlar se o servidor web está iniciado
 
-// JsonObject jsonObj;                             // Objeto JSON para receber dados do cliente
 String mensagemStr;                             // String para armazenar a representação em texto do objeto JSON
-String listaArquivosStr;                        // String para armazenar a lista de arquivos do escravo
+int RTKAtual;                                   // Variável para armazenar o valor da pressão atual do RTK
+int precisaoRTK;                                 // Variável para armazenar o valor da pressão de precisão do RTK
 int ComandoEscravo;                             // Flag para controlar o envio de dados para o escravo
 bool waitResponse = false;                      // Flag para controlar o recebimento de dados do escravo
 bool verifyingComunication = false;             // Flag para controlar a verificação de comunicação com o escravo

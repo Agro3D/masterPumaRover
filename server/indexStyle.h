@@ -85,7 +85,7 @@ char INDEX_STYLE[] PROGMEM = R"=====(
 }
 
 #botaoCancelar{
-    background-color: #e81e1e;
+    background-color: #a011ff;
     width: 16vw;
     height: 4.5vh;
     border-radius: 10px;
@@ -95,7 +95,7 @@ char INDEX_STYLE[] PROGMEM = R"=====(
 }
 
 #botaoCancelar:hover{
-    background-color: #b91c1c;
+    background-color: #810ad1;
     cursor: pointer;
 }
 
@@ -104,7 +104,7 @@ char INDEX_STYLE[] PROGMEM = R"=====(
 }
 
 #tituloCota{
-    font-size: 5vh;
+    font-size: 6vh;
     font-weight: bold;
     margin-left: 5vh;
     margin-bottom: 2vh;
@@ -131,26 +131,30 @@ char INDEX_STYLE[] PROGMEM = R"=====(
     letter-spacing: 0.8vh;
 }
 
-#statusRTK{
+#informacoes{
+    column-count: 2;
+    margin-bottom: 2vh;
+}
+
+.informacoesDivs{
     display: flex;
     align-items: center;
     justify-content: center;
     padding: 1vh; 
-    margin-bottom: 2vh;
-    font-size: 3vh;
+    font-size: 2.5vh;
 }
 
-#tituloStatus{
+.informacoesTitulos{
     font-weight: bold;
     margin-right: 2vh;
 }
 
-#statusRTKValor{
+.informacoesValor{
     display: flex;
     align-items: center;
     justify-content: center;
     font-weight: bold;
-    width: 20%;
+    min-width: 20%;
     height: 5vh;
     border-radius: 5px;
 }

@@ -110,12 +110,20 @@ char INDEX_PAGE[] PROGMEM = R"=====(
                     </div>
                 </div>
 
-                <div id="statusRTK" class="divs">
+                <div id="informacoes" class="divs">
 
-                    <div id="tituloStatus">Status do RTK: </div>
-                    <div id="statusRTKValor" class="verde">FIX</div>
+                    <div class="informacoesDivs">
+                        <div class="informacoesTitulos">Status do RTK: </div>
+                        <div id="statusRTKValor" class="informacoesValor">Carregando</div>
+                    </div>
+
+                    <div class="informacoesDivs">
+                        <div class="informacoesTitulos">Precisão posicional: </div>
+                        <div id="precisaoValor" class="informacoesValor">Carregando</div>
+                    </div>
 
                 </div>
+
 
                 <div class="button">
                     <button onclick="voltar()" id="botaoCancelar">Voltar</button>

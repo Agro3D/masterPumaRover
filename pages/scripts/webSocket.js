@@ -18,24 +18,36 @@ function initWebSocket() {
     ws.onmessage = async function (event) {
         console.log('Server: ', event.data);
 
-        document.getElementById('cotaValor').innerHTML = event.data;
-
         // Transform event.data to json
-        // var data = JSON.parse(event.data);
-        // var mensagem = data['mensagem'];
-        // var valor = data['valor'];
+        var data = JSON.parse(event.data);
+        var mensagem = data['Mensagem'];
+        var valor = data['Valor'];
 
-        // switch(mensagem) {
-        //     case 'cota':
-        //         atualizaCota(valor);
-        //         break;
-        //     case 'statusRTK':
-        //         atualizaStatusRTK(valor);
-        //         break;
+        switch(mensagem) {
+            case 'Cota':
+                document.getElementById('cotaValor').innerHTML = valor;
+                break;
+            
+            case 'RTK':
+                if(valor == 0) {
+                    document.getElementById('statusRTKValor').innerHTML = 'No Fix';
+                    document.getElementById('statusRTKValor').className = 'informacoesValor vermelho';
+                }else if(valor == 1) {
+                    document.getElementById('statusRTKValor').innerHTML = 'Float';
+                    document.getElementById('statusRTKValor').className = 'informacoesValor amarelo';
+                }else if(valor == 2) {
+                    document.getElementById('statusRTKValor').innerHTML = 'Fix';
+                    document.getElementById('statusRTKValor').className = 'informacoesValor verde';
+                }
+                break;
 
-        //     default:
-        //         console.log('Nenhuma ação definida');
-        //         break;
-        // }
+            case 'Precisao':
+                document.getElementById('precisaoValor').innerHTML = valor;
+                break;
+
+            default:
+                console.log('Nenhuma ação definida');
+                break;
+        }
     };
 };
