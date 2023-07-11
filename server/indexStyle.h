@@ -125,7 +125,7 @@ char INDEX_STYLE[] PROGMEM = R"=====(
 #cotaValor{
     margin-block: 1vh;
     color: #FFF;
-    font-size: 12vh;
+    font-size: 14vw;
     font-weight: bold;
     font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
     letter-spacing: 0.8vh;
@@ -139,9 +139,9 @@ char INDEX_STYLE[] PROGMEM = R"=====(
 .informacoesDivs{
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: space-around;
     padding: 1vh; 
-    font-size: 2.5vh;
+    font-size: 4vw;
 }
 
 .informacoesTitulos{

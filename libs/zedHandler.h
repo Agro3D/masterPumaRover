@@ -2,23 +2,24 @@
 #define ZEDHANDLER_H
 
 // Função para pegar a cota do GPS
-String getAltitudeFromNMEA(String nmea) {
-    char* str = (char*) nmea.c_str();
+String getAltitudeFromNMEA(String nmeastr) {
+    char* nmea = (char*) nmeastr.c_str();
 
     // Divide a string em substrings separadas por vírgula
-    char* messageType = strtok(str, ",");
+    nmea = strtok(nmea, ",");
 
     // Verifica se a mensagem é do tipo GNGGA
-    if (strcmp(messageType, "$GNGGA") != 0) {
+    if (strcmp(nmea, "$GNGGA") != 0) {
         return "-1.00";     // Retorna uma altitude inválida se a mensagem não for do tipo GNGGA
     }
 
-    Serial.println("Mensagem GNGGA recebida: " + String(nmea));
+    Serial.print("Mensagem GNGGA recebida: " + nmeastr);
 
 
     // Conta a quantidade de vírgulas na mensagem
     int commaCount = 0;
     char* piece = strtok(NULL, ",");
+    String cota;
 
     // Percorre a mensagem até encontrar a nona vírgula
     while (piece != NULL) {
@@ -26,9 +27,15 @@ String getAltitudeFromNMEA(String nmea) {
 
         // Altitude é o nono elemento da mensagem
         if (commaCount == 9) {
-            return String(piece);
+            cota = String(piece);
+        } else if (commaCount == 10)
+        {
+            if (piece[0] == 'M'){
+                return cota;
+            } else{
+                return "-1.00";
+            }
         }
-
         piece = strtok(NULL, ",");
     }
 

@@ -45,6 +45,7 @@ body{
     border: 2px solid #616161;
     border-radius: 15px;
     min-width: 60vw;
+    max-width: 95vw;
     margin-top: 10vh;
     margin-bottom: 4vh;
 }

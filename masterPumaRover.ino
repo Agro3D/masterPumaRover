@@ -102,9 +102,15 @@ void loop() {
     
     String cota = getAltitudeFromNMEA(message);
     if(cota != "-1.00"){
+      if (cota.length() == 4){
+        cota += "00";
+      } else if (cota.length() == 5){
+        cota += "0";
+      }
+
+      Serial.println();
       Serial.println("Cota: " + String(cota));
       webSocket.broadcastTXT("{\"Mensagem\": \"Cota\", \"Valor\": " + String(cota) + "}");
-      webSocket.broadcastTXT("{\"Mensagem\": \"Precisao\", \"Valor\": " + String(precisaoRTK) + "}");
     }
   }
 
@@ -146,6 +152,7 @@ void webSocketEvent(uint8_t num, WStype_t type, uint8_t * payload, size_t length
             Serial.printf("[%u] Connected from  . . .  url: 192.168.4.1%s\n", num, payload);
             webSocket.sendTXT(num, "Conectado");
             webSocket.sendTXT(num, "{\"Mensagem\": \"RTK\", \"Valor\": " + String(RTKAtual) + "}");
+            webSocket.broadcastTXT("{\"Mensagem\": \"Precisao\", \"Valor\": " + String(precisaoRTK) + "}");
         break;
         case WStype_TEXT:
             Serial.printf("[%u] Received: %s\n", num, payload);

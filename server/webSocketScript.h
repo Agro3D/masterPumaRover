@@ -44,7 +44,7 @@ function initWebSocket() {
                 break;
 
             case 'Precisao':
-                document.getElementById('precisaoValor').innerHTML = valor;
+                document.getElementById('precisaoValor').innerHTML = valor + ' mm';
                 break;
 
             default:
