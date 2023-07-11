@@ -46,7 +46,7 @@ void setup() {
   // Inicia o protocolo I2C como master.
   Serial.println();
   Serial.println("Iniciando Comunicação UART");
-  MySerial.begin(480600, SERIAL_8N1, MYPORT_RX, MYPORT_TX);     // Set up the hardware serial port
+  MySerial.begin(460800, SERIAL_8N1, MYPORT_RX, MYPORT_TX);     // Set up the hardware serial port
   delay(1000);
   while (MySerial.available()) MySerial.read();
 
