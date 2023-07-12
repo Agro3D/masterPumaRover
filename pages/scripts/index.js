@@ -17,7 +17,7 @@ function novoTrabalho() {
         document.getElementById("status").style.display = "none";
         return;
     }else{
-        configJson.frequenciaRadio = frequencia;
+        configJson.radioFrequencia = frequencia;
     }
 
 
@@ -41,11 +41,27 @@ function novoTrabalho() {
         return;
     }
 
-    configJson.velocidadeRadio = document.getElementById("velocidadeRadioSelect").value;
-    configJson.frequenciaTransmissao = document.getElementById("frequenciaTransmissao").value;
+    configJson.velocidadeTransmissao = document.getElementById("velocidadeRadioSelect").value;
+    configJson.taxaAtualizacao = document.getElementById("frequenciaTransmissao").value;
 
     console.log(configJson);
 
+    // Realiza o POST request com o objeto dataJson
+    fetch('/postConfiguration', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(dataJson),
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+    })
+    .catch(error => {
+        console.error('There has been a problem with your fetch operation:', error);
+    });
 }
 
 

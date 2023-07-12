@@ -74,44 +74,15 @@ void setup() {
 // Função principal do programa
 void loop() {
   // Função principal executada repetidamente após a função de inicialização.
-  // if(ComandoEscravo || MySerial.available()) {
-  //   Serial.println("Comando recebido do escravo: " + String(ComandoEscravo));
-  //   slaveSendHandler();                           // Chama a função de manipulação de envio para o escravo.
-  //   slaveReceiveHandler();                        // Chama a função de manipulação de recebimento do escravo.
-  // }
-
-  if( MySerial.available()) {
-    mensagemStr = MySerial.readStringUntil('\n');
-    // Serial.println("Mensagem recebida do escravo: \n" + mensagemStr);
-    
-    DynamicJsonDocument doc(64);
-    deserializeJson(doc, mensagemStr);
-    
-    if(doc["Mensagem"] == "Precisao"){
-      precisaoRTK = doc["Valor"];
-    } else if (doc["Mensagem"] == "RTK"){
-      RTKAtual = doc["Valor"];
-    }
-    
-    webSocket.broadcastTXT(mensagemStr);
+  if(ComandoEscravo || MySerial.available()) {
+    Serial.println("Comando recebido do escravo: " + String(ComandoEscravo));
+    slaveSendHandler();                           // Chama a função de manipulação de envio para o escravo.
+    slaveReceiveHandler();                        // Chama a função de manipulação de recebimento do escravo.
   }
 
 
-  while (MySerialZed.available()) {
-    String message = MySerialZed.readStringUntil('\n');
-    
-    String cota = getAltitudeFromNMEA(message);
-    if(cota != "-1.00"){
-      if (cota.length() == 4){
-        cota += "00";
-      } else if (cota.length() == 5){
-        cota += "0";
-      }
-
-      Serial.println();
-      Serial.println("Cota: " + String(cota));
-      webSocket.broadcastTXT("{\"Mensagem\": \"Cota\", \"Valor\": " + String(cota) + "}");
-    }
+  if (receberMensagens){
+    processaMensagem();
   }
 
   webSocket.loop();

@@ -20,15 +20,17 @@
 
 // Constantes para identificar o tipo de mensagem enviada para o escravo
 
+#define NOVA_CONFIGURACAO 1             // Mensagem para enviar uma nova configuração para o escravo
+
+#define GET_STATUS 9                    // Mensagem para solicitar o status do escravo
 #define ACK_MSG 99                      // Mensagem de confirmação de comunicação com o escravo
 
 
 
 
 // Variáveis Globais
-char ssid[] = "PumaRover";              // nome do AP
-char password[] = "00000000";           // senha do AP
-
+char ssid[] = "PumaRover";                              // nome do AP
+char password[] = "00000000";                           // senha do AP
 
 HardwareSerial MySerialZed(0);                          // Use UART0
 AsyncWebServer server(SERVER_PORT);                     // Cria o servidor web na porta 80
@@ -36,13 +38,14 @@ WebSocketsServer webSocket = WebSocketsServer(81);      // Cria o servidor web s
 HardwareSerial MySerial(1);                             // Use the 2nd hardware serial port. 0 is connected to the USB
 bool hasComunication = false;                           // Flag para controlar se a comunicação com o escravo está estabelecida
 bool serverStarted = false;                             // Flag para controlar se o servidor web está iniciado
+bool receberMensagens = false;                          // Flag para controlar o recebimento de mensagens do escravo
 
-String mensagemStr;                             // String para armazenar a representação em texto do objeto JSON
-int RTKAtual;                                   // Variável para armazenar o valor da pressão atual do RTK
-int precisaoRTK;                                 // Variável para armazenar o valor da pressão de precisão do RTK
-int ComandoEscravo;                             // Flag para controlar o envio de dados para o escravo
-bool waitResponse = false;                      // Flag para controlar o recebimento de dados do escravo
-bool verifyingComunication = false;             // Flag para controlar a verificação de comunicação com o escravo
+String mensagemStr;                                     // String para armazenar a representação em texto do objeto JSON
+int RTKAtual;                                           // Variável para armazenar o valor da pressão atual do RTK
+int precisaoRTK;                                        // Variável para armazenar o valor da pressão de precisão do RTK
+int ComandoEscravo;                                     // Flag para controlar o envio de dados para o escravo
+bool waitResponse = false;                              // Flag para controlar o recebimento de dados do escravo
+bool verifyingComunication = false;                     // Flag para controlar a verificação de comunicação com o escravo
 
 
 // Lista de todas as funções do programa
@@ -59,6 +62,7 @@ bool verifyComunication();
 void webSocketEvent(uint8_t num, WStype_t type, uint8_t * payload, size_t length);
 String getAltgetAltitudeFromNMEA(String nmea);
 String randomCota();
+void processaMensagem();
 
 
 
