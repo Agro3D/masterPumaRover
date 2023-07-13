@@ -4,7 +4,7 @@
 
 // Função para realizar a configuração inicial do servidor web.
 void setup() {
-  delay(2000);
+  delay(6000);
   Serial.begin(115200);
   
   // Imprime linhas de separação e mensagens de inicialização no console serial.
