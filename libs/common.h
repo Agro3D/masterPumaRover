@@ -21,8 +21,9 @@
 // Constantes para identificar o tipo de mensagem enviada para o escravo
 
 #define NOVA_CONFIGURACAO 1             // Mensagem para enviar uma nova configuração para o escravo
+#define PARAR_TRABALHO 2                // Mensagem para cancelar a pesquisa realizada pelo escravo
 
-#define GET_STATUS 9                    // Mensagem para solicitar o status do escravo
+#define GET_STATUS 98                   // Mensagem para solicitar o status do escravo
 #define ACK_MSG 99                      // Mensagem de confirmação de comunicação com o escravo
 
 
@@ -41,9 +42,9 @@ bool serverStarted = false;                             // Flag para controlar s
 bool receberMensagens = false;                          // Flag para controlar o recebimento de mensagens do escravo
 
 String mensagemStr;                                     // String para armazenar a representação em texto do objeto JSON
-int RTKAtual;                                           // Variável para armazenar o valor da pressão atual do RTK
-int precisaoRTK;                                        // Variável para armazenar o valor da pressão de precisão do RTK
-int ComandoEscravo;                                     // Flag para controlar o envio de dados para o escravo
+int RTKAtual = -1;                                      // Variável para armazenar o valor da pressão atual do RTK
+int precisaoRTK = -1;                                   // Variável para armazenar o valor da pressão de precisão do RTK
+int ComandoEscravo = 0;                                 // Flag para controlar o envio de dados para o escravo
 bool waitResponse = false;                              // Flag para controlar o recebimento de dados do escravo
 bool verifyingComunication = false;                     // Flag para controlar a verificação de comunicação com o escravo
 
@@ -62,7 +63,7 @@ bool verifyComunication();
 void webSocketEvent(uint8_t num, WStype_t type, uint8_t * payload, size_t length);
 String getAltgetAltitudeFromNMEA(String nmea);
 String randomCota();
-void processaMensagem();
+void processaMensagem(String message);
 
 
 

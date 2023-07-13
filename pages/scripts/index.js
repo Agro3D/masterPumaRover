@@ -1,6 +1,27 @@
 function voltar() {
     document.getElementById("configuracoes").style.display = "block";
     document.getElementById("status").style.display = "none";
+
+    document.getElementById("cotaValor").innerHTML = "000.000";
+    document.getElementById("precisaoValor").innerHTML = "Carregando";
+    document.getElementById("statusRTKValor").innerHTML = "Carregando";
+    document.getElementById("statusRTKValor").className = "informacoesValor";
+
+    // Realiza o POST para parar o trabalho
+    fetch('/pararTrabalho', {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+        }
+    }).then(response => {
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+    }).catch(error => {
+        console.error('There has been a problem with your fetch operation:', error);
+    });
+
+
 }
 
 
@@ -52,7 +73,7 @@ function novoTrabalho() {
         headers: {
             'Content-Type': 'application/json',
         },
-        body: JSON.stringify(dataJson),
+        body: JSON.stringify(configJson),
     })
     .then(response => {
         if (!response.ok) {

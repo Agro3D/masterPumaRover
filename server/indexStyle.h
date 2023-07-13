@@ -69,7 +69,7 @@ char INDEX_STYLE[] PROGMEM = R"=====(
  column-count: 2;
 }
 
-#botaoNovoTrabalho{
+#botaoNovaConfig{
     width: 16vw;
     height: 4.5vh;
     border-radius: 10px;
@@ -79,7 +79,7 @@ char INDEX_STYLE[] PROGMEM = R"=====(
     margin: 1.5vh 0;
 }
 
-#botaoNovoTrabalho:hover{
+#botaoNovaConfig:hover{
     background-color: #4e9e44;
     cursor: pointer;
 }
@@ -140,8 +140,9 @@ char INDEX_STYLE[] PROGMEM = R"=====(
     display: flex;
     align-items: center;
     justify-content: space-around;
-    padding: 1vh; 
+    padding: 1vh;
     font-size: 4vw;
+    padding: 0.2vh;
 }
 
 .informacoesTitulos{

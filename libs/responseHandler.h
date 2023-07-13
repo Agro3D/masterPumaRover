@@ -11,6 +11,13 @@ void slaveReceiveHandler() {
     receberMensagens = true;
     ComandoEscravo = 0;
     break;
+
+  case PARAR_TRABALHO:
+    receberMensagens = false;
+    RTKAtual = -1;
+    precisaoRTK = -1;
+    ComandoEscravo = 0;
+    break;
   
   default:
     slaveListerner();
@@ -31,7 +38,7 @@ void slaveListerner() {
   serializeJsonPretty(resposta, Serial);
   Serial.println();
 
-  if (resposta["Mensagem"] == "precisao" || resposta["Mensagem"] == "RTK"){
+  if (resposta["Mensagem"] == "Precisao" || resposta["Mensagem"] == "RTK"){
     if(resposta["Mensagem"] == "Precisao"){
       precisaoRTK = resposta["Valor"];
     } else if (resposta["Mensagem"] == "RTK"){
