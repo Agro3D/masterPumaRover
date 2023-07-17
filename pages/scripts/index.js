@@ -1,6 +1,6 @@
 function voltar() {
-    document.getElementById("configuracoes").style.display = "block";
-    document.getElementById("status").style.display = "none";
+    document.getElementById("configuracoes").className = "visivel";
+    document.getElementById("status").className = "naoVisivel";
 
     document.getElementById("cotaValor").innerHTML = "000.000";
     document.getElementById("precisaoValor").innerHTML = "Carregando";
@@ -26,16 +26,16 @@ function voltar() {
 
 
 function novoTrabalho() {
-    document.getElementById("configuracoes").style.display = "none";
-    document.getElementById("status").style.display = "block";
+    document.getElementById("configuracoes").className = "naoVisivel";
+    document.getElementById("status").className = "visivel";
     
     var configJson = {};
     var frequencia = document.getElementById("frequenciaRadioValor").value;
 
     if (frequencia == ""){
         alert("Preencha todos os campos")
-        document.getElementById("configuracoes").style.display = "block";
-        document.getElementById("status").style.display = "none";
+        document.getElementById("configuracoes").className = "visivel";
+        document.getElementById("status").className = "naoVisivel";
         return;
     }else{
         configJson.radioFrequencia = frequencia;
@@ -57,8 +57,8 @@ function novoTrabalho() {
     // Verifica se ao menos uma constelacao foi selecionada
     if (numConstelations == 0){
         alert("Selecione ao menos uma constelação!");
-        document.getElementById("configuracoes").style.display = "block";
-        document.getElementById("status").style.display = "none";
+        document.getElementById("configuracoes").className = "visivel";
+        document.getElementById("status").className = "naoVisivel";
         return;
     }
 
@@ -93,20 +93,33 @@ function atualizaCota(valor) {
 function atualizaStatusRTK(valor) {
 
     document.getElementById("statusRTKValor").innerHTML = valor;
-
+    
     switch(valor) {
-        case 'FIX':
-            document.getElementById("statusRTKValor").className = "verde";
+        case 2:
+            document.getElementById('statusRTKValor').innerHTML = 'Fix';
+            document.getElementById('statusRTKValor').className = 'informacoesValor verde';
             break;
-        case 'FLOAT':
-            document.getElementById("statusRTKValor").className = "yellow";
+            case 1:
+            document.getElementById('statusRTKValor').innerHTML = 'Float';
+            document.getElementById('statusRTKValor').className = 'informacoesValor amarelo';
             break;
-        case 'NO FIX':
-            document.getElementById("statusRTKValor").className = "red";
+            case 0:
+            document.getElementById('statusRTKValor').innerHTML = 'No Fix';
+            document.getElementById('statusRTKValor').className = 'informacoesValor vermelho';
             break;
         default:
-            document.getElementById("statusRTKValor").className = "red";
+            document.getElementById("statusRTKValor").className = "informacoesValor vermelho";
             document.getElementById("statusRTKValor").innerHTML = "ERRO";
             break;
+    }
+}
+
+function troca(){
+    if(document.getElementById("status").className == "naoVisivel"){
+        document.getElementById("configuracoes").className = "naoVisivel";
+        document.getElementById("status").className = "flvisivelex";
+    }else{
+        document.getElementById("configuracoes").className = "visivel";
+        document.getElementById("status").className = "naoVisivel";
     }
 }

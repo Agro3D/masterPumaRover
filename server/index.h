@@ -131,6 +131,10 @@ char INDEX_PAGE[] PROGMEM = R"=====(
                 </div>
             </div>
 
+            <div class="button">
+                <button onclick="troca()" id="troca">Troca</button>
+            </div>
+
 
 
         </div>
