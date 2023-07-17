@@ -29,16 +29,7 @@ function initWebSocket() {
                 break;
             
             case 'RTK':
-                if(valor == 0) {
-                    document.getElementById('statusRTKValor').innerHTML = 'No Fix';
-                    document.getElementById('statusRTKValor').className = 'informacoesValor vermelho';
-                }else if(valor == 1) {
-                    document.getElementById('statusRTKValor').innerHTML = 'Float';
-                    document.getElementById('statusRTKValor').className = 'informacoesValor amarelo';
-                }else if(valor == 2) {
-                    document.getElementById('statusRTKValor').innerHTML = 'Fix';
-                    document.getElementById('statusRTKValor').className = 'informacoesValor verde';
-                }
+                atualizaStatusRTK(valor);
                 break;
 
             case 'Precisao':
