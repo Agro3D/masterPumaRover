@@ -24,7 +24,9 @@ char INDEX_PAGE[] PROGMEM = R"=====(
             <h1 id="tituloPrincipal">Rover RTK</h1>
 
 
-            <div id="configuracoes" class="naoVisivel">
+
+            <!-- Tela de configurações -->
+            <div id="configuracoes" class="visivel">
                 <div id="configuracaoRadio" class="divs bordas">
 
                     <div id="frequenciaRadio" class="optionsRadio">
@@ -51,7 +53,7 @@ char INDEX_PAGE[] PROGMEM = R"=====(
                 <div id="options" class="divs bordas">
 
                     <div id="frequenceDiv" class="optionsDivs">
-                        <p class="titulo">Frequência
+                        <p class="titulo">Taxa de Atualização
                         </p>
                         <select id="frequenciaTransmissao" name="frequence" class="input">
                             <option value="1" selected>1HZ</option>
@@ -93,16 +95,15 @@ char INDEX_PAGE[] PROGMEM = R"=====(
                 </div>
 
                 <div class="button">
-                    <button onclick="novoTrabalho()" id="botaoNovoTrabalho">Iniciar</button>
+                    <button onclick="novoTrabalho()" id="botaoNovaConfig">Iniciar</button>
                 </div>
             </div>
 
 
 
-
-
-
-            <div id="status" class="visivel">
+            
+            <!-- Tela de status -->
+            <div id="status" class="naoVisivel">
                 <div id="cota" class="divs bordas">
                     <p id="tituloCota" class="titulo">Cota</p>
                     <div id="cotaQuadro">

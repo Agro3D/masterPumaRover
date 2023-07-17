@@ -4,9 +4,8 @@
 
 // Função para realizar a configuração inicial do servidor web.
 void setup() {
+  delay(6000);
   Serial.begin(115200);
-  MySerialZed.begin(19200, SERIAL_8N1, RX, TX);     // Set up the hardware serial port
-  delay(2000);
   
   // Imprime linhas de separação e mensagens de inicialização no console serial.
   Serial.println();
@@ -14,6 +13,28 @@ void setup() {
   Serial.println("============================================================");
   Serial.println("  ----- Inicializando o Master Puma Rover RTK -----  ");
   // Serial.println("Versao do Arduino: " + String(ARDUINO));
+
+
+  // Inicia o protocolo UART para comunicação com o escravo.
+  Serial.println();
+  Serial.println("Iniciando Comunicação UART (Escravo)");
+  MySerial.begin(460800, SERIAL_8N1, MYPORT_RX, MYPORT_TX);     // Set up the hardware serial port
+  delay(1000);
+  while (MySerial.available()) MySerial.read();
+
+  Serial.println("Comunicação UART (Escravo) Inicializada");
+
+
+
+  // Inicia o protocolo UART para comunicação com o ZED.
+  Serial.println();
+  Serial.println("Iniciando Comunicação UART (ZED)");
+  MySerialZed.begin(460800, SERIAL_8N1, RX, TX);     // Set up the hardware serial port
+  delay(1000);
+  while (MySerialZed.available()) MySerialZed.read();
+
+  Serial.println("Comunicação UART (ZED) Inicializada");
+
 
   // Inicia o WiFi no modo AP com o SSID e a senha definidos.
   Serial.println();
@@ -43,16 +64,6 @@ void setup() {
   Serial.println("Servidor WebSocket Inicializado");
 
 
-  // Inicia o protocolo I2C como master.
-  Serial.println();
-  Serial.println("Iniciando Comunicação UART");
-  MySerial.begin(460800, SERIAL_8N1, MYPORT_RX, MYPORT_TX);     // Set up the hardware serial port
-  delay(1000);
-  while (MySerial.available()) MySerial.read();
-
-  Serial.println("Comunicação UART Inicializado");
-
-
   // Inicia o servidor web e imprime uma mensagem no console serial.
   Serial.println();
   Serial.println("Iniciando o servidor HTTP");
@@ -74,43 +85,18 @@ void setup() {
 // Função principal do programa
 void loop() {
   // Função principal executada repetidamente após a função de inicialização.
-  // if(ComandoEscravo || MySerial.available()) {
-  //   Serial.println("Comando recebido do escravo: " + String(ComandoEscravo));
-  //   slaveSendHandler();                           // Chama a função de manipulação de envio para o escravo.
-  //   slaveReceiveHandler();                        // Chama a função de manipulação de recebimento do escravo.
-  // }
-
-  if( MySerial.available()) {
-    mensagemStr = MySerial.readStringUntil('\n');
-    // Serial.println("Mensagem recebida do escravo: \n" + mensagemStr);
-    
-    DynamicJsonDocument doc(64);
-    deserializeJson(doc, mensagemStr);
-    
-    if(doc["Mensagem"] == "Precisao"){
-      precisaoRTK = doc["Valor"];
-    } else if (doc["Mensagem"] == "RTK"){
-      RTKAtual = doc["Valor"];
-    }
-    
-    webSocket.broadcastTXT(mensagemStr);
+  if(ComandoEscravo || MySerial.available()) {
+    Serial.println("Comando recebido do escravo: " + String(ComandoEscravo));
+    slaveSendHandler();                           // Chama a função de manipulação de envio para o escravo.
+    slaveReceiveHandler();                        // Chama a função de manipulação de recebimento do escravo.
   }
 
 
-  while (MySerialZed.available()) {
+   while (MySerialZed.available()) {
     String message = MySerialZed.readStringUntil('\n');
-    
-    String cota = getAltitudeFromNMEA(message);
-    if(cota != "-1.00"){
-      if (cota.length() == 4){
-        cota += "00";
-      } else if (cota.length() == 5){
-        cota += "0";
-      }
 
-      Serial.println();
-      Serial.println("Cota: " + String(cota));
-      webSocket.broadcastTXT("{\"Mensagem\": \"Cota\", \"Valor\": " + String(cota) + "}");
+    if(receberMensagens){
+      processaMensagem(message);
     }
   }
 
@@ -151,8 +137,12 @@ void webSocketEvent(uint8_t num, WStype_t type, uint8_t * payload, size_t length
         case WStype_CONNECTED:
             Serial.printf("[%u] Connected from  . . .  url: 192.168.4.1%s\n", num, payload);
             webSocket.sendTXT(num, "Conectado");
-            webSocket.sendTXT(num, "{\"Mensagem\": \"RTK\", \"Valor\": " + String(RTKAtual) + "}");
-            webSocket.broadcastTXT("{\"Mensagem\": \"Precisao\", \"Valor\": " + String(precisaoRTK) + "}");
+            if (RTKAtual !=-1){
+              webSocket.sendTXT(num, "{\"Mensagem\": \"RTK\", \"Valor\": " + String(RTKAtual) + "}");
+            }
+            if (precisaoRTK !=-1){
+              webSocket.sendTXT(num, "{\"Mensagem\": \"Precisao\", \"Valor\": " + String(precisaoRTK) + "}");
+            }
         break;
         case WStype_TEXT:
             Serial.printf("[%u] Received: %s\n", num, payload);

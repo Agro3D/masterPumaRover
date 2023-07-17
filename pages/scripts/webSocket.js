@@ -25,7 +25,7 @@ function initWebSocket() {
 
         switch(mensagem) {
             case 'Cota':
-                document.getElementById('cotaValor').innerHTML = valor;
+                document.getElementById('cotaValor').innerHTML = valor.toFixed(3);
                 break;
             
             case 'RTK':

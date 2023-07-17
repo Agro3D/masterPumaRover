@@ -1,6 +1,25 @@
 #ifndef ZEDHANDLER_H
 #define ZEDHANDLER_H
 
+
+String getAltitudeFromNMEA(String nmeastr);
+
+// Função para receber e processar a mensagem do cliente.
+void processaMensagem(String message){
+
+    
+    String cota = getAltitudeFromNMEA(message);
+    if(cota != "-1.00"){
+
+      Serial.println();
+      Serial.println("Cota: " + String(cota));
+      webSocket.broadcastTXT("{\"Mensagem\": \"Cota\", \"Valor\": " + String(cota) + "}");
+  }
+}
+
+
+
+
 // Função para pegar a cota do GPS
 String getAltitudeFromNMEA(String nmeastr) {
     char* nmea = (char*) nmeastr.c_str();

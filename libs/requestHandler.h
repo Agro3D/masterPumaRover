@@ -58,8 +58,14 @@ void slaveSendHandler() {
   case ACK_MSG:
     hasComunication = true;
     break;
-  case 0:
-    Serial.println("\nComando Desconhecido");
+  case GET_STATUS:
+    Serial.println("\nRequisição de status enviada para o escravo");
+    break;
+  case NOVA_CONFIGURACAO:
+    Serial.println("\nNova configuração enviada para o escravo");
+    break;
+  case PARAR_TRABALHO:
+    Serial.println("\nRequisição de parada de trabalho enviada para o escravo");
     break;
   
   default:
