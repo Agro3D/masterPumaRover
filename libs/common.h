@@ -22,6 +22,7 @@
 
 #define NOVA_CONFIGURACAO 1             // Mensagem para enviar uma nova configuração para o escravo
 #define PARAR_TRABALHO 2                // Mensagem para cancelar a pesquisa realizada pelo escravo
+#define NOVO_PONTO 3                    // Mensagem para salvar um novo ponto de interesse
 
 #define GET_STATUS 98                   // Mensagem para solicitar o status do escravo
 #define ACK_MSG 99                      // Mensagem de confirmação de comunicação com o escravo
@@ -84,7 +85,7 @@ void processaMensagem(String message);
 // Scripts JS do servidor web
 #include "../server/globalScript.h"         // Script JS global do servidor web
 #include "../server/indexScript.h"          // Script JS da página principal
-#include "../server/arquivosScript.h"       // Script JS da página arquivos
+#include "../server/pontosScript.h"       // Script JS da página arquivos
 #include "../server/webSocketScript.h"      // Script JS do webSocket
 
 

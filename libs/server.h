@@ -10,10 +10,10 @@ void setupServer() {
   setupServerScripts();
 
   
-// ========== Rotas de funções do servidor web ==========
+  // ========== Rotas de funções do servidor web ==========
 
 
-// Rota para cancelar a pesquisa realizada pelo escravo.
+  // Rota para cancelar a pesquisa realizada pelo escravo.
   server.on("/pararTrabalho", HTTP_GET, [](AsyncWebServerRequest *request){
     Serial.println("\n\n##### Requisicao Recebida: /pararTrabalho");
 
@@ -40,7 +40,18 @@ void setupServer() {
   });
   // Adicionar a rota ao servidor
   server.addHandler(newConfig);
+
+  
+  //  Rota para salvar um novo ponto de interesse.
+  server.on("/novoPonto", HTTP_GET, [](AsyncWebServerRequest *request){
+    Serial.println("\n\n##### Requisicao Recebida: /novoPonto");
+
+    ComandoEscravo = NOVO-PONTO;
+   
+    request->send(200, "text/plain", "Salvando novo ponto...");
+  });
 }
+
 
 
 #endif

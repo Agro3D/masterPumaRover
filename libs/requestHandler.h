@@ -67,6 +67,10 @@ void slaveSendHandler() {
   case PARAR_TRABALHO:
     Serial.println("\nRequisição de parada de trabalho enviada para o escravo");
     break;
+
+case NOVO_PONTO:
+    Serial.println("\nRequisição de novo ponto enviada para o escravo");
+    break;
   
   default:
     Serial.println("\nComando Desconhecido");

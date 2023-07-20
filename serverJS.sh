@@ -37,18 +37,18 @@ echo "Gerando indexScript.h... OK"
 
 
 # Página de scripts do servidor (script.js)
-echo "Gerando arquivosScripts.h..."
+echo "Gerando pontosScripts.h..."
 
-start='//Página de scripts da página de arquivos do servidor    
-char ARQUIVOS_SCRIPT[] PROGMEM = R"=====(
+start='//Página de scripts da página de pontos do servidor    
+char PONTOS_SCRIPT[] PROGMEM = R"=====(
 '
 end='
 
 )=====";'
 
-file="$start$(<pages/scripts/arquivos.js)$end"
-echo "$file" >| server/arquivosScript.h
-echo "Gerando arquivosScript.h... OK"
+file="$start$(<pages/scripts/pontos.js)$end"
+echo "$file" >| server/pontosScript.h
+echo "Gerando pontosScript.h... OK"
 
 
 # Página de scripts do Websocket (websocket.js)

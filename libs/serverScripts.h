@@ -25,7 +25,7 @@ void setupServerScripts(){
   server.on("/scripts/arquivos.js", HTTP_GET, [](AsyncWebServerRequest *request){
     Serial.println("\n\n##### Requisicao Recebida: /scripts/arquivos.js");
     Serial.println("Enviando script.js ...");
-    request->send(200, "text/javascript", ARQUIVOS_SCRIPT);
+    request->send(200, "text/javascript", PONTOS_SCRIPT);
   });
 
 

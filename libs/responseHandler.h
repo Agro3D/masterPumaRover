@@ -18,6 +18,11 @@ void slaveReceiveHandler() {
     precisaoRTK = -1;
     ComandoEscravo = 0;
     break;
+
+  case NOVO_PONTO:
+    ComandoEscravo = 0;
+    break;
+
   
   default:
     slaveListerner();

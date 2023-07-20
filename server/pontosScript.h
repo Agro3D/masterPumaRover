@@ -1,5 +1,5 @@
-//Página de scripts da página de arquivos do servidor    
-char ARQUIVOS_SCRIPT[] PROGMEM = R"=====(
+//Página de scripts da página de pontos do servidor    
+char PONTOS_SCRIPT[] PROGMEM = R"=====(
 window.onload = loadFiles();
 
 async function loadFiles(){
