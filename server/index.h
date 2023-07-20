@@ -10,14 +10,15 @@ char INDEX_PAGE[] PROGMEM = R"=====(
 
         <link rel="stylesheet" type="text/css" href="styles/global.css">
         <link rel="stylesheet" type="text/css" href="styles/header.css">
-        <link rel="stylesheet" type="text/css" href="styles/index.css">
+        <link rel="stylesheet" type="text/css" href="styles/indexConfig.css">
+        <link rel="stylesheet" type="text/css" href="styles/indexStatus.css">
 
         <script src="scripts/webSocket.js"></script>
         <script src="scripts/global.js"></script>
         <script src="scripts/index.js"></script>
     </head>
 
-    <body onload="imports();startWebSocket();">
+    <body onload="imports();startWebSocket();troca()">
         <div id="header" class="header"></div>
 
         <div id="body2" class="divs">
@@ -40,7 +41,7 @@ char INDEX_PAGE[] PROGMEM = R"=====(
                     
                         <p class="titulo">Velocidade de transmissão</p>
 
-                        <select id="velocidadeRadioSelect" name="velocidade" class="input">
+                        <select id="velocidadeRadioSelect" name="velocidade" class="input inputSelect">
                             <option value="1" selected>1HZ</option>
                             <option value="3">3HZ</option>
                             <option value="5">5HZ</option>
@@ -55,7 +56,7 @@ char INDEX_PAGE[] PROGMEM = R"=====(
                     <div id="frequenceDiv" class="optionsDivs">
                         <p class="titulo">Taxa de Atualização
                         </p>
-                        <select id="frequenciaTransmissao" name="frequence" class="input">
+                        <select id="frequenciaTransmissao" name="frequence" class="input inputSelect">
                             <option value="1" selected>1HZ</option>
                             <option value="3">3HZ</option>
                             <option value="5">5HZ</option>
@@ -129,8 +130,27 @@ char INDEX_PAGE[] PROGMEM = R"=====(
                 <div class="button">
                     <button onclick="voltar()" id="botaoCancelar">Voltar</button>
                 </div>
+                
+                
+                <div class="divs bordas listaPontos">
+                    <h1 id="tituloPrincipal">Lista de Pontos</h1>
+                    <div class="button">
+                        <button onclick="novoPonto()" id="botaoNovoPonto">Novo Ponto</button>
+                    </div>
+
+                    <div class="divs bordas">
+                        <div id="archives">
+
+                            
+                        </div>
+                    </div>
+                
+                </div>
+            
             </div>
 
+
+            <!-- Temporario para testes -->
             <div class="button">
                 <button onclick="troca()" id="troca">Troca</button>
             </div>

@@ -35,11 +35,11 @@ echo "$file" >| server/headerStyle.h
 echo "Gerando headerStyle.h... OK"
 
 
-# Página de estilos da página inicial do servidor (indexStyle.css)
-echo "Gerando indexStyle.h..."
+# Página de estilos da página inicial do servidor (indexConfigStyle.css)
+echo "Gerando indexConfigStyle.h..."
 
 start='//Página de estilos da página inicial do servidor
-char INDEX_STYLE[] PROGMEM = R"=====(
+char INDEX_CONFIG_STYLE[] PROGMEM = R"=====(
 
 '
 end='
@@ -47,8 +47,25 @@ end='
 )=====";'
 
 file="$start$(<pages/styles/index.css)$end"
-echo "$file" >| server/indexStyle.h
-echo "Gerando indexStyle.h... OK"
+echo "$file" >| server/indexConfigStyle.h
+echo "Gerando indexConfigStyle.h... OK"
+echo "Gerando headerStyle.h... OK"
+
+
+# Página de estilos da página inicial do servidor (indexStatusStyle.css)
+echo "Gerando indexStatusStyle.h..."
+
+start='//Página de estilos da página inicial do servidor
+char INDEX_STATUS_STYLE[] PROGMEM = R"=====(
+
+'
+end='
+
+)=====";'
+
+file="$start$(<pages/styles/index.css)$end"
+echo "$file" >| server/indexStatusStyle.h
+echo "Gerando indexStatusStyle.h... OK"
 
 
 # Página de estilos da página inicial do servidor (arquivosStyle.css)

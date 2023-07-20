@@ -77,7 +77,8 @@ void processaMensagem(String message);
 // Estilos CSS do servidor web
 #include "../server/globalStyle.h"          // Estilo CSS global do servidor web
 #include "../server/headerStyle.h"          // Estilo CSS do cabeçalho das páginas do servidor web
-#include "../server/indexStyle.h"           // Estilo CSS da página principal
+#include "../server/indexConfigStyle.h"     // Estilo CSS da página principal (configuração)
+#include "../server/indexStatusStyle.h"     // Estilo CSS da página principal (status)
 #include "../server/arquivosStyle.h"        // Estilo CSS da página arquivos
 
 // Scripts JS do servidor web
