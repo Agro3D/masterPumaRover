@@ -54,6 +54,10 @@
     border-radius: 8px;
 }
 
+.inputSelect{
+    height: 3vh;
+}
+
 .button{
     display: flex;
     align-items: center;
