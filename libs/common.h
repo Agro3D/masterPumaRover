@@ -63,8 +63,8 @@ void slaveSendHandler();
 bool verifyComunication();
 void webSocketEvent(uint8_t num, WStype_t type, uint8_t * payload, size_t length);
 String getAltgetAltitudeFromNMEA(String nmea);
-String randomCota();
 void processaMensagem(String message);
+void updateRTK(DynamicJsonDocument resposta);
 
 
 

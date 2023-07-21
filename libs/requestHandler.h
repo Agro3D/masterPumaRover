@@ -25,7 +25,17 @@ void slaveSendHandler() {
     String slaveResponse = slaveReceiveResponse();            // Solicite a resposta do escravo
     Serial.println("Resposta do escravo: " + slaveResponse);
 
-    if (slaveResponse == "ACK") {                             // Se a resposta do escravo for "ACK", saia do loop
+    //  Se a esposta tiver "Mensagem", chama a funcao updateRTK
+    while (slaveResponse.indexOf("Mensagem") != -1 && slaveResponse.indexOf("ACK") == -1){
+      DynamicJsonDocument json(128);
+      deserializeJson(json, mensagemStr);
+      updateRTK(json);
+      
+      slaveResponse = slaveReceiveResponse();            // Solicite a resposta do escravo
+      Serial.println("Resposta do escravo: " + slaveResponse);
+    }
+
+    if (slaveResponse.indexOf("ACK") != -1) { // Se a resposta do escravo for "ACK", saia do loop
     mensagemStr = "";                                        // Limpe a mensagem
     hasComunication = true;
       break;

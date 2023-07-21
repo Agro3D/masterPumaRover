@@ -21,9 +21,9 @@ void setupServerScripts(){
   });
 
 
-  // Rota para o script JS da página de arquivos.
-  server.on("/scripts/arquivos.js", HTTP_GET, [](AsyncWebServerRequest *request){
-    Serial.println("\n\n##### Requisicao Recebida: /scripts/arquivos.js");
+  // Rota para o script JS da página de pontos.
+  server.on("/scripts/pontos.js", HTTP_GET, [](AsyncWebServerRequest *request){
+    Serial.println("\n\n##### Requisicao Recebida: /scripts/pontos.js");
     Serial.println("Enviando script.js ...");
     request->send(200, "text/javascript", PONTOS_SCRIPT);
   });

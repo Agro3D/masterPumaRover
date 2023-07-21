@@ -16,6 +16,7 @@ char INDEX_PAGE[] PROGMEM = R"=====(
         <script src="scripts/webSocket.js"></script>
         <script src="scripts/global.js"></script>
         <script src="scripts/index.js"></script>
+        <script src="scripts/pontos.js"></script>
     </head>
 
     <body onload="imports();startWebSocket();troca()">

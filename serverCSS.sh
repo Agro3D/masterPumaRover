@@ -46,7 +46,7 @@ end='
 
 )=====";'
 
-file="$start$(<pages/styles/index.css)$end"
+file="$start$(<pages/styles/indexConfig.css)$end"
 echo "$file" >| server/indexConfigStyle.h
 echo "Gerando indexConfigStyle.h... OK"
 echo "Gerando headerStyle.h... OK"
@@ -63,7 +63,7 @@ end='
 
 )=====";'
 
-file="$start$(<pages/styles/index.css)$end"
+file="$start$(<pages/styles/indexStatus.css)$end"
 echo "$file" >| server/indexStatusStyle.h
 echo "Gerando indexStatusStyle.h... OK"
 

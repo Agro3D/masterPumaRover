@@ -22,17 +22,17 @@ void setupServerStyles(){
 
 
   // Rota para o estilo CSS da página inicial. (indexConfigStyle.css)
-  server.on("/styles/index.css", HTTP_GET, [](AsyncWebServerRequest *request){
-    Serial.println("\n\n##### Requisicao Recebida: /styles/index.css");
-    Serial.println("Enviando indexConfigStyle.css ...");
+  server.on("/styles/indexConfig.css", HTTP_GET, [](AsyncWebServerRequest *request){
+    Serial.println("\n\n##### Requisicao Recebida: /styles/indexConfig.css");
+    Serial.println("Enviando indexConfig.css ...");
     request->send(200, "text/css", INDEX_CONFIG_STYLE);
   });
 
 
   // Rota para o estilo CSS da página inicial. (indexStatusStyle.css)
-  server.on("/styles/index.css", HTTP_GET, [](AsyncWebServerRequest *request){
-    Serial.println("\n\n##### Requisicao Recebida: /styles/index.css");
-    Serial.println("Enviando indexStatusStyle.css ...");
+  server.on("/styles/indexStatus.css", HTTP_GET, [](AsyncWebServerRequest *request){
+    Serial.println("\n\n##### Requisicao Recebida: /styles/indexStatus.css");
+    Serial.println("Enviando indexStatus.css ...");
     request->send(200, "text/css", INDEX_STATUS_STYLE);
   });
 

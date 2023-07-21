@@ -26,7 +26,6 @@ void slaveReceiveHandler() {
   
   default:
     slaveListerner();
-    ComandoEscravo = 0;
     break;
   }
 }
@@ -35,13 +34,18 @@ void slaveReceiveHandler() {
 
 // Função para receber a resposta do escravo.
 void slaveListerner() {
-  String mensagemStr = slaveReceiveResponse();
-  DynamicJsonDocument resposta(1024);
-  deserializeJson(resposta, mensagemStr);
+  DynamicJsonDocument resposta(128);
+  deserializeJson(resposta, slaveReceiveResponse());
   
   Serial.println("Escravo: ");
   serializeJsonPretty(resposta, Serial);
   Serial.println();
+
+  updateRTK(resposta);
+
+}
+
+void updateRTK(DynamicJsonDocument resposta){
 
   if (resposta["Mensagem"] == "Precisao" || resposta["Mensagem"] == "RTK"){
     if(resposta["Mensagem"] == "Precisao"){
@@ -49,7 +53,12 @@ void slaveListerner() {
     } else if (resposta["Mensagem"] == "RTK"){
       RTKAtual = resposta["Valor"];
     }
-    
+
+    String mensagemStr = "{\"Mensagem\": \"" + resposta["Mensagem"].as<String>() + "\", \"Valor\": " + String(resposta["Valor"].as<int>()) + "}";
+    Serial.println(mensagemStr);
+    mensagemStr = resposta.as<String>();
+    Serial.println(mensagemStr);
+
     webSocket.broadcastTXT(mensagemStr);
   } 
 }

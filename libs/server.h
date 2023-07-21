@@ -46,7 +46,7 @@ void setupServer() {
   server.on("/novoPonto", HTTP_GET, [](AsyncWebServerRequest *request){
     Serial.println("\n\n##### Requisicao Recebida: /novoPonto");
 
-    ComandoEscravo = NOVO-PONTO;
+    ComandoEscravo = NOVO_PONTO;
    
     request->send(200, "text/plain", "Salvando novo ponto...");
   });
