@@ -35,18 +35,20 @@ void slaveReceiveHandler() {
 // Função para receber a resposta do escravo.
 void slaveListerner() {
   DynamicJsonDocument resposta(128);
-  deserializeJson(resposta, slaveReceiveResponse());
+  deserializeJson(resposta, slaveReceiveResponse());            // Le a resposta do escravo e converte para json
   
   Serial.println("Escravo: ");
   serializeJsonPretty(resposta, Serial);
   Serial.println();
 
+  // Verifica se a resposta é um status 
   updateRTK(resposta);
 
 }
 
 void updateRTK(DynamicJsonDocument resposta){
 
+  // Verifica se a resposta é um status ou uma mensagem de precisão e atualiza as variáveis
   if (resposta["Mensagem"] == "Precisao" || resposta["Mensagem"] == "RTK"){
     if(resposta["Mensagem"] == "Precisao"){
       precisaoRTK = resposta["Valor"];
@@ -54,9 +56,9 @@ void updateRTK(DynamicJsonDocument resposta){
       RTKAtual = resposta["Valor"];
     }
 
-    String mensagemStr = "{\"Mensagem\": \"" + resposta["Mensagem"].as<String>() + "\", \"Valor\": " + String(resposta["Valor"].as<int>()) + "}";
-    Serial.println(mensagemStr);
-    mensagemStr = resposta.as<String>();
+    // String mensagemStr = "{\"Mensagem\": \"" + resposta["Mensagem"].as<String>() + "\", \"Valor\": " + String(resposta["Valor"].as<int>()) + "}";
+    // Serial.println(mensagemStr);
+    String mensagemStr = resposta.as<String>();
     Serial.println(mensagemStr);
 
     webSocket.broadcastTXT(mensagemStr);
@@ -70,6 +72,7 @@ String slaveReceiveResponse() {
   String response = "";
   unsigned long startTime = millis();
 
+  // Aguarda a chegada de dados do escravo ou aguarda n segundos sem resposta
   while (!MySerial.available() && millis() - startTime < 10000) {}
   
   startTime = millis();

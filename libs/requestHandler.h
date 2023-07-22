@@ -22,7 +22,7 @@ void slaveSendHandler() {
     slaveSendData(mensagemStr);                               // Enviar dados para o slave
     Serial.println("\nDados enviados para o escravo");
     
-    String slaveResponse = slaveReceiveResponse();            // Solicite a resposta do escravo
+    String slaveResponse = slaveReceiveResponse();            // Le a resposta do escravo
     Serial.println("Resposta do escravo: " + slaveResponse);
 
     //  Se a esposta tiver "Mensagem", chama a funcao updateRTK
@@ -31,12 +31,12 @@ void slaveSendHandler() {
       deserializeJson(json, mensagemStr);
       updateRTK(json);
       
-      slaveResponse = slaveReceiveResponse();            // Solicite a resposta do escravo
+      slaveResponse = slaveReceiveResponse();                 // Le a resposta do escravo
       Serial.println("Resposta do escravo: " + slaveResponse);
     }
 
-    if (slaveResponse.indexOf("ACK") != -1) { // Se a resposta do escravo for "ACK", saia do loop
-    mensagemStr = "";                                        // Limpe a mensagem
+    if (slaveResponse.indexOf("ACK") != -1) {                 // Se a resposta do escravo for "ACK", saia do loop
+    mensagemStr = "";                                         // Limpe a mensagem
     hasComunication = true;
       break;
     } else {                                                  // Se a resposta do escravo não for "ACK", continue no loop
@@ -68,12 +68,15 @@ void slaveSendHandler() {
   case ACK_MSG:
     hasComunication = true;
     break;
+    
   case GET_STATUS:
     Serial.println("\nRequisição de status enviada para o escravo");
     break;
+
   case NOVA_CONFIGURACAO:
     Serial.println("\nNova configuração enviada para o escravo");
     break;
+
   case PARAR_TRABALHO:
     Serial.println("\nRequisição de parada de trabalho enviada para o escravo");
     break;

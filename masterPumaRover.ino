@@ -1,5 +1,5 @@
 // Variáveis Globais
-#include "libs/common.h"              // Variáveis globais
+#include "libs/common.h"                // Variáveis globais
 
 
 // Função para realizar a configuração inicial do servidor web.
@@ -29,7 +29,7 @@ void setup() {
   // Inicia o protocolo UART para comunicação com o ZED.
   Serial.println();
   Serial.println("Iniciando Comunicação UART (ZED)");
-  MySerialZed.begin(460800, SERIAL_8N1, RX, TX);     // Set up the hardware serial port
+  MySerialZed.begin(460800, SERIAL_8N1, RX, TX);                // Set up the hardware serial port
   delay(1000);
   while (MySerialZed.available()) MySerialZed.read();
 
@@ -85,6 +85,8 @@ void setup() {
 // Função principal do programa
 void loop() {
   // Função principal executada repetidamente após a função de inicialização.
+
+  // Verifica se ha alguma requisicao pendente no servidor web, ou alguma mensagem pendente do escravo.
   if(ComandoEscravo || MySerial.available()) {
     Serial.println("Comando recebido do escravo: " + String(ComandoEscravo));
     slaveSendHandler();                           // Chama a função de manipulação de envio para o escravo.
@@ -92,7 +94,8 @@ void loop() {
   }
 
 
-   while (MySerialZed.available()) {
+  // Lê as mensagens recebidas do ZED
+  while (MySerialZed.available()) {
     String message = MySerialZed.readStringUntil('\n');
 
     if(receberMensagens){

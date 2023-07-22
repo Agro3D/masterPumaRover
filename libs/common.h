@@ -10,6 +10,7 @@
 #include <WiFi.h>                       // Biblioteca para operações de WiFi
 
 
+
 // Constantes do Programa
 #define SERVER_PORT 80                  // Porta do servidor HTTP
 #define CHUNK_SIZE 64                   // Tamanho do chunk de dados enviado para o escravo
@@ -18,8 +19,8 @@
 #define MYPORT_RX 18                    // Porta recepção UART
 #define MYPORT_TX 17                    // Porta transmissão UART
 
-// Constantes para identificar o tipo de mensagem enviada para o escravo
 
+// Constantes para identificar o tipo de mensagem enviada para o escravo
 #define NOVA_CONFIGURACAO 1             // Mensagem para enviar uma nova configuração para o escravo
 #define PARAR_TRABALHO 2                // Mensagem para cancelar a pesquisa realizada pelo escravo
 #define NOVO_PONTO 3                    // Mensagem para salvar um novo ponto de interesse
@@ -75,6 +76,7 @@ void updateRTK(DynamicJsonDocument resposta);
 #include "../server/index.h"                // Página principal
 #include "../server/arquivos.h"             // Página arquivo
 
+
 // Estilos CSS do servidor web
 #include "../server/globalStyle.h"          // Estilo CSS global do servidor web
 #include "../server/headerStyle.h"          // Estilo CSS do cabeçalho das páginas do servidor web
@@ -82,10 +84,11 @@ void updateRTK(DynamicJsonDocument resposta);
 #include "../server/indexStatusStyle.h"     // Estilo CSS da página principal (status)
 #include "../server/arquivosStyle.h"        // Estilo CSS da página arquivos
 
+
 // Scripts JS do servidor web
 #include "../server/globalScript.h"         // Script JS global do servidor web
 #include "../server/indexScript.h"          // Script JS da página principal
-#include "../server/pontosScript.h"       // Script JS da página arquivos
+#include "../server/pontosScript.h"         // Script JS da página arquivos
 #include "../server/webSocketScript.h"      // Script JS do webSocket
 
 

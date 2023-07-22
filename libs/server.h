@@ -21,6 +21,7 @@ void setupServer() {
    
     request->send(200, "text/plain", "Cancelando pesquisa...");
   });
+  
 
 // Rota para receber dados do cliente em formato JSON.
   AsyncCallbackJsonWebHandler* newConfig = new AsyncCallbackJsonWebHandler("/postConfiguration",
@@ -38,8 +39,10 @@ void setupServer() {
     
     request->send(200, "text/plain", "Recebendo configuracao...");
   });
+
   // Adicionar a rota ao servidor
   server.addHandler(newConfig);
+
 
   
   //  Rota para salvar um novo ponto de interesse.
