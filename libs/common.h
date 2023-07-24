@@ -22,8 +22,13 @@
 
 // Constantes para identificar o tipo de mensagem enviada para o escravo
 #define NOVA_CONFIGURACAO 1             // Mensagem para enviar uma nova configuração para o escravo
-#define PARAR_TRABALHO 2                // Mensagem para cancelar a pesquisa realizada pelo escravo
-#define NOVO_PONTO 3                    // Mensagem para salvar um novo ponto de interesse
+#define RESP_CONFIGURACAO 2             // Mensagem para receber a resposta do escravo sobre a configuração
+
+#define PARAR_TRABALHO 3                // Mensagem para cancelar a pesquisa realizada pelo escravo
+#define RESP_PARAR_TRABALHO 4           // Mensagem para receber a resposta do escravo sobre o cancelamento da pesquisa
+
+#define NOVO_PONTO 5                    // Mensagem para salvar um novo ponto de interesse
+#define RESP_NOVO_PONTO 6               // Mensagem para receber a resposta do escravo sobre o salvamento do ponto de interesse
 
 #define GET_STATUS 98                   // Mensagem para solicitar o status do escravo
 #define ACK_MSG 99                      // Mensagem de confirmação de comunicação com o escravo
@@ -63,7 +68,7 @@ void slaveSendData(String data);
 void slaveSendHandler();
 bool verifyComunication();
 void webSocketEvent(uint8_t num, WStype_t type, uint8_t * payload, size_t length);
-String getAltgetAltitudeFromNMEA(String nmea);
+String getAltitudeFromNMEA(String nmea);
 void processaMensagem(String message);
 void updateRTK(DynamicJsonDocument resposta);
 
