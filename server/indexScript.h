@@ -28,6 +28,39 @@ function voltar() {
 }
 
 
+
+function getStatus(){
+    // Verifica o status pelo mestre
+    fetch("/getStatus", {
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json"
+        }
+    }).then(function(response) {
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+
+        response.text().then(function(text) {
+
+            console.log(text);
+
+            switch (text) {
+                case 'Trabalhando':
+                    troca();
+                    break;
+
+                default:
+                    console.log('Nenhuma ação definida');
+                    break;
+            }
+        });
+    }).catch(error => {
+        console.error('There has been a problem with your fetch operation:', error);
+    });
+}
+
+
 function novoTrabalho() {
     document.getElementById("configuracoes").className = "naoVisivel";
     document.getElementById("status").className = "visivel";

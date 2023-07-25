@@ -71,6 +71,7 @@ void setup() {
   server.begin();
   Serial.println("Servidor HTTP iniciado em http://" + String(IP.toString()));
 
+  statusAtual = char(ESPERANDO);
 
   Serial.println("\n\n\tMaster Puma Rover inicializado.");
 
@@ -140,10 +141,13 @@ void webSocketEvent(uint8_t num, WStype_t type, uint8_t * payload, size_t length
         case WStype_CONNECTED:
             Serial.printf("[%u] Connected from  . . .  url: 192.168.4.1%s\n", num, payload);
             webSocket.sendTXT(num, "Conectado");
+
             if (RTKAtual !=-1){
+              Serial.println("Envio de RTK");
               webSocket.sendTXT(num, "{\"Mensagem\": \"RTK\", \"Valor\": " + String(RTKAtual) + "}");
             }
             if (precisaoRTK !=-1){
+              Serial.println("Envio de precisao");
               webSocket.sendTXT(num, "{\"Mensagem\": \"Precisao\", \"Valor\": " + String(precisaoRTK) + "}");
             }
         break;

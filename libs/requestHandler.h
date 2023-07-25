@@ -73,7 +73,7 @@ void slaveSendHandler() {
     Serial.println("\nRequisição de status enviada para o escravo");
     break;
 
-  case NOVA_CONFIGURACAO:
+  case NOVO_TRABALHO:
     Serial.println("\nNova configuração enviada para o escravo");
     break;
 

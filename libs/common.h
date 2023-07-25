@@ -21,7 +21,7 @@
 
 
 // Constantes para identificar o tipo de mensagem enviada para o escravo
-#define NOVA_CONFIGURACAO 1             // Mensagem para enviar uma nova configuração para o escravo
+#define NOVO_TRABALHO 1             // Mensagem para enviar uma nova configuração para o escravo
 #define RESP_CONFIGURACAO 2             // Mensagem para receber a resposta do escravo sobre a configuração
 
 #define PARAR_TRABALHO 3                // Mensagem para cancelar a pesquisa realizada pelo escravo
@@ -32,6 +32,11 @@
 
 #define GET_STATUS 98                   // Mensagem para solicitar o status do escravo
 #define ACK_MSG 99                      // Mensagem de confirmação de comunicação com o escravo
+
+
+// Definições de Status
+#define ESPERANDO 0
+#define TRABALHANDO 1
 
 
 
@@ -51,12 +56,14 @@ bool receberMensagens = false;                          // Flag para controlar o
 String mensagemStr;                                     // String para armazenar a representação em texto do objeto JSON
 int RTKAtual = -1;                                      // Variável para armazenar o valor da pressão atual do RTK
 int precisaoRTK = -1;                                   // Variável para armazenar o valor da pressão de precisão do RTK
+char statusAtual;                                       // Variável para armazenar o status atual do escravo
 int ComandoEscravo = 0;                                 // Flag para controlar o envio de dados para o escravo
 bool waitResponse = false;                              // Flag para controlar o recebimento de dados do escravo
 bool verifyingComunication = false;                     // Flag para controlar a verificação de comunicação com o escravo
 
 
 // Lista de todas as funções do programa
+void getStatus();
 void setupServer();
 void setupServerPages();
 void setupServerScripts();

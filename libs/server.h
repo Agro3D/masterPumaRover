@@ -35,7 +35,7 @@ void setupServer() {
 
     mensagemStr = json.as<String>();
 
-    ComandoEscravo = NOVA_CONFIGURACAO;
+    ComandoEscravo = NOVO_TRABALHO;
     
     request->send(200, "text/plain", "Recebendo configuracao...");
   });
@@ -52,6 +52,29 @@ void setupServer() {
     ComandoEscravo = NOVO_PONTO;
    
     request->send(200, "text/plain", "Salvando novo ponto...");
+  });
+
+
+  
+  //  Rota para salvar um novo ponto de interesse.
+  server.on("/getStatus", HTTP_GET, [](AsyncWebServerRequest *request){
+    Serial.println("\n\n##### Requisicao Recebida: /getStatus");
+
+    String statusStr;
+
+    switch (statusAtual){
+    case ESPERANDO:
+      statusStr = "Esperando";
+      break;
+
+    case TRABALHANDO:
+      statusStr = "Trabalhando";
+      break;
+    
+    default:
+      break;
+    }
+    request->send(200, "text/plain", statusStr);
   });
 }
 

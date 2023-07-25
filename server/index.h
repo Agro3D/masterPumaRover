@@ -19,7 +19,7 @@ char INDEX_PAGE[] PROGMEM = R"=====(
         <script src="scripts/pontos.js"></script>
     </head>
 
-    <body onload="imports();startWebSocket();troca()">
+    <body onload="imports();startWebSocket();getStatus()">
         <div id="header" class="header"></div>
 
         <div id="body2" class="divs">

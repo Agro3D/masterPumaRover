@@ -5,18 +5,23 @@
 // Função para passo a passo da comunicação com o escravo
 void slaveReceiveHandler() {
 
-  switch (ComandoEscravo)
-  {
-  case NOVA_CONFIGURACAO:
-    receberMensagens = true;
+  switch (ComandoEscravo){
+  case GET_STATUS:
+    getStatus();
     ComandoEscravo = 0;
+    break;
+  case NOVO_TRABALHO:
+    receberMensagens = true;
+    ComandoEscravo = GET_STATUS;
+    statusAtual = char(TRABALHANDO);
     break;
 
   case PARAR_TRABALHO:
     receberMensagens = false;
     RTKAtual = -1;
     precisaoRTK = -1;
-    ComandoEscravo = 0;
+    ComandoEscravo = GET_STATUS;
+    statusAtual = char(ESPERANDO);
     break;
 
   case NOVO_PONTO:
@@ -28,6 +33,33 @@ void slaveReceiveHandler() {
     slaveListerner();
     break;
   }
+}
+
+
+
+void getStatus() {
+  DynamicJsonDocument respostaStatus(256);
+  deserializeJson(respostaStatus, slaveReceiveResponse());
+  // String status = slaveReceiveResponse();
+  int status =  respostaStatus["Mensagem"].as<int>();
+  String statusStr;
+
+  switch (status){
+  case ESPERANDO:
+    statusStr = "Esperando";
+    statusAtual = char(ESPERANDO);
+    break;
+  case TRABALHANDO:
+    statusStr = "TRABALHANDO";
+    statusAtual = char(TRABALHANDO);
+    break;
+
+  default:
+    break;
+  }
+
+  Serial.println("Status do escravo: " + statusStr);
+  webSocket.broadcastTXT(statusStr);
 }
 
 
