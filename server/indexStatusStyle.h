@@ -136,6 +136,13 @@ char INDEX_STATUS_STYLE[] PROGMEM = R"=====(
     display: none;
 }
 
+.disabled {
+    border: 1px solid #999999 !important;
+    background-color: #cccccc !important;
+    color: #666666 !important;
+    cursor: default !important;
+  }
+
 /* 
 320px — 480px: Mobile devices
 481px — 768px: iPads, Tablets

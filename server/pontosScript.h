@@ -19,4 +19,11 @@ async  function novoPonto(){
     });
 }
 
+
+// Função para habilitar o botão de novo ponto
+function enableButton(){
+    document.getElementById('botaoNovoPonto').disabled = false;
+    document.getElementById('botaoNovoPonto').className = '';
+}
+
 )=====";

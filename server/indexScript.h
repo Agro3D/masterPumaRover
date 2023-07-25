@@ -43,9 +43,10 @@ function getStatus(){
 
         response.text().then(function(text) {
 
-            console.log(text);
-
             switch (text) {
+                case 'Esperando':
+                    break;
+                    
                 case 'Trabalhando':
                     troca();
                     break;

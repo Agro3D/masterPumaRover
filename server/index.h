@@ -136,7 +136,7 @@ char INDEX_PAGE[] PROGMEM = R"=====(
                 <div class="divs bordas listaPontos">
                     <h1 id="tituloPrincipal">Lista de Pontos</h1>
                     <div class="button">
-                        <button onclick="novoPonto()" id="botaoNovoPonto">Novo Ponto</button>
+                        <button onclick="novoPonto()" id="botaoNovoPonto" class="disabled" disabled>Novo Ponto</button>
                     </div>
 
                     <div class="divs bordas">

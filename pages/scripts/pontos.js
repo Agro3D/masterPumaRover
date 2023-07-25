@@ -16,3 +16,10 @@ async  function novoPonto(){
         console.error('There has been a problem with your fetch operation:', error);
     });
 }
+
+
+// Função para habilitar o botão de novo ponto
+function enableButton(){
+    document.getElementById('botaoNovoPonto').disabled = false;
+    document.getElementById('botaoNovoPonto').className = '';
+}

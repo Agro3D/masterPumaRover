@@ -18,6 +18,13 @@ function initWebSocket() {
     ws.onmessage = async function (event) {
         console.log('Server: ', event.data);
 
+        if (event.data == 'Conectado') {
+
+            if (window.location.href == 'http://192.168.4.1/') {    enableButton(); }
+            
+            return;
+        }
+
         // Transform event.data to json
         var data = JSON.parse(event.data);
         var mensagem = data['Mensagem'];
