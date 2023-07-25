@@ -37,6 +37,14 @@ void setupServerStyles(){
   });
 
 
+  // Rota para o estilo CSS do popup de novo ponto. (popupNovoPontoStyle.css)
+  server.on("/styles/popupNovoPonto.css", HTTP_GET, [](AsyncWebServerRequest *request){
+    Serial.println("\n\n##### Requisicao Recebida: /styles/popupNovoPonto.css");
+    Serial.println("Enviando popupNovoPonto.css ...");
+    request->send(200, "text/css", POPUP_NOVO_PONTO_STYLE);
+  });
+
+
   // Rota para o estilo CSS da página de arquivos. (arquivosStyle.css)
   server.on("/styles/arquivos.css", HTTP_GET, [](AsyncWebServerRequest *request){
     Serial.println("\n\n##### Requisicao Recebida: /styles/arquivos.css");

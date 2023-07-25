@@ -94,6 +94,7 @@ void updateRTK(DynamicJsonDocument resposta);
 #include "../server/headerStyle.h"          // Estilo CSS do cabeçalho das páginas do servidor web
 #include "../server/indexConfigStyle.h"     // Estilo CSS da página principal (configuração)
 #include "../server/indexStatusStyle.h"     // Estilo CSS da página principal (status)
+#include "../server/popupStyle.h"           // Estilo CSS do popup de novo ponto
 #include "../server/arquivosStyle.h"        // Estilo CSS da página arquivos
 
 

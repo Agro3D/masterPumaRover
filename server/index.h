@@ -3,6 +3,7 @@ char INDEX_PAGE[] PROGMEM = R"=====(
     
 <!DOCTYPE html>
 <html>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <head>
         <title>Puma Station Web Server</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -12,6 +13,7 @@ char INDEX_PAGE[] PROGMEM = R"=====(
         <link rel="stylesheet" type="text/css" href="styles/header.css">
         <link rel="stylesheet" type="text/css" href="styles/indexConfig.css">
         <link rel="stylesheet" type="text/css" href="styles/indexStatus.css">
+        <link rel="stylesheet" type="text/css" href="styles/popupNovoPonto.css">
 
         <script src="scripts/webSocket.js"></script>
         <script src="scripts/global.js"></script>
@@ -136,7 +138,7 @@ char INDEX_PAGE[] PROGMEM = R"=====(
                 <div class="divs bordas listaPontos">
                     <h1 id="tituloPrincipal">Lista de Pontos</h1>
                     <div class="button">
-                        <button onclick="novoPonto()" id="botaoNovoPonto" class="disabled" disabled>Novo Ponto</button>
+                        <button onclick="showPopup()" id="botaoNovoPonto" class="disabled" >Novo Ponto</button>
                     </div>
 
                     <div class="divs bordas">
@@ -149,6 +151,28 @@ char INDEX_PAGE[] PROGMEM = R"=====(
                 </div>
             
             </div>
+
+
+            <!-- PopUp Novo Ponto-->
+            <div id="popupNovoPonto" class="popup" onclick="hidePopup(event)">
+                <div class="popup-content">
+                    <label for="name">Nome:</label><br>
+                    <input type="text" id="nomePonto" name="namePonto" class="inputPopup" placeholder="Escreva aqui o nome do ponto"><br>
+                    <label for="desc">Descrição:</label><br>
+                    <textarea id="descPonto" name="descPonto" class="inputPopup textareaPopup" placeholder="Escreva aqui a descrição do ponto"></textarea>
+
+                    <div id="botoesPopup">
+                        <button id="cancel" class="botaoPopup" onclick="cancelData()">Cancelar</button>
+                        <button id="save" class="botaoPopup" onclick="novoPonto()">Salvar</button>
+                    </div>
+
+                </div>
+              </div>
+              
+              
+
+              
+
 
 
             <!-- Temporario para testes -->

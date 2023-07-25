@@ -68,6 +68,22 @@ echo "$file" >| server/indexStatusStyle.h
 echo "Gerando indexStatusStyle.h... OK"
 
 
+# Página de estilos do popup de novo ponto (popupStyle.css)
+echo "Gerando popupStyle.h..."
+
+start='//Página de estilos do popup de novo ponto
+char POPUP_NOVO_PONTO_STYLE[] PROGMEM = R"=====(
+
+'
+end='
+
+)=====";'
+
+file="$start$(<pages/styles/popupNovoPonto.css)$end"
+echo "$file" >| server/popupStyle.h
+echo "Gerando popupStyle.h... OK"
+
+
 # Página de estilos da página inicial do servidor (arquivosStyle.css)
 echo "Gerando arquivosStyle.h..."
 
