@@ -76,6 +76,15 @@ void slaveListerner() {
   // Verifica se a resposta é um status 
   updateRTK(resposta);
 
+  switch (resposta["Comando"].as<int>()) {
+    case NOVO_PONTO:
+    webSocket.broadcastTXT(resposta["Mensagem"].as<String>().c_str());
+      break;
+  
+  default:
+    break;
+  }
+
 }
 
 void updateRTK(DynamicJsonDocument resposta){
@@ -88,12 +97,7 @@ void updateRTK(DynamicJsonDocument resposta){
       RTKAtual = resposta["Valor"];
     }
 
-    // String mensagemStr = "{\"Mensagem\": \"" + resposta["Mensagem"].as<String>() + "\", \"Valor\": " + String(resposta["Valor"].as<int>()) + "}";
-    // Serial.println(mensagemStr);
-    String mensagemStr = resposta.as<String>();
-    Serial.println(mensagemStr);
-
-    webSocket.broadcastTXT(mensagemStr);
+    webSocket.broadcastTXT(resposta.as<String>().c_str());
   } 
 }
 

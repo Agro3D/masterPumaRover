@@ -89,7 +89,7 @@ void loop() {
 
   // Verifica se ha alguma requisicao pendente no servidor web, ou alguma mensagem pendente do escravo.
   if(ComandoEscravo || MySerial.available()) {
-    Serial.println("Comando recebido do escravo: " + String(ComandoEscravo));
+    Serial.println("\nComando recebido do escravo: " + String(ComandoEscravo));
     slaveSendHandler();                           // Chama a função de manipulação de envio para o escravo.
     slaveReceiveHandler();                        // Chama a função de manipulação de recebimento do escravo.
   }

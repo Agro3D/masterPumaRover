@@ -63,8 +63,7 @@ void slaveSendHandler() {
 
 
   // Ações a serem executadas após o envio dos dados para o escravo
-  switch (ComandoEscravo)
-  {
+  switch (ComandoEscravo)  {
   case ACK_MSG:
     hasComunication = true;
     break;

@@ -21,10 +21,10 @@ async  function novoPonto(){
         if (!response.ok) {
             throw new Error('Network response was not ok');
         }else{
-            console.log("Ponto registrado com sucesso!");
+            console.log("Requisição de novo ponto enviada com sucesso!");
             closePopup();
             clearData();
-            showMessage("Ponto registrado com sucesso!");
+            showMessage("Registrando ponto...");
         }
     }).catch(error => {
         console.error('There has been a problem with your fetch operation:', error);
@@ -63,7 +63,15 @@ function clearData() {
   document.getElementById('descPonto').value = '';
 }
 
-function showMessage(message) {
+function showMessage(message, cor) {
+    if(cor == 'verde'){
+        document.getElementById("messageAlert").style.backgroundColor = "#2b8f17";
+    }else if(cor == 'vermelho'){
+        document.getElementById("messageAlert").style.backgroundColor = "#f44336";
+    }else{
+        document.getElementById("messageAlert").style.backgroundColor = "#a011ff";
+    }
+
     document.getElementById("messageAlert").innerHTML = message;
     document.getElementById("messageAlert").className = "message show"; /* Mostrar a mensagem */
     setTimeout(function(){ document.getElementById("messageAlert").className = "message"; }, 3000); /* Esconder após 3 segundos */

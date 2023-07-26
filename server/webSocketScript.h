@@ -45,6 +45,15 @@ function initWebSocket() {
                 document.getElementById('precisaoValor').innerHTML = valor + ' mm';
                 break;
 
+            case 'NOVO_PONTO':
+                if (valor == 'OK') {
+                    showMessage('Ponto registrado com sucesso!', 'verde');
+                } else if (valor == 'ERRO') {
+                    showMessage('Erro ao registrar ponto!', 'vermelho');
+                } else {
+                    showMessage('Erro desconhecido ao registrar ponto!', 'vermelho');
+                }
+
             default:
                 console.log('Nenhuma ação definida');
                 break;
