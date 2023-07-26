@@ -66,5 +66,5 @@ function clearData() {
 function showMessage(message) {
     document.getElementById("messageAlert").innerHTML = message;
     document.getElementById("messageAlert").className = "message show"; /* Mostrar a mensagem */
-    setTimeout(function(){ document.getElementById("messageAlert").className = "show"; }, 3000); /* Esconder após 3 segundos */
+    setTimeout(function(){ document.getElementById("messageAlert").className = "message"; }, 3000); /* Esconder após 3 segundos */
   }

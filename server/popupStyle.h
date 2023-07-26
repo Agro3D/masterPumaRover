@@ -1,7 +1,7 @@
 //Página de estilos do popup de novo ponto
 char POPUP_NOVO_PONTO_STYLE[] PROGMEM = R"=====(
 
-/* The popup (background) */
+/* CSS para Popup */
 .popup {
     display: none;
     position: fixed;
@@ -82,6 +82,53 @@ char POPUP_NOVO_PONTO_STYLE[] PROGMEM = R"=====(
 #cancel:hover {
     background-color: #c0392b; 
 }
+
+
+
+/* CSS para alert Message */
+.message {
+    visibility: hidden;
+    margin: 10px auto;
+    background-color: #a011ff;
+    color: white;
+    text-align: center;
+    border-radius: 10px;
+    padding: 3vh;
+    position: fixed;
+    z-index: 1;
+    left: 50%;
+    top: 10vh;
+    font-size: 1rem;
+    font-weight: bold;
+    transform: translate(-50%, -50%);
+  }
+  
+  /* A mensagem aparece (pode personalizar como preferir) */
+  .message.show {
+    visibility: visible;
+    -webkit-animation: fadeIn 0.6s, fadeOut 0.5s 2.5s;
+    animation: fadeIn 0.6s, fadeOut 0.5s 2.5s;
+  }
+  
+  @-webkit-keyframes fadeIn {
+    from {top: 0; opacity: 0;} 
+    to {top: 10vh; opacity: 1;}
+  }
+  
+  @keyframes fadeIn {
+    from {top: 0; opacity: 0;}
+    to {top: 10vh; opacity: 1;}
+  }
+  
+  @-webkit-keyframes fadeOut {
+    from {top: 10vh; opacity: 1;} 
+    to {top: 0; opacity: 0;}
+  }
+  
+  @keyframes fadeOut {
+    from {top: 10vh; opacity: 1;}
+    to {top: 0; opacity: 0;}
+  }
 
 
 
