@@ -79,7 +79,7 @@ end='
 
 )=====";'
 
-file="$start$(<pages/styles/popupNovoPonto.css)$end"
+file="$start$(<pages/styles/popupAlert.css)$end"
 echo "$file" >| server/popupStyle.h
 echo "Gerando popupStyle.h... OK"
 

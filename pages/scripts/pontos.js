@@ -24,6 +24,7 @@ async  function novoPonto(){
             console.log("Ponto registrado com sucesso!");
             closePopup();
             clearData();
+            showMessage("Ponto registrado com sucesso!");
         }
     }).catch(error => {
         console.error('There has been a problem with your fetch operation:', error);
@@ -39,16 +40,16 @@ function enableButton(){
 
 
 function showPopup() {
-    document.getElementById("popupNovoPonto").style.display = "block";
+    document.getElementById("popupAlert").style.display = "block";
 }
 
 function closePopup() {
-    document.getElementById("popupNovoPonto").style.display = "none";
+    document.getElementById("popupAlert").style.display = "none";
 }
 
 function hidePopup(event) {
-    if (event.target == document.getElementById("popupNovoPonto")) {
-        document.getElementById("popupNovoPonto").style.display = "none";
+    if (event.target == document.getElementById("popupAlert")) {
+        document.getElementById("popupAlert").style.display = "none";
     }
 }
 
@@ -61,3 +62,9 @@ function clearData() {
   document.getElementById('nomePonto').value = '';
   document.getElementById('descPonto').value = '';
 }
+
+function showMessage(message) {
+    document.getElementById("messageAlert").innerHTML = message;
+    document.getElementById("messageAlert").className = "message show"; /* Mostrar a mensagem */
+    setTimeout(function(){ document.getElementById("messageAlert").className = "show"; }, 3000); /* Esconder após 3 segundos */
+  }

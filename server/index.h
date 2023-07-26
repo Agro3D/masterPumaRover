@@ -13,7 +13,7 @@ char INDEX_PAGE[] PROGMEM = R"=====(
         <link rel="stylesheet" type="text/css" href="styles/header.css">
         <link rel="stylesheet" type="text/css" href="styles/indexConfig.css">
         <link rel="stylesheet" type="text/css" href="styles/indexStatus.css">
-        <link rel="stylesheet" type="text/css" href="styles/popupNovoPonto.css">
+        <link rel="stylesheet" type="text/css" href="styles/popupAlert.css">
 
         <script src="scripts/webSocket.js"></script>
         <script src="scripts/global.js"></script>
@@ -154,7 +154,7 @@ char INDEX_PAGE[] PROGMEM = R"=====(
 
 
             <!-- PopUp Novo Ponto-->
-            <div id="popupNovoPonto" class="popup" onclick="hidePopup(event)">
+            <div id="popupAlert" class="popup" onclick="hidePopup(event)">
                 <div class="popup-content">
                     <label for="name">Nome:</label><br>
                     <input type="text" id="nomePonto" name="namePonto" class="inputPopup" placeholder="Escreva aqui o nome do ponto"><br>

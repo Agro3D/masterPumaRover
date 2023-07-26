@@ -41,16 +41,16 @@ function enableButton(){
 
 
 function showPopup() {
-    document.getElementById("popupNovoPonto").style.display = "block";
+    document.getElementById("popupAlert").style.display = "block";
 }
 
 function closePopup() {
-    document.getElementById("popupNovoPonto").style.display = "none";
+    document.getElementById("popupAlert").style.display = "none";
 }
 
 function hidePopup(event) {
-    if (event.target == document.getElementById("popupNovoPonto")) {
-        document.getElementById("popupNovoPonto").style.display = "none";
+    if (event.target == document.getElementById("popupAlert")) {
+        document.getElementById("popupAlert").style.display = "none";
     }
 }
 

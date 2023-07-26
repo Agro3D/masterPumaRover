@@ -37,10 +37,10 @@ void setupServerStyles(){
   });
 
 
-  // Rota para o estilo CSS do popup de novo ponto. (popupNovoPontoStyle.css)
-  server.on("/styles/popupNovoPonto.css", HTTP_GET, [](AsyncWebServerRequest *request){
-    Serial.println("\n\n##### Requisicao Recebida: /styles/popupNovoPonto.css");
-    Serial.println("Enviando popupNovoPonto.css ...");
+  // Rota para o estilo CSS do popup de novo ponto. (popupAlertStyle.css)
+  server.on("/styles/popupAlert.css", HTTP_GET, [](AsyncWebServerRequest *request){
+    Serial.println("\n\n##### Requisicao Recebida: /styles/popupAlert.css");
+    Serial.println("Enviando popupAlert.css ...");
     request->send(200, "text/css", POPUP_NOVO_PONTO_STYLE);
   });
 
