@@ -5,15 +5,15 @@ async  function novoPonto(){
     console.log("Iniciando novo ponto...");
 
     var dataJson = {
-        nome: document.getElementById('nomePonto').value,
-        descricao: document.getElementById('descPonto').value
+        Nome: document.getElementById('nomePonto').value,
+        Descricao: document.getElementById('descPonto').value
     };
 
     console.log(dataJson);
 
     // Realiza o POST request e verifica se foi bem sucedido
     await fetch('/novoPonto', {
-        method: 'get',
+        method: 'POST',
         headers: {
             'Content-Type': 'application/json',
         },

@@ -24,7 +24,7 @@ void setupServer() {
   
 
 // Rota para receber dados do cliente em formato JSON.
-  AsyncCallbackJsonWebHandler* newConfig = new AsyncCallbackJsonWebHandler("/postConfiguration",
+  AsyncCallbackJsonWebHandler* postConfig = new AsyncCallbackJsonWebHandler("/postConfiguration",
   [](AsyncWebServerRequest *request, JsonVariant &json) {
     Serial.println("\n\n##### Requisicao Recebida: /postConfiguration");
 
@@ -40,20 +40,28 @@ void setupServer() {
     request->send(200, "text/plain", "Recebendo configuracao...");
   });
 
-  // Adicionar a rota ao servidor
-  server.addHandler(newConfig);
 
 
-  
   //  Rota para salvar um novo ponto de interesse.
-  server.on("/novoPonto", HTTP_GET, [](AsyncWebServerRequest *request){
+  AsyncCallbackJsonWebHandler* novoPonto = new AsyncCallbackJsonWebHandler("/novoPonto",
+  [](AsyncWebServerRequest *request, JsonVariant &json) {
+
     Serial.println("\n\n##### Requisicao Recebida: /novoPonto");
+
+    Serial.println("Received JSON object:");
+    serializeJsonPretty(json, Serial);
+
+    mensagemStr = json.as<String>();
 
     ComandoEscravo = NOVO_PONTO;
    
     request->send(200, "text/plain", "Salvando novo ponto...");
   });
 
+  
+  // Adicionar a rota ao servidor
+  server.addHandler(postConfig);
+  server.addHandler(novoPonto);
 
   
   //  Rota para salvar um novo ponto de interesse.
