@@ -7,24 +7,37 @@ char POPUP_NOVO_PONTO_STYLE[] PROGMEM = R"=====(
     position: fixed;
     z-index: 1;
     left: 0;
-    bottom: 0;
     width: 100vw;
     overflow: auto;
+    -webkit-animation: fadeInPopup 0.6s;
+    animation: fadeInPopup 0.6s;
 }
+
+@-webkit-keyframes fadeInPopup {
+  from {top: 0; opacity: 0;} 
+  to {bottom: 0; opacity: 1;}
+}
+
+@keyframes fadeInPopup {
+  from {opacity: 0;}
+  to {opacity: 1;}
+}
+
 
 
 /* popup Content */
 .popup-content {
-    background-color: #292929;
-    margin: 15% auto;
-    padding: 20px;
-    border: 2px solid #bbb;
-    width: 50%;
-    height: auto;
-    border-radius: 10px;
-    color: white;
-    font-size: 0.8rem;
-    font-weight: bold;
+  bottom: 0;
+  background-color: #292929;
+  margin: 15% auto;
+  padding: 20px;
+  border: 2px solid #bbb;
+  width: 50%;
+  height: auto;
+  border-radius: 10px;
+  color: white;
+  font-size: 0.8rem;
+  font-weight: bold;
 }
 
 
@@ -35,6 +48,7 @@ char POPUP_NOVO_PONTO_STYLE[] PROGMEM = R"=====(
     margin-bottom: 3vh;
     background-color: #f8f8f8;
     border: none;
+    border-radius: 5px;
     border-bottom: 3px solid #fff;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
@@ -106,26 +120,26 @@ char POPUP_NOVO_PONTO_STYLE[] PROGMEM = R"=====(
   /* A mensagem aparece (pode personalizar como preferir) */
   .message.show {
     visibility: visible;
-    -webkit-animation: fadeIn 0.6s, fadeOut 0.5s 2.5s;
-    animation: fadeIn 0.6s, fadeOut 0.5s 2.5s;
+    -webkit-animation: fadeInAlertMessage 0.6s, fadeOutAlertNessage 0.5s 2.5s;
+    animation: fadeInAlertMessage 0.6s, fadeOutAlertNessage 0.5s 2.5s;
   }
   
-  @-webkit-keyframes fadeIn {
+  @-webkit-keyframes fadeInAlertMessage {
     from {top: 0; opacity: 0;} 
     to {top: 10vh; opacity: 1;}
   }
   
-  @keyframes fadeIn {
+  @keyframes fadeInAlertMessage {
     from {top: 0; opacity: 0;}
     to {top: 10vh; opacity: 1;}
   }
   
-  @-webkit-keyframes fadeOut {
+  @-webkit-keyframes fadeOutAlertNessage {
     from {top: 10vh; opacity: 1;} 
     to {top: 0; opacity: 0;}
   }
   
-  @keyframes fadeOut {
+  @keyframes fadeOutAlertNessage {
     from {top: 10vh; opacity: 1;}
     to {top: 0; opacity: 0;}
   }

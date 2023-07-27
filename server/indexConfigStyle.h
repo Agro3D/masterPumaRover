@@ -12,6 +12,17 @@ char INDEX_CONFIG_STYLE[] PROGMEM = R"=====(
     margin-bottom: 0;
 }
 
+#frequenceDiv{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#frequenceDiv select{
+    width: 25%;
+}
+
 #configuracaoRadio{
     column-count: 2;
     display: flex;
@@ -83,8 +94,26 @@ char INDEX_CONFIG_STYLE[] PROGMEM = R"=====(
 
 #constelacoesOptions{
     column-count: 2;
+    margin-bottom: 1vh;
 }
 
+#arquivos{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    margin-bottom: 1vh;
+    font-size: 0.6rem;
+    font-weight: bold;
+}
+
+.arquivosDivs{
+    display: flex;
+    flex-direction: column;
+}
+
+.inputContent{
+    width: max-content;
+}
 
 .visivel{
     display: block;

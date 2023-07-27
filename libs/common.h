@@ -105,7 +105,8 @@ void listaArquivos();
 
 // Scripts JS do servidor web
 #include "../server/globalScript.h"         // Script JS global do servidor web
-#include "../server/indexScript.h"          // Script JS da página principal
+#include "../server/indexConfigScript.h"    // Script JS da página principal (configuração)
+#include "../server/indexStatusScript.h"    // Script JS da página principal (status)
 #include "../server/pontosScript.h"         // Script JS da página arquivos
 #include "../server/webSocketScript.h"      // Script JS do webSocket
 

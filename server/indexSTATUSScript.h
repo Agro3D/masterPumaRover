@@ -1,3 +1,6 @@
+//Página de scripts da página inicial do servidor
+char INDEX_STATUS_SCRIPT[] PROGMEM = R"=====(
+    
 function voltar() {
     document.getElementById("configuracoes").className = "visivel";
     document.getElementById("status").className = "naoVisivel";
@@ -59,65 +62,6 @@ function getStatus(){
 }
 
 
-function novoTrabalho() {
-    document.getElementById("configuracoes").className = "naoVisivel";
-    document.getElementById("status").className = "visivel";
-    
-    var configJson = {};
-    var frequencia = document.getElementById("frequenciaRadioValor").value;
-
-    if (frequencia == ""){
-        alert("Preencha todos os campos")
-        document.getElementById("configuracoes").className = "visivel";
-        document.getElementById("status").className = "naoVisivel";
-        return;
-    }else{
-        configJson.radioFrequencia = frequencia;
-    }
-
-
-    var numConstelations = 0;
-    // Verifica quais constelacoes estao selecionadas e atribui ao objeto configJson
-    var constelations = document.getElementsByName('constelacoes');
-    
-    for(var i=0, n=constelations.length; i<n; i++) {
-        if (constelations[i].checked == true){
-            configJson[constelations[i].value] = constelations[i].checked;
-            numConstelations++;
-        }
-    }
-    
-
-    // Verifica se ao menos uma constelacao foi selecionada
-    if (numConstelations == 0){
-        alert("Selecione ao menos uma constelação!");
-        document.getElementById("configuracoes").className = "visivel";
-        document.getElementById("status").className = "naoVisivel";
-        return;
-    }
-
-    configJson.velocidadeTransmissao = document.getElementById("velocidadeRadioSelect").value;
-    configJson.taxaAtualizacao = document.getElementById("frequenciaTransmissao").value;
-
-    console.log(configJson);
-
-    // Realiza o POST request com o objeto dataJson
-    fetch('/postConfiguration', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(configJson),
-    })
-    .then(response => {
-        if (!response.ok) {
-            throw new Error('Network response was not ok');
-        }
-    })
-    .catch(error => {
-        console.error('There has been a problem with your fetch operation:', error);
-    });
-}
 
 
 function atualizaCota(valor) {
@@ -148,12 +92,4 @@ function atualizaStatusRTK(valor) {
     }
 }
 
-function troca(){
-    if(document.getElementById("status").className == "naoVisivel"){
-        document.getElementById("configuracoes").className = "naoVisivel";
-        document.getElementById("status").className = "flvisivelex";
-    }else{
-        document.getElementById("configuracoes").className = "visivel";
-        document.getElementById("status").className = "naoVisivel";
-    }
-}
+)=====";

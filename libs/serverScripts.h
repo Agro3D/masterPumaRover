@@ -13,11 +13,19 @@ void setupServerScripts(){
   });
 
 
-  // Rota para o script JS da página inicial.
-  server.on("/scripts/index.js", HTTP_GET, [](AsyncWebServerRequest *request){
-    Serial.println("\n\n##### Requisicao Recebida: /scripts/index.js");
-    Serial.println("Enviando script.js ...");
-    request->send(200, "text/javascript", INDEX_SCRIPT);
+  // Rota para o script JS de configuração da pagina inicial.
+  server.on("/scripts/indexConfig.js", HTTP_GET, [](AsyncWebServerRequest *request){
+    Serial.println("\n\n##### Requisicao Recebida: /scripts/indexConfig.js");
+    Serial.println("Enviando scriptConfig.js ...");
+    request->send(200, "text/javascript", INDEX_CONFIG_SCRIPT);
+  });
+
+
+  // Rota para o script JS de status da pagina inicial.
+  server.on("/scripts/indexStatus.js", HTTP_GET, [](AsyncWebServerRequest *request){
+    Serial.println("\n\n##### Requisicao Recebida: /scripts/indexStatus.js");
+    Serial.println("Enviando scriptStatus.js ...");
+    request->send(200, "text/javascript", INDEX_STATUS_SCRIPT);
   });
 
 

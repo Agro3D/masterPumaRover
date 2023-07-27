@@ -19,20 +19,37 @@ echo "$file" >| server/globalScript.h
 echo "Gerando globalScript.h... OK"
 
 
-# Página de scripts da pagina inicial do servidor (index.js)
-echo "Gerando indexScript.h..."
+# Página de scripts da pagina inicial de configuracao do servidor (indexConfig.js)
+echo "Gerando indexConfigScript.h..."
 
 start='//Página de scripts da página inicial do servidor
-char INDEX_SCRIPT[] PROGMEM = R"=====(
+char INDEX_CONFIG_SCRIPT[] PROGMEM = R"=====(
     
 '
 end='
 
 )=====";'
 
-file="$start$(<pages/scripts/index.js)$end"
-echo "$file" >| server/indexScript.h
-echo "Gerando indexScript.h... OK"
+file="$start$(<pages/scripts/indexConfig.js)$end"
+echo "$file" >| server/indexConfigScript.h
+echo "Gerando indexConfigScript.h... OK"
+
+
+
+# Página de scripts da pagina inicial de status do servidor (indexStatus.js)
+echo "Gerando indexStatusScript.h..."
+
+start='//Página de scripts da página inicial do servidor
+char INDEX_STATUS_SCRIPT[] PROGMEM = R"=====(
+    
+'
+end='
+
+)=====";'
+
+file="$start$(<pages/scripts/indexStatus.js)$end"
+echo "$file" >| server/indexSTATUSScript.h
+echo "Gerando indexStatusScript.h... OK"
 
 
 

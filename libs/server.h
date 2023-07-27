@@ -84,8 +84,17 @@ void setupServer() {
     }
     request->send(200, "text/plain", statusStr);
   });
-}
 
+
+// Rota para receber a lista de arquivos do escravo.
+  server.on("/getFiles", HTTP_GET, [](AsyncWebServerRequest *request){
+    Serial.println("\n\n##### Requisicao Recebida: /getFiles");
+    Serial.println("Enviando lista de arquivos...");
+    Serial.println(listaArquivosStr);
+
+    request->send(200, "application/json", listaArquivosStr);
+  });
+}
 
 
 #endif

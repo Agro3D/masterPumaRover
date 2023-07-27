@@ -17,11 +17,12 @@ char INDEX_PAGE[] PROGMEM = R"=====(
 
         <script src="scripts/webSocket.js"></script>
         <script src="scripts/global.js"></script>
-        <script src="scripts/index.js"></script>
+        <script src="scripts/indexConfig.js"></script>
+        <script src="scripts/indexStatus.js"></script>
         <script src="scripts/pontos.js"></script>
     </head>
 
-    <body onload="imports();startWebSocket();getStatus()">
+    <body onload="initIndex()">
         <div id="header" class="header"></div>
 
         <div id="body2" class="divs">
@@ -72,7 +73,7 @@ char INDEX_PAGE[] PROGMEM = R"=====(
 
                 <div id="constelacoes" class="divs bordas">
                     <p class="titulo">Constelações </p>
-
+                    
                     <div id="constelacoesOptions" class="divs">
 
                         <input type="checkbox" id="GPS" name="constelacoes" value="GPS" checked>
@@ -95,6 +96,33 @@ char INDEX_PAGE[] PROGMEM = R"=====(
                         <br>
                         <input type="checkbox" id="QZSS" name="constelacoes" value="QZSS">
                         <label for="QZSS">QZSS</label>
+                    </div>
+                </div>
+                
+                
+                <div class="divs bordas">
+                    
+                    <div id="arquivos">
+                        
+                        
+                        <div class="arquivosDivs">
+                            
+                            <p class="titulo">Arquivos</p>
+                            
+                            <select name="arquivos" id="arquivosSelect" onchange="arquivoChange()" class="input inputSelect inputContent">
+                                <option value="0" selected>Selecione um arquivo</option>
+                                <option value="1">Criar um novo Arquivo...</option>
+                            </select>
+                            
+                        </div>
+                        
+                        <div class="arquivosDivs">
+                            
+                            <p class="titulo">Nome do Arquivos</p>
+                            <input type="text" id="nomeArquivo" class="input inputContent inputContent" placeholder="Nome do arquivo" disabled>
+                            
+                        </div>
+                        
                     </div>
                 </div>
 

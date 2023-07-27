@@ -128,13 +128,6 @@ char INDEX_STATUS_STYLE[] PROGMEM = R"=====(
     color: white;
 }
 
-.visivel{
-    display: block;
-}
-
-.naoVisivel{
-    display: none;
-}
 
 .disabled {
     border: 1px solid #999999 !important;
