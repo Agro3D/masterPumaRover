@@ -115,6 +115,14 @@ char INDEX_CONFIG_STYLE[] PROGMEM = R"=====(
     width: max-content;
 }
 
+#obs{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1vh;
+}
+
 .visivel{
     display: block;
 }

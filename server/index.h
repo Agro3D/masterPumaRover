@@ -110,7 +110,7 @@ char INDEX_PAGE[] PROGMEM = R"=====(
                             <p class="titulo">Arquivos</p>
                             
                             <select name="arquivos" id="arquivosSelect" onchange="arquivoChange()" class="input inputSelect inputContent">
-                                <option value="0" selected>Selecione um arquivo</option>
+                                <option value="0" selected disabled>Selecione um arquivo</option>
                                 <option value="1">Criar um novo Arquivo...</option>
                             </select>
                             
@@ -123,6 +123,10 @@ char INDEX_PAGE[] PROGMEM = R"=====(
                             
                         </div>
                         
+                    </div>
+
+                    <div id="obs">
+                        Obs: Deixe em branco para criar um arquivo com data e hora atual(YYYY-MM-DD_HH:MM).
                     </div>
                 </div>
 

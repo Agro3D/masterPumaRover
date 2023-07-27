@@ -9,8 +9,7 @@ function initIndex(){
 }
 
 function novoTrabalho() {
-    document.getElementById("configuracoes").className = "naoVisivel";
-    document.getElementById("status").className = "visivel";
+    document.getElementById("botaoNovaConfig").disabled = true;
     
     var configJson = {};
     var frequencia = document.getElementById("frequenciaRadioValor").value;
@@ -48,6 +47,19 @@ function novoTrabalho() {
     configJson.velocidadeTransmissao = document.getElementById("velocidadeRadioSelect").value;
     configJson.taxaAtualizacao = document.getElementById("frequenciaTransmissao").value;
 
+    var NomeArquivo = document.getElementById("arquivosSelect").value;
+
+    if (NomeArquivo != 0 && NomeArquivo != 1) {
+        configJson.NomeArquivo = document.getElementById("arquivosSelect").value;
+    } else {
+        if (NomeArquivo == 0)
+        configJson.NomeArquivo = "";
+        else{
+            configJson.NomeArquivo = document.getElementById("nomeArquivo").value;
+        }
+    }
+
+
     console.log(configJson);
 
     // Realiza o POST request com o objeto dataJson
@@ -59,13 +71,39 @@ function novoTrabalho() {
         body: JSON.stringify(configJson),
     })
     .then(response => {
+        document.getElementById("botaoNovaConfig").disabled = false;
         if (!response.ok) {
             throw new Error('Network response was not ok');
+        } else{
+            limparConteudo();
         }
+
     })
     .catch(error => {
         console.error('There has been a problem with your fetch operation:', error);
     });
+}
+
+
+function limparConteudo(){
+    document.getElementById("configuracoes").className = "naoVisivel";
+    document.getElementById("status").className = "visivel";
+
+    document.getElementById("frequenciaRadioValor").value = 430;
+    document.getElementById("velocidadeRadioSelect").value = 1;
+
+    document.getElementById("frequenciaTransmissao").value = 1;
+
+    document.getElementById("GPS").checked = true;
+    document.getElementById("GLONASS").checked = true;
+    document.getElementById("GALILEO").checked = true;
+    document.getElementById("BEIDOU").checked = true;
+    document.getElementById("SBAS").checked = false;
+    document.getElementById("IMES").checked = false;
+    document.getElementById("QZSS").checked = false;
+
+    document.getElementById("arquivosSelect").value = 0;
+    document.getElementById("nomeArquivo").value = "";
 }
 
 

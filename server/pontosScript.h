@@ -26,6 +26,7 @@ async  function novoPonto(){
             console.log("Requisição de novo ponto enviada com sucesso!");
             closePopup();
             clearData();
+            disableButton();
             showMessage("Registrando ponto...");
         }
     }).catch(error => {
@@ -38,6 +39,13 @@ async  function novoPonto(){
 function enableButton(){
     document.getElementById('botaoNovoPonto').disabled = false;
     document.getElementById('botaoNovoPonto').className = '';
+}
+
+
+// Função para desabilitar o botão de novo ponto
+function desableButton(){
+    document.getElementById('botaoNovoPonto').disabled = true;
+    document.getElementById('botaoNovoPonto').className = 'disabled';
 }
 
 

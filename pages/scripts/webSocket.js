@@ -51,7 +51,7 @@ function initWebSocket() {
                 } else {
                     showMessage('Erro desconhecido ao registrar ponto!', 'vermelho');
                 }
-
+                enableButton();
             default:
                 console.log('Nenhuma ação definida');
                 break;

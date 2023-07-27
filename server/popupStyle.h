@@ -120,8 +120,8 @@ char POPUP_NOVO_PONTO_STYLE[] PROGMEM = R"=====(
   /* A mensagem aparece (pode personalizar como preferir) */
   .message.show {
     visibility: visible;
-    -webkit-animation: fadeInAlertMessage 0.6s, fadeOutAlertNessage 0.5s 2.5s;
-    animation: fadeInAlertMessage 0.6s, fadeOutAlertNessage 0.5s 2.5s;
+    -webkit-animation: fadeInAlertMessage 0.6s, fadeOutAlertNessage 0.6s 2.5s;
+    animation: fadeInAlertMessage 0.6s, fadeOutAlertNessage 0.6s 2.5s;
   }
   
   @-webkit-keyframes fadeInAlertMessage {
