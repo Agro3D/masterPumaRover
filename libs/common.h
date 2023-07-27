@@ -21,7 +21,7 @@
 
 
 // Constantes para identificar o tipo de mensagem enviada para o escravo
-#define NOVO_TRABALHO 1             // Mensagem para enviar uma nova configuração para o escravo
+#define NOVO_TRABALHO 1                 // Mensagem para enviar uma nova configuração para o escravo
 #define RESP_CONFIGURACAO 2             // Mensagem para receber a resposta do escravo sobre a configuração
 
 #define PARAR_TRABALHO 3                // Mensagem para cancelar a pesquisa realizada pelo escravo
@@ -29,6 +29,9 @@
 
 #define NOVO_PONTO 5                    // Mensagem para salvar um novo ponto de interesse
 #define RESP_NOVO_PONTO 6               // Mensagem para receber a resposta do escravo sobre o salvamento do ponto de interesse
+
+#define LISTAR_ARQUIVOS 7               // Mensagem para listar os arquivos salvos no escravo
+#define RESP_LISTAR_ARQUIVOS 8          // Mensagem para receber a resposta do escravo sobre a listagem dos arquivos
 
 #define GET_STATUS 98                   // Mensagem para solicitar o status do escravo
 #define ACK_MSG 99                      // Mensagem de confirmação de comunicação com o escravo
@@ -54,6 +57,7 @@ bool serverStarted = false;                             // Flag para controlar s
 bool receberMensagens = false;                          // Flag para controlar o recebimento de mensagens do escravo
 
 String mensagemStr;                                     // String para armazenar a representação em texto do objeto JSON
+String listaArquivosStr;                                // String para armazenar a lista de arquivos do escravo
 int RTKAtual = -1;                                      // Variável para armazenar o valor da pressão atual do RTK
 int precisaoRTK = -1;                                   // Variável para armazenar o valor da pressão de precisão do RTK
 char statusAtual;                                       // Variável para armazenar o status atual do escravo
@@ -78,6 +82,7 @@ void webSocketEvent(uint8_t num, WStype_t type, uint8_t * payload, size_t length
 String getAltitudeFromNMEA(String nmea);
 void processaMensagem(String message);
 void updateRTK(DynamicJsonDocument resposta);
+void listaArquivos();
 
 
 

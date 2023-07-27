@@ -26,7 +26,7 @@ void slaveSendHandler() {
     Serial.println("Resposta do escravo: " + slaveResponse);
 
     //  Se a esposta tiver "Mensagem", chama a funcao updateRTK
-    while (slaveResponse.indexOf("Mensagem") != -1 && slaveResponse.indexOf("ACK") == -1){
+    while (slaveResponse.indexOf("Mensagem") != -1 && slaveResponse.indexOf("ACK") == -1 && slaveResponse.indexOf("NACK") == -1){
       DynamicJsonDocument json(128);
       deserializeJson(json, mensagemStr);
       updateRTK(json);
@@ -35,7 +35,7 @@ void slaveSendHandler() {
       Serial.println("Resposta do escravo: " + slaveResponse);
     }
 
-    if (slaveResponse.indexOf("ACK") != -1) {                 // Se a resposta do escravo for "ACK", saia do loop
+    if (slaveResponse.indexOf("ACK") != -1 && slaveResponse.indexOf("NACK") == -1) { // Se a resposta do escravo for "ACK", saia do loop
     mensagemStr = "";                                         // Limpe a mensagem
     hasComunication = true;
       break;
@@ -80,8 +80,12 @@ void slaveSendHandler() {
     Serial.println("\nRequisição de parada de trabalho enviada para o escravo");
     break;
 
-case NOVO_PONTO:
+  case NOVO_PONTO:
     Serial.println("\nRequisição de novo ponto enviada para o escravo");
+    break;
+
+  case LISTAR_ARQUIVOS:
+    Serial.println("\nRequisição de listagem de arquivos enviada para o escravo");
     break;
   
   default:

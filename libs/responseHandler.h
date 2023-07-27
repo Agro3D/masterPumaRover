@@ -28,6 +28,11 @@ void slaveReceiveHandler() {
     ComandoEscravo = 0;
     break;
 
+  case LISTAR_ARQUIVOS:
+    listaArquivos();
+    ComandoEscravo = GET_STATUS;
+    break;
+
   
   default:
     slaveListerner();
@@ -125,6 +130,21 @@ String slaveReceiveResponse() {
 
   
   return response;
+}
+
+
+void listaArquivos() {
+  DynamicJsonDocument resposta(10240);
+  String slaveResponse = slaveReceiveResponse();            // Solicite a resposta do escravo
+
+  Serial.println(slaveResponse);
+  
+  deserializeJson(resposta, slaveResponse);
+  listaArquivosStr = resposta["Mensagem"].as<String>();     // Armazene a lista de arquivos do escravo
+
+  Serial.println("Resposta do escravo:");
+  serializeJsonPretty(resposta, Serial);
+  Serial.println();
 }
 
 

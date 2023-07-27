@@ -71,6 +71,11 @@ void setup() {
   server.begin();
   Serial.println("Servidor HTTP iniciado em http://" + String(IP.toString()));
 
+
+  ComandoEscravo = LISTAR_ARQUIVOS;                 // Envia o comando de lista de arquivos para o escravo.
+  slaveSendHandler();                               // Chama a função de manipulação de envio para o escravo.
+  slaveReceiveHandler();                            // Chama a função de manipulação de recebimento do escravo.
+
   statusAtual = char(ESPERANDO);
 
   Serial.println("\n\n\tMaster Puma Rover inicializado.");
