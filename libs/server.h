@@ -67,6 +67,7 @@ void setupServer() {
   //  Rota para salvar um novo ponto de interesse.
   server.on("/getStatus", HTTP_GET, [](AsyncWebServerRequest *request){
     Serial.println("\n\n##### Requisicao Recebida: /getStatus");
+    Serial.print("Enviando Status: ");
 
     String statusStr;
 
@@ -82,6 +83,8 @@ void setupServer() {
     default:
       break;
     }
+    
+    Serial.println(statusStr);
     request->send(200, "text/plain", statusStr);
   });
 
@@ -93,6 +96,21 @@ void setupServer() {
     Serial.println(listaArquivosStr);
 
     request->send(200, "application/json", listaArquivosStr);
+  });
+
+
+
+// Rota para receber a lista de arquivos do escravo.
+  server.on("/getPontos", HTTP_GET, [](AsyncWebServerRequest *request){
+    Serial.println("\n\n##### Requisicao Recebida: /getPontos");
+    Serial.println("Enviando lista de pontos...");
+    Serial.println(listaPontos);
+
+    if (listaPontos == "") 
+      request->send(204, "application/json", "Nenhum ponto salvo.");
+    else
+      request->send(200, "application/json", listaPontos);
+
   });
 }
 

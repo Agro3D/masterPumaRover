@@ -6,6 +6,8 @@
 // Função para lidar com o envio de dados para o escravo.
 void slaveSendHandler() {
   if (ComandoEscravo == 0){ return; }
+
+  Serial.println("\nComando para o escravo: " + String(ComandoEscravo));
   
   int x;
 
@@ -26,10 +28,10 @@ void slaveSendHandler() {
     Serial.println("Resposta do escravo: " + slaveResponse);
 
     //  Se a esposta tiver "Mensagem", chama a funcao updateRTK
-    while (slaveResponse.indexOf("Mensagem") != -1 && slaveResponse.indexOf("ACK") == -1 && slaveResponse.indexOf("NACK") == -1){
+    while (slaveResponse.indexOf("Comando") != -1 && slaveResponse.indexOf("ACK") == -1 && slaveResponse.indexOf("NACK") == -1){
       DynamicJsonDocument json(128);
-      deserializeJson(json, mensagemStr);
-      updateRTK(json);
+      deserializeJson(json, slaveResponse);
+      updateRTK(json["Comando"].as<int>(), json["Mensagem"].as<int>());
       
       slaveResponse = slaveReceiveResponse();                 // Le a resposta do escravo
       Serial.println("Resposta do escravo: " + slaveResponse);
@@ -88,11 +90,17 @@ void slaveSendHandler() {
     Serial.println("\nRequisição de listagem de arquivos enviada para o escravo");
     break;
   
+  case LISTAR_PONTOS:
+    Serial.println("\nRequisição de listagem de pontos enviada para o escravo");
+    break;
+  
   default:
     Serial.println("\nComando Desconhecido");
     Serial.println("Comando: " + String(ComandoEscravo));
     break;
   }
+  ComandoEscravo = 0;
+  Serial.println();
 }
 
 

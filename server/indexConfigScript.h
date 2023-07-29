@@ -5,7 +5,8 @@ function initIndex(){
     imports();
     startWebSocket();
     getStatus();
-    getFiles()
+    getFiles();
+    getPontos();
 }
 
 function novoTrabalho() {

@@ -22,7 +22,7 @@
 
 // Constantes para identificar o tipo de mensagem enviada para o escravo
 #define NOVO_TRABALHO 1                 // Mensagem para enviar uma nova configuração para o escravo
-#define RESP_CONFIGURACAO 2             // Mensagem para receber a resposta do escravo sobre a configuração
+#define RESP_NOVO_TRABALHO 2            // Mensagem para receber a resposta do escravo sobre a configuração
 
 #define PARAR_TRABALHO 3                // Mensagem para cancelar a pesquisa realizada pelo escravo
 #define RESP_PARAR_TRABALHO 4           // Mensagem para receber a resposta do escravo sobre o cancelamento da pesquisa
@@ -32,6 +32,15 @@
 
 #define LISTAR_ARQUIVOS 7               // Mensagem para listar os arquivos salvos no escravo
 #define RESP_LISTAR_ARQUIVOS 8          // Mensagem para receber a resposta do escravo sobre a listagem dos arquivos
+
+#define LISTAR_PONTOS 9                 // Mensagem para listar os pontos de interesse salvos no escravo
+#define RESP_LISTAR_PONTOS 10           // Mensagem para receber a resposta do escravo sobre a listagem dos pontos de interesse
+
+
+#define ALERT_MESSAGE 90                // Mensagem para mostrar um alerta no servidor
+
+#define GET_PRECISAO 96                 // Mensagem para solicitar o status do escravo
+#define GET_RTKSTATUS 97                // Mensagem para solicitar o status do escravo
 
 #define GET_STATUS 98                   // Mensagem para solicitar o status do escravo
 #define ACK_MSG 99                      // Mensagem de confirmação de comunicação com o escravo
@@ -58,6 +67,7 @@ bool receberMensagens = false;                          // Flag para controlar o
 
 String mensagemStr;                                     // String para armazenar a representação em texto do objeto JSON
 String listaArquivosStr;                                // String para armazenar a lista de arquivos do escravo
+String listaPontos;                                     // String para armazenar a lista de pontos do arquivo
 int RTKAtual = -1;                                      // Variável para armazenar o valor da pressão atual do RTK
 int precisaoRTK = -1;                                   // Variável para armazenar o valor da pressão de precisão do RTK
 char statusAtual;                                       // Variável para armazenar o status atual do escravo
@@ -67,12 +77,11 @@ bool verifyingComunication = false;                     // Flag para controlar a
 
 
 // Lista de todas as funções do programa
-void getStatus();
+void getStatus(int status);
 void setupServer();
 void setupServerPages();
 void setupServerScripts();
 void setupServerStyles();
-void slaveListerner();
 void slaveReceiveHandler();
 String slaveReceiveResponse();
 void slaveSendData(String data);
@@ -81,8 +90,8 @@ bool verifyComunication();
 void webSocketEvent(uint8_t num, WStype_t type, uint8_t * payload, size_t length);
 String getAltitudeFromNMEA(String nmea);
 void processaMensagem(String message);
-void updateRTK(DynamicJsonDocument resposta);
-void listaArquivos();
+void updateRTK(int comando, int valor);
+void listarPontos(String resposta);
 
 
 

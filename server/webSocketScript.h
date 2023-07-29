@@ -27,6 +27,8 @@ function initWebSocket() {
             return;
         }
 
+        if (event.data == 'ESPERANDO' || event.data == 'TRABALHANDO') { return; }
+
         // Transform event.data to json
         var data = JSON.parse(event.data);
         var mensagem = data['Mensagem'];
@@ -41,19 +43,28 @@ function initWebSocket() {
                 atualizaStatusRTK(valor);
                 break;
 
-            case 'Precisao':
+            case 'PRECISAO':
                 document.getElementById('precisaoValor').innerHTML = valor + ' mm';
                 break;
 
-            case 'NOVO_PONTO':
-                if (valor == 'OK') {
-                    showMessage('Ponto registrado com sucesso!', 'verde');
-                } else if (valor == 'ERRO') {
-                    showMessage('Erro ao registrar ponto!', 'vermelho');
-                } else {
-                    showMessage('Erro desconhecido ao registrar ponto!', 'vermelho');
-                }
+            case 'LISTAR_PONTOS':
+                console.log('LISTAR_PONTOS');
+                listarPontos(valor);
+                break;
+
+            case 'ALERT_MESSAGE':
+                console.log("ALERT_MESSAGE");
+
+                console.log(event.data);
+                console.log(data);
+                console.log(mensagem);
+                console.log(valor);
+                // var alerta = JSON.parse(valor);
+                // console.log(alerta);
+                showMessage(valor["Mensagem"], valor["Cor"]);
                 enableButton();
+                break;
+
             default:
                 console.log('Nenhuma ação definida');
                 break;

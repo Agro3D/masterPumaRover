@@ -41,7 +41,7 @@ function enableButton(){
 
 
 // Função para desabilitar o botão de novo ponto
-function desableButton(){
+function disableButton(){
     document.getElementById('botaoNovoPonto').disabled = true;
     document.getElementById('botaoNovoPonto').className = 'disabled';
 }

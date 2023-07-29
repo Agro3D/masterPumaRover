@@ -20,10 +20,7 @@ function voltar() {
     }).catch(error => {
         console.error('There has been a problem with your fetch operation:', error);
     });
-
-
 }
-
 
 
 function getStatus(){
@@ -59,6 +56,30 @@ function getStatus(){
 }
 
 
+function getPontos(){
+    fetch("/getPontos", {
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json"
+        }
+    }).then(function(response) {
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+
+        if (response.status == 204) {
+            document.getElementById("archives").innerHTML = "Nenhum ponto registrado";
+            return;
+        }
+        return response.json();
+    }).then(function(pontos) {
+        if(pontos){
+            listarPontos(pontos);
+        }
+    }).catch(error => {
+        console.error('There has been a problem with your fetch operation:', error);
+    });
+}
 
 
 function atualizaCota(valor) {
@@ -67,24 +88,38 @@ function atualizaCota(valor) {
 
 function atualizaStatusRTK(valor) {
 
-    document.getElementById("statusRTKValor").innerHTML = valor;
+    console.log("StatusRKT: ", valor);
     
     switch(valor) {
         case 2:
             document.getElementById('statusRTKValor').innerHTML = 'Fix';
             document.getElementById('statusRTKValor').className = 'informacoesValor verde';
             break;
-            case 1:
+        
+        case 1:
             document.getElementById('statusRTKValor').innerHTML = 'Float';
             document.getElementById('statusRTKValor').className = 'informacoesValor amarelo';
             break;
-            case 0:
+        
+        case 0:
             document.getElementById('statusRTKValor').innerHTML = 'No Fix';
             document.getElementById('statusRTKValor').className = 'informacoesValor vermelho';
             break;
+        
         default:
             document.getElementById("statusRTKValor").className = "informacoesValor vermelho";
             document.getElementById("statusRTKValor").innerHTML = "ERRO";
             break;
     }
+}
+
+
+function listarPontos(pontos){
+
+    document.getElementById("archives").innerHTML = "";
+    
+    pontos["Pontos"].forEach(ponto => {
+        document.getElementById("archives").innerHTML += ponto["Ponto"];
+        document.getElementById("archives").innerHTML += "</br>";
+    });
 }
