@@ -87,6 +87,9 @@ function limparConteudo(){
     document.getElementById("configuracoes").className = "naoVisivel";
     document.getElementById("status").className = "visivel";
 
+    document.getElementById("listaPontos").innerHTML = "Carregando...";
+
+
     document.getElementById("frequenciaRadioValor").value = 430;
     document.getElementById("velocidadeRadioSelect").value = 1;
 

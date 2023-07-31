@@ -16,7 +16,7 @@ function initWebSocket() {
     };
 
     ws.onmessage = async function (event) {
-        console.log('Server: ', event.data);
+        // console.log('Server: ', event.data);
 
         if (event.data == 'Conectado') {
 
@@ -38,7 +38,7 @@ function initWebSocket() {
                 break;
             
             case 'RTK':
-                atualizaStatusRTK(valor);
+                atualizaStatusRTK(parseInt(valor));
                 break;
 
             case 'PRECISAO':
@@ -51,7 +51,6 @@ function initWebSocket() {
                 break;
 
             case 'ALERT_MESSAGE':
-                console.log("ALERT_MESSAGE");
 
                 console.log(event.data);
                 console.log(data);

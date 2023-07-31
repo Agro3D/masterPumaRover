@@ -55,7 +55,6 @@ void slaveReceiveHandler() {
 
   case LISTAR_ARQUIVOS:
     listaArquivosStr = resposta["Mensagem"].as<String>();
-    serializeJsonPretty(resposta, Serial);
     ComandoEscravo = GET_STATUS;
     break;
 

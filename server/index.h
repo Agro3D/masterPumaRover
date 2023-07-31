@@ -173,11 +173,9 @@ char INDEX_PAGE[] PROGMEM = R"=====(
                         <button onclick="showPopup()" id="botaoNovoPonto" class="disabled" >Novo Ponto</button>
                     </div>
 
-                    <div class="divs bordas">
-                        <div id="archives">
+                    <div id="listaPontos">
+                        Carregando...
 
-                            
-                        </div>
                     </div>
                 
                 </div>

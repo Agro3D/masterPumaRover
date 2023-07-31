@@ -153,7 +153,7 @@ void webSocketEvent(uint8_t num, WStype_t type, uint8_t * payload, size_t length
             }
             if (precisaoRTK !=-1){
               Serial.println("Envio de precisao");
-              webSocket.sendTXT(num, "{\"Mensagem\": \"Precisao\", \"Valor\": " + String(precisaoRTK) + "}");
+              webSocket.sendTXT(num, "{\"Mensagem\": \"PRECISAO\", \"Valor\": " + String(precisaoRTK) + "}");
             }
         break;
         case WStype_TEXT:

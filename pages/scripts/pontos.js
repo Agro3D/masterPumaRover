@@ -33,6 +33,48 @@ async  function novoPonto(){
 }
 
 
+function getPontos(){
+    fetch("/getPontos", {
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json"
+        }
+    }).then(function(response) {
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+
+        if (response.status == 204) {
+            document.getElementById("listaPontos").innerHTML = "Nenhum ponto registrado";
+            return;
+        }
+        return response.json();
+    }).then(function(pontos) {
+        if(pontos){
+            listarPontos(pontos);
+        }
+    }).catch(error => {
+        console.error('There has been a problem with your fetch operation:', error);
+    });
+}
+
+
+function listarPontos(pontos){
+
+    document.getElementById("listaPontos").innerHTML = "";
+    var html = "";
+    
+    pontos["Pontos"].forEach(ponto => {
+        html += "<div class='ponto'>";
+        html += "<div class='pontoNome'>" + ponto["Ponto"] + "</div>";
+        html += "</div>";
+        
+    });
+
+    document.getElementById("listaPontos").innerHTML = html;
+}
+
+
 // Função para habilitar o botão de novo ponto
 function enableButton(){
     document.getElementById('botaoNovoPonto').disabled = false;
@@ -70,17 +112,3 @@ function clearData() {
   document.getElementById('nomePonto').value = '';
   document.getElementById('descPonto').value = '';
 }
-
-function showMessage(message, cor) {
-    if(cor == 'verde'){
-        document.getElementById("messageAlert").style.backgroundColor = "#2b8f17";
-    }else if(cor == 'vermelho'){
-        document.getElementById("messageAlert").style.backgroundColor = "#f44336";
-    }else{
-        document.getElementById("messageAlert").style.backgroundColor = "#a011ff";
-    }
-
-    document.getElementById("messageAlert").innerHTML = message;
-    document.getElementById("messageAlert").className = "message show"; /* Mostrar a mensagem */
-    setTimeout(function(){ document.getElementById("messageAlert").className = "message"; }, 3000); /* Esconder após 3 segundos */
-  }
