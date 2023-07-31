@@ -1,7 +1,5 @@
 async  function novoPonto(){
 
-    console.log("Iniciando novo ponto...");
-
     var dataJson = {
         Nome: document.getElementById('nomePonto').value,
         Descricao: document.getElementById('descPonto').value
@@ -21,7 +19,6 @@ async  function novoPonto(){
         if (!response.ok) {
             throw new Error('Network response was not ok');
         }else{
-            console.log("Requisição de novo ponto enviada com sucesso!");
             closePopup();
             clearData();
             disableButton();
@@ -72,6 +69,16 @@ function listarPontos(pontos){
     });
 
     document.getElementById("listaPontos").innerHTML = html;
+}
+
+
+function incluirPontoLista(nome){
+    var html = "";
+    html += "<div class='ponto'>";
+    html += "<div class='pontoNome'>" + nome + "</div>";
+    html += "</div>";
+
+    document.getElementById("listaPontos").innerHTML += html;
 }
 
 

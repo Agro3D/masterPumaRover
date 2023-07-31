@@ -44,7 +44,9 @@ void slaveReceiveHandler() {
     break;
 
   case NOVO_PONTO:
-      ComandoEscravo = 0;
+      if(resposta["Mensagem"].as<String>() == "Ponto Criado com Sucesso!") {
+        webSocket.broadcastTXT("{\"Mensagem\": \"NOVO_PONTO\", \"Valor\": \"" + novoPontoNome + "\"}");
+      }
     break;
 
   case LISTAR_PONTOS:

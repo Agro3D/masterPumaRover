@@ -21,15 +21,14 @@ function initWebSocket() {
         // console.log('Server: ', event.data);
 
         if (event.data == 'Conectado') {
-
             if (window.location.href == 'http://192.168.4.1/') {    enableButton(); }
-            
             return;
         }
 
         if (event.data == 'ESPERANDO' || event.data == 'TRABALHANDO') { return; }
 
         // Transform event.data to json
+        console.log(event.data);
         var data = JSON.parse(event.data);
         var mensagem = data['Mensagem'];
         var valor = data['Valor'];
@@ -47,19 +46,15 @@ function initWebSocket() {
                 document.getElementById('precisaoValor').innerHTML = valor + ' mm';
                 break;
 
+            case 'NOVO_PONTO':
+                incluirPontoLista(valor);
+                break;
+
             case 'LISTAR_PONTOS':
-                console.log('LISTAR_PONTOS');
                 listarPontos(valor);
                 break;
 
             case 'ALERT_MESSAGE':
-
-                console.log(event.data);
-                console.log(data);
-                console.log(mensagem);
-                console.log(valor);
-                // var alerta = JSON.parse(valor);
-                // console.log(alerta);
                 showMessage(valor["Mensagem"], valor["Cor"]);
                 enableButton();
                 break;

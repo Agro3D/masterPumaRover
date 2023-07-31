@@ -52,6 +52,7 @@ void setupServer() {
     serializeJsonPretty(json, Serial);
 
     mensagemStr = json.as<String>();
+    novoPontoNome = json["Nome"].as<String>();
 
     ComandoEscravo = NOVO_PONTO;
    
