@@ -19,8 +19,8 @@ async  function novoPonto(){
         if (!response.ok) {
             throw new Error('Network response was not ok');
         }else{
-            closePopup();
-            clearData();
+            closePopupPonto();
+            clearDataPonto();
             disableButton();
             showMessage("Registrando ponto...");
         }
@@ -86,6 +86,9 @@ function incluirPontoLista(nome){
 function enableButton(){
     document.getElementById('botaoNovoPonto').disabled = false;
     document.getElementById('botaoNovoPonto').className = '';
+
+    document.getElementById('botaoNovaConfig').disabled = false;
+    document.getElementById('botaoNovaConfig').className = '';
 }
 
 
@@ -96,26 +99,26 @@ function disableButton(){
 }
 
 
-function showPopup() {
-    document.getElementById("popupAlert").style.display = "block";
+function showPopupPonto() {
+    document.getElementById("popupAlertPonto").style.display = "block";
 }
 
-function closePopup() {
-    document.getElementById("popupAlert").style.display = "none";
+function closePopupPonto() {
+    document.getElementById("popupAlertPonto").style.display = "none";
 }
 
-function hidePopup(event) {
-    if (event.target == document.getElementById("popupAlert")) {
-        document.getElementById("popupAlert").style.display = "none";
+function hidePopupPonto(event) {
+    if (event.target == document.getElementById("popupAlertPonto")) {
+        closePopupPonto();
     }
 }
 
-function cancelData() {
-    clearData();
-    closePopup();
+function cancelDataPonto() {
+    clearDataPonto();
+    closePopupPonto();
 }
 
-function clearData() {
+function clearDataPonto() {
   document.getElementById('nomePonto').value = '';
   document.getElementById('descPonto').value = '';
 }

@@ -32,42 +32,49 @@ char INDEX_PAGE[] PROGMEM = R"=====(
 
             <!-- Tela de configurações -->
             <div id="configuracoes" class="visivel">
-                <div id="configuracaoRadio" class="divs bordas">
+                <div class="divs bordas">
+                    <p class="titulo tituloPrincipal">Rádio</p>
 
-                    <div id="frequenciaRadio" class="optionsRadio">
-                        <p class="titulo">Frequencia do rádio</p>
-                        <div id="frequenciaValor">
-                            <input type="number" id="frequenciaRadioValor" class="input" min="430" max="470" value="430"> MHZ
-                        </div>
-                    </div>
-
-                    <div id="velocidadeRadio" class="optionsRadio">
+                    <div id="configuracaoRadio">
                     
-                        <p class="titulo">Velocidade de transmissão</p>
-
-                        <select id="velocidadeRadioSelect" name="velocidade" class="input inputSelect">
-                            <option value="1" selected>1HZ</option>
-                            <option value="3">3HZ</option>
-                            <option value="5">5HZ</option>
-                            <option value="10">10HZ</option>
-                        </select>
+                        <div id="frequenciaRadio" class="optionsRadio">
+                            <p class="titulo">Frequencia do rádio</p>
+                            <div id="frequenciaValor">
+                                <input type="number" id="frequenciaRadioValor" class="input" min="430" max="470" value="430"> MHZ
+                            </div>
+                        </div>
+                    
+                        <div id="velocidadeRadio" class="optionsRadio">
+                        
+                            <p class="titulo">Velocidade de transmissão</p>
+                        
+                            <select id="velocidadeRadioSelect" name="velocidade" class="input inputSelect">
+                                <option value="1" selected>1HZ</option>
+                                <option value="3">3HZ</option>
+                                <option value="5">5HZ</option>
+                                <option value="10">10HZ</option>
+                            </select>
+                        </div>
+                    
                     </div>
-
                 </div>
 
                 <div id="options" class="divs bordas">
+                    <p class="titulo tituloPrincipal">GNSS
+                    <div id="options">
 
-                    <div id="frequenceDiv" class="optionsDivs">
-                        <p class="titulo">Taxa de Atualização
-                        </p>
-                        <select id="frequenciaTransmissao" name="frequence" class="input inputSelect">
-                            <option value="1" selected>1HZ</option>
-                            <option value="3">3HZ</option>
-                            <option value="5">5HZ</option>
-                            <option value="10">10HZ</option>
-                        </select>
+                        <div id="frequenceDiv" class="optionsDivs">
+                            <p class="titulo">Taxa de Atualização
+                            </p>
+                            <select id="frequenciaTransmissao" name="frequence" class="input inputSelect">
+                                <option value="1" selected>1HZ</option>
+                                <option value="3">3HZ</option>
+                                <option value="5">5HZ</option>
+                                <option value="10">10HZ</option>
+                            </select>
+                        </div>
+
                     </div>
-
                 </div>
 
 
@@ -109,7 +116,7 @@ char INDEX_PAGE[] PROGMEM = R"=====(
                             
                             <p class="titulo">Arquivos</p>
                             
-                            <select name="arquivos" id="arquivosSelect" onchange="arquivoChange()" class="input inputSelect inputContent">
+                            <select name="arquivos" id="arquivosSelect" class="input inputSelect inputContent">
                                 <option value="0" selected disabled>Selecione um arquivo</option>
                                 <option value="1">Criar um novo Arquivo...</option>
                             </select>
@@ -118,31 +125,45 @@ char INDEX_PAGE[] PROGMEM = R"=====(
                         
                         <div class="arquivosDivs">
                             
-                            <p class="titulo">Nome do Arquivos</p>
-                            <input type="text" id="nomeArquivo" class="input inputContent inputContent" placeholder="Nome do arquivo" disabled>
+                            <p class="titulo">Criar novo Arquivos</p>
+                            <button onclick="showPopupArquivo()" id="botaoNovoArquivo">Novo Arquivo</button>
                             
                         </div>
                         
                     </div>
-
-                    <div id="obs">
-                        Obs: Deixe em branco para criar um arquivo com data e hora atual(YYYY-MM-DD_HH:MM).
-                    </div>
                 </div>
 
                 <div class="button">
-                    <button onclick="novoTrabalho()" id="botaoNovaConfig">Iniciar</button>
+                    <button onclick="novoTrabalho()" id="botaoNovaConfig" class="disabled" disabled>Iniciar</button>
                 </div>
             </div>
 
+
+            <!-- PopUp Novo Arquivo-->
+            <div id="popupAlertArquivo" class="popup" onclick="hidePopupArquivo(event)">
+                <div class="popup-content">
+                    <label for="name">Nome:</label><br>
+                    <input type="text" id="nomeArquivo" name="nameArquivo" class="inputPopup" placeholder="Nome do Arquivo"><br>
+
+                    <div id="obs">
+                        Obs: Para criar um arquivo com data e hora atual(YYYY-MM-DD_HH:MM), deixe em branco e clique em salvar.
+                    </div>
+
+                    <div id="botoesPopup">
+                        <button id="cancel" class="botaoPopup" onclick="cancelDataArquivo()">Cancelar</button>
+                        <button id="save" class="botaoPopup" onclick="novoArquivo()">Salvar</button>
+                    </div>
+
+                </div>
+            </div>
 
 
             
             <!-- Tela de status -->
             <div id="status" class="naoVisivel">
                 <div id="cota" class="divs bordas">
-                    <p id="tituloCota" class="titulo">Cota</p>
                     <div id="cotaQuadro">
+                        <p id="tituloCota" class="titulo">Cota:</p>
                         <p id="cotaValor">000,000</p>
                     </div>
                 </div>
@@ -150,13 +171,13 @@ char INDEX_PAGE[] PROGMEM = R"=====(
                 <div id="informacoes" class="divs">
 
                     <div class="informacoesDivs">
-                        <div class="informacoesTitulos">Status do RTK: </div>
-                        <div id="statusRTKValor" class="informacoesValor">Carregando</div>
+                        <div class="informacoesTitulos">RTK: </div>
+                        <div id="statusRTKValor" class="informacoesValor">Carregando...</div>
                     </div>
 
                     <div class="informacoesDivs">
-                        <div class="informacoesTitulos">Precisão posicional: </div>
-                        <div id="precisaoValor" class="informacoesValor">Carregando</div>
+                        <div class="informacoesTitulos">Precisão: </div>
+                        <div id="precisaoValor" class="informacoesValor">Carregando...</div>
                     </div>
 
                 </div>
@@ -168,10 +189,11 @@ char INDEX_PAGE[] PROGMEM = R"=====(
                 
                 
                 <div class="divs bordas listaPontos">
-                    <h1 id="tituloPrincipal">Lista de Pontos</h1>
-                    <div class="button">
-                        <button onclick="showPopup()" id="botaoNovoPonto" class="disabled" >Novo Ponto</button>
+                    
+                    <div id="novoPonto">
+                        <button onclick="showPopupPonto()" id="botaoNovoPonto" class="disabled" disabled>Novo Ponto</button>
                     </div>
+                    <h1 id="tituloPrincipal">Lista de Pontos</h1>
 
                     <div id="listaPontos">
                         Carregando...
@@ -184,7 +206,7 @@ char INDEX_PAGE[] PROGMEM = R"=====(
 
 
             <!-- PopUp Novo Ponto-->
-            <div id="popupAlert" class="popup" onclick="hidePopup(event)">
+            <div id="popupAlertPonto" class="popup" onclick="hidePopupPonto(event)">
                 <div class="popup-content">
                     <label for="name">Nome:</label><br>
                     <input type="text" id="nomePonto" name="namePonto" class="inputPopup" placeholder="Escreva aqui o nome do ponto"><br>
@@ -192,16 +214,16 @@ char INDEX_PAGE[] PROGMEM = R"=====(
                     <textarea id="descPonto" name="descPonto" class="inputPopup textareaPopup" placeholder="Escreva aqui a descrição do ponto"></textarea>
 
                     <div id="botoesPopup">
-                        <button id="cancel" class="botaoPopup" onclick="cancelData()">Cancelar</button>
+                        <button id="cancel" class="botaoPopup" onclick="cancelDataPonto()">Cancelar</button>
                         <button id="save" class="botaoPopup" onclick="novoPonto()">Salvar</button>
                     </div>
 
                 </div>
-              </div>
+            </div>
 
 
               <!-- Alerta de mensagem -->
-              <div id="messageAlert" class="message">Ponto criado com sucesso!</div>
+              <div id="messageAlert" class="message">Carregando</div>
               
               
 

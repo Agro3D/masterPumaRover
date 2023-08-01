@@ -7,15 +7,8 @@ char INDEX_STATUS_STYLE[] PROGMEM = R"=====(
     padding-left: 1vh;
 }
 
-.button{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-top: 1vh;
-}
-
 #botaoCancelar{
-    background-color: #a011ff;
+    background-color: #41753c;
     width: 16vw;
     height: 4.5vh;
     border-radius: 10px;
@@ -25,12 +18,12 @@ char INDEX_STATUS_STYLE[] PROGMEM = R"=====(
 }
 
 #botaoCancelar:hover{
-    background-color: #810ad1;
+    background-color: #4e9e44;
     cursor: pointer;
 }
 
 #botaoNovoPonto{
-    background-color: #65c55c;
+    background-color: #41753c;
     min-width: 16vw;
     height: 4.5vh;
     border-radius: 10px;
@@ -46,14 +39,17 @@ char INDEX_STATUS_STYLE[] PROGMEM = R"=====(
 
 
 #tituloCota{
+    display: flex;
+    align-items: flex-end;
+    width: 100%;
     font-size: 6vh;
     font-weight: bold;
-    margin-left: 5vh;
-    margin-bottom: 2vh;
+    margin: 0;
 }
 
 #cotaQuadro{
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
     padding: 1vh;
@@ -65,7 +61,8 @@ char INDEX_STATUS_STYLE[] PROGMEM = R"=====(
 }
 
 #cotaValor{
-    margin-block: 1vh;
+    margin-top: 0vh;
+    margin-bottom: 1vh;
     color: #FFF;
     font-size: 14vw;
     font-weight: bold;
@@ -100,6 +97,12 @@ char INDEX_STATUS_STYLE[] PROGMEM = R"=====(
     min-width: 20%;
     height: 5vh;
     border-radius: 5px;
+}
+
+#novoPonto{
+    position: absolute;
+    align-items: end;
+    margin-left: 5vh;
 }
 
 #listaPontos{
@@ -170,6 +173,28 @@ char INDEX_STATUS_STYLE[] PROGMEM = R"=====(
         padding-top: 0;
         padding-bottom: 0;
         margin-block: 0;
+    }
+
+    #tituloCota{
+        font-size: 2.5vh;
+    }
+
+    #cotaValor{
+        letter-spacing: 0.5vh;
+        font-size: 12vw;
+    }
+
+    #botaoNovoPonto{
+        width: 10vw;
+        font-size: 1.8vh;
+    }
+
+    #botaoCancelar{
+        font-size: 1.8vh;
+    }
+
+    #novoPonto{
+        margin-left: 1vh;
     }
 }
 

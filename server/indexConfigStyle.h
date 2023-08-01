@@ -29,6 +29,7 @@ char INDEX_CONFIG_STYLE[] PROGMEM = R"=====(
     align-items: center;
     justify-content: space-around;
     padding-bottom: 3vh;
+    margin-bottom: 1vh;
 }
 
 #frequenciaValor{
@@ -39,6 +40,11 @@ char INDEX_CONFIG_STYLE[] PROGMEM = R"=====(
 
 #frequenciaValor input{
     margin-right: 1vh;
+}
+
+.tituloPrincipal{
+    margin-bottom: -1vh;
+    font-size: 2.5vh !important;
 }
 
 .optionsDivs{
@@ -67,6 +73,21 @@ char INDEX_CONFIG_STYLE[] PROGMEM = R"=====(
     height: 3vh;
 }
 
+#botaoNovoArquivo{
+    width: 16vw;
+    height: 4.5vh;
+    border-radius: 10px;
+    background-color: #c2c2c2;
+    font-weight: bold;
+    font-size: 2vh;
+    margin: 1.5vh 0;
+    border: 0;
+}
+
+#botaoNovoArquivo:hover{
+    background-color: #ffffff;
+    cursor: pointer;
+}
 
 .button{
     display: flex;
@@ -84,6 +105,7 @@ char INDEX_CONFIG_STYLE[] PROGMEM = R"=====(
     font-weight: bold;
     font-size: 2vh;
     margin: 1.5vh 0;
+    border: 0;
 }
 
 #botaoNovaConfig:hover{
@@ -121,6 +143,7 @@ char INDEX_CONFIG_STYLE[] PROGMEM = R"=====(
     align-items: center;
     justify-content: center;
     margin-bottom: 1vh;
+    font-size: 2vh
 }
 
 .visivel{
@@ -131,6 +154,36 @@ char INDEX_CONFIG_STYLE[] PROGMEM = R"=====(
     display: none;
 }
 
+@media screen and (max-width: 1024px) {
+    #botaoNovoArquivo{
+        width: 30vw;
+    }
+
+}
+
+@media screen and (max-width: 600px) {
+    #arquivos{
+        flex-direction: column;
+    }
+
+    #configuracaoRadio{
+        flex-direction: column;
+    }
+
+    .arquivosDivs{
+        margin-bottom: 4vh;
+    }
+
+    #constelacoesOptions{
+        column-count: 1;
+    }
+
+    #botaoNovoArquivo{
+        width: 50vw;
+    }
+
+    
+}
 /* 
 320px — 480px: Mobile devices
 481px — 768px: iPads, Tablets

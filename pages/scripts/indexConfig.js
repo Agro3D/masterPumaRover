@@ -107,6 +107,31 @@ function limparConteudo(){
     document.getElementById("nomeArquivo").value = "";
 }
 
+function novoArquivo() {
+    document.getElementById("arquivosSelect").value = 1;
+    closePopupArquivo();
+}
+
+function showPopupArquivo(){
+    document.getElementById("popupAlertArquivo").style.display = "block";
+}
+
+function closePopupArquivo() {
+    document.getElementById("popupAlertArquivo").style.display = "none";
+}
+
+function hidePopupArquivo(event) {
+    if (event.target == document.getElementById("popupAlertArquivo")) {
+        closePopupArquivo();
+    }
+}
+
+function cancelDataArquivo() {
+    document.getElementById('nomeArquivo').value = '';
+    document.getElementById("arquivosSelect").value = 0;
+    closePopupArquivo();
+}
+
 
 function troca(){
     if(document.getElementById("status").className == "naoVisivel"){
@@ -116,13 +141,6 @@ function troca(){
         document.getElementById("configuracoes").className = "visivel";
         document.getElementById("status").className = "naoVisivel";
     }
-}
-
-function arquivoChange(){
-    if (document.getElementById("arquivosSelect").value == 1)
-        document.getElementById("nomeArquivo").disabled = false;
-    else
-        document.getElementById("nomeArquivo").disabled = true;
 }
 
 

@@ -39,14 +39,12 @@ void slaveReceiveHandler() {
     receberMensagens = false;
     RTKAtual = -1;
     precisaoRTK = -1;
-    ComandoEscravo = GET_STATUS;
+    ComandoEscravo = LISTAR_ARQUIVOS;
     statusAtual = char(ESPERANDO);
     break;
 
   case NOVO_PONTO:
-      if(resposta["Mensagem"].as<String>() == "Ponto Criado com Sucesso!") {
-        webSocket.broadcastTXT("{\"Mensagem\": \"NOVO_PONTO\", \"Valor\": \"" + novoPontoNome + "\"}");
-      }
+    webSocket.broadcastTXT("{\"Mensagem\": \"NOVO_PONTO\", \"Valor\": \"" + resposta["Mensagem"].as<String>() + "\"}");
     break;
 
   case LISTAR_PONTOS:
