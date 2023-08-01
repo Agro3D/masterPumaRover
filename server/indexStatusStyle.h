@@ -1,5 +1,5 @@
 //Página de estilos da página inicial do servidor
-char INDEX_STYLE[] PROGMEM = R"=====(
+char INDEX_STATUS_STYLE[] PROGMEM = R"=====(
 
 .titulo{
     font-size: 2vh;
@@ -7,111 +7,49 @@ char INDEX_STYLE[] PROGMEM = R"=====(
     padding-left: 1vh;
 }
 
-#options{
-    padding-bottom: 3vh;
-    margin-bottom: 0;
-}
-
-#configuracaoRadio{
-    column-count: 2;
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
-    padding-bottom: 3vh;
-}
-
-#frequence{
-    height: 3vh;
-    width: 40%;
-}
-
-#frequenciaValor{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-#frequenciaValor input{
-    margin-right: 1vh;
-}
-
-.optionsDivs{
-    display: flex;
-    flex-direction: column;
-    height: auto;
-    margin-bottom: 10px;
-}
-
-.optionsRadio{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    padding: 1vh;
-}
-
-.input{
-    margin: 0.3vh 0vh 0vh 0.6vh;
-    width: 60%;
-    height: 2.5vh;
-    border-radius: 8px;
-}
-
-.button{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-top: 1vh;
-}
-
-
-#checkboxsOptions{
- column-count: 2;
-}
-
-#botaoNovaConfig{
-    width: 16vw;
-    height: 4.5vh;
-    border-radius: 10px;
-    background-color: #65c55c;
-    font-weight: bold;
-    font-size: 2vh;
-    margin: 1.5vh 0;
-}
-
-#botaoNovaConfig:hover{
-    background-color: #4e9e44;
-    cursor: pointer;
-}
-
 #botaoCancelar{
-    background-color: #a011ff;
+    background-color: #41753c;
     width: 16vw;
     height: 4.5vh;
     border-radius: 10px;
-    font-size: 2vh;
+    font-size: 2.6vh;
     font-weight: bold;
     margin: 1.5vh 0;
 }
 
 #botaoCancelar:hover{
-    background-color: #810ad1;
+    background-color: #4e9e44;
     cursor: pointer;
 }
 
-#constelacoesOptions{
-    column-count: 2;
+#botaoNovoPonto{
+    background-color: #41753c;
+    min-width: 16vw;
+    height: 4.5vh;
+    border-radius: 10px;
+    font-size: 2.6vh;
+    font-weight: bold;
+    margin: 1.5vh 0;
 }
 
+#botaoNovoPonto:hover{
+    background-color: #4e9e44;
+    cursor: pointer;
+}
+
+
 #tituloCota{
+    display: flex;
+    align-items: flex-end;
+    width: 100%;
     font-size: 6vh;
     font-weight: bold;
-    margin-left: 5vh;
-    margin-bottom: 2vh;
+    margin: 0;
 }
 
 #cotaQuadro{
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
     padding: 1vh;
@@ -123,7 +61,8 @@ char INDEX_STYLE[] PROGMEM = R"=====(
 }
 
 #cotaValor{
-    margin-block: 1vh;
+    margin-top: 0vh;
+    margin-bottom: 1vh;
     color: #FFF;
     font-size: 14vw;
     font-weight: bold;
@@ -160,6 +99,42 @@ char INDEX_STYLE[] PROGMEM = R"=====(
     border-radius: 5px;
 }
 
+#novoPonto{
+    position: absolute;
+    align-items: end;
+    margin-left: 5vh;
+}
+
+#listaPontos{
+    margin: 2vw;
+    padding: 1vw;
+    border: 1px solid #bbb;
+    border-radius: 5px;
+    background-color: #fff;
+    box-shadow: 0px 0px 5px #bbb;  
+    color: #000; 
+}
+
+.ponto{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 1vh;
+    padding: 1vh;
+    border: 1px solid #bbb;
+    border-radius: 5px;
+    background-color: #fff;
+    box-shadow: 0px 0px 5px #bbb;  
+    color: #000; 
+}
+
+.pontoNome{
+    font-weight: bold;
+    font-size: 1rem;
+}
+
+
+
 .verde{
     background-color: #2e8326;
     color: white;
@@ -175,13 +150,13 @@ char INDEX_STYLE[] PROGMEM = R"=====(
     color: white;
 }
 
-.visivel{
-    display: block;
-}
 
-.naoVisivel{
-    display: none;
-}
+.disabled {
+    border: 1px solid #999999 !important;
+    background-color: #cccccc !important;
+    color: #666666 !important;
+    cursor: default !important;
+  }
 
 /* 
 320px — 480px: Mobile devices
@@ -193,15 +168,33 @@ char INDEX_STYLE[] PROGMEM = R"=====(
 
 
 @media (max-width: 850px) {
-    
-    #checkboxsOptions{
-        column-count: 1;
-    }
 
     #cotaQuadro{
         padding-top: 0;
         padding-bottom: 0;
         margin-block: 0;
+    }
+
+    #tituloCota{
+        font-size: 2.5vh;
+    }
+
+    #cotaValor{
+        letter-spacing: 0.5vh;
+        font-size: 12vw;
+    }
+
+    #botaoNovoPonto{
+        width: 10vw;
+        font-size: 1.8vh;
+    }
+
+    #botaoCancelar{
+        font-size: 1.8vh;
+    }
+
+    #novoPonto{
+        margin-left: 1vh;
     }
 }
 

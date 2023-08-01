@@ -23,7 +23,7 @@ body{
 }
 
 .bordas{
-    border: 3px solid #2b8f17;
+    border: 3px solid #499242;
     /* border: 3px solid #810ad17b; */
     border-left: 0;
     border-right: 0;
@@ -36,7 +36,7 @@ body{
     font-weight: bolder;
     margin-top: 1vh;
     margin-bottom: 2vh;
-    color: #a011ff;
+    color: #872dc2;
 }
 
 #body2{

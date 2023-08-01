@@ -2,14 +2,13 @@
 #define ZEDHANDLER_H
 
 
-String getAltitudeFromNMEA(String nmeastr);
 
 // Função para receber e processar a mensagem do cliente.
 void processaMensagem(String message){
 
-    
+    // Processa a mensagem recebida retornando a cota elipsoidal
     String cota = getAltitudeFromNMEA(message);
-    if(cota != "-1.00"){
+    if(cota != "-1.00"){                                // Se a cota for válida, envia a cota para o cliente
 
       Serial.println();
       Serial.println("Cota: " + String(cota));
@@ -19,8 +18,7 @@ void processaMensagem(String message){
 
 
 
-
-// Função para pegar a cota do GPS
+// Função para pegar a cota do GPS, calculando a cota elipsoidal
 String getAltitudeFromNMEA(String nmeastr) {
     char* nmea = (char*) nmeastr.c_str();
 
@@ -29,13 +27,12 @@ String getAltitudeFromNMEA(String nmeastr) {
 
     // Verifica se a mensagem é do tipo GNGGA
     if (strcmp(nmea, "$GNGGA") != 0) {
-        return "-1.00";     // Retorna uma altitude inválida se a mensagem não for do tipo GNGGA
+        return "-1.00";                                // Retorna uma altitude inválida se a mensagem não for do tipo GNGGA
     }
 
     Serial.print("Mensagem GNGGA recebida: " + nmeastr);
 
-
-    // Conta a quantidade de vírgulas na mensagem
+    // Percorre a mensagem atraves das vírgulas
     int commaCount = 0;
     char* piece = strtok(NULL, ",");
     String cota;
@@ -44,62 +41,34 @@ String getAltitudeFromNMEA(String nmeastr) {
     while (piece != NULL) {
         commaCount++;
 
-        // Altitude é o nono elemento da mensagem
-        if (commaCount == 9) {
+        switch (commaCount){
+        // Altitude é o nono elemento da mensagem, altitute nivel do mar
+        case 9:
             cota = String(piece);
-        } else if (commaCount == 10)
-        {
-            if (piece[0] == 'M'){
-                return cota;
-            } else{
-                return "-1.00";
+            break;
+
+        // Verifica se a mensagem é válida
+        case 10:
+            if (piece[0] != 'M'){
+                return "-1.00";                         // Retorna uma altitude inválida se a mensagem não for válida
             }
+            break;
+            
+        // Diferença é o décimo primeiro elemento da mensagem, diferença entre a altitude elipsoidal e a altitude nivel do mar
+        case 11:
+            cota = String(cota.toFloat() + String(piece).toFloat(), 3);
+            return cota;                                // Retorna a cota elipsoidal
+        
+        default:
+            break;
         }
-        piece = strtok(NULL, ",");
+        
+        piece = strtok(NULL, ",");                      // Pega o próximo elemento da mensagem
     }
 
-    return "-1.00";     // Retorna uma altitude inválida se não encontrar a nona vírgula
+    return "-1.00";                                     // Retorna uma altitude inválida se não encontrar a nona vírgula
 }
 
-
-// Função para gerar uma cota aleatória
-// int cotaInt = 630;
-// String randomCota(){
-//   // int randomNumber = random(628000, 633000); // generate a random integer between 680000 and 690000
-//   // Min = 628 or cotaInt-1
-//   int min = cotaInt-1;
-//   // Max = 633 or cotaInt+1
-//   int max = cotaInt+2;
-
-//   if (min < 628) {
-//     min = 628;
-//   }
-//   if (max > 633) {
-//     max = 633;
-//   }
-
-//   Serial.println("Min: " + String(min));
-//   Serial.println("Max: " + String(max));
-  
-//   cotaInt = random(min, max); // generate a random integer between 680000 and 690000
-//   int cotaDecimal = random(0, 999); // generate a random integer between 0 and 999
-//   int randomNumber = cotaInt*1000 + cotaDecimal; // generate a random integer between 680000 and 690000
-
-//   Serial.println("Cota: " + String(cotaInt));
-//   Serial.println("Decimal: " + String(cotaDecimal));
-
-//   if (cotaDecimal < 10) {
-//     cotaDecimal = cotaDecimal * 100;
-//   } else if (cotaDecimal < 100) {
-//     cotaDecimal = cotaDecimal * 10;
-//   }
-  
-
-//   String randomNumberStr = String(cotaInt) + "." + String(cotaDecimal);
-
-//   float randomFloat = randomNumber / 1000.00; // convert it to a float with 3 decimal places
-//   return randomNumberStr;
-// }
 
 
 

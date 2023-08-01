@@ -6,6 +6,8 @@
 // Função para lidar com o envio de dados para o escravo.
 void slaveSendHandler() {
   if (ComandoEscravo == 0){ return; }
+
+  Serial.println("\nComando para o escravo: " + String(ComandoEscravo));
   
   int x;
 
@@ -22,11 +24,21 @@ void slaveSendHandler() {
     slaveSendData(mensagemStr);                               // Enviar dados para o slave
     Serial.println("\nDados enviados para o escravo");
     
-    String slaveResponse = slaveReceiveResponse();            // Solicite a resposta do escravo
+    String slaveResponse = slaveReceiveResponse();            // Le a resposta do escravo
     Serial.println("Resposta do escravo: " + slaveResponse);
 
-    if (slaveResponse == "ACK") {                             // Se a resposta do escravo for "ACK", saia do loop
-    mensagemStr = "";                                        // Limpe a mensagem
+    //  Se a esposta tiver "Mensagem", chama a funcao updateRTK
+    while (slaveResponse.indexOf("Comando") != -1 && slaveResponse.indexOf("ACK") == -1 && slaveResponse.indexOf("NACK") == -1){
+      DynamicJsonDocument json(128);
+      deserializeJson(json, slaveResponse);
+      updateRTK(json["Comando"].as<int>(), json["Mensagem"].as<int>());
+      
+      slaveResponse = slaveReceiveResponse();                 // Le a resposta do escravo
+      Serial.println("Resposta do escravo: " + slaveResponse);
+    }
+
+    if (slaveResponse.indexOf("ACK") != -1 && slaveResponse.indexOf("NACK") == -1) { // Se a resposta do escravo for "ACK", saia do loop
+    mensagemStr = "";                                         // Limpe a mensagem
     hasComunication = true;
       break;
     } else {                                                  // Se a resposta do escravo não for "ACK", continue no loop
@@ -53,19 +65,33 @@ void slaveSendHandler() {
 
 
   // Ações a serem executadas após o envio dos dados para o escravo
-  switch (ComandoEscravo)
-  {
+  switch (ComandoEscravo)  {
   case ACK_MSG:
     hasComunication = true;
     break;
+    
   case GET_STATUS:
     Serial.println("\nRequisição de status enviada para o escravo");
     break;
-  case NOVA_CONFIGURACAO:
+
+  case NOVO_TRABALHO:
     Serial.println("\nNova configuração enviada para o escravo");
     break;
+
   case PARAR_TRABALHO:
     Serial.println("\nRequisição de parada de trabalho enviada para o escravo");
+    break;
+
+  case NOVO_PONTO:
+    Serial.println("\nRequisição de novo ponto enviada para o escravo");
+    break;
+
+  case LISTAR_ARQUIVOS:
+    Serial.println("\nRequisição de listagem de arquivos enviada para o escravo");
+    break;
+  
+  case LISTAR_PONTOS:
+    Serial.println("\nRequisição de listagem de pontos enviada para o escravo");
     break;
   
   default:
@@ -73,6 +99,8 @@ void slaveSendHandler() {
     Serial.println("Comando: " + String(ComandoEscravo));
     break;
   }
+  ComandoEscravo = 0;
+  Serial.println();
 }
 
 

@@ -3,7 +3,7 @@ char HEADER_STYLE[] PROGMEM = R"=====(
 
 .header {
     width: 100vw;
-    height: 6vh;
+    height: 8vh;
     display: flex;
     align-items: center;
     background-color: #333;
@@ -41,6 +41,7 @@ char HEADER_STYLE[] PROGMEM = R"=====(
     color: white;
     text-decoration: none;
     margin-right: 15px;
+    font-size: 1rem;
 }
 
 #headerLinks a:hover {
@@ -49,7 +50,7 @@ char HEADER_STYLE[] PROGMEM = R"=====(
 
 
 
-@media (max-width: 768px) {
+@media (max-width: 1024px) {
     #headerLinks{
         display: none;
     }

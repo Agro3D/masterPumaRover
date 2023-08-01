@@ -4,58 +4,126 @@
 
 // Função para passo a passo da comunicação com o escravo
 void slaveReceiveHandler() {
+  DynamicJsonDocument resposta(10240);
+  deserializeJson(resposta, slaveReceiveResponse());                 // Le a resposta do escravo e converte para json
 
-  switch (ComandoEscravo)
-  {
-  case NOVA_CONFIGURACAO:
-    receberMensagens = true;
+  Serial.println("Mensagem do escravo: ");
+  serializeJsonPretty(resposta, Serial);
+  Serial.println();
+  Serial.println();
+
+  // Serial.println("Tamanho da resposta: " + String(resposta["Tamanho"].as<int>()));
+
+
+  switch (resposta["Comando"].as<int>()){
+  case GET_STATUS:
+    getStatus(resposta["Mensagem"].as<int>());
     ComandoEscravo = 0;
+    break;
+
+  case GET_PRECISAO:
+    updateRTK(resposta["Comando"].as<int>(), resposta["Mensagem"].as<int>());
+    break;
+    
+  case GET_RTKSTATUS:
+    updateRTK(resposta["Comando"].as<int>(), resposta["Mensagem"].as<int>());
+    break;
+    
+  case NOVO_TRABALHO:
+    receberMensagens = true;
+    ComandoEscravo = LISTAR_PONTOS;
+    statusAtual = char(TRABALHANDO);
     break;
 
   case PARAR_TRABALHO:
     receberMensagens = false;
     RTKAtual = -1;
     precisaoRTK = -1;
-    ComandoEscravo = 0;
+    ComandoEscravo = LISTAR_ARQUIVOS;
+    statusAtual = char(ESPERANDO);
     break;
-  
+
+  case NOVO_PONTO:
+    webSocket.broadcastTXT("{\"Mensagem\": \"NOVO_PONTO\", \"Valor\": \"" + resposta["Mensagem"].as<String>() + "\"}");
+    break;
+
+  case LISTAR_PONTOS:
+    listarPontos(resposta["Mensagem"].as<String>());
+    ComandoEscravo = GET_STATUS;
+    break;
+
+
+  case LISTAR_ARQUIVOS:
+    listaArquivosStr = resposta["Mensagem"].as<String>();
+    ComandoEscravo = GET_STATUS;
+    break;
+
+  case ALERT_MESSAGE:
+    webSocket.broadcastTXT(resposta["Mensagem"].as<String>().c_str());
+    break;
+
   default:
-    slaveListerner();
-    ComandoEscravo = 0;
     break;
   }
 }
 
 
+void getStatus(int status){
+  // DynamicJsonDocument respostaStatus(256);
+  // deserializeJson(respostaStatus, slaveReceiveResponse());
+  // String status = slaveReceiveResponse();
 
-// Função para receber a resposta do escravo.
-void slaveListerner() {
-  String mensagemStr = slaveReceiveResponse();
-  DynamicJsonDocument resposta(1024);
-  deserializeJson(resposta, mensagemStr);
-  
-  Serial.println("Escravo: ");
-  serializeJsonPretty(resposta, Serial);
-  Serial.println();
+  String statusStr;
 
-  if (resposta["Mensagem"] == "Precisao" || resposta["Mensagem"] == "RTK"){
-    if(resposta["Mensagem"] == "Precisao"){
-      precisaoRTK = resposta["Valor"];
-    } else if (resposta["Mensagem"] == "RTK"){
-      RTKAtual = resposta["Valor"];
-    }
-    
-    webSocket.broadcastTXT(mensagemStr);
-  } 
+
+  switch (status){
+  case ESPERANDO:
+    statusStr = "ESPERANDO";
+    statusAtual = char(ESPERANDO);
+    break;
+  case TRABALHANDO:
+    statusStr = "TRABALHANDO";
+    statusAtual = char(TRABALHANDO);
+    break;
+
+  default:
+    break;
+  }
+
+  Serial.println("Status atualizado para: " + statusStr);
+  webSocket.broadcastTXT(statusStr);
 }
 
 
+void updateRTK(int comando, int valor) {
+
+  String mensagem;
+
+  switch (comando){
+  case GET_PRECISAO:
+    mensagem = "{\"Mensagem\": \"PRECISAO\", \"Valor\": \"" + String(valor) + "\"}";
+    precisaoRTK = valor;
+    break;
+    
+  case GET_RTKSTATUS:
+    mensagem = "{\"Mensagem\": \"RTK\", \"Valor\": \"" + String(valor) + "\"}";
+    RTKAtual = valor;
+    break;
+  
+  default:
+    break;
+  }
+
+  webSocket.broadcastTXT(mensagem); 
+}
+
 // Função para receber a resposta do escravo.
 String slaveReceiveResponse() {
-  Serial.println("Esperando mensagem do slave");
+  Serial.println("Lendo mensagem do slave");
   String response = "";
   unsigned long startTime = millis();
 
+  // Aguarda a chegada de dados do escravo ou aguarda n segundos sem resposta
   while (!MySerial.available() && millis() - startTime < 10000) {}
   
   startTime = millis();
@@ -72,6 +140,16 @@ String slaveReceiveResponse() {
 
   
   return response;
+}
+
+
+void listarPontos(String resposta) {
+
+  listaPontos = resposta;
+
+  Serial.println("Pontos: " + listaPontos);
+  
+  webSocket.broadcastTXT("{\"Mensagem\": \"LISTAR_PONTOS\", \"Valor\": " + listaPontos + "}");
 }
 
 

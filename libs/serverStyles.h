@@ -21,11 +21,27 @@ void setupServerStyles(){
   });
 
 
-  // Rota para o estilo CSS da página inicial. (indexStyle.css)
-  server.on("/styles/index.css", HTTP_GET, [](AsyncWebServerRequest *request){
-    Serial.println("\n\n##### Requisicao Recebida: /styles/index.css");
-    Serial.println("Enviando indexStyle.css ...");
-    request->send(200, "text/css", INDEX_STYLE);
+  // Rota para o estilo CSS da página inicial. (indexConfigStyle.css)
+  server.on("/styles/indexConfig.css", HTTP_GET, [](AsyncWebServerRequest *request){
+    Serial.println("\n\n##### Requisicao Recebida: /styles/indexConfig.css");
+    Serial.println("Enviando indexConfig.css ...");
+    request->send(200, "text/css", INDEX_CONFIG_STYLE);
+  });
+
+
+  // Rota para o estilo CSS da página inicial. (indexStatusStyle.css)
+  server.on("/styles/indexStatus.css", HTTP_GET, [](AsyncWebServerRequest *request){
+    Serial.println("\n\n##### Requisicao Recebida: /styles/indexStatus.css");
+    Serial.println("Enviando indexStatus.css ...");
+    request->send(200, "text/css", INDEX_STATUS_STYLE);
+  });
+
+
+  // Rota para o estilo CSS do popup de novo ponto. (popupAlertStyle.css)
+  server.on("/styles/popupAlert.css", HTTP_GET, [](AsyncWebServerRequest *request){
+    Serial.println("\n\n##### Requisicao Recebida: /styles/popupAlert.css");
+    Serial.println("Enviando popupAlert.css ...");
+    request->send(200, "text/css", POPUP_NOVO_PONTO_STYLE);
   });
 
 

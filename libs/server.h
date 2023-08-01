@@ -10,10 +10,10 @@ void setupServer() {
   setupServerScripts();
 
   
-// ========== Rotas de funções do servidor web ==========
+  // ========== Rotas de funções do servidor web ==========
 
 
-// Rota para cancelar a pesquisa realizada pelo escravo.
+  // Rota para cancelar a pesquisa realizada pelo escravo.
   server.on("/pararTrabalho", HTTP_GET, [](AsyncWebServerRequest *request){
     Serial.println("\n\n##### Requisicao Recebida: /pararTrabalho");
 
@@ -21,9 +21,10 @@ void setupServer() {
    
     request->send(200, "text/plain", "Cancelando pesquisa...");
   });
+  
 
 // Rota para receber dados do cliente em formato JSON.
-  AsyncCallbackJsonWebHandler* newConfig = new AsyncCallbackJsonWebHandler("/postConfiguration",
+  AsyncCallbackJsonWebHandler* postConfig = new AsyncCallbackJsonWebHandler("/postConfiguration",
   [](AsyncWebServerRequest *request, JsonVariant &json) {
     Serial.println("\n\n##### Requisicao Recebida: /postConfiguration");
 
@@ -34,12 +35,84 @@ void setupServer() {
 
     mensagemStr = json.as<String>();
 
-    ComandoEscravo = NOVA_CONFIGURACAO;
+    ComandoEscravo = NOVO_TRABALHO;
     
     request->send(200, "text/plain", "Recebendo configuracao...");
   });
+
+
+
+  //  Rota para salvar um novo ponto de interesse.
+  AsyncCallbackJsonWebHandler* novoPonto = new AsyncCallbackJsonWebHandler("/novoPonto",
+  [](AsyncWebServerRequest *request, JsonVariant &json) {
+
+    Serial.println("\n\n##### Requisicao Recebida: /novoPonto");
+
+    Serial.println("Received JSON object:");
+    serializeJsonPretty(json, Serial);
+
+    mensagemStr = json.as<String>();
+    novoPontoNome = json["Nome"].as<String>();
+
+    ComandoEscravo = NOVO_PONTO;
+   
+    request->send(200, "text/plain", "Salvando novo ponto...");
+  });
+
+  
   // Adicionar a rota ao servidor
-  server.addHandler(newConfig);
+  server.addHandler(postConfig);
+  server.addHandler(novoPonto);
+
+  
+  //  Rota para salvar um novo ponto de interesse.
+  server.on("/getStatus", HTTP_GET, [](AsyncWebServerRequest *request){
+    Serial.println("\n\n##### Requisicao Recebida: /getStatus");
+    Serial.print("Enviando Status: ");
+
+    String statusStr;
+
+    switch (statusAtual){
+    case ESPERANDO:
+      statusStr = "Esperando";
+      break;
+
+    case TRABALHANDO:
+      statusStr = "Trabalhando";
+      break;
+    
+    default:
+      break;
+    }
+    
+    Serial.println(statusStr);
+    request->send(200, "text/plain", statusStr);
+  });
+
+
+// Rota para receber a lista de arquivos do escravo.
+  server.on("/getFiles", HTTP_GET, [](AsyncWebServerRequest *request){
+    Serial.println("\n\n##### Requisicao Recebida: /getFiles");
+    Serial.println("Enviando lista de arquivos...");
+    Serial.println(listaArquivosStr);
+
+    request->send(200, "application/json", listaArquivosStr);
+  });
+
+
+
+// Rota para receber a lista de arquivos do escravo.
+  server.on("/getPontos", HTTP_GET, [](AsyncWebServerRequest *request){
+    Serial.println("\n\n##### Requisicao Recebida: /getPontos");
+    Serial.println("Enviando lista de pontos...");
+    Serial.println(listaPontos);
+
+    if (listaPontos == "") 
+      request->send(204, "application/json", "Nenhum ponto salvo.");
+    else
+      request->send(200, "application/json", listaPontos);
+
+  });
 }
 
 

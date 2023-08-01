@@ -1,5 +1,5 @@
 // Variáveis Globais
-#include "libs/common.h"              // Variáveis globais
+#include "libs/common.h"                // Variáveis globais
 
 
 // Função para realizar a configuração inicial do servidor web.
@@ -29,7 +29,7 @@ void setup() {
   // Inicia o protocolo UART para comunicação com o ZED.
   Serial.println();
   Serial.println("Iniciando Comunicação UART (ZED)");
-  MySerialZed.begin(460800, SERIAL_8N1, RX, TX);     // Set up the hardware serial port
+  MySerialZed.begin(460800, SERIAL_8N1, RX, TX);                // Set up the hardware serial port
   delay(1000);
   while (MySerialZed.available()) MySerialZed.read();
 
@@ -72,6 +72,13 @@ void setup() {
   Serial.println("Servidor HTTP iniciado em http://" + String(IP.toString()));
 
 
+  ComandoEscravo = LISTAR_ARQUIVOS;                 // Envia o comando de lista de arquivos para o escravo.
+  slaveSendHandler();                               // Chama a função de manipulação de envio para o escravo.
+  slaveReceiveHandler();                            // Chama a função de manipulação de recebimento do escravo.
+
+  statusAtual = char(ESPERANDO);
+  listaPontos = "";
+
   Serial.println("\n\n\tMaster Puma Rover inicializado.");
 
   Serial.println();
@@ -85,14 +92,16 @@ void setup() {
 // Função principal do programa
 void loop() {
   // Função principal executada repetidamente após a função de inicialização.
+
+  // Verifica se ha alguma requisicao pendente no servidor web, ou alguma mensagem pendente do escravo.
   if(ComandoEscravo || MySerial.available()) {
-    Serial.println("Comando recebido do escravo: " + String(ComandoEscravo));
     slaveSendHandler();                           // Chama a função de manipulação de envio para o escravo.
     slaveReceiveHandler();                        // Chama a função de manipulação de recebimento do escravo.
   }
 
 
-   while (MySerialZed.available()) {
+  // Lê as mensagens recebidas do ZED
+  while (MySerialZed.available()) {
     String message = MySerialZed.readStringUntil('\n');
 
     if(receberMensagens){
@@ -137,11 +146,14 @@ void webSocketEvent(uint8_t num, WStype_t type, uint8_t * payload, size_t length
         case WStype_CONNECTED:
             Serial.printf("[%u] Connected from  . . .  url: 192.168.4.1%s\n", num, payload);
             webSocket.sendTXT(num, "Conectado");
+
             if (RTKAtual !=-1){
+              Serial.println("Envio de RTK");
               webSocket.sendTXT(num, "{\"Mensagem\": \"RTK\", \"Valor\": " + String(RTKAtual) + "}");
             }
             if (precisaoRTK !=-1){
-              webSocket.sendTXT(num, "{\"Mensagem\": \"Precisao\", \"Valor\": " + String(precisaoRTK) + "}");
+              Serial.println("Envio de precisao");
+              webSocket.sendTXT(num, "{\"Mensagem\": \"PRECISAO\", \"Valor\": " + String(precisaoRTK) + "}");
             }
         break;
         case WStype_TEXT:
