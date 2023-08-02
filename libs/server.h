@@ -32,10 +32,15 @@ void setupServer() {
     // jsonObj = json.as<JsonObject>();
     Serial.println("Received JSON object:");
     serializeJsonPretty(json, Serial);
+    Serial.print("");
 
-    mensagemStr = json.as<String>();
-
-    ComandoEscravo = NOVO_TRABALHO;
+    if(escravoTrabalhando){
+      proximoComandoEscravo = NOVO_TRABALHO;
+      mensagemStrAux = json.as<String>();
+    } else{
+      ComandoEscravo = NOVO_TRABALHO;
+      mensagemStr = json.as<String>();
+    }
     
     request->send(200, "text/plain", "Recebendo configuracao...");
   });
@@ -50,11 +55,16 @@ void setupServer() {
 
     Serial.println("Received JSON object:");
     serializeJsonPretty(json, Serial);
+    Serial.println();
 
-    mensagemStr = json.as<String>();
-    novoPontoNome = json["Nome"].as<String>();
 
-    ComandoEscravo = NOVO_PONTO;
+    if(escravoTrabalhando){
+      proximoComandoEscravo = NOVO_PONTO;
+      mensagemStrAux = json.as<String>();
+    } else{
+      ComandoEscravo = NOVO_PONTO;
+      mensagemStr = json.as<String>();
+    }
    
     request->send(200, "text/plain", "Salvando novo ponto...");
   });

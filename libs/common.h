@@ -66,14 +66,16 @@ bool serverStarted = false;                             // Flag para controlar s
 bool receberMensagens = false;                          // Flag para controlar o recebimento de mensagens do escravo
 
 String mensagemStr;                                     // String para armazenar a representação em texto do objeto JSON
+String mensagemStrAux;                                  // String auxiliar para armazenar a representação em texto do objeto JSON
 String listaArquivosStr;                                // String para armazenar a lista de arquivos do escravo
 String listaPontos;                                     // String para armazenar a lista de pontos do arquivo
-String novoPontoNome;                                   // String para armazenar o novo ponto de interesse
 
 int RTKAtual = -1;                                      // Variável para armazenar o valor da pressão atual do RTK
 int precisaoRTK = -1;                                   // Variável para armazenar o valor da pressão de precisão do RTK
 char statusAtual;                                       // Variável para armazenar o status atual do escravo
 int ComandoEscravo = 0;                                 // Flag para controlar o envio de dados para o escravo
+int proximoComandoEscravo = 0;                          // Flag para controlar o envio de dados para o escravo, Caso ja exista um comando em andamento
+bool escravoTrabalhando = false;
 bool waitResponse = false;                              // Flag para controlar o recebimento de dados do escravo
 bool verifyingComunication = false;                     // Flag para controlar a verificação de comunicação com o escravo
 

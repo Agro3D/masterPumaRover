@@ -39,6 +39,7 @@ void slaveSendHandler() {
 
     if (slaveResponse.indexOf("ACK") != -1 && slaveResponse.indexOf("NACK") == -1) { // Se a resposta do escravo for "ACK", saia do loop
     mensagemStr = "";                                         // Limpe a mensagem
+    escravoTrabalhando = true;
     hasComunication = true;
       break;
     } else {                                                  // Se a resposta do escravo não for "ACK", continue no loop

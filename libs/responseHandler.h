@@ -18,7 +18,19 @@ void slaveReceiveHandler() {
   switch (resposta["Comando"].as<int>()){
   case GET_STATUS:
     getStatus(resposta["Mensagem"].as<int>());
-    ComandoEscravo = 0;
+    Serial.println("Proximo: " + String(proximoComandoEscravo));
+    Serial.println("ProximaMsg: " + mensagemStrAux);
+    if(proximoComandoEscravo){
+      ComandoEscravo = proximoComandoEscravo;
+      mensagemStr = mensagemStrAux;
+      
+      proximoComandoEscravo = 0;
+      mensagemStrAux = "";
+
+    } else {
+      escravoTrabalhando = false;
+      ComandoEscravo = 0;
+    }
     break;
 
   case GET_PRECISAO:
@@ -45,6 +57,8 @@ void slaveReceiveHandler() {
 
   case NOVO_PONTO:
     webSocket.broadcastTXT("{\"Mensagem\": \"NOVO_PONTO\", \"Valor\": \"" + resposta["Mensagem"].as<String>() + "\"}");
+    ComandoEscravo = 0;
+    escravoTrabalhando = false;
     break;
 
   case LISTAR_PONTOS:
