@@ -7,25 +7,27 @@ char INDEX_STATUS_STYLE[] PROGMEM = R"=====(
     padding-left: 1vh;
 }
 
-#botaoCancelar{
+#botaoFinalizar{
     background-color: #41753c;
-    width: 16vw;
-    height: 4.5vh;
+    color: white;
+    padding: 1vh 3vw;
+    border: 0;
     border-radius: 10px;
     font-size: 2.6vh;
     font-weight: bold;
-    margin: 1.5vh 0;
 }
 
-#botaoCancelar:hover{
+#botaoFinalizar:hover{
     background-color: #4e9e44;
     cursor: pointer;
 }
 
 #botaoNovoPonto{
     background-color: #41753c;
+    color: white;
     min-width: 16vw;
     height: 4.5vh;
+    border: 0;
     border-radius: 10px;
     font-size: 2.6vh;
     font-weight: bold;
@@ -71,31 +73,37 @@ char INDEX_STATUS_STYLE[] PROGMEM = R"=====(
 }
 
 #informacoes{
+    display: flex;
+    margin-inline: 5vw;
     column-count: 2;
     margin-bottom: 2vh;
+    justify-content: space-between;
 }
 
-.informacoesDivs{
+#informacoesDiv{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+.informacaoDiv{
     display: flex;
     align-items: center;
-    justify-content: space-around;
-    padding: 1vh;
-    font-size: 4vw;
-    padding: 0.2vh;
 }
 
 .informacoesTitulos{
+    font-size: 4vw;
     font-weight: bold;
     margin-right: 2vh;
 }
 
 .informacoesValor{
+    font-size: 3vw;
     display: flex;
     align-items: center;
     justify-content: center;
     font-weight: bold;
     min-width: 20%;
-    height: 5vh;
     border-radius: 5px;
 }
 
@@ -138,16 +146,19 @@ char INDEX_STATUS_STYLE[] PROGMEM = R"=====(
 .verde{
     background-color: #2e8326;
     color: white;
+    padding: 1vh;
 }
 
 .amarelo{
     background-color: #ffdb11;
     color: black;
+    padding: 1vh;
 }
 
 .vermelho{
     background-color: #e81e1e;
     color: white;
+    padding: 1vh;
 }
 
 
@@ -186,15 +197,49 @@ char INDEX_STATUS_STYLE[] PROGMEM = R"=====(
 
     #botaoNovoPonto{
         width: 10vw;
-        font-size: 1.8vh;
+        min-height: fit-content;
+        font-size: 1.4vh;
+        margin: 0;
     }
 
-    #botaoCancelar{
-        font-size: 1.8vh;
+    #botaoFinalizar{
+        font-size: 1.4vh;
+        padding: 0.7vh 2.5vw;
     }
 
     #novoPonto{
         margin-left: 1vh;
+    }
+
+    .tituloMobile{
+        font-size: 2.5vh !important;
+    }
+}
+
+@media (orientation: landscape) and (max-height: 850px) {
+
+    #tituloCota{
+        font-size: 3.5vh;
+    }
+
+    #botaoNovoPonto{
+        width: 6vw;
+        min-height: fit-content;
+        font-size: 3vh;
+        margin: 3vh 0;
+    }
+
+    #botaoFinalizar{
+        font-size: 3vh;
+        padding: 3vh 4vw;
+    }
+
+    #novoPonto{
+        margin-left: 1vh;
+    }
+
+    .tituloMobile{
+        font-size: 6vh !important;
     }
 }
 

@@ -7,6 +7,7 @@ function initIndex(){
     getStatus();
     getFiles();
     getPontos();
+    troca();
 }
 
 function novoTrabalho() {

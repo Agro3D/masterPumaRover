@@ -90,4 +90,14 @@ char HEADER_STYLE[] PROGMEM = R"=====(
 
 }
 
+@media (orientation: landscape){
+    .header {
+        height: 10vh;
+    }
+
+    .headerTitle {
+        font-size: 2rem;
+    }
+}
+
 )=====";

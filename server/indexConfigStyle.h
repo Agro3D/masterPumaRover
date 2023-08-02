@@ -93,7 +93,10 @@ char INDEX_CONFIG_STYLE[] PROGMEM = R"=====(
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-top: 1vh;
+}
+
+.button button{
+    color: white !important;
 }
 
 

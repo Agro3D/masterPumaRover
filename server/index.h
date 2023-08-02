@@ -75,10 +75,8 @@ char INDEX_PAGE[] PROGMEM = R"=====(
                         </div>
 
                     </div>
-                </div>
 
 
-                <div id="constelacoes" class="divs bordas">
                     <p class="titulo">Constelações </p>
                     
                     <div id="constelacoesOptions" class="divs">
@@ -169,23 +167,24 @@ char INDEX_PAGE[] PROGMEM = R"=====(
                 </div>
 
                 <div id="informacoes" class="divs">
-
-                    <div class="informacoesDivs">
-                        <div class="informacoesTitulos">RTK: </div>
-                        <div id="statusRTKValor" class="informacoesValor">Carregando...</div>
-                    </div>
-
-                    <div class="informacoesDivs">
+                    <div id="informacoesDiv">
+                        <div class="informacaoDiv">
+                            <div class="informacoesTitulos">RTK: </div>
+                            <div id="statusRTKValor" class="informacoesValor">Carregando...</div>
+                        </div>
+                        
+                    <div class="informacaoDiv">
                         <div class="informacoesTitulos">Precisão: </div>
                         <div id="precisaoValor" class="informacoesValor">Carregando...</div>
                     </div>
-
+                </div>
+                    
+                    <div class="button">
+                        <button onclick="voltar()" id="botaoFinalizar"> Finalizar </br> Trabalho </button>
+                    </div>
                 </div>
 
 
-                <div class="button">
-                    <button onclick="voltar()" id="botaoCancelar">Voltar</button>
-                </div>
                 
                 
                 <div class="divs bordas listaPontos">
@@ -193,7 +192,7 @@ char INDEX_PAGE[] PROGMEM = R"=====(
                     <div id="novoPonto">
                         <button onclick="showPopupPonto()" id="botaoNovoPonto" class="disabled" disabled>Novo Ponto</button>
                     </div>
-                    <h1 id="tituloPrincipal">Lista de Pontos</h1>
+                    <h1 id="tituloPrincipal" class="tituloMobile">Lista de Pontos</h1>
 
                     <div id="listaPontos">
                         Carregando...

@@ -44,7 +44,7 @@ body{
     flex-direction: column;
     border: 2px solid #616161;
     border-radius: 15px;
-    min-width: 60vw;
+    min-width: 80vw;
     max-width: 95vw;
     margin-top: 10vh;
     margin-bottom: 4vh;
@@ -53,6 +53,16 @@ body{
 @media screen and (max-width: 400px){
     #body2{
         min-width: 75vw;
+    }
+}
+
+@media (orientation: landscape) and (max-height: 400px){
+    #tituloPrincipal{
+        font-size: 6vh;
+    }
+
+    #body2{
+        margin-top: 12vh;
     }
 }
 
