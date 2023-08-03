@@ -18,6 +18,7 @@ void slaveReceiveHandler() {
   switch (resposta["Comando"].as<int>()){
   case GET_STATUS:
     getStatus(resposta["Mensagem"].as<int>());
+
     Serial.println("Proximo: " + String(proximoComandoEscravo));
     Serial.println("ProximaMsg: " + mensagemStrAux);
     if(proximoComandoEscravo){
@@ -94,10 +95,12 @@ void getStatus(int status){
   case ESPERANDO:
     statusStr = "ESPERANDO";
     statusAtual = char(ESPERANDO);
+    receberMensagens = false;
     break;
   case TRABALHANDO:
     statusStr = "TRABALHANDO";
     statusAtual = char(TRABALHANDO);
+    receberMensagens = true;
     break;
 
   default:

@@ -35,9 +35,11 @@ void setupServer() {
     Serial.print("");
 
     if(escravoTrabalhando){
+      Serial.println("Escravo trabalhando");
       proximoComandoEscravo = NOVO_TRABALHO;
       mensagemStrAux = json.as<String>();
     } else{
+      Serial.println("Escravo nao trabalhando");
       ComandoEscravo = NOVO_TRABALHO;
       mensagemStr = json.as<String>();
     }
@@ -59,9 +61,11 @@ void setupServer() {
 
 
     if(escravoTrabalhando){
+      Serial.println("Escravo trabalhando");
       proximoComandoEscravo = NOVO_PONTO;
       mensagemStrAux = json.as<String>();
     } else{
+      Serial.println("Escravo nao trabalhando");
       ComandoEscravo = NOVO_PONTO;
       mensagemStr = json.as<String>();
     }

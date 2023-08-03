@@ -56,7 +56,7 @@ body{
     }
 }
 
-@media (orientation: landscape) and (max-height: 400px){
+@media (orientation: landscape) and (max-height: 850px){
     #tituloPrincipal{
         font-size: 6vh;
     }

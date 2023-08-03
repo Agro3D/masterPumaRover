@@ -225,12 +225,12 @@ char INDEX_STATUS_STYLE[] PROGMEM = R"=====(
     #botaoNovoPonto{
         width: 6vw;
         min-height: fit-content;
-        font-size: 3vh;
+        font-size: 3.4vh;
         margin: 3vh 0;
     }
 
     #botaoFinalizar{
-        font-size: 3vh;
+        font-size: 3.4vh;
         padding: 3vh 4vw;
     }
 
