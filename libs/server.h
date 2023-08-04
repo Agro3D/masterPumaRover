@@ -32,7 +32,7 @@ void setupServer() {
     // jsonObj = json.as<JsonObject>();
     Serial.println("Received JSON object:");
     serializeJsonPretty(json, Serial);
-    Serial.print("");
+    Serial.println();
 
     if(escravoTrabalhando){
       Serial.println("Escravo trabalhando");
@@ -111,6 +111,29 @@ void setupServer() {
     Serial.println(listaArquivosStr);
 
     request->send(200, "application/json", listaArquivosStr);
+  });
+
+  
+// Rota para definir a cota de referência.
+  server.on("/cotaReferencia", HTTP_POST, [](AsyncWebServerRequest *request){
+    Serial.println("\n\n##### Requisicao Recebida: /cotaReferencia");
+    Serial.println("Definindo cota de referencia...");
+
+
+    cotaRefInferior = request->getParam("Ponto")->value().toFloat() - MARGEM_COTA_REFERENCIA / 100.0;
+    cotaRefSuperior = request->getParam("Ponto")->value().toFloat() + MARGEM_COTA_REFERENCIA / 100.0;
+
+    Serial.println("Cota de referencia inferior: " + String(cotaRefInferior));
+    Serial.println("Cota de referencia superior: " + String(cotaRefSuperior));
+
+    
+    if(!request->hasParam("Ponto", true)){
+      Serial.println("Cota referencia nao definida.");
+      request->send(400, "text/plain", "Cota referencia nao definida.");
+      return;
+    }
+
+    request->send(200, "text/plain", "Definindo cota de referencia...");
   });
 
 

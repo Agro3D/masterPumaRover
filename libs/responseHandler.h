@@ -17,7 +17,7 @@ void slaveReceiveHandler() {
 
   switch (resposta["Comando"].as<int>()){
   case GET_STATUS:
-    getStatus(resposta["Mensagem"].as<int>());
+    getStatus(resposta["Mensagem"].as<String>());
 
     Serial.println("Proximo: " + String(proximoComandoEscravo));
     Serial.println("ProximaMsg: " + mensagemStrAux);
@@ -83,15 +83,14 @@ void slaveReceiveHandler() {
 }
 
 
-void getStatus(int status){
-  // DynamicJsonDocument respostaStatus(256);
-  // deserializeJson(respostaStatus, slaveReceiveResponse());
-  // String status = slaveReceiveResponse();
+void getStatus(String mensagem){
+  DynamicJsonDocument respostaStatus(62);
+  deserializeJson(respostaStatus, mensagem);
 
   String statusStr;
 
 
-  switch (status){
+  switch (respostaStatus["Status"].as<int>()){
   case ESPERANDO:
     statusStr = "ESPERANDO";
     statusAtual = char(ESPERANDO);
@@ -101,6 +100,8 @@ void getStatus(int status){
     statusStr = "TRABALHANDO";
     statusAtual = char(TRABALHANDO);
     receberMensagens = true;
+    RTKAtual = respostaStatus["RTK"].as<int>();
+    precisaoRTK = respostaStatus["Precisao"].as<int>();
     break;
 
   default:

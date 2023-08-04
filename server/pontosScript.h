@@ -83,6 +83,31 @@ function incluirPontoLista(nome){
     document.getElementById("listaPontos").innerHTML += html;
 }
 
+async function pontoReferencia(){
+    // Mostra alerta confirmando a ação
+    if(!confirm("Deseja definir o ponto atual como ponto de referência?")){
+        return;
+    }
+    
+    // Realiza o POST request e verifica se foi bem sucedido
+    await fetch('/cotaReferencia?Ponto=' + document.getElementById("cotaValor").innerHTML, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        }
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }else{
+            showMessage("Registrando cota de referencia...");
+        }
+    }).catch(error => {
+        console.error('There has been a problem with your fetch operation:', error);
+    });
+}
+
+
 
 // Função para habilitar o botão de novo ponto
 function enableButton(){

@@ -109,6 +109,17 @@ void loop() {
     }
   }
 
+  static uint32_t lastHeapSize = 0;
+  uint32_t currentHeapSize = ESP.getFreeHeap();
+
+  // If the heap size has decreased since the last loop iteration, print a warning
+  if (currentHeapSize < lastHeapSize) {
+    Serial.print("WARNING: Heap size decreased! Current heap size: ");
+    Serial.println(currentHeapSize);
+  }
+
+  lastHeapSize = currentHeapSize;
+
   webSocket.loop();
   delay(300);
 }

@@ -159,22 +159,30 @@ char INDEX_PAGE[] PROGMEM = R"=====(
             
             <!-- Tela de status -->
             <div id="status" class="naoVisivel">
+                
                 <div id="cota" class="divs bordas">
-                    <div id="cotaQuadro">
+
+                    <div id="cotaQuadro" class="cotaErrada">
                         <p id="tituloCota" class="titulo">Cota:</p>
                         <p id="cotaValor">000,000</p>
                     </div>
+                    
+                    <div id="cotaReferencia">
+                        <button id="cotaBotao" onclick="pontoReferencia()">Cota </br> Referencia</button>
+                    </div>
+
                 </div>
+
 
                 <div id="informacoes" class="divs">
                     <div id="informacoesDiv">
                         <div class="informacaoDiv">
                             <div class="informacoesTitulos">RTK: </div>
-                            <div id="statusRTKValor" class="informacoesValor">Carregando...</div>
+                            <div class="informacoesTitulos">Precisão: </div>
                         </div>
                         
-                    <div class="informacaoDiv">
-                        <div class="informacoesTitulos">Precisão: </div>
+                        <div class="informacaoDiv">
+                            <div id="statusRTKValor" class="informacoesValor">Carregando...</div>
                         <div id="precisaoValor" class="informacoesValor">Carregando...</div>
                     </div>
                 </div>

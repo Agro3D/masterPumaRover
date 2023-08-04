@@ -18,6 +18,7 @@
 #define RECEIVE_DATA_TRIES 5            // Número de tentativas de recebimento de dados do escravo
 #define MYPORT_RX 18                    // Porta recepção UART
 #define MYPORT_TX 17                    // Porta transmissão UART
+#define MARGEM_COTA_REFERENCIA 10       // Margem de erro para a cota de referência, em centímetros(100cm = 1M)
 
 
 // Constantes para identificar o tipo de mensagem enviada para o escravo
@@ -72,6 +73,8 @@ String listaPontos;                                     // String para armazenar
 
 int RTKAtual = -1;                                      // Variável para armazenar o valor da pressão atual do RTK
 int precisaoRTK = -1;                                   // Variável para armazenar o valor da pressão de precisão do RTK
+float cotaRefInferior = -1;                             // Variável para armazenar o valor da cota de referência inferior
+float cotaRefSuperior = -1;                             // Variável para armazenar o valor da cota de referência superior
 char statusAtual;                                       // Variável para armazenar o status atual do escravo
 int ComandoEscravo = 0;                                 // Flag para controlar o envio de dados para o escravo
 int proximoComandoEscravo = 0;                          // Flag para controlar o envio de dados para o escravo, Caso ja exista um comando em andamento
@@ -81,7 +84,7 @@ bool verifyingComunication = false;                     // Flag para controlar a
 
 
 // Lista de todas as funções do programa
-void getStatus(int status);
+void getStatus(String mensagem);
 void setupServer();
 void setupServerPages();
 void setupServerScripts();

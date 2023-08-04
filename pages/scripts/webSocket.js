@@ -34,6 +34,10 @@ function initWebSocket() {
         switch(mensagem) {
             case 'Cota':
                 document.getElementById('cotaValor').innerHTML = valor.toFixed(3);
+                if (data['Status'] == "CERTO")
+                    document.getElementById('cotaQuadro').className = 'cotaCerta';
+                else
+                    document.getElementById('cotaQuadro').className = 'cotaErrada';
                 break;
             
             case 'RTK':
