@@ -18,6 +18,7 @@
 #define RECEIVE_DATA_TRIES 5            // Número de tentativas de recebimento de dados do escravo
 #define MYPORT_RX 18                    // Porta recepção UART
 #define MYPORT_TX 17                    // Porta transmissão UART
+#define DEBUG false                    // Variável para habilitar/desabilitar o envio de mensagens para o monitor serial
 #define MARGEM_COTA_REFERENCIA 10       // Margem de erro para a cota de referência, em centímetros(100cm = 1M)
 
 
@@ -55,7 +56,7 @@
 
 
 // Variáveis Globais
-char ssid[] = "PumaRover";                              // nome do AP
+char ssid[] = "PumaRoverTeste";                              // nome do AP
 char password[] = "00000000";                           // senha do AP
 
 HardwareSerial MySerialZed(0);                          // Use UART0
@@ -99,6 +100,9 @@ String getAltitudeFromNMEA(String nmea);
 void processaMensagem(String message);
 void updateRTK(int comando, int valor);
 void listarPontos(String resposta);
+void printString(String message);
+void printJson(DynamicJsonDocument doc);
+void printStringNoBreak(String message);
 
 
 
@@ -135,6 +139,7 @@ void listarPontos(String resposta);
 #include "requestHandler.h"                 // Funções de comunicação com o escravo
 #include "responseHandler.h"                // Funções do servidor web socket
 #include "zedHandler.h"                     // Funções de comunicação com o escravo
+#include "utils.h"                          // Funções de utilidades
 
 
 #endif

@@ -7,20 +7,20 @@ void slaveReceiveHandler() {
   DynamicJsonDocument resposta(10240);
   deserializeJson(resposta, slaveReceiveResponse());                 // Le a resposta do escravo e converte para json
 
-  Serial.println("Mensagem do escravo: ");
-  serializeJsonPretty(resposta, Serial);
-  Serial.println();
-  Serial.println();
+  printString("Mensagem do escravo: ");
+  printJson(resposta);
+  printString("");
+  printString("");
 
-  // Serial.println("Tamanho da resposta: " + String(resposta["Tamanho"].as<int>()));
+  // printString("Tamanho da resposta: " + String(resposta["Tamanho"].as<int>()));
 
 
   switch (resposta["Comando"].as<int>()){
   case GET_STATUS:
     getStatus(resposta["Mensagem"].as<String>());
 
-    Serial.println("Proximo: " + String(proximoComandoEscravo));
-    Serial.println("ProximaMsg: " + mensagemStrAux);
+    printString("Proximo: " + String(proximoComandoEscravo));
+    printString("ProximaMsg: " + mensagemStrAux);
     if(proximoComandoEscravo){
       ComandoEscravo = proximoComandoEscravo;
       mensagemStr = mensagemStrAux;
@@ -108,7 +108,7 @@ void getStatus(String mensagem){
     break;
   }
 
-  Serial.println("Status atualizado para: " + statusStr);
+  printString("Status atualizado para: " + statusStr);
   webSocket.broadcastTXT(statusStr);
 }
 
@@ -137,7 +137,7 @@ void updateRTK(int comando, int valor) {
 
 // Função para receber a resposta do escravo.
 String slaveReceiveResponse() {
-  Serial.println("Lendo mensagem do slave");
+  printString("Lendo mensagem do slave");
   String response = "";
   unsigned long startTime = millis();
 
@@ -165,7 +165,7 @@ void listarPontos(String resposta) {
 
   listaPontos = resposta;
 
-  Serial.println("Pontos: " + listaPontos);
+  printString("Pontos: " + listaPontos);
   
   webSocket.broadcastTXT("{\"Mensagem\": \"LISTAR_PONTOS\", \"Valor\": " + listaPontos + "}");
 }

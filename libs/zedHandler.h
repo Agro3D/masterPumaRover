@@ -10,14 +10,14 @@ void processaMensagem(String message){
     String cota = getAltitudeFromNMEA(message);
     if(cota != "-1.00"){                                // Se a cota for válida, envia a cota para o cliente
 
-        Serial.println();
-        Serial.println("Cota: " + String(cota));
+        printString("");
+        printString("Cota: " + String(cota));
 
         if (cota.toFloat() >= cotaRefInferior && cota.toFloat() <= cotaRefSuperior){
-            Serial.println("Cota dentro da faixa de referência");
+            printString("Cota dentro da faixa de referência");
             webSocket.broadcastTXT("{\"Mensagem\": \"Cota\", \"Valor\": " + cota + ", \"Status\": \"CERTO\"}");
         } else{
-            Serial.println("Cota fora da faixa de referência");
+            printString("Cota fora da faixa de referência");
             webSocket.broadcastTXT("{\"Mensagem\": \"Cota\", \"Valor\": " + cota + ", \"Status\": \"ERRADO\"}");
         }
   }
@@ -37,7 +37,7 @@ String getAltitudeFromNMEA(String nmeastr) {
         return "-1.00";                                // Retorna uma altitude inválida se a mensagem não for do tipo GNGGA
     }
 
-    Serial.println("Mensagem GNGGA recebida: " + nmeastr);
+    printString("Mensagem GNGGA recebida: " + nmeastr);
 
     // Percorre a mensagem atraves das vírgulas
     int commaCount = 0;

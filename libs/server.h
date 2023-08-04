@@ -15,7 +15,7 @@ void setupServer() {
 
   // Rota para cancelar a pesquisa realizada pelo escravo.
   server.on("/pararTrabalho", HTTP_GET, [](AsyncWebServerRequest *request){
-    Serial.println("\n\n##### Requisicao Recebida: /pararTrabalho");
+    printString("\n\n##### Requisicao Recebida: /pararTrabalho");
 
     ComandoEscravo = PARAR_TRABALHO;
    
@@ -26,20 +26,20 @@ void setupServer() {
 // Rota para receber dados do cliente em formato JSON.
   AsyncCallbackJsonWebHandler* postConfig = new AsyncCallbackJsonWebHandler("/postConfiguration",
   [](AsyncWebServerRequest *request, JsonVariant &json) {
-    Serial.println("\n\n##### Requisicao Recebida: /postConfiguration");
+    printString("\n\n##### Requisicao Recebida: /postConfiguration");
 
     // Receber o JSON do cliente
     // jsonObj = json.as<JsonObject>();
-    Serial.println("Received JSON object:");
-    serializeJsonPretty(json, Serial);
-    Serial.println();
+    printString("Received JSON object:");
+    printJson(json);
+    printString("");
 
     if(escravoTrabalhando){
-      Serial.println("Escravo trabalhando");
+      printString("Escravo trabalhando");
       proximoComandoEscravo = NOVO_TRABALHO;
       mensagemStrAux = json.as<String>();
     } else{
-      Serial.println("Escravo nao trabalhando");
+      printString("Escravo nao trabalhando");
       ComandoEscravo = NOVO_TRABALHO;
       mensagemStr = json.as<String>();
     }
@@ -53,19 +53,19 @@ void setupServer() {
   AsyncCallbackJsonWebHandler* novoPonto = new AsyncCallbackJsonWebHandler("/novoPonto",
   [](AsyncWebServerRequest *request, JsonVariant &json) {
 
-    Serial.println("\n\n##### Requisicao Recebida: /novoPonto");
+    printString("\n\n##### Requisicao Recebida: /novoPonto");
 
-    Serial.println("Received JSON object:");
-    serializeJsonPretty(json, Serial);
-    Serial.println();
+    printString("Received JSON object:");
+    printJson(json);
+    printString("");
 
 
     if(escravoTrabalhando){
-      Serial.println("Escravo trabalhando");
+      printString("Escravo trabalhando");
       proximoComandoEscravo = NOVO_PONTO;
       mensagemStrAux = json.as<String>();
     } else{
-      Serial.println("Escravo nao trabalhando");
+      printString("Escravo nao trabalhando");
       ComandoEscravo = NOVO_PONTO;
       mensagemStr = json.as<String>();
     }
@@ -81,8 +81,8 @@ void setupServer() {
   
   //  Rota para salvar um novo ponto de interesse.
   server.on("/getStatus", HTTP_GET, [](AsyncWebServerRequest *request){
-    Serial.println("\n\n##### Requisicao Recebida: /getStatus");
-    Serial.print("Enviando Status: ");
+    printString("\n\n##### Requisicao Recebida: /getStatus");
+    printStringNoBreak("Enviando Status: ");
 
     String statusStr;
 
@@ -99,16 +99,16 @@ void setupServer() {
       break;
     }
     
-    Serial.println(statusStr);
+    printString(statusStr);
     request->send(200, "text/plain", statusStr);
   });
 
 
 // Rota para receber a lista de arquivos do escravo.
   server.on("/getFiles", HTTP_GET, [](AsyncWebServerRequest *request){
-    Serial.println("\n\n##### Requisicao Recebida: /getFiles");
-    Serial.println("Enviando lista de arquivos...");
-    Serial.println(listaArquivosStr);
+    printString("\n\n##### Requisicao Recebida: /getFiles");
+    printString("Enviando lista de arquivos...");
+    printString(listaArquivosStr);
 
     request->send(200, "application/json", listaArquivosStr);
   });
@@ -116,19 +116,19 @@ void setupServer() {
   
 // Rota para definir a cota de referência.
   server.on("/cotaReferencia", HTTP_POST, [](AsyncWebServerRequest *request){
-    Serial.println("\n\n##### Requisicao Recebida: /cotaReferencia");
-    Serial.println("Definindo cota de referencia...");
+    printString("\n\n##### Requisicao Recebida: /cotaReferencia");
+    printString("Definindo cota de referencia...");
 
 
     cotaRefInferior = request->getParam("Ponto")->value().toFloat() - MARGEM_COTA_REFERENCIA / 100.0;
     cotaRefSuperior = request->getParam("Ponto")->value().toFloat() + MARGEM_COTA_REFERENCIA / 100.0;
 
-    Serial.println("Cota de referencia inferior: " + String(cotaRefInferior));
-    Serial.println("Cota de referencia superior: " + String(cotaRefSuperior));
+    printString("Cota de referencia inferior: " + String(cotaRefInferior));
+    printString("Cota de referencia superior: " + String(cotaRefSuperior));
 
     
     if(!request->hasParam("Ponto", true)){
-      Serial.println("Cota referencia nao definida.");
+      printString("Cota referencia nao definida.");
       request->send(400, "text/plain", "Cota referencia nao definida.");
       return;
     }
@@ -140,9 +140,9 @@ void setupServer() {
 
 // Rota para receber a lista de arquivos do escravo.
   server.on("/getPontos", HTTP_GET, [](AsyncWebServerRequest *request){
-    Serial.println("\n\n##### Requisicao Recebida: /getPontos");
-    Serial.println("Enviando lista de pontos...");
-    Serial.println(listaPontos);
+    printString("\n\n##### Requisicao Recebida: /getPontos");
+    printString("Enviando lista de pontos...");
+    printString(listaPontos);
 
     if (listaPontos == "") 
       request->send(204, "application/json", "Nenhum ponto salvo.");

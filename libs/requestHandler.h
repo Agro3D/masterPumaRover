@@ -7,7 +7,7 @@
 void slaveSendHandler() {
   if (ComandoEscravo == 0){ return; }
 
-  Serial.println("\nComando para o escravo: " + String(ComandoEscravo));
+  printString("\nComando para o escravo: " + String(ComandoEscravo));
   
   int x;
 
@@ -22,10 +22,10 @@ void slaveSendHandler() {
 
   for (x = 0; x <= SEND_DATA_TRIES; x++) {                    // Tentar enviar os dados para o escravo por um número limitado de vezes
     slaveSendData(mensagemStr);                               // Enviar dados para o slave
-    Serial.println("\nDados enviados para o escravo");
+    printString("\nDados enviados para o escravo");
     
     String slaveResponse = slaveReceiveResponse();            // Le a resposta do escravo
-    Serial.println("Resposta do escravo: " + slaveResponse);
+    printString("Resposta do escravo: " + slaveResponse);
 
     //  Se a esposta tiver "Mensagem", chama a funcao updateRTK
     while (slaveResponse.indexOf("Comando") != -1 && slaveResponse.indexOf("ACK") == -1 && slaveResponse.indexOf("NACK") == -1){
@@ -34,7 +34,7 @@ void slaveSendHandler() {
       updateRTK(json["Comando"].as<int>(), json["Mensagem"].as<int>());
       
       slaveResponse = slaveReceiveResponse();                 // Le a resposta do escravo
-      Serial.println("Resposta do escravo: " + slaveResponse);
+      printString("Resposta do escravo: " + slaveResponse);
     }
 
     if (slaveResponse.indexOf("ACK") != -1 && slaveResponse.indexOf("NACK") == -1) { // Se a resposta do escravo for "ACK", saia do loop
@@ -43,23 +43,23 @@ void slaveSendHandler() {
     hasComunication = true;
       break;
     } else {                                                  // Se a resposta do escravo não for "ACK", continue no loop
-      Serial.println("\nErro ao enviar dados para o escravo");
+      printString("\nErro ao enviar dados para o escravo");
 
       if (x == SEND_DATA_TRIES) {                             // Se o número máximo de tentativas for atingido, tente reestabelecer a comunicação com o escravo
-        Serial.println("Numero maximo de tentativas atingido.");
-        Serial.println("Verificando a comunicacao com o escravo...");
+        printString("Numero maximo de tentativas atingido.");
+        printString("Verificando a comunicacao com o escravo...");
 
         // Tentar reestabelecer a comunicação com o escravo uma vez
         if (!verifyingComunication)
         {
           if (verifyComunication()) {
-            Serial.println("Tente novamente em alguns instantes.");
+            printString("Tente novamente em alguns instantes.");
             return;
             }
         }
         
       } else{                                                 // Se o número máximo de tentativas não for atingido, continue no loop
-        Serial.println("Tentando novamente...");
+        printString("Tentando novamente...");
       }
     }
   }
@@ -72,43 +72,43 @@ void slaveSendHandler() {
     break;
     
   case GET_STATUS:
-    Serial.println("\nRequisição de status enviada para o escravo");
+    printString("\nRequisição de status enviada para o escravo");
     break;
 
   case NOVO_TRABALHO:
-    Serial.println("\nNova configuração enviada para o escravo");
+    printString("\nNova configuração enviada para o escravo");
     break;
 
   case PARAR_TRABALHO:
-    Serial.println("\nRequisição de parada de trabalho enviada para o escravo");
+    printString("\nRequisição de parada de trabalho enviada para o escravo");
     break;
 
   case NOVO_PONTO:
-    Serial.println("\nRequisição de novo ponto enviada para o escravo");
+    printString("\nRequisição de novo ponto enviada para o escravo");
     break;
 
   case LISTAR_ARQUIVOS:
-    Serial.println("\nRequisição de listagem de arquivos enviada para o escravo");
+    printString("\nRequisição de listagem de arquivos enviada para o escravo");
     break;
   
   case LISTAR_PONTOS:
-    Serial.println("\nRequisição de listagem de pontos enviada para o escravo");
+    printString("\nRequisição de listagem de pontos enviada para o escravo");
     break;
   
   default:
-    Serial.println("\nComando Desconhecido");
-    Serial.println("Comando: " + String(ComandoEscravo));
+    printString("\nComando Desconhecido");
+    printString("Comando: " + String(ComandoEscravo));
     break;
   }
   ComandoEscravo = 0;
-  Serial.println();
+  printString("");
 }
 
 
 // Função para enviar dados para o escravo.
 void slaveSendData(String data) {
-  Serial.println("\n\nEnviando dados para o slave");
-  Serial.println(mensagemStr);
+  printString("\n\nEnviando dados para o slave");
+  printString(mensagemStr);
   
   MySerial.println(data);
   delay(300);
