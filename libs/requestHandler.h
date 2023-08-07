@@ -2,20 +2,20 @@
 #define REQUEST_HANDLER_H
 
 
+// Este arquivo contém as funções para lidar com as requisições HTTP e envia-las para o escravo
+
+
 
 // Função para lidar com o envio de dados para o escravo.
 void slaveSendHandler() {
-  if (ComandoEscravo == 0){ return; }
 
   printString("\nComando para o escravo: " + String(ComandoEscravo));
-  
   int x;
 
-  // Caso a mensagem esteja vazia, envie um objeto JSON vazio
-  if (mensagemStr == "") { mensagemStr = "{}"; }
+  if (mensagemStr == "") { mensagemStr = "{}"; }              // Caso a mensagem esteja vazia, envie um objeto JSON vazio
 
-    // Mostrar o objeto JSON a ser enviado para o escravo
-  mensagemStr = "{\"Comando\":" + String( ComandoEscravo ) +
+  // Monta a mensagem a ser enviada para o escravo
+  mensagemStr = "{\"Comando\":" + String( ComandoEscravo ) +  
     ",\"Tamanho\":" + String( mensagemStr.length() ) +
     ",\"Mensagem\":" + mensagemStr + "}";
     
@@ -27,7 +27,10 @@ void slaveSendHandler() {
     String slaveResponse = slaveReceiveResponse();            // Le a resposta do escravo
     printString("Resposta do escravo: " + slaveResponse);
 
-    //  Se a esposta tiver "Mensagem", chama a funcao updateRTK
+
+    // Verifica se a resposta do escravo é um ACK/NACK ou uma mensagem de comando,
+    // caso seja uma mensagem de comando, execute a função de atualização do RTK e da Precisão
+    // e continue no loop até receber um ACK/NACK
     while (slaveResponse.indexOf("Comando") != -1 && slaveResponse.indexOf("ACK") == -1 && slaveResponse.indexOf("NACK") == -1){
       DynamicJsonDocument json(128);
       deserializeJson(json, slaveResponse);
@@ -37,6 +40,8 @@ void slaveSendHandler() {
       printString("Resposta do escravo: " + slaveResponse);
     }
 
+
+    // Verifica se a resposta do escravo é um ACK ou um NACK
     if (slaveResponse.indexOf("ACK") != -1 && slaveResponse.indexOf("NACK") == -1) { // Se a resposta do escravo for "ACK", saia do loop
     mensagemStr = "";                                         // Limpe a mensagem
     escravoTrabalhando = true;
@@ -49,9 +54,8 @@ void slaveSendHandler() {
         printString("Numero maximo de tentativas atingido.");
         printString("Verificando a comunicacao com o escravo...");
 
-        // Tentar reestabelecer a comunicação com o escravo uma vez
-        if (!verifyingComunication)
-        {
+        // Verifica a comunicação com o escravo
+        if (!verifyingComunication) {
           if (verifyComunication()) {
             printString("Tente novamente em alguns instantes.");
             return;
@@ -110,7 +114,7 @@ void slaveSendData(String data) {
   printString("\n\nEnviando dados para o slave");
   printString(mensagemStr);
   
-  MySerial.println(data);
+  MySerial.println(data);                                     // Envia os dados para o escravo
   delay(300);
 }
 

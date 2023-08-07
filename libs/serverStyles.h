@@ -2,6 +2,11 @@
 #define SERVER_STYLES_H
 
 
+// Este arquivo contém as requisições e respostas dos estilos CSS do servidor web.
+
+
+
+// Função para responder as requisições dos estilos CSS do servidor web.
 void setupServerStyles(){
 
 // ========== Rotas dos estilos do servidor web ==========

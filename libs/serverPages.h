@@ -2,8 +2,12 @@
 #define SERVER_PAGES_H
 
 
+// Este arquivo contém as requisições e respostas das páginas HTML do servidor web.
+
+
+
+// Função para responder as requisições das páginas HTML do servidor web.
 void setupServerPages() {
-  // Função para configurar as páginas do servidor web.
 
   // Rota para erros 404 (página não encontrada).
   server.onNotFound([](AsyncWebServerRequest *request){
@@ -34,7 +38,6 @@ void setupServerPages() {
   // Rota para a página inicial do servidor web. (index.html & starting.html)
   server.on("/", HTTP_GET, [](AsyncWebServerRequest *request){
     printString("\n\n##### Requisicao Recebida: /");
-    
     printString("Enviando index.html ...");
     request->send(200, "text/html", INDEX_PAGE);
   });

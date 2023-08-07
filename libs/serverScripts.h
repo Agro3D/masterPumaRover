@@ -2,6 +2,10 @@
 #define SERVER_SCRIPTS_H
 
 
+// Este arquivo contém as requisições e respostas dos scripts JS do servidor web.
+
+
+// Função para responder as requisições dos scripts JS do servidor web.
 void setupServerScripts(){
 
 // ========== Rotas dos scripts do servidor web ==========

@@ -2,17 +2,18 @@
 #define RESPONSE_HANDLER_H
 
 
-// Função para passo a passo da comunicação com o escravo
+// Este arquivo contém as funções para lidar com as respostas do escravo
+
+
+// Função para processar a resposta do escravo e configurar o proximo comando a ser enviado
 void slaveReceiveHandler() {
   DynamicJsonDocument resposta(10240);
-  deserializeJson(resposta, slaveReceiveResponse());                 // Le a resposta do escravo e converte para json
+  deserializeJson(resposta, slaveReceiveResponse());          // Le a resposta do escravo e converte para json
 
   printString("Mensagem do escravo: ");
   printJson(resposta);
   printString("");
   printString("");
-
-  // printString("Tamanho da resposta: " + String(resposta["Tamanho"].as<int>()));
 
 
   switch (resposta["Comando"].as<int>()){
@@ -21,16 +22,17 @@ void slaveReceiveHandler() {
 
     printString("Proximo: " + String(proximoComandoEscravo));
     printString("ProximaMsg: " + mensagemStrAux);
-    if(proximoComandoEscravo){
-      ComandoEscravo = proximoComandoEscravo;
+
+    if(proximoComandoEscravo){                                // Caso exista um proximo comando a ser enviado
+      ComandoEscravo = proximoComandoEscravo;                 // Configura o proximo comando a ser enviado
       mensagemStr = mensagemStrAux;
       
-      proximoComandoEscravo = 0;
-      mensagemStrAux = "";
+      proximoComandoEscravo = 0;                              // Limpa o proximo comando a ser enviado
+      mensagemStrAux = "";                                    // Limpa a mensagem auxiliar
 
-    } else {
-      escravoTrabalhando = false;
-      ComandoEscravo = 0;
+    } else {                                                  // Caso não exista um proximo comando a ser enviado
+      escravoTrabalhando = false;                             // Marca o escravo como não trabalhando(processando comandos)
+      ComandoEscravo = 0;                                     // Limpa o comando a ser enviado
     }
     break;
 
@@ -83,6 +85,7 @@ void slaveReceiveHandler() {
 }
 
 
+// Função para processar a reposta de status do escravo
 void getStatus(String mensagem){
   DynamicJsonDocument respostaStatus(62);
   deserializeJson(respostaStatus, mensagem);
@@ -90,12 +93,14 @@ void getStatus(String mensagem){
   String statusStr;
 
 
+  // Configura o status atual do sistema
   switch (respostaStatus["Status"].as<int>()){
   case ESPERANDO:
     statusStr = "ESPERANDO";
     statusAtual = char(ESPERANDO);
     receberMensagens = false;
     break;
+
   case TRABALHANDO:
     statusStr = "TRABALHANDO";
     statusAtual = char(TRABALHANDO);
@@ -113,6 +118,7 @@ void getStatus(String mensagem){
 }
 
 
+// Função para processar a resposta do RTK/Precisão e enviar para o cliente
 void updateRTK(int comando, int valor) {
 
   String mensagem;
@@ -135,13 +141,14 @@ void updateRTK(int comando, int valor) {
   webSocket.broadcastTXT(mensagem); 
 }
 
-// Função para receber a resposta do escravo.
+
+// Função para ler a resposta do escravo.
 String slaveReceiveResponse() {
   printString("Lendo mensagem do slave");
   String response = "";
   unsigned long startTime = millis();
 
-  // Aguarda a chegada de dados do escravo ou aguarda n segundos sem resposta
+  // Aguarda a chegada de dados do escravo ou aguarda n segundos sem comunicação
   while (!MySerial.available() && millis() - startTime < 10000) {}
   
   startTime = millis();
@@ -161,14 +168,15 @@ String slaveReceiveResponse() {
 }
 
 
+// Função para gravar a lista de pontos recebida do escravo
 void listarPontos(String resposta) {
 
   listaPontos = resposta;
-
   printString("Pontos: " + listaPontos);
   
   webSocket.broadcastTXT("{\"Mensagem\": \"LISTAR_PONTOS\", \"Valor\": " + listaPontos + "}");
 }
+
 
 
 

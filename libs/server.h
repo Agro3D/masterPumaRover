@@ -1,13 +1,19 @@
 #ifndef SERVER_H
 #define SERVER_H
 
+// Este arquivo contém as funções para configurar o servidor web,
+// enviar requisições dos arquivos do servidor web e receber requisições do cliente.
 
 
+
+// Função para configurar o servidor web.
 void setupServer() {
-  // Função para configurar o servidor web.
+  // Funções para configurar as rotas do servidor web e os arquivos do servidor web.
   setupServerPages();
   setupServerStyles();
   setupServerScripts();
+
+  
 
   
   // ========== Rotas de funções do servidor web ==========
@@ -34,6 +40,7 @@ void setupServer() {
     printJson(json);
     printString("");
 
+    // Configurar o proximo comando a ser enviado para o escravo
     if(escravoTrabalhando){
       printString("Escravo trabalhando");
       proximoComandoEscravo = NOVO_TRABALHO;
@@ -60,6 +67,7 @@ void setupServer() {
     printString("");
 
 
+    // Configurar o proximo comando a ser enviado para o escravo
     if(escravoTrabalhando){
       printString("Escravo trabalhando");
       proximoComandoEscravo = NOVO_PONTO;
@@ -74,7 +82,7 @@ void setupServer() {
   });
 
   
-  // Adicionar a rota ao servidor
+  // Adicionar a rotas de funções do servidor web.
   server.addHandler(postConfig);
   server.addHandler(novoPonto);
 
@@ -120,18 +128,10 @@ void setupServer() {
     printString("Definindo cota de referencia...");
 
 
+    // Define a cota de referência com base no ponto recebido, com uma margem de erro.
     cotaRefInferior = request->getParam("Ponto")->value().toFloat() - MARGEM_COTA_REFERENCIA / 100.0;
     cotaRefSuperior = request->getParam("Ponto")->value().toFloat() + MARGEM_COTA_REFERENCIA / 100.0;
 
-    printString("Cota de referencia inferior: " + String(cotaRefInferior));
-    printString("Cota de referencia superior: " + String(cotaRefSuperior));
-
-    
-    if(!request->hasParam("Ponto", true)){
-      printString("Cota referencia nao definida.");
-      request->send(400, "text/plain", "Cota referencia nao definida.");
-      return;
-    }
 
     request->send(200, "text/plain", "Definindo cota de referencia...");
   });
