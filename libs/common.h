@@ -62,7 +62,7 @@
 
 
 // Variáveis Globais
-char ssid[] = "PumaRoverTeste";                                  // nome do AP
+char ssid[] = "PumaRover";                                  // nome do AP
 char password[] = "00000000";                               // senha do AP
 
 HardwareSerial MySerialZed(0);                              // Use UART0
@@ -83,6 +83,7 @@ int precisaoRTK = -1;                                       // Variável para ar
 float cotaRefInferior = -1;                                 // Variável para armazenar o valor da cota de referência inferior
 float cotaRefSuperior = -1;                                 // Variável para armazenar o valor da cota de referência superior
 char statusAtual;                                           // Variável para armazenar o status atual do escravo
+
 int ComandoEscravo = 0;                                     // Flag para controlar o envio de dados para o escravo
 int proximoComandoEscravo = 0;                              // Flag para controlar o envio de dados para o escravo, Caso ja exista um comando em andamento
 bool escravoTrabalhando = false;
@@ -109,6 +110,7 @@ void listarPontos(String resposta);
 void printString(String message);
 void printJson(DynamicJsonDocument doc);
 void printStringNoBreak(String message);
+void novoPonto(String nomePonto);
 
 
 
@@ -142,8 +144,10 @@ void printStringNoBreak(String message);
 #include "serverPages.h"                    // Funções das páginas do servidor web
 #include "serverStyles.h"                   // Funções dos estilos CSS do servidor web
 #include "serverScripts.h"                  // Funções dos scripts JS do servidor web
+
 #include "requestHandler.h"                 // Funções de comunicação com o escravo
 #include "responseHandler.h"                // Funções do servidor web socket
+
 #include "zedHandler.h"                     // Funções de comunicação com o escravo
 #include "utils.h"                          // Funções de utilidades
 

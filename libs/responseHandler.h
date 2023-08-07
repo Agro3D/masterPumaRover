@@ -62,6 +62,7 @@ void slaveReceiveHandler() {
     webSocket.broadcastTXT("{\"Mensagem\": \"NOVO_PONTO\", \"Valor\": \"" + resposta["Mensagem"].as<String>() + "\"}");
     ComandoEscravo = 0;
     escravoTrabalhando = false;
+    novoPonto(resposta["Mensagem"].as<String>());
     break;
 
   case LISTAR_PONTOS:
