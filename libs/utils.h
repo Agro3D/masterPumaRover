@@ -35,7 +35,7 @@ void printJson(DynamicJsonDocument doc){
 void novoPonto(String nomePonto) {
 
   printString("Lista de pontos: " + listaPontos);
-  if(listaPontos == "" || listaPontos == NULL){
+  if(listaPontos == "" || listaPontos == "\"\"" || listaPontos == NULL){
     listaPontos = "{\"Pontos\":[{\"Ponto\":\"" + nomePonto + "\"}]}";
   }else{
     // Construir a nova string do ponto
