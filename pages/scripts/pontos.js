@@ -78,7 +78,11 @@ function incluirPontoLista(nome){
     html += "<div class='pontoNome'>" + nome + "</div>";
     html += "</div>";
 
-    document.getElementById("listaPontos").innerHTML += html;
+    if(document.getElementById("listaPontos").innerHTML == "Nenhum ponto registrado"){
+        document.getElementById("listaPontos").innerHTML = html;
+    }else{
+        document.getElementById("listaPontos").innerHTML += html;
+    }
 }
 
 async function pontoReferencia(){

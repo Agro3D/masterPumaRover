@@ -33,14 +33,18 @@ void printJson(DynamicJsonDocument doc){
 
 // Função para adicionar um novo ponto na lista de pontos
 void novoPonto(String nomePonto) {
-  // Construir a nova string do ponto
-  nomePonto = ", { \"Ponto\": \"" + nomePonto + "\" }";
-  
-  // Encontrar a posição do último ']'
-  int pos = listaPontos.lastIndexOf(']');
+  if(listaPontos == "") {
+    listaPontos = "{\"Pontos\":[{\"Ponto\":\"" + nomePonto + "\"}]}";
+  }else{
+    // Construir a nova string do ponto
+    nomePonto = ", { \"Ponto\": \"" + nomePonto + "\" }";
+    
+    // Encontrar a posição do último ']'
+    int pos = listaPontos.lastIndexOf(']');
 
-  // Inserir a nova string de ponto na posição encontrada
-  listaPontos = listaPontos.substring(0, pos) + nomePonto + listaPontos.substring(pos);
+    // Inserir a nova string de ponto na posição encontrada
+    listaPontos = listaPontos.substring(0, pos) + nomePonto + listaPontos.substring(pos);
+  }
 }
 
 
