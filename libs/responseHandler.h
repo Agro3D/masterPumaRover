@@ -54,6 +54,7 @@ void slaveReceiveHandler() {
     receberMensagens = false;
     RTKAtual = -1;
     precisaoRTK = -1;
+    listaPontos = "";
     comandoEscravo = LISTAR_ARQUIVOS;
     statusAtual = char(ESPERANDO);
     break;
@@ -93,6 +94,11 @@ void getStatus(String mensagem){
 
   String statusStr;
 
+
+  if(statusAtual != char(respostaStatus["Status"].as<int>())){      // Caso o status atual seja diferente do status recebido
+    proximoComandoEscravo = LISTAR_PONTOS;                          // Configura o proximo comando a ser enviado
+    mensagemStrAux = "";                                            // Limpa a mensagem auxiliar
+  }
 
   // Configura o status atual do sistema
   switch (respostaStatus["Status"].as<int>()){
@@ -172,7 +178,12 @@ String slaveReceiveResponse() {
 // Função para gravar a lista de pontos recebida do escravo
 void listarPontos(String resposta) {
 
-  listaPontos = resposta;
+  if (resposta == "" || resposta == NULL || resposta.length() < 2) {
+    listaPontos = "\"\"";
+  } else {
+    listaPontos = resposta;
+  }
+  
   printString("Pontos: " + listaPontos);
   
   webSocket.broadcastTXT("{\"Mensagem\": \"LISTAR_PONTOS\", \"Valor\": " + listaPontos + "}");

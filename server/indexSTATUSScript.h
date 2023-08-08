@@ -5,9 +5,9 @@ function voltar() {
     document.getElementById("configuracoes").className = "visivel";
     document.getElementById("status").className = "naoVisivel";
 
-    document.getElementById("cotaValor").innerHTML = "000.000";
-    document.getElementById("precisaoValor").innerHTML = "Carregando";
-    document.getElementById("statusRTKValor").innerHTML = "Carregando";
+    document.getElementById("cotaValor").innerHTML = "000,000";
+    document.getElementById("precisaoValor").innerHTML = "Carregando...";
+    document.getElementById("statusRTKValor").innerHTML = "Carregando...";
     document.getElementById("statusRTKValor").className = "informacoesValor";
 
     // Realiza o POST para parar o trabalho

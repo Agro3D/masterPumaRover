@@ -144,7 +144,7 @@ void setupServer() {
     printString("Enviando lista de pontos...");
     printString(listaPontos);
 
-    if (listaPontos == "") 
+    if (listaPontos == "" || listaPontos == NULL) 
       request->send(204, "application/json", "Nenhum ponto salvo.");
     else
       request->send(200, "application/json", listaPontos);

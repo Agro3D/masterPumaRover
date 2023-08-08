@@ -58,14 +58,13 @@ function getPontos(){
 
 function listarPontos(pontos){
 
-    document.getElementById("listaPontos").innerHTML = "";
+    document.getElementById("listaPontos").innerHTML = "Nenhum ponto registrado";
     var html = "";
-    
+
     pontos["Pontos"].forEach(ponto => {
         html += "<div class='ponto'>";
         html += "<div class='pontoNome'>" + ponto["Ponto"] + "</div>";
         html += "</div>";
-        
     });
 
     document.getElementById("listaPontos").innerHTML = html;

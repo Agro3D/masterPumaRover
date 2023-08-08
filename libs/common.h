@@ -77,8 +77,8 @@ bool receberMensagens = false;                              // Flag para control
 
 String mensagemStr;                                         // String para armazenar a representação em texto do objeto JSON
 String mensagemStrAux;                                      // String auxiliar para armazenar a representação em texto do objeto JSON
-String listaArquivosStr;                                    // String para armazenar a lista de arquivos do escravo
-String listaPontos;                                         // String para armazenar a lista de pontos do arquivo
+String listaArquivosStr="";                                 // String para armazenar a lista de arquivos do escravo
+String listaPontos="";                                      // String para armazenar a lista de pontos do arquivo
 
 int RTKAtual = -1;                                          // Variável para armazenar o valor da pressão atual do RTK
 int precisaoRTK = -1;                                       // Variável para armazenar o valor da pressão de precisão do RTK

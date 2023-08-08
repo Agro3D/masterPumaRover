@@ -33,7 +33,9 @@ void printJson(DynamicJsonDocument doc){
 
 // Função para adicionar um novo ponto na lista de pontos
 void novoPonto(String nomePonto) {
-  if(listaPontos == "") {
+
+  printString("Lista de pontos: " + listaPontos);
+  if(listaPontos == "" || listaPontos == NULL){
     listaPontos = "{\"Pontos\":[{\"Ponto\":\"" + nomePonto + "\"}]}";
   }else{
     // Construir a nova string do ponto
