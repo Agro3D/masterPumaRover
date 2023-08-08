@@ -144,7 +144,7 @@ char INDEX_PAGE[] PROGMEM = R"=====(
                     <input type="text" id="nomeArquivo" name="nameArquivo" class="inputPopup" placeholder="Nome do Arquivo"><br>
 
                     <div id="obs">
-                        Obs: Salvar em branco, salvará o arquivo com a data e hora atual (YYYY-MM-DD_HH:MM.kml).
+                        Obs: Deixar em branco, salvará o arquivo com a data e hora atual (YYYY-MM-DD_HH:MM.kml).
                     </div>
 
                     <div id="botoesPopup">

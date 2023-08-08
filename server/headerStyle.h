@@ -30,6 +30,18 @@ char HEADER_STYLE[] PROGMEM = R"=====(
 
 #mobileMenu {
     display: none;
+    -webkit-animation: fadeInMobileMenu 0.4s;
+    animation: fadeInMobileMenu 0.4s;
+}
+
+@-webkit-keyframes fadeInMobileMenu {
+    from {left: -50vh; opacity: 0;} 
+    to {left: 0; opacity: 1;}
+}
+
+@keyframes fadeInMobileMenu {
+    from {left: -50vh; opacity: 0;} 
+    to {left: 0; opacity: 1;}
 }
 
 #headerLinks{
@@ -97,6 +109,11 @@ char HEADER_STYLE[] PROGMEM = R"=====(
 
     .headerTitle {
         font-size: 2rem;
+    }
+
+    #mobileMenu {
+        margin-top: 11vh;
+        font-size: 0.8rem;
     }
 }
 
