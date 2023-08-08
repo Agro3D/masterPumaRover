@@ -72,7 +72,7 @@ void setup() {
   printString("Servidor HTTP iniciado em http://" + String(IP.toString()));
 
 
-  ComandoEscravo = LISTAR_ARQUIVOS;                               // Envia o comando de lista de arquivos para o escravo.
+  comandoEscravo = INICIALIZAR;                                   // Envia o comando de lista de arquivos para o escravo.
   slaveSendHandler();                                             // Chama a função de manipulação de envio para o escravo.
   slaveReceiveHandler();                                          // Chama a função de manipulação de recebimento do escravo.
 
@@ -95,7 +95,7 @@ void setup() {
 void loop() {
 
   // Verifica se ha alguma requisicao do cliente, caso haja, processa e envia a requisicao para o escravo.
-  if(ComandoEscravo) { slaveSendHandler(); }
+  if(comandoEscravo != -1) { slaveSendHandler(); }
 
   // Verifica se ha alguma mensagem do escravo, caso haja, processa a mensagem recebida.
   if(MySerial.available()) { slaveReceiveHandler(); }
@@ -140,7 +140,7 @@ bool verifyComunication(){
 
   verifyingComunication = true;             // Marca a verificação como iniciada
     
-  ComandoEscravo = ACK_MSG;                 // Define o comando para o escravo como ACK_MSG
+  comandoEscravo = ACK_MSG;                 // Define o comando para o escravo como ACK_MSG
   mensagemStr = "{\"ACK_MSG\":1}";          // Define a mensagem de envio para o escravo como ACK_MSG
   slaveSendHandler();                       // Chama a função de manipulação de envio para o escravo.
 

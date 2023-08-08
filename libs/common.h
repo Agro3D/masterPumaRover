@@ -29,6 +29,8 @@
 
 
 // Constantes para identificar o tipo de mensagem enviada para o escravo
+#define INICIALIZAR 0                                       // Mensagem para informar que o mestre está inicializando
+
 #define NOVO_TRABALHO 1                                     // Mensagem para enviar uma nova configuração para o escravo
 #define RESP_NOVO_TRABALHO 2                                // Mensagem para receber a resposta do escravo sobre a configuração
 
@@ -84,8 +86,8 @@ float cotaRefInferior = -1;                                 // Variável para ar
 float cotaRefSuperior = -1;                                 // Variável para armazenar o valor da cota de referência superior
 char statusAtual;                                           // Variável para armazenar o status atual do escravo
 
-int ComandoEscravo = 0;                                     // Flag para controlar o envio de dados para o escravo
-int proximoComandoEscravo = 0;                              // Flag para controlar o envio de dados para o escravo, Caso ja exista um comando em andamento
+int comandoEscravo = -1;                                    // Flag para controlar o envio de dados para o escravo
+int proximoComandoEscravo = -1;                             // Flag para controlar o envio de dados para o escravo, Caso ja exista um comando em andamento
 bool escravoTrabalhando = false;
 bool waitResponse = false;                                  // Flag para controlar o recebimento de dados do escravo
 bool verifyingComunication = false;                         // Flag para controlar a verificação de comunicação com o escravo

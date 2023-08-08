@@ -23,7 +23,7 @@ void setupServer() {
   server.on("/pararTrabalho", HTTP_GET, [](AsyncWebServerRequest *request){
     printString("\n\n##### Requisicao Recebida: /pararTrabalho");
 
-    ComandoEscravo = PARAR_TRABALHO;
+    comandoEscravo = PARAR_TRABALHO;
    
     request->send(200, "text/plain", "Cancelando pesquisa...");
   });
@@ -47,7 +47,7 @@ void setupServer() {
       mensagemStrAux = json.as<String>();
     } else{
       printString("Escravo nao trabalhando");
-      ComandoEscravo = NOVO_TRABALHO;
+      comandoEscravo = NOVO_TRABALHO;
       mensagemStr = json.as<String>();
     }
     
@@ -74,7 +74,7 @@ void setupServer() {
       mensagemStrAux = json.as<String>();
     } else{
       printString("Escravo nao trabalhando");
-      ComandoEscravo = NOVO_PONTO;
+      comandoEscravo = NOVO_PONTO;
       mensagemStr = json.as<String>();
     }
    

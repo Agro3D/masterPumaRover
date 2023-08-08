@@ -9,13 +9,13 @@
 // Função para lidar com o envio de dados para o escravo.
 void slaveSendHandler() {
 
-  printString("\nComando para o escravo: " + String(ComandoEscravo));
+  printString("\nComando para o escravo: " + String(comandoEscravo));
   int x;
 
   if (mensagemStr == "") { mensagemStr = "{}"; }              // Caso a mensagem esteja vazia, envie um objeto JSON vazio
 
   // Monta a mensagem a ser enviada para o escravo
-  mensagemStr = "{\"Comando\":" + String( ComandoEscravo ) +  
+  mensagemStr = "{\"Comando\":" + String( comandoEscravo ) +  
     ",\"Tamanho\":" + String( mensagemStr.length() ) +
     ",\"Mensagem\":" + mensagemStr + "}";
     
@@ -70,7 +70,7 @@ void slaveSendHandler() {
 
 
   // Ações a serem executadas após o envio dos dados para o escravo
-  switch (ComandoEscravo)  {
+  switch (comandoEscravo)  {
   case ACK_MSG:
     hasComunication = true;
     break;
@@ -101,10 +101,10 @@ void slaveSendHandler() {
   
   default:
     printString("\nComando Desconhecido");
-    printString("Comando: " + String(ComandoEscravo));
+    printString("Comando: " + String(comandoEscravo));
     break;
   }
-  ComandoEscravo = 0;
+  comandoEscravo = -1;
   printString("");
 }
 

@@ -23,16 +23,16 @@ void slaveReceiveHandler() {
     printString("Proximo: " + String(proximoComandoEscravo));
     printString("ProximaMsg: " + mensagemStrAux);
 
-    if(proximoComandoEscravo){                                // Caso exista um proximo comando a ser enviado
-      ComandoEscravo = proximoComandoEscravo;                 // Configura o proximo comando a ser enviado
+    if(proximoComandoEscravo != -1){                                // Caso exista um proximo comando a ser enviado
+      comandoEscravo = proximoComandoEscravo;                 // Configura o proximo comando a ser enviado
       mensagemStr = mensagemStrAux;
       
-      proximoComandoEscravo = 0;                              // Limpa o proximo comando a ser enviado
+      proximoComandoEscravo = -1;                              // Limpa o proximo comando a ser enviado
       mensagemStrAux = "";                                    // Limpa a mensagem auxiliar
 
     } else {                                                  // Caso não exista um proximo comando a ser enviado
       escravoTrabalhando = false;                             // Marca o escravo como não trabalhando(processando comandos)
-      ComandoEscravo = 0;                                     // Limpa o comando a ser enviado
+      comandoEscravo = -1;                                     // Limpa o comando a ser enviado
     }
     break;
 
@@ -46,7 +46,7 @@ void slaveReceiveHandler() {
     
   case NOVO_TRABALHO:
     receberMensagens = true;
-    ComandoEscravo = LISTAR_PONTOS;
+    comandoEscravo = LISTAR_PONTOS;
     statusAtual = char(TRABALHANDO);
     break;
 
@@ -54,26 +54,26 @@ void slaveReceiveHandler() {
     receberMensagens = false;
     RTKAtual = -1;
     precisaoRTK = -1;
-    ComandoEscravo = LISTAR_ARQUIVOS;
+    comandoEscravo = LISTAR_ARQUIVOS;
     statusAtual = char(ESPERANDO);
     break;
 
   case NOVO_PONTO:
     webSocket.broadcastTXT("{\"Mensagem\": \"NOVO_PONTO\", \"Valor\": \"" + resposta["Mensagem"].as<String>() + "\"}");
-    ComandoEscravo = 0;
+    comandoEscravo = -1;
     escravoTrabalhando = false;
     novoPonto(resposta["Mensagem"].as<String>());
     break;
 
   case LISTAR_PONTOS:
     listarPontos(resposta["Mensagem"].as<String>());
-    ComandoEscravo = GET_STATUS;
+    comandoEscravo = GET_STATUS;
     break;
 
 
   case LISTAR_ARQUIVOS:
     listaArquivosStr = resposta["Mensagem"].as<String>();
-    ComandoEscravo = GET_STATUS;
+    comandoEscravo = GET_STATUS;
     break;
 
   case ALERT_MESSAGE:
