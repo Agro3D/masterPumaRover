@@ -26,7 +26,7 @@
 #define MYPORT_TX 17                                        // Porta transmissão UART
 #define DEBUG true                                         // Variável para habilitar/desabilitar o envio de mensagens para o monitor serial
 #define MARGEM_COTA_REFERENCIA 10                           // Margem de erro para a cota de referência, em centímetros(100cm = 1M)
-#define HEAP_SIZE_TIMER 3000                              // Intervalo de tempo para enviar o status do heap para o escravo, em milisegundos
+#define HEAP_SIZE_TIMER 120000                              // Intervalo de tempo para enviar o status do heap para o escravo, em milisegundos
 
 
 // Constantes para identificar o tipo de mensagem enviada para o escravo
