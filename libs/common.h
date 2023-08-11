@@ -17,7 +17,7 @@
 
 
 
-// Constantes do Programa
+// Constantes de configuração do sistema
 #define SERVER_PORT 80                                      // Porta do servidor HTTP
 #define CHUNK_SIZE 64                                       // Tamanho do chunk de dados enviado para o escravo
 #define SEND_DATA_TRIES 5                                   // Número de tentativas de envio de dados para o escravo
@@ -26,6 +26,7 @@
 #define MYPORT_TX 17                                        // Porta transmissão UART
 #define DEBUG true                                         // Variável para habilitar/desabilitar o envio de mensagens para o monitor serial
 #define MARGEM_COTA_REFERENCIA 10                           // Margem de erro para a cota de referência, em centímetros(100cm = 1M)
+#define HEAP_SIZE_TIMER 3000                              // Intervalo de tempo para enviar o status do heap para o escravo, em milisegundos
 
 
 // Constantes para identificar o tipo de mensagem enviada para o escravo
@@ -55,6 +56,8 @@
 #define GET_STATUS 98                                       // Mensagem para solicitar o status do escravo
 #define ACK_MSG 99                                          // Mensagem de confirmação de comunicação com o escravo
 
+#define HEAP_SIZE 100                                       // Mensagem de enviar o tamanho da heap do mestre
+
 
 // Definições de Status
 #define ESPERANDO 0
@@ -74,6 +77,7 @@ HardwareSerial MySerial(1);                                 // Use the 2nd hardw
 bool hasComunication = false;                               // Flag para controlar se a comunicação com o escravo está estabelecida
 bool serverStarted = false;                                 // Flag para controlar se o servidor web está iniciado
 bool receberMensagens = false;                              // Flag para controlar o recebimento de mensagens do escravo
+unsigned long lastHeapSend = 0;                             // Variável para armazenar o tempo da última verificação do heap
 
 String mensagemStr;                                         // String para armazenar a representação em texto do objeto JSON
 String mensagemStrAux;                                      // String auxiliar para armazenar a representação em texto do objeto JSON

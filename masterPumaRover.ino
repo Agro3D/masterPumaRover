@@ -127,10 +127,16 @@ void loop() {
   // Atualiza o tamanho da memória da última iteração do loop.
   lastHeapSize = currentHeapSize;
 
+  if(millis() - lastHeapSend > HEAP_SIZE_TIMER){
+    lastHeapSend = millis();
+    comandoEscravo = HEAP_SIZE;
+    mensagemStr = String(currentHeapSize);
+  }
+
 
   // Realiza o loop do servidor WebSocket.
   webSocket.loop();
-  delay(300);
+  delay(200);
 }
 
 
