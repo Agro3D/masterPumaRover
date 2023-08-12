@@ -53,7 +53,7 @@ function novoTrabalho() {
         if (NomeArquivo == 0)
         configJson.NomeArquivo = "";
         else{
-            configJson.NomeArquivo = document.getElementById("nomeArquivo").value;
+            configJson.NomeArquivo = document.getElementById("nomeArquivo").value.normalize('NFD').replace(/[\u0300-\u036f]/g, "");
         }
     }
 
