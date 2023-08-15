@@ -150,35 +150,6 @@ char INDEX_STATUS_STYLE[] PROGMEM = R"=====(
     margin-left: 5vh;
 }
 
-#listaPontos{
-    margin: 2vw;
-    padding: 1vw;
-    border: 1px solid #bbb;
-    border-radius: 5px;
-    background-color: #fff;
-    box-shadow: 0px 0px 5px #bbb;  
-    color: #000; 
-}
-
-.ponto{
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin: 1vh;
-    padding: 1vh;
-    border: 1px solid #bbb;
-    border-radius: 5px;
-    background-color: #fff;
-    box-shadow: 0px 0px 5px #bbb;  
-    color: #000; 
-}
-
-.pontoNome{
-    font-weight: bold;
-    font-size: 1rem;
-}
-
-
 
 .verde{
     background-color: #2e8326;

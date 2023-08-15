@@ -61,7 +61,7 @@ void slaveReceiveHandler() {
 
   case NOVO_PONTO:
     novoPonto(resposta["Mensagem"].as<String>());
-    webSocket.broadcastTXT("{\"Mensagem\": \"NOVO_PONTO\", \"Valor\": \"" + resposta["Mensagem"].as<String>() + "\"}");
+    webSocket.broadcastTXT("{\"Mensagem\": \"NOVO_PONTO\", \"Valor\": " + resposta["Mensagem"].as<String>() + "}");
     comandoEscravo = -1;
     escravoTrabalhando = false;
     break;
@@ -181,6 +181,7 @@ void listarPontos(String resposta) {
   if (resposta == "" || resposta == NULL || resposta.length() < 2) {
     listaPontos = "\"\"";
   } else {
+    resposta.replace("\\n", "</br>");
     listaPontos = resposta;
   }
   

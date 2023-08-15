@@ -42,6 +42,14 @@ void setupServerStyles(){
   });
 
 
+  // Rota para o estilo CSS da lista de pontos. (listaPontosStyle.css)
+  server.on("/styles/listaPontos.css", HTTP_GET, [](AsyncWebServerRequest *request){
+    printString("\n\n##### Requisicao Recebida: /styles/listaPontos.css");
+    printString("Enviando listaPontos.css ...");
+    request->send(200, "text/css", LISTA_PONTOS_STYLE);
+  });
+
+
   // Rota para o estilo CSS do popup de novo ponto. (popupAlertStyle.css)
   server.on("/styles/popupAlert.css", HTTP_GET, [](AsyncWebServerRequest *request){
     printString("\n\n##### Requisicao Recebida: /styles/popupAlert.css");

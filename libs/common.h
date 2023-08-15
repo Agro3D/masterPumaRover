@@ -116,7 +116,7 @@ void listarPontos(String resposta);
 void printString(String message);
 void printJson(DynamicJsonDocument doc);
 void printStringNoBreak(String message);
-void novoPonto(String nomePonto);
+void novoPonto(String Ponto);
 
 
 
@@ -133,6 +133,7 @@ void novoPonto(String nomePonto);
 #include "../server/headerStyle.h"          // Estilo CSS do cabeçalho das páginas do servidor web
 #include "../server/indexConfigStyle.h"     // Estilo CSS da página principal (configuração)
 #include "../server/indexStatusStyle.h"     // Estilo CSS da página principal (status)
+#include "../server/listaPontosStyle.h"     // Estilo CSS da lista de pontos
 #include "../server/popupStyle.h"           // Estilo CSS do popup de novo ponto
 #include "../server/arquivosStyle.h"        // Estilo CSS da página arquivos
 

@@ -13,6 +13,7 @@ char INDEX_PAGE[] PROGMEM = R"=====(
         <link rel="stylesheet" type="text/css" href="styles/header.css">
         <link rel="stylesheet" type="text/css" href="styles/indexConfig.css">
         <link rel="stylesheet" type="text/css" href="styles/indexStatus.css">
+        <link rel="stylesheet" type="text/css" href="styles/listaPontos.css">
         <link rel="stylesheet" type="text/css" href="styles/popupAlert.css">
 
         <script src="scripts/webSocket.js"></script>

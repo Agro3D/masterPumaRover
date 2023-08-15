@@ -68,6 +68,22 @@ echo "$file" >| server/indexStatusStyle.h
 echo "Gerando indexStatusStyle.h... OK"
 
 
+# Página de estilos da lista de pontos (listaPontosStyle.css)
+echo "Gerando listaPontosStyle.h..."
+
+start='//Página de estilos da lista de pontos
+char LISTA_PONTOS_STYLE[] PROGMEM = R"=====(
+
+'
+end='
+
+)=====";'
+
+file="$start$(<pages/styles/listaPontos.css)$end"
+echo "$file" >| server/listaPontosStyle.h
+echo "Gerando listaPontosStyle.h... OK"
+
+
 # Página de estilos do popup de novo ponto (popupStyle.css)
 echo "Gerando popupStyle.h..."
 

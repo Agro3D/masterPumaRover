@@ -62,8 +62,9 @@ function listarPontos(pontos){
     var html = "";
 
     pontos["Pontos"].forEach(ponto => {
-        html += "<div class='ponto'>";
+        html += "<div class='ponto' onclick='expandPonto(this)'>";
         html += "<div class='pontoNome'>" + ponto["Ponto"] + "</div>";
+        html += "<div class='pontoDescricao'>" + ponto["Descricao"] + "</div>";
         html += "</div>";
     });
 
@@ -71,10 +72,11 @@ function listarPontos(pontos){
 }
 
 
-function incluirPontoLista(nome){
+function incluirPontoLista(ponto){
     var html = "";
-    html += "<div class='ponto'>";
-    html += "<div class='pontoNome'>" + nome + "</div>";
+    html += "<div class='ponto' onclick='expandPonto(this)'>";
+    html += "<div class='pontoNome'>" + ponto["Ponto"] + "</div>";
+    html += "<div class='pontoDescricao'>" + ponto["Descricao"] + "</div>";
     html += "</div>";
 
     if(document.getElementById("listaPontos").innerHTML == "Nenhum ponto registrado"){
@@ -150,3 +152,64 @@ function clearDataPonto() {
   document.getElementById('nomePonto').value = '';
   document.getElementById('descPonto').value = '';
 }
+
+
+function expandPonto(divPonto){
+    var listaPontos = document.getElementsByClassName("pontoDescricao");
+    var pontoDescricao = divPonto.getElementsByClassName("pontoDescricao")[0];
+    
+    for (var i = 0; i < listaPontos.length; i++) {
+        if(listaPontos[i] == pontoDescricao)
+            if(pontoDescricao.style.display == "block"){
+                recolher(pontoDescricao);
+            }else{
+                expandir(pontoDescricao);
+            }
+        else{
+            recolher(listaPontos[i]);
+        }
+    }
+}
+
+
+function expandir(div){
+    // Calcula a altura da div para a animação de expandir
+
+    var heightInicial = div.parentElement.clientHeight * 0.9 + "px";
+    div.style.display = "block";
+    var heightFinal = div.parentElement.clientHeight * 0.92 + "px";
+    div.style.display = "none";
+    
+    // Define a altura da div para a animação de expandir
+    var r = document.querySelector(':root');
+    r.style.setProperty('--alturaExpandirInicial', heightInicial);
+    r.style.setProperty('--alturaExpandirFinal', heightFinal);
+    
+    div.parentElement.classList.add("expandir");
+    div.parentElement.classList.remove("recolher");
+    div.style.display = "block";
+}
+
+function recolher(div){
+
+    // Caso a div não esteja expandida, não faz nada
+    if(!div.parentElement.classList.contains("expandir")){
+        return;
+    }
+    
+    // Calcula a altura da div para a animação de expandir
+    var heightInicial = div.parentElement.clientHeight * 0.9 + "px";
+    div.style.display = "none";
+    var heightFinal = div.parentElement.clientHeight * 0.65 + "px";
+    div.style.display = "block";
+    
+    // Define a altura da div para a animação de expandir
+    var r = document.querySelector(':root');
+    r.style.setProperty('--alturaRecolherInicial', heightInicial);
+    r.style.setProperty('--alturaRecolherFinal', heightFinal);
+
+    div.parentElement.classList.remove("expandir");
+    div.parentElement.classList.add("recolher");
+    div.style.display = "none";
+}
+ 

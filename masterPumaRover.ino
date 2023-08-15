@@ -20,7 +20,7 @@ void setup() {
 
   printString("");
   printString("Iniciando Comunicação UART (Escravo)");
-  MySerial.begin(460800, SERIAL_8N1, MYPORT_RX, MYPORT_TX);       // Inicia o protocolo UART para comunicação com o escravo.
+  MySerial.begin(921600, SERIAL_8N1, MYPORT_RX, MYPORT_TX);       // Inicia o protocolo UART para comunicação com o escravo.
   delay(1000);
   while (MySerial.available()) MySerial.read();                   // Limpa o buffer de recebimento da UART.
 
