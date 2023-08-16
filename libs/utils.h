@@ -33,6 +33,7 @@ void printJson(DynamicJsonDocument doc){
 
 // Função para adicionar um novo ponto na lista de pontos
 void novoPonto(String PontoStr) {
+  PontoStr.replace("\\n", "<br />");
   DynamicJsonDocument Ponto(512);
   deserializeJson(Ponto, PontoStr);
 
@@ -48,7 +49,6 @@ void novoPonto(String PontoStr) {
     "\", \"Descricao\":\"" + Ponto["Descricao"].as<String>() + "\"}" +
     listaPontos.substring(pos);
   }
-  listaPontos.replace("\\n", "</br>");
 }
 
 

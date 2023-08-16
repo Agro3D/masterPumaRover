@@ -62,7 +62,8 @@ void setupServer() {
 
     printString("\n\n##### Requisicao Recebida: /novoPonto");
 
-    printString("Received JSON object:");
+    printString("Received JSON object, adding 'Cota Referencia' in description:");
+    json["Descricao"] = json["Descricao"].as<String>() + "\n\nCota Referencia: " + String(cotaRef) + " m";
     printJson(json);
     printString("");
 
@@ -129,8 +130,9 @@ void setupServer() {
 
 
     // Define a cota de referência com base no ponto recebido, com uma margem de erro.
-    cotaRefInferior = request->getParam("Ponto")->value().toFloat() - MARGEM_COTA_REFERENCIA / 100.0;
-    cotaRefSuperior = request->getParam("Ponto")->value().toFloat() + MARGEM_COTA_REFERENCIA / 100.0;
+    cotaRef = request->getParam("Ponto")->value().toFloat();
+    cotaRefInferior = cotaRef - MARGEM_COTA_REFERENCIA / 100.0;
+    cotaRefSuperior = cotaRef + MARGEM_COTA_REFERENCIA / 100.0;
 
 
     request->send(200, "text/plain", "Definindo cota de referencia...");

@@ -76,9 +76,12 @@ function incluirPontoLista(ponto){
     var html = "";
     html += "<div class='ponto' onclick='expandPonto(this)'>";
     html += "<div class='pontoNome'>" + ponto["Ponto"] + "</div>";
-    html += "<div class='pontoDescricao'>" + ponto["Descricao"] + "</div>";
+    if(ponto["Descricao"])
+        html += "<div class='pontoDescricao'>" + ponto["Descricao"].replace(/\n/g, "<br />") + "</div>";
+    else
+        html += "<div class='pontoDescricao'>Sem descrição</div>";
     html += "</div>";
-
+    
     if(document.getElementById("listaPontos").innerHTML == "Nenhum ponto registrado"){
         document.getElementById("listaPontos").innerHTML = html;
     }else{
@@ -189,6 +192,7 @@ function expandir(div){
     div.parentElement.classList.remove("recolher");
     div.style.display = "block";
 }
+
 
 function recolher(div){
 

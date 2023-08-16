@@ -181,7 +181,7 @@ void listarPontos(String resposta) {
   if (resposta == "" || resposta == NULL || resposta.length() < 2) {
     listaPontos = "\"\"";
   } else {
-    resposta.replace("\\n", "</br>");
+    resposta.replace("\\n", "<br />");
     listaPontos = resposta;
   }
   

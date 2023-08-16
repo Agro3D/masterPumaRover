@@ -86,6 +86,7 @@ String listaPontos="";                                      // String para armaz
 
 int RTKAtual = -1;                                          // Variável para armazenar o valor da pressão atual do RTK
 int precisaoRTK = -1;                                       // Variável para armazenar o valor da pressão de precisão do RTK
+float cotaRef = -1;                                         // Variável para armazenar o valor da cota de referência base
 float cotaRefInferior = -1;                                 // Variável para armazenar o valor da cota de referência inferior
 float cotaRefSuperior = -1;                                 // Variável para armazenar o valor da cota de referência superior
 char statusAtual;                                           // Variável para armazenar o status atual do escravo
