@@ -118,6 +118,7 @@ void printString(String message);
 void printJson(DynamicJsonDocument doc);
 void printStringNoBreak(String message);
 void novoPonto(String Ponto);
+void verificaProximoComando();
 
 
 

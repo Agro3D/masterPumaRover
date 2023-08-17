@@ -22,7 +22,7 @@ async  function novoPonto(){
             closePopupPonto();
             clearDataPonto();
             disableButton();
-            showMessage("Registrando ponto...");
+            showMessage("Registrando ponto... <br /> Mantenha o aparelho imóvel.");
         }
     }).catch(error => {
         console.error('There has been a problem with your fetch operation:', error);

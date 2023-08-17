@@ -19,7 +19,6 @@ void slaveReceiveHandler() {
   switch (resposta["Comando"].as<int>()){
   case GET_STATUS:
     getStatus(resposta["Mensagem"].as<String>());
-
     verificaProximoComando();
     break;
 
@@ -182,6 +181,8 @@ void verificaProximoComando(){
     escravoTrabalhando = false;                             // Marca o escravo como não trabalhando(processando comandos)
     comandoEscravo = -1;                                    // Limpa o comando a ser enviado
   }
+  
+  printString("EscraTrabalhando: " + String(escravoTrabalhando));
 }
 
 // Função para gravar a lista de pontos recebida do escravo
