@@ -177,3 +177,15 @@ function getFiles(){
         console.error('There has been a problem with your fetch operation:', error);
     });
 }
+
+function listarArquivos(arquivos){
+    arquivos.forEach(arquivo => {
+
+        var select = document.getElementById("arquivosSelect");
+        var option = document.createElement("option");
+        option.text = arquivo["Arquivo"];
+        option.value = arquivo["Arquivo"];
+        select.appendChild(option);
+        
+    });
+}

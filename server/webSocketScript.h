@@ -58,6 +58,10 @@ function initWebSocket() {
                 listarPontos(valor);
                 break;
 
+            case 'LISTAR_ARQUIVOS':
+                listarArquivos(valor);
+                break;
+
             case 'ALERT_MESSAGE':
                 showMessage(valor["Mensagem"], valor["Cor"]);
                 enableButton();

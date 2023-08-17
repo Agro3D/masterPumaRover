@@ -20,20 +20,7 @@ void slaveReceiveHandler() {
   case GET_STATUS:
     getStatus(resposta["Mensagem"].as<String>());
 
-    printString("Proximo: " + String(proximoComandoEscravo));
-    printString("ProximaMsg: " + mensagemStrAux);
-
-    if(proximoComandoEscravo != -1){                                // Caso exista um proximo comando a ser enviado
-      comandoEscravo = proximoComandoEscravo;                 // Configura o proximo comando a ser enviado
-      mensagemStr = mensagemStrAux;
-      
-      proximoComandoEscravo = -1;                              // Limpa o proximo comando a ser enviado
-      mensagemStrAux = "";                                    // Limpa a mensagem auxiliar
-
-    } else {                                                  // Caso não exista um proximo comando a ser enviado
-      escravoTrabalhando = false;                             // Marca o escravo como não trabalhando(processando comandos)
-      comandoEscravo = -1;                                     // Limpa o comando a ser enviado
-    }
+    verificaProximoComando();
     break;
 
   case GET_PRECISAO:
@@ -74,11 +61,16 @@ void slaveReceiveHandler() {
 
   case LISTAR_ARQUIVOS:
     listaArquivosStr = resposta["Mensagem"].as<String>();
+    webSocket.broadcastTXT("{\"Mensagem\": \"LISTAR_ARQUIVOS\", \"Valor\": " + listaArquivosStr + "}");
     comandoEscravo = GET_STATUS;
     break;
 
   case ALERT_MESSAGE:
     webSocket.broadcastTXT(resposta["Mensagem"].as<String>().c_str());
+    break;
+
+  case HEAP_SIZE:
+    verificaProximoComando();
     break;
 
   default:
@@ -174,6 +166,23 @@ String slaveReceiveResponse() {
   return response;
 }
 
+
+void verificaProximoComando(){
+  printString("Proximo: " + String(proximoComandoEscravo));
+  printString("ProximaMsg: " + mensagemStrAux);
+
+  if(proximoComandoEscravo != -1){                          // Caso exista um proximo comando a ser enviado
+    comandoEscravo = proximoComandoEscravo;                 // Configura o proximo comando a ser enviado
+    mensagemStr = mensagemStrAux;
+      
+    proximoComandoEscravo = -1;                             // Limpa o proximo comando a ser enviado
+    mensagemStrAux = "";                                    // Limpa a mensagem auxiliar
+
+  } else {                                                  // Caso não exista um proximo comando a ser enviado
+    escravoTrabalhando = false;                             // Marca o escravo como não trabalhando(processando comandos)
+    comandoEscravo = -1;                                    // Limpa o comando a ser enviado
+  }
+}
 
 // Função para gravar a lista de pontos recebida do escravo
 void listarPontos(String resposta) {
