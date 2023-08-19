@@ -21,7 +21,6 @@ async  function novoPonto(){
         }else{
             closePopupPonto();
             clearDataPonto();
-            disableButton();
             showMessage("Registrando ponto... <br /> Mantenha o aparelho imóvel.");
         }
     }).catch(error => {
@@ -82,7 +81,8 @@ function incluirPontoLista(ponto){
         html += "<div class='pontoDescricao'>Sem descrição</div>";
     html += "</div>";
     
-    if(document.getElementById("listaPontos").innerHTML == "Nenhum ponto registrado"){
+    if(document.getElementById("listaPontos").innerHTML == "Nenhum ponto registrado" || 
+    document.getElementById("listaPontos").innerHTML == "Carregando..." ){
         document.getElementById("listaPontos").innerHTML = html;
     }else{
         document.getElementById("listaPontos").innerHTML += html;

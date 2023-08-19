@@ -23,7 +23,10 @@ void setupServer() {
   server.on("/pararTrabalho", HTTP_GET, [](AsyncWebServerRequest *request){
     printString("\n\n##### Requisicao Recebida: /pararTrabalho");
 
-    comandoEscravo = PARAR_TRABALHO;
+    // Adicionar novo comando na lista de comandos a serem enviados para o escravo
+    novoComando(PARAR_TRABALHO, "");
+    novoComando(LISTAR_ARQUIVOS, "");
+    novoComando(GET_STATUS, "");
    
     request->send(200, "text/plain", "Cancelando pesquisa...");
   });
@@ -40,16 +43,10 @@ void setupServer() {
     printJson(json);
     printString("");
 
-    // Configurar o proximo comando a ser enviado para o escravo
-    if(escravoTrabalhando){
-      printString("Escravo trabalhando");
-      proximoComandoEscravo = NOVO_TRABALHO;
-      mensagemStrAux = json.as<String>();
-    } else{
-      printString("Escravo nao trabalhando");
-      comandoEscravo = NOVO_TRABALHO;
-      mensagemStr = json.as<String>();
-    }
+    // Adicionar novo comando na lista de comandos a serem enviados para o escravo
+    novoComando(NOVO_TRABALHO, json.as<String>());
+    novoComando(LISTAR_PONTOS, "");
+    novoComando(GET_STATUS, "");
     
     request->send(200, "text/plain", "Recebendo configuracao...");
   });
@@ -68,16 +65,8 @@ void setupServer() {
     printString("");
 
 
-    // Configurar o proximo comando a ser enviado para o escravo
-    if(escravoTrabalhando){
-      printString("Escravo trabalhando");
-      proximoComandoEscravo = NOVO_PONTO;
-      mensagemStrAux = json.as<String>();
-    } else{
-      printString("Escravo nao trabalhando");
-      comandoEscravo = NOVO_PONTO;
-      mensagemStr = json.as<String>();
-    }
+    // Adicionar novo comando na lista de comandos a serem enviados para o escravo
+    novoComando(NOVO_PONTO, json.as<String>());
    
     request->send(200, "text/plain", "Salvando novo ponto...");
   });

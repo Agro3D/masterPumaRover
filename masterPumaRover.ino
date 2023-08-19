@@ -54,8 +54,7 @@ void setup() {
   printString("MAC Address: ........................... " + WiFi.softAPmacAddress());
 
   IPAddress IP = WiFi.softAPIP();
-  printStringNoBreak("Endereco de IP do Access Point: ........ ");
-  printString(String(IP));
+  printString("Endereco de IP do Access Point: ........ " + IP.toString());
 
 
 
@@ -76,9 +75,14 @@ void setup() {
   slaveSendHandler();                                             // Chama a função de manipulação de envio para o escravo.
   slaveReceiveHandler();                                          // Chama a função de manipulação de recebimento do escravo.
 
-
-  statusAtual = char(ESPERANDO);
   listaPontos = "";
+
+  if(statusAtual == char(ESPERANDO)){comandoEscravo = LISTAR_ARQUIVOS;} // Caso o escravo esteja em modo de espera, envia o comando de lista de arquivos para o escravo.
+  else{comandoEscravo = LISTAR_PONTOS;}                           // Caso o escravo esteja em modo de trabalho, envia o comando de lista de pontos para o escravo.
+  slaveSendHandler();                                             // Chama a função de manipulação de envio para o escravo.
+  slaveReceiveHandler();                                          // Chama a função de manipulação de recebimento do escravo.
+
+
 
 
   printString("\n\n\tMaster Puma Rover inicializado.");
@@ -129,8 +133,7 @@ void loop() {
 
   if(millis() - lastHeapSend > HEAP_SIZE_TIMER){
     lastHeapSend = millis();
-    comandoEscravo = HEAP_SIZE;
-    mensagemStr = String(currentHeapSize);
+    heapSize = String(currentHeapSize);
   }
 
 

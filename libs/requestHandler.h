@@ -44,7 +44,6 @@ void slaveSendHandler() {
     // Verifica se a resposta do escravo é um ACK ou um NACK
     if (slaveResponse.indexOf("ACK") != -1 && slaveResponse.indexOf("NACK") == -1) { // Se a resposta do escravo for "ACK", saia do loop
     mensagemStr = "";                                         // Limpe a mensagem
-    escravoTrabalhando = true;
     hasComunication = true;
       break;
     } else {                                                  // Se a resposta do escravo não for "ACK", continue no loop
@@ -78,6 +77,10 @@ void slaveSendHandler() {
   case GET_STATUS:
     printString("\nRequisição de status enviada para o escravo");
     break;
+    
+  case HEAP_SIZE:
+    printString("\nEnviando tamanho da heap para o escravo");
+    break;
 
   case NOVO_TRABALHO:
     printString("\nNova configuração enviada para o escravo");
@@ -104,8 +107,13 @@ void slaveSendHandler() {
     printString("Comando: " + String(comandoEscravo));
     break;
   }
-  comandoEscravo = -1;
-  printString("");
+
+  if(comandoEscravo == HEAP_SIZE){
+    proximoComando();
+  }else {
+    comandoEscravo = -1;
+    printString("");
+  }
 }
 
 

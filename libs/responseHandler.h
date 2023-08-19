@@ -19,7 +19,7 @@ void slaveReceiveHandler() {
   switch (resposta["Comando"].as<int>()){
   case GET_STATUS:
     getStatus(resposta["Mensagem"].as<String>());
-    verificaProximoComando();
+    proximoComando();
     break;
 
   case GET_PRECISAO:
@@ -32,8 +32,9 @@ void slaveReceiveHandler() {
     
   case NOVO_TRABALHO:
     receberMensagens = true;
-    comandoEscravo = LISTAR_PONTOS;
+    proximoComando();
     statusAtual = char(TRABALHANDO);
+    receberMensagens = true;
     break;
 
   case PARAR_TRABALHO:
@@ -41,27 +42,26 @@ void slaveReceiveHandler() {
     RTKAtual = -1;
     precisaoRTK = -1;
     listaPontos = "";
-    comandoEscravo = LISTAR_ARQUIVOS;
+    proximoComando();
     statusAtual = char(ESPERANDO);
     break;
 
   case NOVO_PONTO:
     novoPonto(resposta["Mensagem"].as<String>());
     webSocket.broadcastTXT("{\"Mensagem\": \"NOVO_PONTO\", \"Valor\": " + resposta["Mensagem"].as<String>() + "}");
-    comandoEscravo = -1;
-    escravoTrabalhando = false;
+    proximoComando();
     break;
 
   case LISTAR_PONTOS:
     listarPontos(resposta["Mensagem"].as<String>());
-    comandoEscravo = GET_STATUS;
+    proximoComando();
     break;
 
 
   case LISTAR_ARQUIVOS:
     listaArquivosStr = resposta["Mensagem"].as<String>();
     webSocket.broadcastTXT("{\"Mensagem\": \"LISTAR_ARQUIVOS\", \"Valor\": " + listaArquivosStr + "}");
-    comandoEscravo = GET_STATUS;
+    proximoComando();
     break;
 
   case ALERT_MESSAGE:
@@ -69,7 +69,7 @@ void slaveReceiveHandler() {
     break;
 
   case HEAP_SIZE:
-    verificaProximoComando();
+    proximoComando();
     break;
 
   default:
@@ -84,12 +84,6 @@ void getStatus(String mensagem){
   deserializeJson(respostaStatus, mensagem);
 
   String statusStr;
-
-
-  if(statusAtual != char(respostaStatus["Status"].as<int>())){      // Caso o status atual seja diferente do status recebido
-    proximoComandoEscravo = LISTAR_PONTOS;                          // Configura o proximo comando a ser enviado
-    mensagemStrAux = "";                                            // Limpa a mensagem auxiliar
-  }
 
   // Configura o status atual do sistema
   switch (respostaStatus["Status"].as<int>()){
@@ -166,24 +160,6 @@ String slaveReceiveResponse() {
 }
 
 
-void verificaProximoComando(){
-  printString("Proximo: " + String(proximoComandoEscravo));
-  printString("ProximaMsg: " + mensagemStrAux);
-
-  if(proximoComandoEscravo != -1){                          // Caso exista um proximo comando a ser enviado
-    comandoEscravo = proximoComandoEscravo;                 // Configura o proximo comando a ser enviado
-    mensagemStr = mensagemStrAux;
-      
-    proximoComandoEscravo = -1;                             // Limpa o proximo comando a ser enviado
-    mensagemStrAux = "";                                    // Limpa a mensagem auxiliar
-
-  } else {                                                  // Caso não exista um proximo comando a ser enviado
-    escravoTrabalhando = false;                             // Marca o escravo como não trabalhando(processando comandos)
-    comandoEscravo = -1;                                    // Limpa o comando a ser enviado
-  }
-  
-  printString("EscraTrabalhando: " + String(escravoTrabalhando));
-}
 
 // Função para gravar a lista de pontos recebida do escravo
 void listarPontos(String resposta) {

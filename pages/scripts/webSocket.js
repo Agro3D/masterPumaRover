@@ -50,6 +50,7 @@ function initWebSocket() {
 
             case 'NOVO_PONTO':
                 incluirPontoLista(valor);
+                enableButton();
                 break;
 
             case 'LISTAR_PONTOS':

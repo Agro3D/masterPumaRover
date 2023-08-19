@@ -6,6 +6,8 @@
 // as definições de constantes, as variáveis globais e as inicializações das funções
 
 
+using namespace std;
+
 
 // Bibliotecas Utilizadas no Programa
 #include <Arduino.h>                                        // Biblioteca padrão do Arduino
@@ -14,6 +16,7 @@
 #include <ESPAsyncWebServer.h>                              // Biblioteca para criar servidor web assíncrono
 #include <WebSocketsServer.h>                               // Biblioteca para criar servidor web socket
 #include <WiFi.h>                                           // Biblioteca para operações de WiFi
+#include <bits/stdc++.h>                                    // Biblioteca para manipular arrays
 
 
 
@@ -26,7 +29,7 @@
 #define MYPORT_TX 17                                        // Porta transmissão UART
 #define DEBUG true                                         // Variável para habilitar/desabilitar o envio de mensagens para o monitor serial
 #define MARGEM_COTA_REFERENCIA 10                           // Margem de erro para a cota de referência, em centímetros(100cm = 1M)
-#define HEAP_SIZE_TIMER 300000                              // Intervalo de tempo para enviar o status do heap para o escravo, em milisegundos
+#define HEAP_SIZE_TIMER 30000                              // Intervalo de tempo para enviar o status do heap para o escravo, em milisegundos
 
 
 // Constantes para identificar o tipo de mensagem enviada para o escravo
@@ -80,7 +83,8 @@ bool receberMensagens = false;                              // Flag para control
 unsigned long lastHeapSend = 0;                             // Variável para armazenar o tempo da última verificação do heap
 
 String mensagemStr;                                         // String para armazenar a representação em texto do objeto JSON
-String mensagemStrAux;                                      // String auxiliar para armazenar a representação em texto do objeto JSON
+String heapSize;                                            // String para armazenar o tamanho da heap do mestre
+vector<String> listaMensagens;                              // Lista de mensagens referentes aos comandos enviados para o escravo
 String listaArquivosStr="";                                 // String para armazenar a lista de arquivos do escravo
 String listaPontos="";                                      // String para armazenar a lista de pontos do arquivo
 
@@ -92,8 +96,7 @@ float cotaRefSuperior = -1;                                 // Variável para ar
 char statusAtual;                                           // Variável para armazenar o status atual do escravo
 
 int comandoEscravo = -1;                                    // Flag para controlar o envio de dados para o escravo
-int proximoComandoEscravo = -1;                             // Flag para controlar o envio de dados para o escravo, Caso ja exista um comando em andamento
-bool escravoTrabalhando = false;
+vector<int> listaComandos;                                  // Lista de comandos para o escravo
 bool waitResponse = false;                                  // Flag para controlar o recebimento de dados do escravo
 bool verifyingComunication = false;                         // Flag para controlar a verificação de comunicação com o escravo
 
@@ -118,7 +121,9 @@ void printString(String message);
 void printJson(DynamicJsonDocument doc);
 void printStringNoBreak(String message);
 void novoPonto(String Ponto);
-void verificaProximoComando();
+void novoComando(int novoComando, String novaMensagem);
+void proximoComando();
+void printListaComandos();
 
 
 
