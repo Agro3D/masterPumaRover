@@ -58,7 +58,8 @@ function novoTrabalho() {
     }
 
     document.getElementById("cotaValor").innerHTML = "000.000";
-    document.getElementById("precisaoValor").innerHTML = "Carregando...";
+    document.getElementById("precisaoHorizontalValor").innerHTML = "Carregando...";
+    document.getElementById("precisaoVerticalValor").innerHTML = "Carregando...";
     document.getElementById("statusRTKValor").innerHTML = "Carregando...";
     document.getElementById("statusRTKValor").className = "informacoesValor";
     

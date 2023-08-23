@@ -179,16 +179,15 @@ void webSocketEvent(uint8_t num, WStype_t type, uint8_t * payload, size_t length
             printString(String((char *) payload));
             webSocket.sendTXT(num, "Conectado");
 
-            // Caso o RTK esteja definido, envia o valor para o cliente.
-            if (RTKAtual !=-1){
-              printString("Envio de RTK");
-              webSocket.sendTXT(num, "{\"Mensagem\": \"RTK\", \"Valor\": " + String(RTKAtual) + "}");
+            if(precisaoHorizontal != "-1" || precisaoVertical != "-1"){
+              // Envia a precisao para o cliente
+              webSocket.broadcastTXT("{\"Mensagem\": \"PRECISAO\", \"Valor\": {\"precisaoVertical\": " +
+                          precisaoVertical + ", \"precisaoHorizontal\": " + precisaoHorizontal + "}}");
             }
 
-            // Caso a precisão esteja definida, envia o valor para o cliente.
-            if (precisaoRTK !=-1){
-              printString("Envio de precisao");
-              webSocket.sendTXT(num, "{\"Mensagem\": \"PRECISAO\", \"Valor\": " + String(precisaoRTK) + "}");
+            if(RTKAtual != '-1'){
+              // Envia o status do RTK para o cliente
+              webSocket.broadcastTXT("{\"Mensagem\": \"RTK\", \"Valor\": " + String(RTKAtual) + "}");
             }
         break;
 

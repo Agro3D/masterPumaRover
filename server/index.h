@@ -184,9 +184,10 @@ char INDEX_PAGE[] PROGMEM = R"=====(
                         
                         <div class="informacaoDiv">
                             <div id="statusRTKValor" class="informacoesValor">Carregando...</div>
-                        <div id="precisaoValor" class="informacoesValor">Carregando...</div>
+                            <div id="precisaoHorizontalValor" class="informacoesValor">Carregando...</div>
+                            <div id="precisaoVerticalValor" class="informacoesValor">Carregando...</div>
+                        </div>
                     </div>
-                </div>
                     
                     <div class="button">
                         <button onclick="voltar()" id="botaoFinalizar"> Finalizar </br> Trabalho </button>

@@ -6,7 +6,8 @@ function voltar() {
     document.getElementById("status").className = "naoVisivel";
 
     document.getElementById("cotaValor").innerHTML = "000,000";
-    document.getElementById("precisaoValor").innerHTML = "Carregando...";
+    document.getElementById("precisaoHorizontalValor").innerHTML = "Carregando...";
+    document.getElementById("precisaoVerticalValor").innerHTML = "Carregando...";
     document.getElementById("statusRTKValor").innerHTML = "Carregando...";
     document.getElementById("statusRTKValor").className = "informacoesValor";
 
@@ -67,21 +68,32 @@ function atualizaCota(valor) {
 function atualizaStatusRTK(valor) {
     
     switch(valor) {
-        case 2:
-            document.getElementById('statusRTKValor').innerHTML = 'Fix';
-            document.getElementById('statusRTKValor').className = 'informacoesValor verde';
-            break;
-        
-        case 1:
-            document.getElementById('statusRTKValor').innerHTML = 'Float';
-            document.getElementById('statusRTKValor').className = 'informacoesValor amarelo';
-            break;
         
         case 0:
-            document.getElementById('statusRTKValor').innerHTML = 'No Fix';
+            document.getElementById('statusRTKValor').innerHTML = 'Sem Sinal';
             document.getElementById('statusRTKValor').className = 'informacoesValor vermelho';
             break;
         
+        case 1:
+            document.getElementById('statusRTKValor').innerHTML = 'No Fix';
+            document.getElementById('statusRTKValor').className = 'informacoesValor vermelho';
+            break;
+            
+        case 2:
+            document.getElementById('statusRTKValor').innerHTML = 'No Fix';
+            document.getElementById('statusRTKValor').className = 'informacoesValor vermelho';
+            break;
+                
+        case 4:
+            document.getElementById('statusRTKValor').innerHTML = 'Fix';
+            document.getElementById('statusRTKValor').className = 'informacoesValor verde';
+            break;
+                
+        case 5:
+            document.getElementById('statusRTKValor').innerHTML = 'Float';
+            document.getElementById('statusRTKValor').className = 'informacoesValor amarelo';
+            break;
+
         default:
             document.getElementById("statusRTKValor").className = "informacoesValor vermelho";
             document.getElementById("statusRTKValor").innerHTML = "ERRO";

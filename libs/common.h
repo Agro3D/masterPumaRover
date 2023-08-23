@@ -17,6 +17,7 @@ using namespace std;
 #include <WebSocketsServer.h>                               // Biblioteca para criar servidor web socket
 #include <WiFi.h>                                           // Biblioteca para operações de WiFi
 #include <bits/stdc++.h>                                    // Biblioteca para manipular arrays
+#include <SparkFun_u-blox_GNSS_Arduino_Library.h>           // Biblioteca do GNSS
 
 
 
@@ -29,7 +30,7 @@ using namespace std;
 #define MYPORT_TX 17                                        // Porta transmissão UART
 #define DEBUG true                                         // Variável para habilitar/desabilitar o envio de mensagens para o monitor serial
 #define MARGEM_COTA_REFERENCIA 10                           // Margem de erro para a cota de referência, em centímetros(100cm = 1M)
-#define HEAP_SIZE_TIMER 30000                              // Intervalo de tempo para enviar o status do heap para o escravo, em milisegundos
+#define HEAP_SIZE_TIMER 300000                              // Intervalo de tempo para enviar o status do heap para o escravo, em milisegundos
 
 
 // Constantes para identificar o tipo de mensagem enviada para o escravo
@@ -73,6 +74,9 @@ using namespace std;
 char ssid[] = "PumaRover";                                  // nome do AP
 char password[] = "00000000";                               // senha do AP
 
+
+SFE_UBLOX_GNSS myGNSS;
+
 HardwareSerial MySerialZed(0);                              // Use UART0
 AsyncWebServer server(SERVER_PORT);                         // Cria o servidor web na porta 80
 WebSocketsServer webSocket = WebSocketsServer(81);          // Cria o servidor web socket na porta 81
@@ -88,11 +92,14 @@ vector<String> listaMensagens;                              // Lista de mensagen
 String listaArquivosStr="";                                 // String para armazenar a lista de arquivos do escravo
 String listaPontos="";                                      // String para armazenar a lista de pontos do arquivo
 
-int RTKAtual = -1;                                          // Variável para armazenar o valor da pressão atual do RTK
-int precisaoRTK = -1;                                       // Variável para armazenar o valor da pressão de precisão do RTK
-float cotaRef = -1;                                         // Variável para armazenar o valor da cota de referência base
-float cotaRefInferior = -1;                                 // Variável para armazenar o valor da cota de referência inferior
-float cotaRefSuperior = -1;                                 // Variável para armazenar o valor da cota de referência superior
+String cota;                                                // Variável para armazenar o valor da cota atual
+char RTKAtual = '-1';                                       // Variável para armazenar o valor do status atual do RTK
+String precisaoVertical = "-1";                             // Variável para armazenar o valor da precisão vertical
+String precisaoHorizontal = "-1";                           // Variável para armazenar o valor da precisão horizontal
+
+float cotaRef = FLT_MIN;                                    // Variável para armazenar o valor da cota de referência
+float cotaRefInferior = FLT_MIN;                            // Variável para armazenar o valor da cota de referência inferior
+float cotaRefSuperior = FLT_MIN;                            // Variável para armazenar o valor da cota de referência superior
 char statusAtual;                                           // Variável para armazenar o status atual do escravo
 
 int comandoEscravo = -1;                                    // Flag para controlar o envio de dados para o escravo
@@ -113,8 +120,9 @@ void slaveSendData(String data);
 void slaveSendHandler();
 bool verifyComunication();
 void webSocketEvent(uint8_t num, WStype_t type, uint8_t * payload, size_t length);
-String getAltitudeFromNMEA(String nmea);
 void processaMensagem(String message);
+void processaNMEAGGA(String nmeastr);
+void processaNMEAPUBX(String pubxstr);
 void updateRTK(int comando, int valor);
 void listarPontos(String resposta);
 void printString(String message);

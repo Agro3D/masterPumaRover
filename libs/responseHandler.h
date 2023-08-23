@@ -34,13 +34,13 @@ void slaveReceiveHandler() {
     receberMensagens = true;
     proximoComando();
     statusAtual = char(TRABALHANDO);
-    receberMensagens = true;
     break;
 
   case PARAR_TRABALHO:
     receberMensagens = false;
-    RTKAtual = -1;
-    precisaoRTK = -1;
+    RTKAtual = '-1';
+    precisaoHorizontal = -1;
+    precisaoVertical = -1;
     listaPontos = "";
     proximoComando();
     statusAtual = char(ESPERANDO);
@@ -97,8 +97,6 @@ void getStatus(String mensagem){
     statusStr = "TRABALHANDO";
     statusAtual = char(TRABALHANDO);
     receberMensagens = true;
-    RTKAtual = respostaStatus["RTK"].as<int>();
-    precisaoRTK = respostaStatus["Precisao"].as<int>();
     break;
 
   default:
@@ -118,7 +116,7 @@ void updateRTK(int comando, int valor) {
   switch (comando){
   case GET_PRECISAO:
     mensagem = "{\"Mensagem\": \"PRECISAO\", \"Valor\": \"" + String(valor) + "\"}";
-    precisaoRTK = valor;
+    // precisaoRTK = valor;
     break;
     
   case GET_RTKSTATUS:
