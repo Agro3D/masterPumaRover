@@ -137,11 +137,13 @@ char INDEX_STATUS_STYLE[] PROGMEM = R"=====(
 .informacoesValor{
     font-size: 3vw;
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
     font-weight: bold;
     min-width: 20%;
     border-radius: 5px;
+    margin-top: 2vh;
 }
 
 #novoPonto{

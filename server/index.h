@@ -184,8 +184,10 @@ char INDEX_PAGE[] PROGMEM = R"=====(
                         
                         <div class="informacaoDiv">
                             <div id="statusRTKValor" class="informacoesValor">Carregando...</div>
-                            <div id="precisaoHorizontalValor" class="informacoesValor">Carregando...</div>
-                            <div id="precisaoVerticalValor" class="informacoesValor">Carregando...</div>
+                            <div class="informacoesValor">
+                                <div id="precisaoHorizontalValor">Carregando...</div>
+                                <div id="precisaoVerticalValor">Carregando...</div>
+                            </div>
                         </div>
                     </div>
                     
@@ -200,7 +202,7 @@ char INDEX_PAGE[] PROGMEM = R"=====(
                 <div class="divs bordas listaPontos">
                     
                     <div id="novoPonto">
-                        <button onclick="showPopupPonto()" id="botaoNovoPonto" class="disabled" disabled>Novo Ponto</button>
+                        <button onclick="showPopupPonto()" id="botaoNovoPonto" class="disabled" disabled>Coletar Ponto</button>
                     </div>
                     <h1 id="tituloPrincipal" class="tituloMobile">Lista de Pontos</h1>
 
