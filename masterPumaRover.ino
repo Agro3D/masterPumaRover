@@ -20,9 +20,9 @@ void setup() {
 
   printString("");
   printString("Iniciando Comunicação UART (Escravo)");
-  MySerial.begin(921600, SERIAL_8N1, MYPORT_RX, MYPORT_TX);       // Inicia o protocolo UART para comunicação com o escravo.
+  MySerial.begin(ESP_COMM_SPEED, SERIAL_8N1, MYPORT_RX, MYPORT_TX);       // Inicia o protocolo UART para comunicação com o escravo.
   delay(1000);
-  while (MySerial.available()) MySerial.read();                   // Limpa o buffer de recebimento da UART.
+  while (MySerial.available()) MySerial.read();                           // Limpa o buffer de recebimento da UART.
 
   printString("Comunicação UART (Escravo) Inicializada");
 
@@ -30,9 +30,9 @@ void setup() {
 
   printString("");
   printString("Iniciando Comunicação UART (ZED)");
-  MySerialZed.begin(460800, SERIAL_8N1, RX, TX);                  // Inicia o protocolo UART para comunicação com o ZED.
+  MySerialZed.begin(ZED_COMM_SPEED, SERIAL_8N1, RX, TX);                  // Inicia o protocolo UART para comunicação com o ZED.
   delay(1000);
-  while (MySerialZed.available()) MySerialZed.read();             // Limpa o buffer de recebimento da UART.
+  while (MySerialZed.available()) MySerialZed.read();                     // Limpa o buffer de recebimento da UART.
 
   printString("Comunicação UART (ZED) Inicializada");
 
@@ -88,20 +88,20 @@ void setup() {
 
   // Configura o core 0(APP_CORE) para executar a função CommCoreLoop 
   xTaskCreatePinnedToCore(CommCoreLoop,                           // Configura a função para ser executada
-                        "TaskOnApp",                              // Apelida a função com um nuome
-                        2048,                                     // Define o tamanho da pilha da função
+                        "TaskComm",                               // Apelida a função com um nuome
+                        STACK_SIZE_CPU,                                     // Define o tamanho da pilha da função
                         NULL,                                     // Define um parametro para a função, usado para lidar com varios contextos
                         10,                                       // Define a prioridade da função (0-25)
-                        NULL,                                     // Salva o local da função
+                        &taskCommHandler,                                     // Salva o local da função
                         APP_CPU_NUM);                             // Define o core que executará a função
 
-  // Configura o core 1(PRO_CORE) para executar a função ProccessCoreLoop
-  xTaskCreatePinnedToCore(ProccessCoreLoop,                       // Configura a função para ser executada
-                        "TaskOnPro",                              // Apelida a função com um nuome
-                        2048,                                     // Define o tamanho da pilha da função
+  // Configura o core 1(PRO_CORE) para executar a função ProcessCoreLoop
+  xTaskCreatePinnedToCore(ProcessCoreLoop,                        // Configura a função para ser executada
+                        "TaskProcess",                            // Apelida a função com um nuome
+                        STACK_SIZE_CPU,                                     // Define o tamanho da pilha da função
                         NULL,                                     // Define um parametro para a função, usado para lidar com varios contextos
                         10,                                       // Define a prioridade da função (0-25)
-                        NULL,                                     // Salva o local da função
+                        &taskProcessHandler,                                     // Salva o local da função
                         PRO_CPU_NUM);                             // Define o core que executará a função
 
   printString("Dual core configurado");

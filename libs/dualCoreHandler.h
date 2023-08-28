@@ -2,7 +2,7 @@
 #define DUALCOREHANDLER_H
 
 
-void ProccessCoreLoop(void *arg) {
+void ProcessCoreLoop(void *arg) {
   while(1){
 
     // Lê as mensagens recebidas do ZED
@@ -49,11 +49,6 @@ void CommCoreLoop(void *arg) {
     
     // Verifica se ha alguma mensagem do escravo, caso haja, processa a mensagem recebida.
     if(MySerial.available()) { slaveReceiveHandler(); }
-    
-
-    // String testestr = "Hello from PRO_CPU";
-    // esp_ipc_call(PRO_CPU_NUM, printString2, &testestr);
-    // esp_ipc_call(APP_CPU_NUM, printString2, (void*) "Hello from PRO_CPU");
 
   
     delay(100);

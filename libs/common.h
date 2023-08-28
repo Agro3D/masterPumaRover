@@ -23,15 +23,25 @@ using namespace std;
 
 
 // Constantes de configuração do sistema
+#define DEBUG true                                         // Variável para habilitar/desabilitar o envio de mensagens para o monitor serial
+
+#define ZED_COMM_SPEED 460800                              // Velocidade de comunicação com o ZED
+#define ESP_COMM_SPEED 921600                              // Velocidade de comunicação com o ZED
+
+#define MYPORT_RX 18                                        // Porta recepção UART
+#define MYPORT_TX 17                                        // Porta transmissão UART
+
+#define STACK_SIZE_CPU 2048                                 // Tamanho da pilha dos processos de cada core
+
+#define HEAP_SIZE_TIMER 300000                              // Intervalo de tempo para enviar o status do heap para o escravo, em milisegundos
+
 #define SERVER_PORT 80                                      // Porta do servidor HTTP
+
 #define CHUNK_SIZE 64                                       // Tamanho do chunk de dados enviado para o escravo
 #define SEND_DATA_TRIES 5                                   // Número de tentativas de envio de dados para o escravo
 #define RECEIVE_DATA_TRIES 5                                // Número de tentativas de recebimento de dados do escravo
-#define MYPORT_RX 18                                        // Porta recepção UART
-#define MYPORT_TX 17                                        // Porta transmissão UART
-#define DEBUG true                                         // Variável para habilitar/desabilitar o envio de mensagens para o monitor serial
+
 #define MARGEM_COTA_REFERENCIA 10                           // Margem de erro para a cota de referência, em centímetros(100cm = 1M)
-#define HEAP_SIZE_TIMER 300000                              // Intervalo de tempo para enviar o status do heap para o escravo, em milisegundos
 
 
 // Constantes para identificar o tipo de mensagem enviada para o escravo
@@ -73,8 +83,8 @@ using namespace std;
 char ssid[] = "PumaRover";                                  // nome do AP
 char password[] = "00000000";                               // senha do AP
 
-
-SFE_UBLOX_GNSS myGNSS;
+// Variaveis para teste de armazenamento de dados nos nucleos
+TaskHandle_t taskCommHandler, taskProcessHandler;                      // Variáveis para armazenar o handle das tasks
 
 HardwareSerial MySerialZed(0);                              // Use UART0
 AsyncWebServer server(SERVER_PORT);                         // Cria o servidor web na porta 80

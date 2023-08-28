@@ -162,4 +162,13 @@ void printFuncCore(String func){
   Serial.println("==================================================");
 }
 
+
+// Função para imprimir a quantidade de memoria usada
+void printStackCore(String func){
+  UBaseType_t stackLeft = STACK_SIZE_CPU - uxTaskGetStackHighWaterMark(NULL);
+  printStringNoBreak(func);
+  printStringNoBreak(" - stack used: ");
+  printString(String(stackLeft));
+}
+
 #endif // UTILS_H
