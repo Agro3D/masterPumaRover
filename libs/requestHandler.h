@@ -2,13 +2,14 @@
 #define REQUEST_HANDLER_H
 
 
-// Este arquivo contém as funções para lidar com as requisições HTTP e envia-las para o escravo
+// Este arquivo contém as funções para lidar com o envio de dados para o escravo
+// Estes dados tem origem como requisições do cliente através do servidor
 
 
 
 // Função para lidar com o envio de dados para o escravo.
 void slaveSendHandler() {
-
+  
   printString("\nComando para o escravo: " + String(comandoEscravo));
   int x;
 
@@ -26,19 +27,6 @@ void slaveSendHandler() {
     
     String slaveResponse = slaveReceiveResponse();            // Le a resposta do escravo
     printString("Resposta do escravo: " + slaveResponse);
-
-
-    // Verifica se a resposta do escravo é um ACK/NACK ou uma mensagem de comando,
-    // caso seja uma mensagem de comando, execute a função de atualização do RTK e da Precisão
-    // e continue no loop até receber um ACK/NACK
-    while (slaveResponse.indexOf("Comando") != -1 && slaveResponse.indexOf("ACK") == -1 && slaveResponse.indexOf("NACK") == -1){
-      DynamicJsonDocument json(128);
-      deserializeJson(json, slaveResponse);
-      updateRTK(json["Comando"].as<int>(), json["Mensagem"].as<int>());
-      
-      slaveResponse = slaveReceiveResponse();                 // Le a resposta do escravo
-      printString("Resposta do escravo: " + slaveResponse);
-    }
 
 
     // Verifica se a resposta do escravo é um ACK ou um NACK
@@ -72,6 +60,10 @@ void slaveSendHandler() {
   switch (comandoEscravo)  {
   case ACK_MSG:
     hasComunication = true;
+    break;
+
+  case INICIALIZAR:
+    printString("\nInicializando o Sistema");
     break;
     
   case GET_STATUS:

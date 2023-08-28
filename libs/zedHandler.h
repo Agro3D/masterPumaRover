@@ -7,7 +7,7 @@
 
 // Função para receber e processar a mensagem do ZED-F9P
 void processaMensagem(String message){
-
+  
   // Verifica qual o tipo de mensagem recebida
   if(message.indexOf("$GNGGA") != -1){
     // Processa a mensagem recebida retornando a cota elipsoidal
@@ -23,6 +23,7 @@ void processaMensagem(String message){
 
 // Função para pegar a cota do GPS, calculando a cota elipsoidal
 void processaNMEAGGA(String nmeastr) {
+  
 
   int lastCommaIndex = 0;
   int currentCommaIndex = 0;
@@ -92,6 +93,7 @@ void processaNMEAGGA(String nmeastr) {
 
 // Função para pegar a cota do GPS, calculando a cota elipsoidal
 void processaNMEAPUBX(String pubxstr) {
+  
 
   // Percorre a mensagem atraves das vírgulas
   String piece;

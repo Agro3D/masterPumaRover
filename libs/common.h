@@ -18,6 +18,7 @@ using namespace std;
 #include <WiFi.h>                                           // Biblioteca para operações de WiFi
 #include <bits/stdc++.h>                                    // Biblioteca para manipular arrays
 #include <SparkFun_u-blox_GNSS_Arduino_Library.h>           // Biblioteca do GNSS
+#include <esp_ipc.h>
 
 
 
@@ -54,8 +55,6 @@ using namespace std;
 
 #define ALERT_MESSAGE 90                                    // Mensagem para mostrar um alerta no servidor
 
-#define GET_PRECISAO 96                                     // Mensagem para solicitar o status do escravo
-#define GET_RTKSTATUS 97                                    // Mensagem para solicitar o status do escravo
 
 #define GET_STATUS 98                                       // Mensagem para solicitar o status do escravo
 #define ACK_MSG 99                                          // Mensagem de confirmação de comunicação com o escravo
@@ -123,7 +122,6 @@ void webSocketEvent(uint8_t num, WStype_t type, uint8_t * payload, size_t length
 void processaMensagem(String message);
 void processaNMEAGGA(String nmeastr);
 void processaNMEAPUBX(String pubxstr);
-void updateRTK(int comando, int valor);
 void listarPontos(String resposta);
 void printString(String message);
 void printJson(DynamicJsonDocument doc);
@@ -132,6 +130,8 @@ void novoPonto(String Ponto);
 void novoComando(int novoComando, String novaMensagem);
 void proximoComando();
 void printListaComandos();
+void printFuncCore(String func);
+
 
 
 
@@ -170,6 +170,7 @@ void printListaComandos();
 #include "requestHandler.h"                 // Funções de comunicação com o escravo
 #include "responseHandler.h"                // Funções do servidor web socket
 
+#include "dualCoreHandler.h"                // Funções de comunicação com o escravo
 #include "zedHandler.h"                     // Funções de comunicação com o escravo
 #include "utils.h"                          // Funções de utilidades
 
