@@ -33,6 +33,7 @@ void printJson(DynamicJsonDocument doc){
 
 // Função para adicionar um novo ponto na lista de pontos
 void novoPonto(String PontoStr) {
+  
   PontoStr.replace("\\n", "<br />");
   DynamicJsonDocument Ponto(512);
   deserializeJson(Ponto, PontoStr);
@@ -54,6 +55,8 @@ void novoPonto(String PontoStr) {
 
 // Funçaõ para adiciona novo comando na fila de comandos a serem enviados para o escravo
 void novoComando(int novoComando, String novaMensagem){
+  printFuncCore(__func__);
+
   printString("Comando Atual: " + String(comandoEscravo));
   printString("Lista de Comandos: " + String(listaComandos.size()));
 
@@ -99,13 +102,12 @@ void novoComando(int novoComando, String novaMensagem){
       }
     }
   }
-
-  printListaComandos();
 }
 
 
 // Função para executar o próximo comando da lista de comandos
 void proximoComando(){
+  
   // Caso haja heapSize, envia o heapSize para o escravo antes de enviar o próximo comando
   if(heapSize != ""){
     comandoEscravo = HEAP_SIZE;
@@ -130,13 +132,13 @@ void proximoComando(){
     listaComandos.erase(listaComandos.begin());
     listaMensagens.erase(listaMensagens.begin());
   }
-
-  printListaComandos();
 }
 
 
 // Função para imprimir a lista de comandos
 void printListaComandos(){
+  printFuncCore(__func__);
+
   printString("Lista de Comandos: ");
   printString("Quantidade: " + String(listaComandos.size()));
 
@@ -145,5 +147,28 @@ void printListaComandos(){
   }
 }
 
+
+// Função para imprimir o nucleo que está executando a função
+void printFuncCore(String func){
+
+  Serial.println("==================================================");
+  Serial.print(func);
+  Serial.print(" : ");
+  Serial.print(xTaskGetTickCount());
+  Serial.print(" : ");
+  Serial.print("This loop runs on ");
+  Serial.print(xPortGetCoreID() ? "APP_CPU" : "PRO_CPU");
+  Serial.println("(" + String(xPortGetCoreID()) + ") core.");
+  Serial.println("==================================================");
+}
+
+
+// Função para imprimir a quantidade de memoria usada
+void printStackCore(String func){
+  UBaseType_t stackLeft = STACK_SIZE_CPU - uxTaskGetStackHighWaterMark(NULL);
+  printStringNoBreak(func);
+  printStringNoBreak(" - stack used: ");
+  printString(String(stackLeft));
+}
 
 #endif // UTILS_H

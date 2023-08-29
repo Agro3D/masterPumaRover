@@ -20,9 +20,9 @@ void setup() {
 
   printString("");
   printString("Iniciando Comunicação UART (Escravo)");
-  MySerial.begin(921600, SERIAL_8N1, MYPORT_RX, MYPORT_TX);       // Inicia o protocolo UART para comunicação com o escravo.
+  MySerial.begin(ESP_COMM_SPEED, SERIAL_8N1, MYPORT_RX, MYPORT_TX);       // Inicia o protocolo UART para comunicação com o escravo.
   delay(1000);
-  while (MySerial.available()) MySerial.read();                   // Limpa o buffer de recebimento da UART.
+  while (MySerial.available()) MySerial.read();                           // Limpa o buffer de recebimento da UART.
 
   printString("Comunicação UART (Escravo) Inicializada");
 
@@ -30,9 +30,9 @@ void setup() {
 
   printString("");
   printString("Iniciando Comunicação UART (ZED)");
-  MySerialZed.begin(460800, SERIAL_8N1, RX, TX);                  // Inicia o protocolo UART para comunicação com o ZED.
+  MySerialZed.begin(ZED_COMM_SPEED, SERIAL_8N1, RX, TX);                  // Inicia o protocolo UART para comunicação com o ZED.
   delay(1000);
-  while (MySerialZed.available()) MySerialZed.read();             // Limpa o buffer de recebimento da UART.
+  while (MySerialZed.available()) MySerialZed.read();                     // Limpa o buffer de recebimento da UART.
 
   printString("Comunicação UART (ZED) Inicializada");
 
@@ -83,6 +83,29 @@ void setup() {
   slaveReceiveHandler();                                          // Chama a função de manipulação de recebimento do escravo.
 
 
+  printString("");
+  printString("Configurando o dual core");
+
+  // Configura o core 0(APP_CORE) para executar a função CommCoreLoop 
+  xTaskCreatePinnedToCore(CommCoreLoop,                           // Configura a função para ser executada
+                        "TaskComm",                               // Apelida a função com um nuome
+                        STACK_SIZE_CPU,                                     // Define o tamanho da pilha da função
+                        NULL,                                     // Define um parametro para a função, usado para lidar com varios contextos
+                        10,                                       // Define a prioridade da função (0-25)
+                        &taskCommHandler,                                     // Salva o local da função
+                        APP_CPU_NUM);                             // Define o core que executará a função
+
+  // Configura o core 1(PRO_CORE) para executar a função ProcessCoreLoop
+  xTaskCreatePinnedToCore(ProcessCoreLoop,                        // Configura a função para ser executada
+                        "TaskProcess",                            // Apelida a função com um nuome
+                        STACK_SIZE_CPU,                                     // Define o tamanho da pilha da função
+                        NULL,                                     // Define um parametro para a função, usado para lidar com varios contextos
+                        10,                                       // Define a prioridade da função (0-25)
+                        &taskProcessHandler,                                     // Salva o local da função
+                        PRO_CPU_NUM);                             // Define o core que executará a função
+
+  printString("Dual core configurado");
+
 
 
   printString("\n\n\tMaster Puma Rover inicializado.");
@@ -98,48 +121,9 @@ void setup() {
 // Função principal executada repetidamente após a função de inicialização.
 void loop() {
 
-  // Verifica se ha alguma requisicao do cliente, caso haja, processa e envia a requisicao para o escravo.
-  if(comandoEscravo != -1) { slaveSendHandler(); }
-
-  // Verifica se ha alguma mensagem do escravo, caso haja, processa a mensagem recebida.
-  if(MySerial.available()) { slaveReceiveHandler(); }
-
-
-
-  // Lê as mensagens recebidas do ZED
-  while (MySerialZed.available()) {
-    String message = MySerialZed.readStringUntil('\n');
-
-    // Caso esteja trabalhando, processa a mensagem recebida.
-    if(receberMensagens){
-      processaMensagem(message);
-    }
-  }
-
-
-
-  // Verifica o uso de memória do ESP32 e imprime um aviso caso o uso de memória tenha aumentado.
-  static uint32_t lastHeapSize = 0;
-  uint32_t currentHeapSize = ESP.getFreeHeap();
-
-  // Caso o tamanho da memória tenha diminuido desde a última iteração do loop, imprime um aviso.
-  if (currentHeapSize < lastHeapSize) {
-    printStringNoBreak("WARNING: Heap size decreased! Current heap size: ");
-    printString(String(currentHeapSize));
-  }
-
-  // Atualiza o tamanho da memória da última iteração do loop.
-  lastHeapSize = currentHeapSize;
-
-  if(millis() - lastHeapSend > HEAP_SIZE_TIMER){
-    lastHeapSend = millis();
-    heapSize = String(currentHeapSize);
-  }
-
-
   // Realiza o loop do servidor WebSocket.
   webSocket.loop();
-  delay(200);
+  delay(1000);
 }
 
 
@@ -169,6 +153,8 @@ bool verifyComunication(){
 
 // Função para gerenciar o websocket do servidor
 void webSocketEvent(uint8_t num, WStype_t type, uint8_t * payload, size_t length){
+  printFuncCore(__func__);
+
     switch(type) {
         case WStype_DISCONNECTED:
             printString("[" + String(num) + "] Disconnected!");

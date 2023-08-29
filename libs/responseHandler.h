@@ -7,6 +7,7 @@
 
 // Função para processar a resposta do escravo e configurar o proximo comando a ser enviado
 void slaveReceiveHandler() {
+  
   DynamicJsonDocument resposta(10240);
   deserializeJson(resposta, slaveReceiveResponse());          // Le a resposta do escravo e converte para json
 
@@ -21,19 +22,23 @@ void slaveReceiveHandler() {
     getStatus(resposta["Mensagem"].as<String>());
     proximoComando();
     break;
-
-  case GET_PRECISAO:
-    updateRTK(resposta["Comando"].as<int>(), resposta["Mensagem"].as<int>());
-    break;
-    
-  case GET_RTKSTATUS:
-    updateRTK(resposta["Comando"].as<int>(), resposta["Mensagem"].as<int>());
-    break;
     
   case NOVO_TRABALHO:
     receberMensagens = true;
     proximoComando();
     statusAtual = char(TRABALHANDO);
+
+    
+    if(precisaoHorizontal != "-1" || precisaoVertical != "-1"){
+      // Envia a precisao para o cliente
+      webSocket.broadcastTXT("{\"Mensagem\": \"PRECISAO\", \"Valor\": {\"precisaoVertical\": " +
+                  precisaoVertical + ", \"precisaoHorizontal\": " + precisaoHorizontal + "}}");
+    }
+
+    if(RTKAtual != '-1'){
+      // Envia o status do RTK para o cliente
+      webSocket.broadcastTXT("{\"Mensagem\": \"RTK\", \"Valor\": " + String(RTKAtual) + "}");
+    }
     break;
 
   case PARAR_TRABALHO:
@@ -80,6 +85,7 @@ void slaveReceiveHandler() {
 
 // Função para processar a reposta de status do escravo
 void getStatus(String mensagem){
+  
   DynamicJsonDocument respostaStatus(62);
   deserializeJson(respostaStatus, mensagem);
 
@@ -108,32 +114,10 @@ void getStatus(String mensagem){
 }
 
 
-// Função para processar a resposta do RTK/Precisão e enviar para o cliente
-void updateRTK(int comando, int valor) {
-
-  String mensagem;
-
-  switch (comando){
-  case GET_PRECISAO:
-    mensagem = "{\"Mensagem\": \"PRECISAO\", \"Valor\": \"" + String(valor) + "\"}";
-    // precisaoRTK = valor;
-    break;
-    
-  case GET_RTKSTATUS:
-    mensagem = "{\"Mensagem\": \"RTK\", \"Valor\": \"" + String(valor) + "\"}";
-    RTKAtual = valor;
-    break;
-  
-  default:
-    break;
-  }
-
-  webSocket.broadcastTXT(mensagem); 
-}
-
 
 // Função para ler a resposta do escravo.
 String slaveReceiveResponse() {
+  
   printString("Lendo mensagem do slave");
   String response = "";
   unsigned long startTime = millis();

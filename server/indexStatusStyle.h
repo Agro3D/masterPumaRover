@@ -138,7 +138,7 @@ char INDEX_STATUS_STYLE[] PROGMEM = R"=====(
     font-size: 3vw;
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: flex-start;
     justify-content: center;
     font-weight: bold;
     min-width: 20%;
