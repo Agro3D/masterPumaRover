@@ -35,8 +35,7 @@ void ProcessCoreLoop(void *arg) {
     }
 
 
-    delay(100);
-    
+    delay(300); 
   }
 }
 
@@ -51,8 +50,7 @@ void CommCoreLoop(void *arg) {
     if(MySerial.available()) { slaveReceiveHandler(); }
 
   
-    delay(100);
-  
+    delay(200);
   }
 }
 

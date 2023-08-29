@@ -37,9 +37,7 @@ using namespace std;
 
 #define SERVER_PORT 80                                      // Porta do servidor HTTP
 
-#define CHUNK_SIZE 64                                       // Tamanho do chunk de dados enviado para o escravo
 #define SEND_DATA_TRIES 5                                   // Número de tentativas de envio de dados para o escravo
-#define RECEIVE_DATA_TRIES 5                                // Número de tentativas de recebimento de dados do escravo
 
 #define MARGEM_COTA_REFERENCIA 10                           // Margem de erro para a cota de referência, em centímetros(100cm = 1M)
 

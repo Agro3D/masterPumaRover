@@ -32,7 +32,7 @@ void slaveReceiveHandler() {
     if(precisaoHorizontal != "-1" || precisaoVertical != "-1"){
       // Envia a precisao para o cliente
       webSocket.broadcastTXT("{\"Mensagem\": \"PRECISAO\", \"Valor\": {\"precisaoVertical\": " +
-      precisaoVertical + ", \"precisaoHorizontal\": " + precisaoHorizontal + "}}");
+                  precisaoVertical + ", \"precisaoHorizontal\": " + precisaoHorizontal + "}}");
     }
 
     if(RTKAtual != '-1'){
