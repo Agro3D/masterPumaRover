@@ -5,6 +5,7 @@ async  function novoPonto(){
         Descricao: document.getElementById('descPonto').value
     };
 
+    closePopupPonto();
     console.log(dataJson);
 
     // Realiza o POST request e verifica se foi bem sucedido
@@ -18,13 +19,14 @@ async  function novoPonto(){
     .then(response => {
         if (!response.ok) {
             throw new Error('Network response was not ok');
+            showMessage("Erro ao registrar ponto <br /> Vereifique a conexão");
         }else{
-            closePopupPonto();
             clearDataPonto();
             showMessage("Registrando ponto... <br /> Mantenha o aparelho imóvel.");
         }
     }).catch(error => {
         console.error('There has been a problem with your fetch operation:', error);
+        showMessage("Erro ao registrar ponto <br /> Vereifique a conexão ou reinicie o aparelho");
     });
 }
 
