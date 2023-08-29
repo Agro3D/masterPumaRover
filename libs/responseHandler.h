@@ -27,6 +27,18 @@ void slaveReceiveHandler() {
     receberMensagens = true;
     proximoComando();
     statusAtual = char(TRABALHANDO);
+
+    
+    if(precisaoHorizontal != "-1" || precisaoVertical != "-1"){
+      // Envia a precisao para o cliente
+      webSocket.broadcastTXT("{\"Mensagem\": \"PRECISAO\", \"Valor\": {\"precisaoVertical\": " +
+      precisaoVertical + ", \"precisaoHorizontal\": " + precisaoHorizontal + "}}");
+    }
+
+    if(RTKAtual != '-1'){
+      // Envia o status do RTK para o cliente
+      webSocket.broadcastTXT("{\"Mensagem\": \"RTK\", \"Valor\": " + String(RTKAtual) + "}");
+    }
     break;
 
   case PARAR_TRABALHO:
