@@ -4,6 +4,7 @@ function initIndex(){
     getStatus();
     getFiles();
     getPontos();
+    getCotaReferencia();
 }
 
 function novoTrabalho() {

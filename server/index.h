@@ -169,7 +169,8 @@ char INDEX_PAGE[] PROGMEM = R"=====(
                     </div>
                     
                     <div id="cotaReferencia">
-                        <button id="cotaBotao" onclick="pontoReferencia()">Cota </br> Referencia</button>
+                        <button id="cotaBotao" onclick="pontoReferencia()">Cota <br /> Referencia <br /> <br /></button>
+                        <!-- <div id="cotaReferenciaValor">600,256</div> -->
                     </div>
 
                 </div>

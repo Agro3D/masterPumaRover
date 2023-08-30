@@ -15,11 +15,10 @@ async  function novoPonto(){
             'Content-Type': 'application/json',
         },
         body: JSON.stringify(dataJson)
-    })
-    .then(response => {
+    }).then(response => {
         if (!response.ok) {
-            throw new Error('Network response was not ok');
             showMessage("Erro ao registrar ponto <br /> Vereifique a conexão");
+            throw new Error('Network response was not ok');
         }else{
             clearDataPonto();
             showMessage("Registrando ponto... <br /> Mantenha o aparelho imóvel.");
@@ -106,11 +105,14 @@ async function pontoReferencia(){
     })
     .then(response => {
         if (!response.ok) {
+            showMessage("Erro ao registrar cota de referência <br /> Vereifique a conexão");
             throw new Error('Network response was not ok');
         }else{
-            showMessage("Registrando cota de referencia...");
+            showMessage("Cota de referencia salva", "verde");
+            document.getElementById("cotaBotao").innerHTML = "Cota <br /> Referencia <br /> <br /> " + document.getElementById("cotaValor").innerHTML;
         }
     }).catch(error => {
+        showMessage("Erro ao registrar cota de referência <br /> Vereifique a conexão ou reinicie o aparelho");
         console.error('There has been a problem with your fetch operation:', error);
     });
 }

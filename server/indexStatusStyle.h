@@ -9,10 +9,11 @@ char INDEX_STATUS_STYLE[] PROGMEM = R"=====(
 
 #cota{
     display: flex;
+    margin-bottom: 2vh;
 }
 
 #botaoFinalizar{
-    background-color: #3a9732;
+    background-color: #2264af;
     color: white;
     padding: 3vh 3vw;
     border: 0;
@@ -22,16 +23,17 @@ char INDEX_STATUS_STYLE[] PROGMEM = R"=====(
 }
 
 #botaoFinalizar:hover{
-    background-color: #4e9e44;
+    background-color: #1b4194;
     cursor: pointer;
 }
 
 #botaoNovoPonto{
-    background-color: #3a9732;
+    background-color: #2264af;
     color: white;
     min-width: 16vw;
-    max-height: 8vh;
-    height: fit-content;
+    max-height: 6vh;
+    min-height: fit-content;
+    height: 4vh;
     border: 0;
     border-radius: 10px;
     font-size: 2.6vh;
@@ -40,7 +42,7 @@ char INDEX_STATUS_STYLE[] PROGMEM = R"=====(
 }
 
 #botaoNovoPonto:hover{
-    background-color: #4e9e44;
+    background-color: #1b4194;
     cursor: pointer;
 }
 
@@ -65,7 +67,6 @@ char INDEX_STATUS_STYLE[] PROGMEM = R"=====(
     border: 4px solid gray;
     border-radius: 5px;
     margin-inline: 5vh;
-    margin-bottom: 2vh;
     color: white;
 }
 
@@ -83,12 +84,22 @@ char INDEX_STATUS_STYLE[] PROGMEM = R"=====(
 }
 
 .cotaCerta{
-    background-color: #139d15;
+    background-color: #0b600c;
 }
 
 #cotaReferencia{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    height: auto;
     margin-right: 2vh;
-    margin-top: 4vh;
+}
+
+#cotaReferenciaValor{
+    font-size: 1.3rem;
+    font-weight: bold;
+    text-align: center;
 }
 
 #cotaBotao{
@@ -96,14 +107,14 @@ char INDEX_STATUS_STYLE[] PROGMEM = R"=====(
     font-size: 1rem;
     font-weight: bold;
     color: white;
-    background-color: #3a9732;
+    background-color: #2264af;
     padding: 3vh 2vw;
     border: 0;
     border-radius: 10px;
 }
 
 #cotaBotao:hover{
-    background-color: #4e9e44;
+    background-color: #1b4194;
     cursor: pointer;
 }
 
@@ -209,6 +220,10 @@ char INDEX_STATUS_STYLE[] PROGMEM = R"=====(
     #cotaReferencia{
         margin-right: 1vw;
         margin-top: 2vh;
+    }
+    
+    #cotaReferenciaValor{
+        font-size: 1rem;
     }
 
     #cotaBotao{

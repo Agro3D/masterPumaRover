@@ -45,8 +45,8 @@ function initWebSocket() {
                 break;
 
             case 'PRECISAO':
-                document.getElementById('precisaoVerticalValor').innerHTML = "Vertical " + (valor["precisaoVertical"]*100).toFixed(0) + ' cm';
-                document.getElementById('precisaoHorizontalValor').innerHTML = "Horizontal " + (valor["precisaoHorizontal"]*100).toFixed(0) + ' cm';
+                document.getElementById('precisaoVerticalValor').innerHTML = "Vertical " + valor["precisaoVertical"] + ' M';
+                document.getElementById('precisaoHorizontalValor').innerHTML = "Horizontal " + valor["precisaoHorizontal"] + ' M';
                 break;
 
             case 'NOVO_PONTO':

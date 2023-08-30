@@ -128,6 +128,16 @@ void setupServer() {
   });
 
 
+// Rota para requisitar a cota de referência.
+  server.on("/getCotaReferencia", HTTP_GET, [](AsyncWebServerRequest *request){
+    printString("\n\n##### Requisicao Recebida: /getCotaReferencia");
+    printString("Enviando cota de referencia...");
+
+    // Enviar a cota de referência para o cliente com 3 casas decimais.
+    request->send(200, "text/plain", String(cotaRef, 3));
+  });
+
+
 
 // Rota para receber a lista de arquivos do escravo.
   server.on("/getPontos", HTTP_GET, [](AsyncWebServerRequest *request){
