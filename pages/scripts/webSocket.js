@@ -34,10 +34,18 @@ function initWebSocket() {
         switch(mensagem) {
             case 'Cota':
                 document.getElementById('cotaValor').innerHTML = valor.toFixed(3);
-                if (data['Status'] == "CERTO")
-                    document.getElementById('cotaQuadro').className = 'cotaCerta';
-                else
+                document.getElementById('cotaQuadro').className = 'cotaCerta';
+
+                setInterval(function() {
                     document.getElementById('cotaQuadro').className = 'cotaErrada';
+                }, 1000);
+
+
+
+                // if (data['Status'] == "CERTO")
+                //     document.getElementById('cotaQuadro').className = 'cotaCerta';
+                // else
+                //     document.getElementById('cotaQuadro').className = 'cotaErrada';
                 break;
             
             case 'RTK':

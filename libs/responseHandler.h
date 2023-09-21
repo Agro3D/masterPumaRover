@@ -77,6 +77,10 @@ void slaveReceiveHandler() {
     proximoComando();
     break;
 
+  case 42:
+    webSocket.broadcastTXT("{\"Mensagem\": \"Cota\", \"Valor\": " + resposta["Mensagem"].as<String>() + ", \"Status\": \"CERTO\"}");
+    break;
+
   default:
     break;
   }
