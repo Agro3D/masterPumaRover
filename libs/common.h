@@ -43,8 +43,8 @@ using namespace std;
 
 
 // Botões de ligar/desligar o sistema
-#define POWER_CHECK 35                                      // Pino do botão liga/desliga
-#define POWER_OFF 36                                        // Pino para ligar/desligar o sistema
+#define POWER_CHECK 5                                       // Pino do botão liga/desliga
+#define POWER_OFF 6                                         // Pino para ligar/desligar o sistema
 #define POWER_TIMER 2000                                    // Tempo de pressionar o botão para ligar/desligar para desligar o sistema, em milisegundos
 
 
