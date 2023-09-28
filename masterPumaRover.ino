@@ -8,6 +8,13 @@
 
 // Função para realizar a configuração inicial do mestre.
 void setup() {
+
+  // Inicializa o pino de verificação de energia e o pino de desligamento do sistema.
+  pinMode(POWER_CHECK, INPUT);
+  pinMode(POWER_OFF, OUTPUT);
+  digitalWrite(POWER_OFF, HIGH);
+
+  // Delay inicial para prevenir bugs na inicialização.
   delay(6000);
   Serial.begin(115200);
   

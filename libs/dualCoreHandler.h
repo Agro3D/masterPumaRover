@@ -34,6 +34,20 @@ void ProcessCoreLoop(void *arg) {
       heapSize = String(currentHeapSize);
     }
 
+    // Verifica o botão de ligar/desligar
+    while(digitalRead(POWER_CHECK) == HIGH){
+      delay(100);
+      timerBotao = timerBotao + 100;
+
+      if(timerBotao >= POWER_TIMER){
+        printStringNoBreak("Desligando o sistema...");
+        digitalWrite(POWER_OFF, LOW);
+        delay(1000);
+      }
+    }
+
+  timerBotao = 0;
+
 
     delay(300); 
   }

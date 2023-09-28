@@ -42,6 +42,12 @@ using namespace std;
 #define MARGEM_COTA_REFERENCIA 10                           // Margem de erro para a cota de referência, em centímetros(100cm = 1M)
 
 
+// Botões de ligar/desligar o sistema
+#define POWER_CHECK 35                                      // Pino do botão liga/desliga
+#define POWER_OFF 36                                        // Pino para ligar/desligar o sistema
+#define POWER_TIMER 2000                                    // Tempo de pressionar o botão para ligar/desligar para desligar o sistema, em milisegundos
+
+
 // Constantes para identificar o tipo de mensagem enviada para o escravo
 #define INICIALIZAR 0                                       // Mensagem para informar que o mestre está inicializando
 
@@ -82,7 +88,7 @@ char ssid[] = "PumaRover";                                  // nome do AP
 char password[] = "00000000";                               // senha do AP
 
 // Variaveis para teste de armazenamento de dados nos nucleos
-TaskHandle_t taskCommHandler, taskProcessHandler;                      // Variáveis para armazenar o handle das tasks
+TaskHandle_t taskCommHandler, taskProcessHandler;           // Variáveis para armazenar o handle das tasks
 
 HardwareSerial MySerialZed(0);                              // Use UART0
 AsyncWebServer server(SERVER_PORT);                         // Cria o servidor web na porta 80
@@ -113,6 +119,8 @@ int comandoEscravo = -1;                                    // Flag para control
 vector<int> listaComandos;                                  // Lista de comandos para o escravo
 bool waitResponse = false;                                  // Flag para controlar o recebimento de dados do escravo
 bool verifyingComunication = false;                         // Flag para controlar a verificação de comunicação com o escravo
+
+int timerBotao = 0;                                         // Variável para armazenar o tempo de pressionamento do botão de ligar/desligar
 
 
 // Lista de todas as funções do programa
