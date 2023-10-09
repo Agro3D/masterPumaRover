@@ -106,7 +106,7 @@ void setupServer() {
   server.on("/getFiles", HTTP_GET, [](AsyncWebServerRequest *request){
     printString("\n\n##### Requisicao Recebida: /getFiles");
     printString("Enviando lista de arquivos...");
-    printString(listaArquivosStr);
+    // printString(listaArquivosStr);
 
     request->send(200, "application/json", listaArquivosStr);
   });
@@ -143,12 +143,12 @@ void setupServer() {
   server.on("/getPontos", HTTP_GET, [](AsyncWebServerRequest *request){
     printString("\n\n##### Requisicao Recebida: /getPontos");
     printString("Enviando lista de pontos...");
-    printString(listaPontos);
+    // printString(listaPontos);
 
-    if (listaPontos == "" || listaPontos == NULL) 
+    if (listaPontos.as<String>() == "" || listaPontos == NULL) 
       request->send(204, "application/json", "Nenhum ponto salvo.");
     else
-      request->send(200, "application/json", listaPontos);
+      request->send(200, "application/json", listaPontos.as<String>());
 
   });
 }

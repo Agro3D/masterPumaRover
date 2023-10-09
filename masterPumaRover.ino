@@ -82,7 +82,7 @@ void setup() {
   slaveSendHandler();                                             // Chama a função de manipulação de envio para o escravo.
   slaveReceiveHandler();                                          // Chama a função de manipulação de recebimento do escravo.
 
-  listaPontos = "";
+  deserializeJson(listaPontos, "[]");                             // Inicializa a lista de pontos de interesse como um array vazio.
 
   if(statusAtual == char(ESPERANDO)){comandoEscravo = LISTAR_ARQUIVOS;} // Caso o escravo esteja em modo de espera, envia o comando de lista de arquivos para o escravo.
   else{comandoEscravo = LISTAR_PONTOS;}                           // Caso o escravo esteja em modo de trabalho, envia o comando de lista de pontos para o escravo.

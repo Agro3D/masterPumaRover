@@ -8,7 +8,7 @@
 // Função para processar a resposta do escravo e configurar o proximo comando a ser enviado
 void slaveReceiveHandler() {
   
-  DynamicJsonDocument resposta(10240);
+  DynamicJsonDocument resposta(20480);
   deserializeJson(resposta, slaveReceiveResponse());          // Le a resposta do escravo e converte para json
 
   printString("Mensagem do escravo: ");
@@ -46,13 +46,14 @@ void slaveReceiveHandler() {
     RTKAtual = '-1';
     precisaoHorizontal = -1;
     precisaoVertical = -1;
-    listaPontos = "";
+    // listaPontos = "";
+    deserializeJson(listaPontos, "[]");    
     proximoComando();
     statusAtual = char(ESPERANDO);
     break;
 
   case NOVO_PONTO:
-    novoPonto(resposta["Mensagem"].as<String>());
+    novoPonto(resposta["Mensagem"]);
     webSocket.broadcastTXT("{\"Mensagem\": \"NOVO_PONTO\", \"Valor\": " + resposta["Mensagem"].as<String>() + "}");
     proximoComando();
     break;
@@ -147,15 +148,13 @@ String slaveReceiveResponse() {
 void listarPontos(String resposta) {
 
   if (resposta == "" || resposta == NULL || resposta.length() < 2) {
-    listaPontos = "\"\"";
+    deserializeJson(listaPontos, "[]");
   } else {
     resposta.replace("\\n", "<br />");
-    listaPontos = resposta;
+    deserializeJson(listaPontos, resposta);
   }
   
-  printString("Pontos: " + listaPontos);
-  
-  webSocket.broadcastTXT("{\"Mensagem\": \"LISTAR_PONTOS\", \"Valor\": " + listaPontos + "}");
+  webSocket.broadcastTXT("{\"Mensagem\": \"LISTAR_PONTOS\", \"Valor\": " + listaPontos.as<String>() + "}");
 }
 
 
