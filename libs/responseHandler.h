@@ -8,7 +8,7 @@
 // Função para processar a resposta do escravo e configurar o proximo comando a ser enviado
 void slaveReceiveHandler() {
   
-  DynamicJsonDocument resposta(20480);
+  DynamicJsonDocument resposta(10240);
   deserializeJson(resposta, slaveReceiveResponse());          // Le a resposta do escravo e converte para json
 
   printString("Mensagem do escravo: ");
@@ -58,8 +58,14 @@ void slaveReceiveHandler() {
     proximoComando();
     break;
 
+  case RESP_LISTAR_PONTOS:
+    listarPontos(resposta["Mensagem"].as<String>());
+    break;
+
   case LISTAR_PONTOS:
     listarPontos(resposta["Mensagem"].as<String>());
+    serializeJsonPretty(listaPontos, Serial);
+    webSocket.broadcastTXT("{\"Mensagem\": \"LISTAR_PONTOS\", \"Valor\": " + listaPontos.as<String>() + "}");
     proximoComando();
     break;
 
@@ -151,10 +157,13 @@ void listarPontos(String resposta) {
     deserializeJson(listaPontos, "[]");
   } else {
     resposta.replace("\\n", "<br />");
-    deserializeJson(listaPontos, resposta);
-  }
-  
-  webSocket.broadcastTXT("{\"Mensagem\": \"LISTAR_PONTOS\", \"Valor\": " + listaPontos.as<String>() + "}");
+    DynamicJsonDocument Pontos(4096);
+    deserializeJson(Pontos, resposta);
+
+    for (int i = 0; i < Pontos["Pontos"].size(); i++) {
+      listaPontos["Pontos"].add(Pontos["Pontos"][i]);
+    }
+  }  
 }
 
 
