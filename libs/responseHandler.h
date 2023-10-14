@@ -46,8 +46,8 @@ void slaveReceiveHandler() {
     RTKAtual = '-1';
     precisaoHorizontal = -1;
     precisaoVertical = -1;
-    // listaPontos = "";
-    deserializeJson(listaPontos, "[]");    
+    deserializeJson(listaPontos, "{\"Pontos\": []}");
+
     proximoComando();
     statusAtual = char(ESPERANDO);
     break;
@@ -63,8 +63,7 @@ void slaveReceiveHandler() {
     break;
 
   case LISTAR_PONTOS:
-    listarPontos(resposta["Mensagem"].as<String>());
-    serializeJsonPretty(listaPontos, Serial);
+    listarPontos(resposta["Mensagem"].as<String>());    
     webSocket.broadcastTXT("{\"Mensagem\": \"LISTAR_PONTOS\", \"Valor\": " + listaPontos.as<String>() + "}");
     proximoComando();
     break;
@@ -135,7 +134,7 @@ String slaveReceiveResponse() {
   startTime = millis();
 
   // Lê os dados do escravo ou aguarda n segundos sem resposta
-  while (millis() - startTime < 1000) { 
+  while (millis() - startTime < 800) { 
     while (MySerial.available() && millis() - startTime < 5000) { 
       response += (char)MySerial.read();
       startTime = millis();
@@ -144,7 +143,6 @@ String slaveReceiveResponse() {
     delay(100);
   }
 
-  
   return response;
 }
 

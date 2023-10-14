@@ -103,7 +103,7 @@ String mensagemStr;                                         // String para armaz
 String heapSize;                                            // String para armazenar o tamanho da heap do mestre
 vector<String> listaMensagens;                              // Lista de mensagens referentes aos comandos enviados para o escravo
 String listaArquivosStr="";                                 // String para armazenar a lista de arquivos do escravo
-DynamicJsonDocument listaPontos(10240);                     // Iniciar o objeto JSON
+StaticJsonDocument<30720> listaPontos;                      // Iniciar o objeto JSON
 
 String cota;                                                // Variável para armazenar o valor da cota atual
 char RTKAtual = '-1';                                       // Variável para armazenar o valor do status atual do RTK

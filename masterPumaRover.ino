@@ -29,6 +29,7 @@ void setup() {
   printString("Iniciando Comunicação UART (Escravo)");
   MySerial.begin(ESP_COMM_SPEED, SERIAL_8N1, MYPORT_RX, MYPORT_TX);       // Inicia o protocolo UART para comunicação com o escravo.
   delay(1000);
+  MySerial.flush();                                                       // Limpa o buffer de envio da UART.
   while (MySerial.available()) MySerial.read();                           // Limpa o buffer de recebimento da UART.
 
   printString("Comunicação UART (Escravo) Inicializada");
@@ -82,7 +83,7 @@ void setup() {
   slaveSendHandler();                                             // Chama a função de manipulação de envio para o escravo.
   slaveReceiveHandler();                                          // Chama a função de manipulação de recebimento do escravo.
 
-  deserializeJson(listaPontos, "{\"Pontos\":[]");                             // Inicializa a lista de pontos de interesse como um array vazio.
+  deserializeJson(listaPontos, "{\"Pontos\":[]}");                             // Inicializa a lista de pontos de interesse como um array vazio.
 
   if(statusAtual == char(ESPERANDO)){comandoEscravo = LISTAR_ARQUIVOS;} // Caso o escravo esteja em modo de espera, envia o comando de lista de arquivos para o escravo.
   else{comandoEscravo = LISTAR_PONTOS;}                           // Caso o escravo esteja em modo de trabalho, envia o comando de lista de pontos para o escravo.
