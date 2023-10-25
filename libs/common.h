@@ -70,6 +70,8 @@ using namespace std;
 #define ALERT_MESSAGE 90                                    // Mensagem para mostrar um alerta no servidor
 
 
+#define SINAL_RADIO 95                                   // Mensagem para receber o status do sinal de rádio do escravo
+
 #define GET_STATUS 98                                       // Mensagem para solicitar o status do escravo
 #define ACK_MSG 99                                          // Mensagem de confirmação de comunicação com o escravo
 
@@ -98,6 +100,8 @@ bool hasComunication = false;                               // Flag para control
 bool serverStarted = false;                                 // Flag para controlar se o servidor web está iniciado
 bool receberMensagens = false;                              // Flag para controlar o recebimento de mensagens do escravo
 unsigned long lastHeapSend = 0;                             // Variável para armazenar o tempo da última verificação do heap
+
+bool sinalRadio = true;                                     // Flag para controlar o sinal de rádio
 
 String mensagemStr;                                         // String para armazenar a representação em texto do objeto JSON
 String heapSize;                                            // String para armazenar o tamanho da heap do mestre

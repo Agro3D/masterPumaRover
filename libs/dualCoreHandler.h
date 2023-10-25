@@ -63,8 +63,7 @@ void CommCoreLoop(void *arg) {
     // Verifica se ha alguma mensagem do escravo, caso haja, processa a mensagem recebida.
     if(MySerial.available()) { slaveReceiveHandler(); }
 
-  
-    delay(200);
+    delay(100);
   }
 }
 

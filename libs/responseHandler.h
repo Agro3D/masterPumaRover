@@ -75,6 +75,21 @@ void slaveReceiveHandler() {
     proximoComando();
     break;
 
+  case SINAL_RADIO:
+    sinalRadio = resposta["Mensagem"].as<bool>();
+
+    if(sinalRadio){
+      // String mensagem = "Sinal de Rádio Reestabelecido";
+      // mensagem = "{\"Mensagem\": \"ALERT_MESSAGE\", \"Valor\": {\"Mensagem\": \"" + mensagem + "\", \"Cor\": \"verde\"}}";
+
+      // webSocket.broadcastTXT(mensagem);
+      Serial.println("Sinal de Rádio Reestabelecido");
+    }else{
+      // webSocket.broadcastTXT("{\"Mensagem\": \"SINAL_RADIO\", \"Valor\": " + String(sinalRadio) + "}");
+      Serial.println("Sinal de Rádio Perdido");
+    }
+    break;
+
   case ALERT_MESSAGE:
     webSocket.broadcastTXT(resposta["Mensagem"].as<String>().c_str());
     break;

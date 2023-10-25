@@ -38,9 +38,9 @@ void setup() {
 
   printString("");
   printString("Iniciando Comunicação UART (ZED)");
-  MySerialZed.begin(ZED_COMM_SPEED, SERIAL_8N1, RX, TX);                  // Inicia o protocolo UART para comunicação com o ZED.
+  MySerialZed.begin(ZED_COMM_SPEED, SERIAL_8N1, RX, TX);          // Inicia o protocolo UART para comunicação com o ZED.
   delay(1000);
-  while (MySerialZed.available()) MySerialZed.read();                     // Limpa o buffer de recebimento da UART.
+  while (MySerialZed.available()) MySerialZed.read();             // Limpa o buffer de recebimento da UART.
 
   printString("Comunicação UART (ZED) Inicializada");
 
@@ -83,7 +83,7 @@ void setup() {
   slaveSendHandler();                                             // Chama a função de manipulação de envio para o escravo.
   slaveReceiveHandler();                                          // Chama a função de manipulação de recebimento do escravo.
 
-  deserializeJson(listaPontos, "{\"Pontos\":[]}");                             // Inicializa a lista de pontos de interesse como um array vazio.
+  deserializeJson(listaPontos, "{\"Pontos\":[]}");                // Inicializa a lista de pontos de interesse como um array vazio.
 
   if(statusAtual == char(ESPERANDO)){comandoEscravo = LISTAR_ARQUIVOS;} // Caso o escravo esteja em modo de espera, envia o comando de lista de arquivos para o escravo.
   else{comandoEscravo = LISTAR_PONTOS;}                           // Caso o escravo esteja em modo de trabalho, envia o comando de lista de pontos para o escravo.
@@ -97,19 +97,19 @@ void setup() {
   // Configura o core 0(APP_CORE) para executar a função CommCoreLoop 
   xTaskCreatePinnedToCore(CommCoreLoop,                           // Configura a função para ser executada
                         "TaskComm",                               // Apelida a função com um nuome
-                        STACK_SIZE_CPU,                                     // Define o tamanho da pilha da função
+                        STACK_SIZE_CPU,                           // Define o tamanho da pilha da função
                         NULL,                                     // Define um parametro para a função, usado para lidar com varios contextos
                         10,                                       // Define a prioridade da função (0-25)
-                        &taskCommHandler,                                     // Salva o local da função
+                        &taskCommHandler,                         // Salva o local da função
                         APP_CPU_NUM);                             // Define o core que executará a função
 
   // Configura o core 1(PRO_CORE) para executar a função ProcessCoreLoop
   xTaskCreatePinnedToCore(ProcessCoreLoop,                        // Configura a função para ser executada
                         "TaskProcess",                            // Apelida a função com um nuome
-                        STACK_SIZE_CPU,                                     // Define o tamanho da pilha da função
+                        STACK_SIZE_CPU,                           // Define o tamanho da pilha da função
                         NULL,                                     // Define um parametro para a função, usado para lidar com varios contextos
                         10,                                       // Define a prioridade da função (0-25)
-                        &taskProcessHandler,                                     // Salva o local da função
+                        &taskProcessHandler,                      // Salva o local da função
                         PRO_CPU_NUM);                             // Define o core que executará a função
 
   printString("Dual core configurado");
