@@ -166,6 +166,7 @@ void printFuncCore(String func);
 // Estilos CSS do servidor web
 #include "../server/globalStyle.h"          // Estilo CSS global do servidor web
 #include "../server/headerStyle.h"          // Estilo CSS do cabeçalho das páginas do servidor web
+#include "../server/sinalRadioStyle.h"      // Estilo CSS das torres de sinal do rádio
 #include "../server/indexConfigStyle.h"     // Estilo CSS da página principal (configuração)
 #include "../server/indexStatusStyle.h"     // Estilo CSS da página principal (status)
 #include "../server/listaPontosStyle.h"     // Estilo CSS da lista de pontos

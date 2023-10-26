@@ -67,6 +67,10 @@ function initWebSocket() {
                 enableButton();
                 break;
 
+            case 'SINAL_RADIO':
+                atualizaSinalRadio(valor);
+                break;
+
             default:
                 console.log('Nenhuma ação definida');
                 break;

@@ -35,6 +35,22 @@ echo "$file" >| server/headerStyle.h
 echo "Gerando headerStyle.h... OK"
 
 
+# Página de estilos das torres de sinal do radio (sinalRadio.css)
+echo "Gerando sinalRadio.h..."
+
+start='//Página de estilos das torres de sinal do radio
+char SINAL_RADIO_STYLE[] PROGMEM = R"=====(
+
+'
+end='
+
+)=====";'
+
+file="$start$(<pages/styles/sinalRadio.css)$end"
+echo "$file" >| server/sinalRadioStyle.h
+echo "Gerando sinalRadio.h... OK"
+
+
 # Página de estilos da página inicial do servidor (indexConfigStyle.css)
 echo "Gerando indexConfigStyle.h..."
 

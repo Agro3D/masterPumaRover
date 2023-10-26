@@ -13,5 +13,16 @@ char HEADER_PAGE[] PROGMEM = R"=====(
         <a href="/">Inicio</a>
         <a href="/configuracoes">Configurações</a>
     </div>
+    <div id="sinalRadio">
+        <div id="torres">
+            <div id="sinalRadioTorre1" class="comTorre"></div>
+            <div id="sinalRadioTorre2" class="comTorre"></div>
+            <div id="sinalRadioTorre3" class="comTorre"></div>
+            <div id="sinalRadioTorre4" class="comTorre"></div>
+        </div>
+        <div>
+            Rádio
+        </div>
+    </div>
 
 )=====";
