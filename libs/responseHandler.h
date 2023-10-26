@@ -75,6 +75,17 @@ void slaveReceiveHandler() {
     proximoComando();
     break;
 
+  case SINAL_RADIO:
+    sinalRadio = resposta["Mensagem"].as<int>();
+    Serial.println("Sinal de radio: " + String(sinalRadio));
+
+    if(sinalRadio){
+      webSocket.broadcastTXT("{\"Mensagem\": \"SINAL_RADIO\", \"Valor\": 4}");
+    }else{
+      webSocket.broadcastTXT("{\"Mensagem\": \"SINAL_RADIO\", \"Valor\": 0}");
+    }
+    break;
+
   case ALERT_MESSAGE:
     webSocket.broadcastTXT(resposta["Mensagem"].as<String>().c_str());
     break;

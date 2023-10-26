@@ -26,6 +26,14 @@ void setupServerStyles(){
   });
 
 
+  // Rota para o estilo CSS das torres de sinal do rádio. (sinalRadio.css)
+  server.on("/styles/sinalRadio.css", HTTP_GET, [](AsyncWebServerRequest *request){
+    printString("\n\n##### Requisicao Recebida: /styles/sinalRadio.css");
+    printString("Enviando sinalRadio.css ...");
+    request->send(200, "text/css", SINAL_RADIO_STYLE);
+  });
+
+
   // Rota para o estilo CSS da página inicial. (indexConfigStyle.css)
   server.on("/styles/indexConfig.css", HTTP_GET, [](AsyncWebServerRequest *request){
     printString("\n\n##### Requisicao Recebida: /styles/indexConfig.css");

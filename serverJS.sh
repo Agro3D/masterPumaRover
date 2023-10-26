@@ -83,6 +83,21 @@ echo "$file" >| server/webSocketScript.h
 echo "Gerando webSocketScript.h... OK"
 
 
+# Página de scripts do sinal de radio (sinalRadio.js)
+echo "Gerando sinalRadioScripts.h..."
+
+start='//Página de scripts do sinal de radio
+char SINAL_RADIO_SCRIPT[] PROGMEM = R"=====(
+'
+end='
+
+)=====";'
+
+file="$start$(<pages/scripts/sinalRadio.js)$end"
+echo "$file" >| server/sinalRadioScript.h
+echo "Gerando 
+
+
 echo "Gerando arquivos .js em arquivos .h... OK"
 echo ""
 echo ""

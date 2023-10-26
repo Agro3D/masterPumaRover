@@ -70,6 +70,8 @@ using namespace std;
 #define ALERT_MESSAGE 90                                    // Mensagem para mostrar um alerta no servidor
 
 
+#define SINAL_RADIO 95                                   // Mensagem para receber o status do sinal de rádio do escravo
+
 #define GET_STATUS 98                                       // Mensagem para solicitar o status do escravo
 #define ACK_MSG 99                                          // Mensagem de confirmação de comunicação com o escravo
 
@@ -98,6 +100,8 @@ bool hasComunication = false;                               // Flag para control
 bool serverStarted = false;                                 // Flag para controlar se o servidor web está iniciado
 bool receberMensagens = false;                              // Flag para controlar o recebimento de mensagens do escravo
 unsigned long lastHeapSend = 0;                             // Variável para armazenar o tempo da última verificação do heap
+
+int sinalRadio = 0;                                         // Int para controlar o sinal de rádio (0-4)
 
 String mensagemStr;                                         // String para armazenar a representação em texto do objeto JSON
 String heapSize;                                            // String para armazenar o tamanho da heap do mestre
@@ -162,6 +166,7 @@ void printFuncCore(String func);
 // Estilos CSS do servidor web
 #include "../server/globalStyle.h"          // Estilo CSS global do servidor web
 #include "../server/headerStyle.h"          // Estilo CSS do cabeçalho das páginas do servidor web
+#include "../server/sinalRadioStyle.h"      // Estilo CSS das torres de sinal do rádio
 #include "../server/indexConfigStyle.h"     // Estilo CSS da página principal (configuração)
 #include "../server/indexStatusStyle.h"     // Estilo CSS da página principal (status)
 #include "../server/listaPontosStyle.h"     // Estilo CSS da lista de pontos
@@ -173,6 +178,7 @@ void printFuncCore(String func);
 #include "../server/globalScript.h"         // Script JS global do servidor web
 #include "../server/indexConfigScript.h"    // Script JS da página principal (configuração)
 #include "../server/indexStatusScript.h"    // Script JS da página principal (status)
+#include "../server/sinalRadioScript.h"     // Script JS da torre de sinal do rádio
 #include "../server/pontosScript.h"         // Script JS da página arquivos
 #include "../server/webSocketScript.h"      // Script JS do webSocket
 

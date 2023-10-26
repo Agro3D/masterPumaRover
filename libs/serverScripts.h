@@ -33,6 +33,14 @@ void setupServerScripts(){
   });
 
 
+  // Rota para o script JS da torre de sinal de rádio.
+  server.on("/scripts/sinalRadio.js", HTTP_GET, [](AsyncWebServerRequest *request){
+    printString("\n\n##### Requisicao Recebida: /scripts/sinalRadio.js");
+    printString("Enviando sinalRadio.js ...");
+    request->send(200, "text/javascript", SINAL_RADIO_SCRIPT);
+  });
+
+
   // Rota para o script JS da página de pontos.
   server.on("/scripts/pontos.js", HTTP_GET, [](AsyncWebServerRequest *request){
     printString("\n\n##### Requisicao Recebida: /scripts/pontos.js");

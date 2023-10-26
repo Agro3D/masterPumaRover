@@ -138,6 +138,16 @@ void setupServer() {
   });
 
 
+// Rota para requisitar a cota de referência.
+  server.on("/getSinalRadio", HTTP_GET, [](AsyncWebServerRequest *request){
+    printString("\n\n##### Requisicao Recebida: /getsinalRadio");
+    printString("Enviando sinal de radio...");
+
+    // Enviar a cota de referência para o cliente com 3 casas decimais.
+    request->send(200, "text/plain", String(sinalRadio));
+  });
+
+
 
 // Rota para receber a lista de arquivos do escravo.
   server.on("/getPontos", HTTP_GET, [](AsyncWebServerRequest *request){
