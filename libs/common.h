@@ -101,7 +101,7 @@ bool serverStarted = false;                                 // Flag para control
 bool receberMensagens = false;                              // Flag para controlar o recebimento de mensagens do escravo
 unsigned long lastHeapSend = 0;                             // Variável para armazenar o tempo da última verificação do heap
 
-bool sinalRadio = true;                                     // Flag para controlar o sinal de rádio
+int sinalRadio = 0;                                         // Int para controlar o sinal de rádio (0-4)
 
 String mensagemStr;                                         // String para armazenar a representação em texto do objeto JSON
 String heapSize;                                            // String para armazenar o tamanho da heap do mestre
@@ -178,6 +178,7 @@ void printFuncCore(String func);
 #include "../server/globalScript.h"         // Script JS global do servidor web
 #include "../server/indexConfigScript.h"    // Script JS da página principal (configuração)
 #include "../server/indexStatusScript.h"    // Script JS da página principal (status)
+#include "../server/sinalRadioScript.h"     // Script JS da torre de sinal do rádio
 #include "../server/pontosScript.h"         // Script JS da página arquivos
 #include "../server/webSocketScript.h"      // Script JS do webSocket
 

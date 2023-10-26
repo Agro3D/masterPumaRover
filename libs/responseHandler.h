@@ -76,17 +76,13 @@ void slaveReceiveHandler() {
     break;
 
   case SINAL_RADIO:
-    sinalRadio = resposta["Mensagem"].as<bool>();
+    sinalRadio = resposta["Mensagem"].as<int>();
+    Serial.println("Sinal de radio: " + String(sinalRadio));
 
     if(sinalRadio){
-      // String mensagem = "Sinal de Rádio Reestabelecido";
-      // mensagem = "{\"Mensagem\": \"ALERT_MESSAGE\", \"Valor\": {\"Mensagem\": \"" + mensagem + "\", \"Cor\": \"verde\"}}";
-
-      // webSocket.broadcastTXT(mensagem);
-      Serial.println("Sinal de Rádio Reestabelecido");
+      webSocket.broadcastTXT("{\"Mensagem\": \"SINAL_RADIO\", \"Valor\": 4}");
     }else{
-      // webSocket.broadcastTXT("{\"Mensagem\": \"SINAL_RADIO\", \"Valor\": " + String(sinalRadio) + "}");
-      Serial.println("Sinal de Rádio Perdido");
+      webSocket.broadcastTXT("{\"Mensagem\": \"SINAL_RADIO\", \"Valor\": 0}");
     }
     break;
 

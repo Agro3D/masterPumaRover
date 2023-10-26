@@ -21,8 +21,11 @@ char INDEX_PAGE[] PROGMEM = R"=====(
 
         <script src="scripts/webSocket.js"></script>
         <script src="scripts/global.js"></script>
+        <script src="scripts/sinalRadio.js"></script>
+
         <script src="scripts/indexConfig.js"></script>
         <script src="scripts/indexStatus.js"></script>
+
         <script src="scripts/pontos.js"></script>
     </head>
 

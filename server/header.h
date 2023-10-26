@@ -9,10 +9,13 @@ char HEADER_PAGE[] PROGMEM = R"=====(
         <a href="/">Inicio</a>
         <a href="/configuracoes">Configurações</a>
     </div>
+    
     <div id="mobileMenu">
         <a href="/">Inicio</a>
         <a href="/configuracoes">Configurações</a>
     </div>
+
+    <!-- Icone de intensidade do sinal do rádio -->
     <div id="sinalRadio">
         <div id="torres">
             <div id="sinalRadioTorre1" class="comTorre"></div>

@@ -2,8 +2,8 @@
 char SINAL_RADIO_STYLE[] PROGMEM = R"=====(
 
 #sinalRadio{
-    width: 60px;
-    height: 80px;
+    width: calc(0.9 * 8vh);
+    height: calc(0.9 * 8vh);
     position: absolute;
     right: 15px;
     display: flex;
@@ -35,14 +35,12 @@ char SINAL_RADIO_STYLE[] PROGMEM = R"=====(
 #sinalRadioTorre3{
     width: 15%;
     height: 60%;
-    border: 2px solid #555;
     border-radius: 6px 6px 0px 0px;
 }
 
 #sinalRadioTorre4{
     width: 15%;
     height: 80%;
-    border: 2px solid #555;
     border-radius: 6px 6px 0px 0px;
 }
 
@@ -52,6 +50,13 @@ char SINAL_RADIO_STYLE[] PROGMEM = R"=====(
 
 .semTorre{
     background-color: #555;
+}
+
+@media (orientation: landscape){
+    #sinalRadio{
+        width: calc(0.9 * 10vh);
+        height: calc(0.9 * 10vh);
+    }
 }
 
 )=====";
