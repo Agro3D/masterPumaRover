@@ -166,4 +166,11 @@ void printStackCore(String func){
   printString(String(stackLeft));
 }
 
+
+// Função para converter graus e minutos para graus decimais
+String converterGrausDecimais(int graus, float minutos){
+  String grausDecimais = String(graus + (minutos/60), 8) + "º";
+  return grausDecimais;
+}
+
 #endif // UTILS_H

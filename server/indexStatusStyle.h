@@ -118,6 +118,15 @@ char INDEX_STATUS_STYLE[] PROGMEM = R"=====(
     cursor: pointer;
 }
 
+#latlon{
+    width: auto;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+
+
+
 #informacoes{
     display: flex;
     margin-inline: 3vw;

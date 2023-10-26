@@ -176,9 +176,28 @@ char INDEX_PAGE[] PROGMEM = R"=====(
                     
                     <div id="cotaReferencia">
                         <button id="cotaBotao" onclick="pontoReferencia()">Cota <br /> Referencia <br /> <br /></button>
-                        <!-- <div id="cotaReferenciaValor">600,256</div> -->
                     </div>
 
+                </div>
+                                
+                <div id="latlon" class="divs">
+                    <div id="latitude">
+                        <div class="tituloLatLon">
+                            latitude:
+                        </div>
+                        <div class="latlonValor">
+                            -12.12345678º
+                        </div>
+                    </div>
+                    
+                    <div id="longitude">
+                        <div class="tituloLatLon">
+                            longitude:
+                        </div>
+                        <div class="latlonValor">
+                            -12.12345678º
+                        </div>
+                    </div>
                 </div>
 
 

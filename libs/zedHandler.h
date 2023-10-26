@@ -47,6 +47,31 @@ void processaNMEAGGA(String nmeastr) {
     // Verifica qual o elemento da mensagem
     switch (commaCount){
 
+      // Latitude é o terceiro elemento da mensagem
+      case 3:
+        latitude = converterGrausDecimais(String(piece).substring(0, 2).toInt(),
+                                          String(piece).substring(2).toFloat());
+        break;
+      
+      // Indicador de norte/sul é o quarto elemento da mensagem
+      case 4:
+        if (piece == "S"){ latitude = "-" + latitude; }
+        break;
+
+      // Longitude é o quinto elemento da mensagem
+      case 5:
+        longitude = converterGrausDecimais(String(piece).substring(0, 3).toInt(),
+                                           String(piece).substring(3).toFloat());
+        break;
+      
+      // Indicador de leste/oeste é o sexto elemento da mensagem
+      case 6:
+        if (piece == "W"){ longitude = "-" + longitude; }
+
+        // Envia a latitude e longitude para o cliente
+        webSocket.broadcastTXT("{\"Mensagem\": \"LAT_LON\", \"Valor\": {\"lat\":\"" + latitude + "\", \"lon\":\"" + longitude + "\"}}");
+        break;
+
       // Status RTK é o sétimo elemento da mensagem
       case 7:
         if(piece[0] != RTKAtual){

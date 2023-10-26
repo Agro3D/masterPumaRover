@@ -9,6 +9,7 @@ function initIndex(){
     getPontos();
     getSinal();
     getCotaReferencia();
+    troca();
 }
 
 function novoTrabalho() {

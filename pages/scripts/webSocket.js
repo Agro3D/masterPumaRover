@@ -39,6 +39,11 @@ function initWebSocket() {
                 else
                     document.getElementById('cotaQuadro').className = 'cotaErrada';
                 break;
+
+            case 'LAT_LON':
+                document.getElementsByClassName('latlonValor')[0].innerHTML = valor["lat"];
+                document.getElementsByClassName('latlonValor')[1].innerHTML = valor["lon"];
+                break;
             
             case 'RTK':
                 atualizaStatusRTK(parseInt(valor));

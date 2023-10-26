@@ -110,6 +110,8 @@ String listaArquivosStr="";                                 // String para armaz
 StaticJsonDocument<30720> listaPontos;                      // Iniciar o objeto JSON
 
 String cota;                                                // Variável para armazenar o valor da cota atual
+String latitude;                                            // Variável para armazenar o valor da latitude atual
+String longitude;                                           // Variável para armazenar o valor da longitude atual
 char RTKAtual = '-1';                                       // Variável para armazenar o valor do status atual do RTK
 String precisaoVertical = "-1";                             // Variável para armazenar o valor da precisão vertical
 String precisaoHorizontal = "-1";                           // Variável para armazenar o valor da precisão horizontal
@@ -151,6 +153,7 @@ void novoComando(int novoComando, String novaMensagem);
 void proximoComando();
 void printListaComandos();
 void printFuncCore(String func);
+String converterGrausDecimais(int graus, float minutos);
 
 
 
