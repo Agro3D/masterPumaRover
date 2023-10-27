@@ -181,21 +181,21 @@ char INDEX_PAGE[] PROGMEM = R"=====(
                 </div>
                                 
                 <div id="latlon" class="divs">
-                    <div id="latitude">
-                        <div class="tituloLatLon">
+                    <div id="latitude" class="latlonDiv">
+                        <div class="latLonTitulo">
                             latitude:
                         </div>
                         <div class="latlonValor">
-                            -12.12345678º
+                            Carregando...
                         </div>
                     </div>
                     
-                    <div id="longitude">
-                        <div class="tituloLatLon">
+                    <div id="longitude" class="latlonDiv">
+                        <div class="latLonTitulo">
                             longitude:
                         </div>
                         <div class="latlonValor">
-                            -12.12345678º
+                            Carregando...
                         </div>
                     </div>
                 </div>

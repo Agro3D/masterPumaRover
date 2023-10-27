@@ -66,7 +66,8 @@ char INDEX_STATUS_STYLE[] PROGMEM = R"=====(
     padding-inline: 2vh;
     border: 4px solid gray;
     border-radius: 5px;
-    margin-inline: 5vh;
+    margin-left: 5vh;
+    margin-right: 5vh;
     color: white;
 }
 
@@ -122,9 +123,26 @@ char INDEX_STATUS_STYLE[] PROGMEM = R"=====(
     width: auto;
     display: flex;
     flex-direction: row;
-    justify-content: space-evenly;
+    margin-bottom: 4vh;
 }
 
+.latlonDiv{
+    width: 100%;
+    margin-left: 2vw;
+}
+
+.latLonTitulo{
+    font-size: 4.5vw;
+    font-weight: bold;
+    margin-right: 1vh;
+}
+
+.latlonValor{
+    font-size: 4vw;
+    font-weight: bold;
+    margin-top: 2vh;
+    margin-left: 10%;
+}
 
 
 #informacoes{
@@ -208,13 +226,27 @@ char INDEX_STATUS_STYLE[] PROGMEM = R"=====(
  */
 
 
+ @media (max-width: 320px) {
+    #latlon{
+        flex-direction: column;
+        margin-bottom: 0;
+    }
+
+    .latlonDiv{
+        margin-bottom: 2vh;
+    }
+ }
+
+
 @media (max-width: 850px) {
 
     #cotaQuadro{
         padding-top: 0;
         padding-bottom: 0;
         margin-block: 0;
-        margin-inline: 2vh;
+        /* margin-inline: 2vh; */
+        margin-left: 2vh;
+        margin-right: 2vh;
     }
 
     #tituloCota{
