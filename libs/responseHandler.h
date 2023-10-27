@@ -46,6 +46,9 @@ void slaveReceiveHandler() {
     RTKAtual = '-1';
     precisaoHorizontal = -1;
     precisaoVertical = -1;
+    cotaRef = FLT_MIN;
+    cotaRefInferior = FLT_MIN;
+    cotaRefSuperior = FLT_MIN;
     deserializeJson(listaPontos, "{\"Pontos\": []}");
 
     proximoComando();

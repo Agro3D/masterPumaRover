@@ -1,11 +1,14 @@
 //Página de scripts da página inicial do servidor
 char INDEX_STATUS_SCRIPT[] PROGMEM = R"=====(
     
-function voltar() {
+function finalizarTrabalho() {
     document.getElementById("configuracoes").className = "visivel";
     document.getElementById("status").className = "naoVisivel";
 
     document.getElementById("cotaValor").innerHTML = "000,000";
+    document.getElementById("cotaBotao").innerHTML = "Cota <br /> Referencia <br /> <br /> ";
+    document.getElementsByClassName("latlonValor")[0].innerHTML = "Carregando...";
+    document.getElementsByClassName("latlonValor")[1].innerHTML = "Carregando...";
     document.getElementById("precisaoHorizontalValor").innerHTML = "Carregando...";
     document.getElementById("precisaoVerticalValor").innerHTML = "Carregando...";
     document.getElementById("statusRTKValor").innerHTML = "Carregando...";

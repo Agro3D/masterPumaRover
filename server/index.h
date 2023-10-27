@@ -40,7 +40,7 @@ char INDEX_PAGE[] PROGMEM = R"=====(
             <!-- Tela de configurações -->
             <div id="configuracoes" class="visivel">
                 <div class="divs bordas">
-                    <p class="titulo tituloPrincipal" onclick="atualizaSinalRadio(2)">Rádio</p>
+                    <p class="titulo tituloPrincipal">Rádio</p>
 
                     <div id="configuracaoRadio">
                     
@@ -218,7 +218,7 @@ char INDEX_PAGE[] PROGMEM = R"=====(
                     </div>
                     
                     <div class="button">
-                        <button onclick="voltar()" id="botaoFinalizar"> Finalizar </br> Trabalho </button>
+                        <button onclick="finalizarTrabalho()" id="botaoFinalizar"> Finalizar </br> Trabalho </button>
                     </div>
                 </div>
 
