@@ -101,18 +101,18 @@ void processaNMEAGGA(String nmeastr) {
   }
 
   // Envia a cota para o cliente
-  printString("");
-  printStringNoBreak("Cota: " + String(cota));
+  // printString("");
+  // printStringNoBreak("Cota: " + String(cota));
 
   if (cota.toFloat() >= cotaRefInferior && cota.toFloat() <= cotaRefSuperior){
-    printString(" dentro da faixa de referência");
+    // printString(" dentro da faixa de referência");
     webSocket.broadcastTXT("{\"Mensagem\": \"Cota\", \"Valor\": " + cota + ", \"Status\": \"CERTO\"}");
   } else{
-    printString(" fora da faixa de referência");
+    // printString(" fora da faixa de referência");
     webSocket.broadcastTXT("{\"Mensagem\": \"Cota\", \"Valor\": " + cota + ", \"Status\": \"ERRADO\"}");
   }
 
-  printString("Status code: " + String(RTKAtual));
+  // printString("Status code: " + String(RTKAtual));
 }
 
 

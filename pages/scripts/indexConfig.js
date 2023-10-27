@@ -170,15 +170,7 @@ function getFiles(){
         return response.json();
     }).then(function(json) {
 
-        json.forEach(arquivo => {
-
-            var select = document.getElementById("arquivosSelect");
-            var option = document.createElement("option");
-            option.text = arquivo["Arquivo"];
-            option.value = arquivo["Arquivo"];
-            select.appendChild(option);
-            
-        });
+        listarArquivos(json['Pastas']);
 
     }).catch(error => {
         console.error('There has been a problem with your fetch operation:', error);

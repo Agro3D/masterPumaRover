@@ -66,7 +66,7 @@ function initWebSocket() {
                 break;
 
             case 'LISTAR_ARQUIVOS':
-                listarArquivos(valor);
+                listarArquivos(valor['Pastas']);
                 break;
 
             case 'ALERT_MESSAGE':

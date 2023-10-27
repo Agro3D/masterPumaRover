@@ -63,6 +63,7 @@ function novoTrabalho() {
     }
 
     document.getElementById("cotaValor").innerHTML = "000.000";
+    document.getElementById('cotaQuadro').className = 'cotaErrada';
     document.getElementById("cotaBotao").innerHTML = "Cota <br /> Referencia <br /> <br /> ";
     document.getElementsByClassName("latlonValor")[0].innerHTML = "Carregando...";
     document.getElementsByClassName("latlonValor")[1].innerHTML = "Carregando...";
@@ -172,15 +173,9 @@ function getFiles(){
         return response.json();
     }).then(function(json) {
 
-        json.forEach(arquivo => {
+        console.log(json['Pastas']);
 
-            var select = document.getElementById("arquivosSelect");
-            var option = document.createElement("option");
-            option.text = arquivo["Arquivo"];
-            option.value = arquivo["Arquivo"];
-            select.appendChild(option);
-            
-        });
+        listarArquivos(json['Pastas']);
 
     }).catch(error => {
         console.error('There has been a problem with your fetch operation:', error);
