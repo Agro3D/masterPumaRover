@@ -16,7 +16,7 @@ char HEADER_PAGE[] PROGMEM = R"=====(
     </div>
 
     <!-- Icone de intensidade do sinal do rádio -->
-    <div id="sinalRadio">
+    <div id="sinalRadio" onclick="atualizaSinalRadio(0)">
         <div id="torres">
             <div id="sinalRadioTorre1" class="comTorre"></div>
             <div id="sinalRadioTorre2" class="comTorre"></div>

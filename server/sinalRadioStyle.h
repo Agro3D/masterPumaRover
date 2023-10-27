@@ -48,6 +48,10 @@ char SINAL_RADIO_STYLE[] PROGMEM = R"=====(
     background-color: aliceblue;
 }
 
+.semSinal{
+    background-color: red;
+}
+
 .semTorre{
     background-color: #555;
 }

@@ -31,6 +31,25 @@ function atualizaSinalRadio(valor){
         else
             elementos[i].className = "semTorre";
     }
+
+    
+    if(valor == 0){
+        // Loop para piscar quando perder sinal
+        var piscar = setInterval(function(){
+            elementos.forEach(elemento => {
+                if(elemento.className == "semTorre")
+                    elemento.className = "semSinal";
+                else
+                    elemento.className = "semTorre";
+                });
+        }, 200);
+
+        // Salvar o ID do intervalo nas variáveis do navegador
+        localStorage.setItem("piscar", piscar);
+    }
+    else{
+        clearInterval(localStorage.getItem("piscar"));
+    }
 }
 
 )=====";
