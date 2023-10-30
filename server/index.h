@@ -112,6 +112,21 @@ char INDEX_PAGE[] PROGMEM = R"=====(
                 </div>
                 
                 
+                <div class="divs">
+                    <div id="bastaoDiv">
+
+                        <p class="titulo">Altura do Bastão</p>
+
+                        <div id="alturaBastaoDiv">
+                            <input type="number" name="alturaBastao" id="alturaBastao"
+                            placeholder="Altura do Bastão" class="input inputText"
+                            min="0" max="100" step="0.1"> M
+                        </div>
+                            
+                    </div>
+                </div>
+
+
                 <div class="divs bordas">
                     
                     <div id="arquivos">
@@ -139,7 +154,9 @@ char INDEX_PAGE[] PROGMEM = R"=====(
                 </div>
 
                 <div class="button">
-                    <button onclick="novoTrabalho()" id="botaoNovaConfig" class="disabled" disabled>Iniciar</button>
+                    <button onclick="novoTrabalho()" id="botaoNovaConfig" class="disabled" disabled>
+                        Iniciar
+                    </button>
                 </div>
             </div>
 

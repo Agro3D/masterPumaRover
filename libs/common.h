@@ -121,6 +121,8 @@ float cotaRefInferior = FLT_MIN;                            // Variável para ar
 float cotaRefSuperior = FLT_MIN;                            // Variável para armazenar o valor da cota de referência superior
 char statusAtual;                                           // Variável para armazenar o status atual do escravo
 
+float alturaBastao = 0;                                     // Variável para armazenar a altura do bastão que segura o rover
+
 int comandoEscravo = -1;                                    // Flag para controlar o envio de dados para o escravo
 vector<int> listaComandos;                                  // Lista de comandos para o escravo
 bool waitResponse = false;                                  // Flag para controlar o recebimento de dados do escravo

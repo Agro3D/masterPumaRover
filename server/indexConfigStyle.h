@@ -62,11 +62,33 @@ char INDEX_CONFIG_STYLE[] PROGMEM = R"=====(
     padding: 1vh;
 }
 
+#bastaoDiv{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-bottom: 5vh;
+}
+
+#alturaBastaoDiv{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin-left: 1vw;
+    width: 20%;
+}
+
 .input{
     margin: 0.3vh 0vh 0vh 0.6vh;
     width: 60%;
     height: 2.5vh;
     border-radius: 8px;
+}
+
+.inputText{
+    width: 100%;
+    text-align: center;
+    margin-right: 1vw;
 }
 
 .inputSelect{
@@ -119,7 +141,7 @@ char INDEX_CONFIG_STYLE[] PROGMEM = R"=====(
 
 #constelacoesOptions{
     column-count: 2;
-    margin-bottom: 1vh;
+    margin-left: 2vw;
 }
 
 #arquivos{

@@ -46,6 +46,7 @@ void slaveReceiveHandler() {
     RTKAtual = '-1';
     precisaoHorizontal = -1;
     precisaoVertical = -1;
+    alturaBastao = 0;
     cotaRef = FLT_MIN;
     cotaRefInferior = FLT_MIN;
     cotaRefSuperior = FLT_MIN;
@@ -106,7 +107,7 @@ void slaveReceiveHandler() {
 // Função para processar a reposta de status do escravo
 void getStatus(String mensagem){
   
-  DynamicJsonDocument respostaStatus(62);
+  DynamicJsonDocument respostaStatus(64);
   deserializeJson(respostaStatus, mensagem);
 
   String statusStr;
@@ -123,6 +124,8 @@ void getStatus(String mensagem){
     statusStr = "TRABALHANDO";
     statusAtual = char(TRABALHANDO);
     receberMensagens = true;
+    alturaBastao = respostaStatus["AlturaBastao"].as<float>();
+    printString("Altura do bastao: " + String(alturaBastao) + " m");
     break;
 
   default:

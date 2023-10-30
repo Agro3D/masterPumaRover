@@ -43,6 +43,9 @@ void setupServer() {
     printJson(json);
     printString("");
 
+    alturaBastao = json["alturaBastao"].as<float>();
+    printString("Altura do bastao: " + String(alturaBastao) + " m");
+
     // Adicionar novo comando na lista de comandos a serem enviados para o escravo
     novoComando(NOVO_TRABALHO, json.as<String>());
     novoComando(LISTAR_PONTOS, "");

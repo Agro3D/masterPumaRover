@@ -47,6 +47,15 @@ function novoTrabalho() {
     configJson.velocidadeTransmissao = document.getElementById("velocidadeRadioSelect").value;
     configJson.taxaAtualizacao = document.getElementById("frequenciaTransmissao").value;
 
+    
+    var alturaBastao = document.getElementById("alturaBastao").value;
+
+    if (alturaBastao == ""){
+        configJson.alturaBastao = 0;
+    }else{
+        configJson.alturaBastao = alturaBastao;
+    }
+
     var NomeArquivo = document.getElementById("arquivosSelect").value;
 
     if (NomeArquivo != 0 && NomeArquivo != 1) {
