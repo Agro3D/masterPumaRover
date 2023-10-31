@@ -45,6 +45,12 @@ void setup() {
   printString("Comunicação UART (ZED) Inicializada");
 
 
+  printString("");
+  printString("Iniciando Constantes para conversão de coordenadas");
+  initLLHtoECEF();                                                // Inicia as constantes da conversão de coordenadas LLH para ECEF.
+  printString("Constantes para conversão de coordenadas iniciadas");
+
+
 
   printString("");
   printString("Inicializando o WiFi");

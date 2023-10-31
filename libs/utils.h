@@ -173,4 +173,30 @@ String converterGrausDecimais(int graus, float minutos){
   return grausDecimais;
 }
 
+
+// Função para iniciar constantes da conversão de coordenadas LLH para ECEF
+void initLLHtoECEF(){
+  // Inicia as constantes da conversão de coordenadas LLH para ECEF
+  a = 6378137.0;
+  b = 6356752.314245;
+  f = 1/298.257223563;
+  e_sq = f * (2-f);
+}
+
+
+// Função para converter coordenadas LLH para ECEF
+void LLHtoECEF(float lat, float lon, float alt){
+  // Converte as coordenadas LLH para ECEF
+  float lamb = lat * DEG_TO_RAD;
+  float phi = lon * DEG_TO_RAD;
+  float h = alt;
+
+  float s = sin(lamb);
+  float N = a / sqrt(1 - e_sq * s * s);
+
+  X = (h + N) * cos(lamb) * cos(phi);
+  Y = (h + N) * cos(lamb) * sin(phi);
+  Z = (h + (pow(b, 2) / pow(a, 2)) * N) * s;
+}
+
 #endif // UTILS_H

@@ -93,6 +93,11 @@ void processaNMEAGGA(String nmeastr) {
       // Diferença elipsoidal é o décimo segundo elemento da mensagem
       case 12:
         cota = String(cota.toFloat() - alturaBastao + String(piece).toFloat(), 3);
+
+        LLHtoECEF(latitude.toFloat(), longitude.toFloat(), cota.toFloat());
+        printString("X: " + String(X));
+        printString("Y: " + String(Y));
+        printString("Z: " + String(Z));
         break;
         
       default:

@@ -112,9 +112,20 @@ StaticJsonDocument<30720> listaPontos;                      // Iniciar o objeto 
 String cota;                                                // Variável para armazenar o valor da cota atual
 String latitude;                                            // Variável para armazenar o valor da latitude atual
 String longitude;                                           // Variável para armazenar o valor da longitude atual
+String X;                                                   // Variável para armazenar o valor da coordenada X atual
+String Y;                                                   // Variável para armazenar o valor da coordenada Y atual
+String Z;                                                   // Variável para armazenar o valor da coordenada Z atual
+
 char RTKAtual = '-1';                                       // Variável para armazenar o valor do status atual do RTK
 String precisaoVertical = "-1";                             // Variável para armazenar o valor da precisão vertical
 String precisaoHorizontal = "-1";                           // Variável para armazenar o valor da precisão horizontal
+
+
+double a = 0;                                               // Variável para armazenar o valor do semi-eixo maior
+double b = 0;                                               // Variável para armazenar o valor do semi-eixo menor
+double f = 0;                                               // Variável para armazenar o valor do achatamento(Flattening)
+double e_sq = 0;                                            // Variável para armazenar o valor do primeiro excentricidade
+
 
 float cotaRef = FLT_MIN;                                    // Variável para armazenar o valor da cota de referência
 float cotaRefInferior = FLT_MIN;                            // Variável para armazenar o valor da cota de referência inferior
@@ -156,6 +167,8 @@ void proximoComando();
 void printListaComandos();
 void printFuncCore(String func);
 String converterGrausDecimais(int graus, float minutos);
+void initLLHtoECEF();
+void LLHtoECEF(float lat, float lon, float alt);
 
 
 
