@@ -110,6 +110,7 @@ vector<String> listaMensagens;                              // Lista de mensagen
 String listaArquivosStr="";                                 // String para armazenar a lista de arquivos do escravo
 StaticJsonDocument<30720> listaPontos;                      // Iniciar o objeto JSON
 
+String cotaRefAux;                                          // Variável para armazenar a string que contem a cota de referência
 String cota;                                                // Variável para armazenar o valor da cota atual
 String latitude;                                            // Variável para armazenar o valor da latitude atual
 String longitude;                                           // Variável para armazenar o valor da longitude atual
@@ -158,6 +159,7 @@ void printListaComandos();
 void printFuncCore(String func);
 String converterGrausDecimais(int graus, float minutos);
 void atualizaSinalRadio(int sinalRadio);
+void setCotaReferencia(float cota);
 
 
 

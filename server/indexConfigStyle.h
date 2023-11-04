@@ -72,10 +72,9 @@ char INDEX_CONFIG_STYLE[] PROGMEM = R"=====(
 #alturaBastaoDiv{
     display: flex;
     flex-direction: row;
-    justify-content: center;
     align-items: center;
     margin-left: 1vw;
-    width: 20%;
+    width: 100%;
 }
 
 .input{
@@ -86,7 +85,7 @@ char INDEX_CONFIG_STYLE[] PROGMEM = R"=====(
 }
 
 .inputText{
-    width: 100%;
+    width: 20%;
     text-align: center;
     margin-right: 1vw;
 }

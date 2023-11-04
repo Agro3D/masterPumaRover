@@ -76,6 +76,10 @@ function initWebSocket() {
                 atualizaSinalRadio(valor);
                 break;
 
+            case 'COTA_REFERENCIA':
+                document.getElementById("cotaBotao").innerHTML = "Cota <br /> Referencia <br /> <br /> " + valor + " M";
+                break;
+
             default:
                 console.log('Nenhuma ação definida');
                 break;

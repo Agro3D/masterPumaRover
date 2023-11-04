@@ -67,9 +67,14 @@ void slaveReceiveHandler() {
     break;
 
   case LISTAR_PONTOS:
+    // Listando e enviando os pontos para o servidor
     listarPontos(resposta["Mensagem"].as<String>());
-    Serial.println(listaPontos.as<String>());
     webSocket.broadcastTXT("{\"Mensagem\": \"LISTAR_PONTOS\", \"Valor\": " + listaPontos.as<String>() + "}");
+
+    // Coletando, configurando e enviando a cota referencia para o servidor
+    cotaRefAux = listaPontos["Pontos"][listaPontos["Pontos"].size()-1].as<String>();
+    setCotaReferencia(cotaRefAux.substring(cotaRefAux.indexOf("Cota Referencia: ") + 17,
+                                          cotaRefAux.indexOf("m<br />")).toFloat());
     proximoComando();
     break;
 

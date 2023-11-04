@@ -185,4 +185,17 @@ void atualizaSinalRadio(int sinalRadio){
     }
 }
 
+
+// Função atribuir cota de referência
+void setCotaReferencia(float cota){
+  cotaRef = cota;
+  cotaRefInferior = cotaRef - MARGEM_COTA_REFERENCIA / 100.0;
+  cotaRefSuperior = cotaRef + MARGEM_COTA_REFERENCIA / 100.0;
+
+  webSocket.broadcastTXT("{\"Mensagem\": \"COTA_REFERENCIA\", \"Valor\": " + String(cotaRef, 3) + "}");
+}
+
+
+
+
 #endif // UTILS_H
