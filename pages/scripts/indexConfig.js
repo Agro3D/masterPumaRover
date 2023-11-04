@@ -116,6 +116,8 @@ function limparConteudo(){
 
     document.getElementById("frequenciaTransmissao").value = 1;
 
+    document.getElementById("alturaBastao").value = 0;
+
     document.getElementById("GPS").checked = true;
     document.getElementById("GLONASS").checked = true;
     document.getElementById("GALILEO").checked = true;

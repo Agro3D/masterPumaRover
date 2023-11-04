@@ -34,7 +34,7 @@ void slaveSendHandler() {
     mensagemStr = "";                                         // Limpe a mensagem
     hasComunication = true;
       break;
-    } else {                                                  // Se a resposta do escravo não for "ACK", continue no loop
+    } else if (slaveResponse.indexOf("NACK") != -1){          // Se a resposta do escravo não for "ACK", continue no loop
       printString("\nErro ao enviar dados para o escravo");
 
       if (x == SEND_DATA_TRIES) {                             // Se o número máximo de tentativas for atingido, tente reestabelecer a comunicação com o escravo
@@ -51,7 +51,27 @@ void slaveSendHandler() {
         
       } else{                                                 // Se o número máximo de tentativas não for atingido, continue no loop
         printString("Tentando novamente...");
+      }                                                       // Se a mensagem recebida
+    } else if (slaveResponse.indexOf("\"Comando\":" + String(ALERT_MESSAGE)) != -1 ||
+               slaveResponse.indexOf("\"Comando\":" + String(SINAL_RADIO)) != -1){
+      
+      DynamicJsonDocument resposta(128);
+      deserializeJson(resposta, slaveResponse);                // Le a resposta do escravo e converte para json
+
+      printString("Mensagem de alerta recebida: ");
+      printString("Mensagem: " + slaveResponse);
+
+      switch (resposta["Comando"].as<int>())
+      {
+      case ALERT_MESSAGE:
+        webSocket.broadcastTXT(resposta["Mensagem"].as<String>().c_str());
+        break;
+      case SINAL_RADIO:
+        atualizaSinalRadio(resposta["Mensagem"].as<int>());
+        break;
       }
+      
+      printString("Fazer Algo");
     }
   }
 

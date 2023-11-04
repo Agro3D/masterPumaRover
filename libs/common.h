@@ -96,13 +96,14 @@ HardwareSerial MySerialZed(0);                              // Use UART0
 AsyncWebServer server(SERVER_PORT);                         // Cria o servidor web na porta 80
 WebSocketsServer webSocket = WebSocketsServer(81);          // Cria o servidor web socket na porta 81
 HardwareSerial MySerial(1);                                 // Use the 2nd hardware serial port. 0 is connected to the USB
+
 bool hasComunication = false;                               // Flag para controlar se a comunicação com o escravo está estabelecida
 bool serverStarted = false;                                 // Flag para controlar se o servidor web está iniciado
 bool receberMensagens = false;                              // Flag para controlar o recebimento de mensagens do escravo
 unsigned long lastHeapSend = 0;                             // Variável para armazenar o tempo da última verificação do heap
 
 int sinalRadio = 0;                                         // Int para controlar o sinal de rádio (0-4)
-
+bool mensagemDeAlerta = false;                              // Flag para controlar se a mensagem recebida foi de alerta
 String mensagemStr;                                         // String para armazenar a representação em texto do objeto JSON
 String heapSize;                                            // String para armazenar o tamanho da heap do mestre
 vector<String> listaMensagens;                              // Lista de mensagens referentes aos comandos enviados para o escravo
@@ -156,6 +157,7 @@ void proximoComando();
 void printListaComandos();
 void printFuncCore(String func);
 String converterGrausDecimais(int graus, float minutos);
+void atualizaSinalRadio(int sinalRadio);
 
 
 

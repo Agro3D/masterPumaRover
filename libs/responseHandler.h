@@ -80,14 +80,7 @@ void slaveReceiveHandler() {
     break;
 
   case SINAL_RADIO:
-    sinalRadio = resposta["Mensagem"].as<int>();
-    Serial.println("Sinal de radio: " + String(sinalRadio));
-
-    if(sinalRadio){
-      webSocket.broadcastTXT("{\"Mensagem\": \"SINAL_RADIO\", \"Valor\": 4}");
-    }else{
-      webSocket.broadcastTXT("{\"Mensagem\": \"SINAL_RADIO\", \"Valor\": 0}");
-    }
+    atualizaSinalRadio(resposta["Mensagem"].as<int>());
     break;
 
   case ALERT_MESSAGE:

@@ -173,4 +173,16 @@ String converterGrausDecimais(int graus, float minutos){
   return grausDecimais;
 }
 
+
+// Atualizar sinal de rádio no servidor
+void atualizaSinalRadio(int sinalRadio){
+    Serial.println("Sinal de radio: " + String(sinalRadio));
+
+    if(sinalRadio){
+      webSocket.broadcastTXT("{\"Mensagem\": \"SINAL_RADIO\", \"Valor\": 4}");
+    }else{
+      webSocket.broadcastTXT("{\"Mensagem\": \"SINAL_RADIO\", \"Valor\": 0}");
+    }
+}
+
 #endif // UTILS_H
