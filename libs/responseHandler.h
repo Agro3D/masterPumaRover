@@ -67,7 +67,8 @@ void slaveReceiveHandler() {
     break;
 
   case LISTAR_PONTOS:
-    listarPontos(resposta["Mensagem"].as<String>());    
+    listarPontos(resposta["Mensagem"].as<String>());
+    Serial.println(listaPontos.as<String>());
     webSocket.broadcastTXT("{\"Mensagem\": \"LISTAR_PONTOS\", \"Valor\": " + listaPontos.as<String>() + "}");
     proximoComando();
     break;
@@ -165,7 +166,7 @@ void listarPontos(String resposta) {
     deserializeJson(listaPontos, "[]");
   } else {
     resposta.replace("\\n", "<br />");
-    DynamicJsonDocument Pontos(4096);
+    DynamicJsonDocument Pontos(10240);
     deserializeJson(Pontos, resposta);
 
     for (int i = 0; i < Pontos["Pontos"].size(); i++) {
