@@ -72,9 +72,13 @@ void slaveReceiveHandler() {
     webSocket.broadcastTXT("{\"Mensagem\": \"LISTAR_PONTOS\", \"Valor\": " + listaPontos.as<String>() + "}");
 
     // Coletando, configurando e enviando a cota referencia para o servidor
-    cotaRefAux = listaPontos["Pontos"][listaPontos["Pontos"].size()-1].as<String>();
-    setCotaReferencia(cotaRefAux.substring(cotaRefAux.indexOf("Cota Referencia: ") + 17,
-                                          cotaRefAux.indexOf("m<br />")).toFloat());
+    if (listaPontos["Pontos"].size() > 0) {
+      cotaRefAux = listaPontos["Pontos"][listaPontos["Pontos"].size()-1].as<String>();
+      if (cotaRefAux.indexOf("Cota Referencia: 0.00 m") == -1){
+        setCotaReferencia(cotaRefAux.substring(cotaRefAux.indexOf("Cota Referencia: ") + 17,
+                                                cotaRefAux.indexOf("m<br />")).toFloat());
+      }
+    }
     proximoComando();
     break;
 
