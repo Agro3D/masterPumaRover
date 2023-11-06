@@ -46,8 +46,7 @@ void ProcessCoreLoop(void *arg) {
       }
     }
 
-  timerBotao = 0;
-
+    timerBotao = 0;
 
     delay(300); 
   }

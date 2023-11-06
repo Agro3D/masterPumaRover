@@ -2,10 +2,10 @@
 char SINAL_RADIO_STYLE[] PROGMEM = R"=====(
 
 #sinalRadio{
-    width: calc(0.9 * 8vh);
-    height: calc(0.9 * 8vh);
+    width: calc(0.8 * 8vh);
+    height: calc(0.8 * 8vh);
     position: absolute;
-    right: 15px;
+    right: 5px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;

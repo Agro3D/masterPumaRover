@@ -82,6 +82,7 @@ char INDEX_CONFIG_STYLE[] PROGMEM = R"=====(
     width: 60%;
     height: 2.5vh;
     border-radius: 8px;
+    color: black;
 }
 
 .inputText{
@@ -103,6 +104,7 @@ char INDEX_CONFIG_STYLE[] PROGMEM = R"=====(
     font-size: 2vh;
     margin: 1.5vh 0;
     border: 0;
+    color: black;
 }
 
 #botaoNovoArquivo:hover{
@@ -178,6 +180,16 @@ char INDEX_CONFIG_STYLE[] PROGMEM = R"=====(
     display: none;
 }
 
+
+/* 
+320px — 480px: Mobile devices
+481px — 768px: iPads, Tablets
+769px — 1024px: Small screens, laptops
+1025px — 1200px: Desktops, large screens
+1201px and more —  Extra large screens, TV
+ */
+
+
 @media screen and (max-width: 1024px) {
     #botaoNovoArquivo{
         width: 30vw;
@@ -208,12 +220,27 @@ char INDEX_CONFIG_STYLE[] PROGMEM = R"=====(
 
     
 }
-/* 
-320px — 480px: Mobile devices
-481px — 768px: iPads, Tablets
-769px — 1024px: Small screens, laptops
-1025px — 1200px: Desktops, large screens
-1201px and more —  Extra large screens, TV
- */
+
+
+ @media (max-width: 480px) {
+    
+    .inputText{
+        width: 50%;
+    }
+    
+    #botaoNovaConfig{
+        width: 24vw;
+        height: 5vh;
+    }
+    
+ }
+
+ 
+ @media (max-width: 768px) {
+    
+    .inputText{
+        width: 40%;
+    }
+ }
 
 )=====";
