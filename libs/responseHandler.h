@@ -104,6 +104,8 @@ void slaveReceiveHandler() {
   default:
     break;
   }
+
+  lastComandSend = millis();
 }
 
 

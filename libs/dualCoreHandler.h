@@ -62,6 +62,14 @@ void CommCoreLoop(void *arg) {
     // Verifica se ha alguma mensagem do escravo, caso haja, processa a mensagem recebida.
     if(MySerial.available()) { slaveReceiveHandler(); }
 
+    // Verifica a ultima comunicação com o escravo, caso a ultima comunicação seja antiga
+    // e haja comandos na lista de comandos, reenvia o ultimo comando para o escravo.
+    if(millis() - lastComandSend > comandoTimeout && listaComandos.size() > 0){
+      Serial.println("Comando Timeout");
+      reenviaUltimoComando();
+      printListaComandos();
+    }
+
     delay(100);
   }
 }

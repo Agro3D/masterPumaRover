@@ -58,8 +58,10 @@ void slaveSendHandler() {
       DynamicJsonDocument resposta(128);
       deserializeJson(resposta, slaveResponse);                // Le a resposta do escravo e converte para json
 
+      printString("");
       printString("Mensagem de alerta recebida: ");
       printString("Mensagem: " + slaveResponse);
+      printString("");
 
       switch (resposta["Comando"].as<int>())
       {
@@ -70,8 +72,6 @@ void slaveSendHandler() {
         atualizaSinalRadio(resposta["Mensagem"].as<int>());
         break;
       }
-      
-      printString("Fazer Algo");
     }
   }
 
@@ -119,6 +119,8 @@ void slaveSendHandler() {
     printString("Comando: " + String(comandoEscravo));
     break;
   }
+
+  lastComandSend = millis();
 
   if(comandoEscravo == HEAP_SIZE){
     proximoComando();

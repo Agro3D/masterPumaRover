@@ -50,7 +50,6 @@ void novoPonto(String PontoStr) {
 
 // Funçaõ para adiciona novo comando na fila de comandos a serem enviados para o escravo
 void novoComando(int novoComando, String novaMensagem){
-  printFuncCore(__func__);
 
   printString("Comando Atual: " + String(comandoEscravo));
   printString("Lista de Comandos: " + String(listaComandos.size()));
@@ -61,6 +60,16 @@ void novoComando(int novoComando, String novaMensagem){
     mensagemStr = novaMensagem;
   }else{
     // Caso o haja algum comando na lista de comandos ou um comando atual, o novo comando é adicionado na lista de comandos
+
+    // Caso a lista de comandos esteja vazia, o comando atual é duplicado na lista de comandos
+    // Isso é feito pois a função proximoComando remove o primeiro comando da lista de comandos
+    // antes de enviar o proximo comando para o escravo. Isto para que haja um backup do ultimo 
+    // comando enviado para o escravo, caso haja algum erro na comunicação. 
+    if(listaComandos.size() == 0){
+      listaComandos.push_back(comandoEscravo);
+      listaMensagens.push_back(mensagemStr);
+    }
+
     listaComandos.push_back(novoComando);
     listaMensagens.push_back(novaMensagem);
 
@@ -119,20 +128,26 @@ void proximoComando(){
     return;
 
   }else{
-    // Caso haja algum comando na lista de comandos, o próximo comando é o primeiro da lista
-    comandoEscravo = listaComandos[0];
-    mensagemStr = listaMensagens[0];
-
     // Remove o primeiro comando da lista de comandos
     listaComandos.erase(listaComandos.begin());
     listaMensagens.erase(listaMensagens.begin());
+
+    // Caso haja algum comando na lista de comandos, o próximo comando é o primeiro da lista
+    comandoEscravo = listaComandos[0];
+    mensagemStr = listaMensagens[0];
   }
+}
+
+
+// Reenvia o ultimo comando para o escravo
+void reenviaUltimoComando(){
+  comandoEscravo = listaComandos[0];
+  mensagemStr = listaMensagens[0];
 }
 
 
 // Função para imprimir a lista de comandos
 void printListaComandos(){
-  printFuncCore(__func__);
 
   printString("Lista de Comandos: ");
   printString("Quantidade: " + String(listaComandos.size()));
@@ -144,6 +159,7 @@ void printListaComandos(){
 
 
 // Função para imprimir o nucleo que está executando a função
+// Exemplo de uso: printFuncCore(__func__);
 void printFuncCore(String func){
 
   Serial.println("==================================================");

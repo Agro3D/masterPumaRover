@@ -35,6 +35,8 @@ using namespace std;
 
 #define HEAP_SIZE_TIMER 300000                              // Intervalo de tempo para enviar o status do heap para o escravo, em milisegundos
 
+#define comandoTimeout 5000                                 // Tempo limite para receber a resposta do escravo, em milisegundos
+
 #define SERVER_PORT 80                                      // Porta do servidor HTTP
 
 #define SEND_DATA_TRIES 5                                   // Número de tentativas de envio de dados para o escravo
@@ -127,6 +129,7 @@ float alturaBastao = 0;                                     // Variável para ar
 
 int comandoEscravo = -1;                                    // Flag para controlar o envio de dados para o escravo
 vector<int> listaComandos;                                  // Lista de comandos para o escravo
+unsigned long lastComandSend = 0;                           // Variável para armazenar o tempo do ultimo envio de comando para o escravo
 bool waitResponse = false;                                  // Flag para controlar o recebimento de dados do escravo
 bool verifyingComunication = false;                         // Flag para controlar a verificação de comunicação com o escravo
 
@@ -160,6 +163,8 @@ void printFuncCore(String func);
 String converterGrausDecimais(int graus, float minutos);
 void atualizaSinalRadio(int sinalRadio);
 void setCotaReferencia(float cota);
+void reenviaUltimoComando();
+
 
 
 
