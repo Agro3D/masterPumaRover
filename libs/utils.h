@@ -65,10 +65,10 @@ void novoComando(int novoComando, String novaMensagem){
     // Isso é feito pois a função proximoComando remove o primeiro comando da lista de comandos
     // antes de enviar o proximo comando para o escravo. Isto para que haja um backup do ultimo 
     // comando enviado para o escravo, caso haja algum erro na comunicação. 
-    if(listaComandos.size() == 0){
-      listaComandos.push_back(comandoEscravo);
-      listaMensagens.push_back(mensagemStr);
-    }
+    // if(listaComandos.size() == 0){
+    //   listaComandos.push_back(comandoEscravo);
+    //   listaMensagens.push_back(mensagemStr);
+    // }
 
     listaComandos.push_back(novoComando);
     listaMensagens.push_back(novaMensagem);
@@ -128,13 +128,13 @@ void proximoComando(){
     return;
 
   }else{
-    // Remove o primeiro comando da lista de comandos
-    listaComandos.erase(listaComandos.begin());
-    listaMensagens.erase(listaMensagens.begin());
-
     // Caso haja algum comando na lista de comandos, o próximo comando é o primeiro da lista
     comandoEscravo = listaComandos[0];
     mensagemStr = listaMensagens[0];
+
+    // Remove o primeiro comando da lista de comandos
+    listaComandos.erase(listaComandos.begin());
+    listaMensagens.erase(listaMensagens.begin());
   }
 }
 

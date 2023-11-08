@@ -39,7 +39,7 @@ char INDEX_PAGE[] PROGMEM = R"=====(
 
             <!-- Tela de configurações -->
             <div id="configuracoes" class="visivel">
-                <div class="divs bordas">
+                <!-- <div class="divs bordas">
                     <p class="titulo tituloPrincipal">Rádio</p>
 
                     <div id="configuracaoRadio">
@@ -64,16 +64,16 @@ char INDEX_PAGE[] PROGMEM = R"=====(
                         </div>
                     
                     </div>
-                </div>
+                </div> -->
 
-                <div id="options" class="divs bordas">
+                <!-- <div id="options" class="divs bordas">
                     <p class="titulo tituloPrincipal">GNSS
                     <div id="options">
 
                         <div id="frequenceDiv" class="optionsDivs">
                             <p class="titulo">Taxa de Atualização
                             </p>
-                            <select id="frequenciaTransmissao" name="frequence" class="input inputSelect">
+                            <sele   ct id="frequenciaTransmissao" name="frequence" class="input inputSelect">
                                 <option value="1" selected>1HZ</option>
                                 <option value="3">3HZ</option>
                                 <option value="5">5HZ</option>
@@ -109,10 +109,10 @@ char INDEX_PAGE[] PROGMEM = R"=====(
                         <input type="checkbox" id="QZSS" name="constelacoes" value="QZSS">
                         <label for="QZSS">QZSS</label>
                     </div>
-                </div>
+                </div> -->
                 
                 
-                <div class="divs">
+                <!-- <div class="divs">
                     <div id="bastaoDiv">
 
                         <p class="titulo">Altura do Bastão</p>
@@ -120,11 +120,11 @@ char INDEX_PAGE[] PROGMEM = R"=====(
                         <div id="alturaBastaoDiv">
                             <input type="number" name="alturaBastao" id="alturaBastao"
                             placeholder="Altura do Bastão" class="input inputText"
-                            min="0" max="100" step="0.1"> M
+                            value="2" min="0" max="100" step="0.1"> M
                         </div>
                             
                     </div>
-                </div>
+                </div> -->
 
 
                 <div class="divs bordas">
@@ -134,19 +134,19 @@ char INDEX_PAGE[] PROGMEM = R"=====(
                         
                         <div class="arquivosDivs">
                             
-                            <p class="titulo">Arquivos</p>
+                            <p class="titulo">Trabalhos Anteriores</p>
                             
                             <select name="arquivos" id="arquivosSelect" class="input inputSelect inputContent">
-                                <option value="0" selected disabled>Selecione um arquivo</option>
-                                <option value="1">Criar um novo Arquivo...</option>
+                                <option value="0" selected disabled>Selecione um Trabalho</option>
+                                <option value="1">Criar um novo Trabalho...</option>
                             </select>
                             
                         </div>
                         
                         <div class="arquivosDivs">
                             
-                            <p class="titulo">Criar novo Arquivos</p>
-                            <button onclick="showPopupArquivo()" id="botaoNovoArquivo">Novo Arquivo</button>
+                            <p class="titulo">Criar novo Trabalho</p>
+                            <button onclick="showPopupArquivo()" id="botaoNovoArquivo">Novo Trabalho</button>
                             
                         </div>
                         
@@ -168,7 +168,7 @@ char INDEX_PAGE[] PROGMEM = R"=====(
                     <input type="text" id="nomeArquivo" name="nameArquivo" class="inputPopup" placeholder="Nome do Arquivo"><br>
 
                     <div id="obs">
-                        Obs: Deixar em branco, salvará o arquivo com a data e hora atual (YYYY-MM-DD_HH:MM.kml).
+                        Obs: Deixar em branco, salvará o arquivo com a data e hora atual (AAAA-MM-DD_HH:MM.kml).
                     </div>
 
                     <div id="botoesPopup">
