@@ -70,7 +70,7 @@ function initWebSocket() {
                 break;
 
             case 'ALERT_MESSAGE':
-                showMessage(valor["Mensagem"], valor["Cor"]);
+                showMessage(valor['Mensagem'], valor['Cor']);
                 enableButton();
                 break;
 

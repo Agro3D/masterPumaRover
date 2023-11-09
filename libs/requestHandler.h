@@ -55,7 +55,7 @@ void slaveSendHandler() {
     } else if (slaveResponse.indexOf("\"Comando\":" + String(ALERT_MESSAGE)) != -1 ||
                slaveResponse.indexOf("\"Comando\":" + String(SINAL_RADIO)) != -1){
       
-      DynamicJsonDocument resposta(128);
+      DynamicJsonDocument resposta(256);
       deserializeJson(resposta, slaveResponse);                // Le a resposta do escravo e converte para json
 
       printString("");
