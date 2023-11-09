@@ -62,14 +62,6 @@ void novoComando(int novoComando, String novaMensagem){
     // Caso o haja algum comando na lista de comandos ou um comando atual, o novo comando é adicionado na lista de comandos
 
     // Caso a lista de comandos esteja vazia, o comando atual é duplicado na lista de comandos
-    // Isso é feito pois a função proximoComando remove o primeiro comando da lista de comandos
-    // antes de enviar o proximo comando para o escravo. Isto para que haja um backup do ultimo 
-    // comando enviado para o escravo, caso haja algum erro na comunicação. 
-    if(listaComandos.size() == 0){
-      listaComandos.push_back(comandoEscravo);
-      listaMensagens.push_back(mensagemStr);
-    }
-
     listaComandos.push_back(novoComando);
     listaMensagens.push_back(novaMensagem);
 
@@ -117,6 +109,8 @@ void proximoComando(){
     comandoEscravo = HEAP_SIZE;
     mensagemStr = heapSize;
     heapSize = "";
+    comandoBackup = HEAP_SIZE;
+    mensagemStrBackup = heapSize;
     return;
   }
 
@@ -125,24 +119,26 @@ void proximoComando(){
   if(listaComandos.size() == 0){
     comandoEscravo = -1;
     mensagemStr = "";
+    comandoBackup = -1;
+    mensagemStrBackup = "";
     return;
 
   }else{
-    // Remove o primeiro comando da lista de comandos
-    listaComandos.erase(listaComandos.begin());
-    listaMensagens.erase(listaMensagens.begin());
-
     // Caso haja algum comando na lista de comandos, o próximo comando é o primeiro da lista
     comandoEscravo = listaComandos[0];
     mensagemStr = listaMensagens[0];
+
+    // Remove o primeiro comando da lista de comandos
+    listaComandos.erase(listaComandos.begin());
+    listaMensagens.erase(listaMensagens.begin());
   }
 }
 
 
 // Reenvia o ultimo comando para o escravo
 void reenviaUltimoComando(){
-  comandoEscravo = listaComandos[0];
-  mensagemStr = listaMensagens[0];
+  comandoEscravo = comandoBackup;
+  mensagemStr = mensagemStrBackup;
 }
 
 

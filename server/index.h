@@ -120,7 +120,7 @@ char INDEX_PAGE[] PROGMEM = R"=====(
                         <div id="alturaBastaoDiv">
                             <input type="number" name="alturaBastao" id="alturaBastao"
                             placeholder="Altura do Bastão" class="input inputText"
-                            min="0" max="100" step="0.1"> M
+                            value="2" min="0" max="100" step="0.1"> M
                         </div>
                             
                     </div>

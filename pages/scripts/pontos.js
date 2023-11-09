@@ -92,12 +92,13 @@ function incluirPontoLista(ponto){
 
 async function pontoReferencia(){
     // Mostra alerta confirmando a ação
-    if(!confirm("Deseja definir o ponto atual como ponto de referência?")){
-        return;
-    }
+    let resposta = prompt("Deseja definir o ponto atual como ponto de referência?",
+                            document.getElementById("cotaValor").innerHTML);
+                            
+    if(resposta == null || resposta == ""){ return; }
     
     // Realiza o POST request e verifica se foi bem sucedido
-    await fetch('/cotaReferencia?Ponto=' + document.getElementById("cotaValor").innerHTML, {
+    await fetch('/cotaReferencia?Ponto=' + resposta, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -109,7 +110,7 @@ async function pontoReferencia(){
             throw new Error('Network response was not ok');
         }else{
             showMessage("Cota de referencia salva", "verde");
-            document.getElementById("cotaBotao").innerHTML = "Cota <br /> Referencia <br /> <br /> " + document.getElementById("cotaValor").innerHTML;
+            document.getElementById("cotaBotao").innerHTML = "Cota <br /> Referencia <br /> <br /> " + resposta;
         }
     }).catch(error => {
         showMessage("Erro ao registrar cota de referência <br /> Vereifique a conexão ou reinicie o aparelho");

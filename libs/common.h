@@ -106,7 +106,9 @@ unsigned long lastHeapSend = 0;                             // Variável para ar
 
 int sinalRadio = 0;                                         // Int para controlar o sinal de rádio (0-4)
 bool mensagemDeAlerta = false;                              // Flag para controlar se a mensagem recebida foi de alerta
-String mensagemStr;                                         // String para armazenar a representação em texto do objeto JSON
+
+String mensagemStr;                                         // String para armazenar a mensagem a ser enviada para o escravo
+String mensagemStrBackup;                                   // String para armazenar a ultima mensagem que foi enviada para o escravo
 String heapSize;                                            // String para armazenar o tamanho da heap do mestre
 vector<String> listaMensagens;                              // Lista de mensagens referentes aos comandos enviados para o escravo
 String listaArquivosStr="";                                 // String para armazenar a lista de arquivos do escravo
@@ -128,6 +130,7 @@ char statusAtual;                                           // Variável para ar
 float alturaBastao = 0;                                     // Variável para armazenar a altura do bastão que segura o rover
 
 int comandoEscravo = -1;                                    // Flag para controlar o envio de dados para o escravo
+int comandoBackup = -1;                                     // Flag para armazenar o ultimo comando enviado para o escravo
 vector<int> listaComandos;                                  // Lista de comandos para o escravo
 unsigned long lastComandSend = 0;                           // Variável para armazenar o tempo do ultimo envio de comando para o escravo
 bool waitResponse = false;                                  // Flag para controlar o recebimento de dados do escravo
