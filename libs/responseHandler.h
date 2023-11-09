@@ -53,6 +53,7 @@ void slaveReceiveHandler() {
     deserializeJson(listaPontos, "{\"Pontos\": []}");
 
     proximoComando();
+    printListaComandos();
     statusAtual = char(ESPERANDO);
     break;
 
