@@ -15,51 +15,59 @@ function novoTrabalho() {
     document.getElementById("botaoNovaConfig").disabled = true;
     
     var configJson = {};
-    var frequencia = document.getElementById("frequenciaRadioValor").value;
+    // var frequencia = document.getElementById("frequenciaRadioValor").value;
 
-    if (frequencia == ""){
-        alert("Preencha todos os campos")
-        document.getElementById("configuracoes").className = "visivel";
-        document.getElementById("status").className = "naoVisivel";
-        return;
-    }else{
-        configJson.radioFrequencia = frequencia;
-        }
+    // if (frequencia == ""){
+    //     alert("Preencha todos os campos")
+    //     document.getElementById("configuracoes").className = "visivel";
+    //     document.getElementById("status").className = "naoVisivel";
+    //     return;
+    // }else{
+        // configJson.radioFrequencia = frequencia;
+        // }
 
     var numConstelations = 0;
     // Verifica quais constelacoes estao selecionadas e atribui ao objeto configJson
-    var constelations = document.getElementsByName('constelacoes');
+    // var constelations = document.getElementsByName('constelacoes');
     
-    for(var i=0, n=constelations.length; i<n; i++) {
-        if (constelations[i].checked == true){
-            configJson[constelations[i].value] = constelations[i].checked;
-            numConstelations++;
-        }
-    }
+    // for(var i=0, n=constelations.length; i<n; i++) {
+    //     if (constelations[i].checked == true){
+    //         configJson[constelations[i].value] = constelations[i].checked;
+    //         numConstelations++;
+    //     }
+    // }
     
+    configJson['GPS'] = true;
+    configJson['GLONASS'] = true;
+    configJson['GALILEO'] = true;
+    configJson['BEIDOU'] = true;
+    configJson['SBAS'] = false;
+    configJson['IMES'] = false;
+    configJson['QZSS'] = false;
 
     // Verifica se ao menos uma constelacao foi selecionada
-    if (numConstelations == 0){
-        alert("Selecione ao menos uma constelação!");
-        document.getElementById("configuracoes").className = "visivel";
-        document.getElementById("status").className = "naoVisivel";
-        return;
-    }
+    // if (numConstelations == 0){
+    //     alert("Selecione ao menos uma constelação!");
+    //     document.getElementById("configuracoes").className = "visivel";
+    //     document.getElementById("status").className = "naoVisivel";
+    //     return;
+    // }
 
-    configJson.velocidadeTransmissao = document.getElementById("velocidadeRadioSelect").value;
-    configJson.taxaAtualizacao = document.getElementById("frequenciaTransmissao").value;
+    // configJson.velocidadeTransmissao = document.getElementById("velocidadeRadioSelect").value;
+    // configJson.taxaAtualizacao = document.getElementById("frequenciaTransmissao").value;
 
+    configJson.taxaAtualizacao = 1;
 
     
-    var alturaBastao = document.getElementById("alturaBastao").value;
+    // var alturaBastao = document.getElementById("alturaBastao").value;
 
-    if (alturaBastao == ""){
-        configJson.alturaBastao = 0;
-    }else{
-        configJson.alturaBastao = alturaBastao;
-    }
+    // if (alturaBastao == ""){
+    //     configJson.alturaBastao = 0;
+    // }else{
+    //     configJson.alturaBastao = alturaBastao;
+    // }
     
-    
+    configJson.alturaBastao = 2;
 
     var NomeArquivo = document.getElementById("arquivosSelect").value;
 

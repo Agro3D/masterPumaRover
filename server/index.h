@@ -39,7 +39,7 @@ char INDEX_PAGE[] PROGMEM = R"=====(
 
             <!-- Tela de configurações -->
             <div id="configuracoes" class="visivel">
-                <div class="divs bordas">
+                <!-- <div class="divs bordas">
                     <p class="titulo tituloPrincipal">Rádio</p>
 
                     <div id="configuracaoRadio">
@@ -64,9 +64,9 @@ char INDEX_PAGE[] PROGMEM = R"=====(
                         </div>
                     
                     </div>
-                </div>
+                </div> -->
 
-                <div id="options" class="divs bordas">
+                <!-- <div id="options" class="divs bordas">
                     <p class="titulo tituloPrincipal">GNSS
                     <div id="options">
 
@@ -109,10 +109,10 @@ char INDEX_PAGE[] PROGMEM = R"=====(
                         <input type="checkbox" id="QZSS" name="constelacoes" value="QZSS">
                         <label for="QZSS">QZSS</label>
                     </div>
-                </div>
+                </div> -->
                 
                 
-                <div class="divs">
+                <!-- <div class="divs">
                     <div id="bastaoDiv">
 
                         <p class="titulo">Altura do Bastão</p>
@@ -124,7 +124,7 @@ char INDEX_PAGE[] PROGMEM = R"=====(
                         </div>
                             
                     </div>
-                </div>
+                </div> -->
 
 
                 <div class="divs bordas">
