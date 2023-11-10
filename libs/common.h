@@ -28,9 +28,6 @@ using namespace std;
 #define ZED_COMM_SPEED 460800                              // Velocidade de comunicação com o ZED
 #define ESP_COMM_SPEED 921600                              // Velocidade de comunicação com o ZED
 
-#define MYPORT_RX 18                                        // Porta recepção UART
-#define MYPORT_TX 17                                        // Porta transmissão UART
-
 #define STACK_SIZE_CPU 2048                                 // Tamanho da pilha dos processos de cada core
 
 #define HEAP_SIZE_TIMER 300000                              // Intervalo de tempo para enviar o status do heap para o escravo, em milisegundos
@@ -44,9 +41,15 @@ using namespace std;
 #define MARGEM_COTA_REFERENCIA 10                           // Margem de erro para a cota de referência, em centímetros(100cm = 1M)
 
 
-// Botões de ligar/desligar o sistema
+// Definições dos pinos utilizados no sistema
+#define MYPORT_RX 18                                        // Pino de recepção da UART
+#define MYPORT_TX 17                                        // Pino de transmissão da UART
+
+#define LED_STATUSRTK 11                                   // Pino do LED de status do RTK
+
 #define POWER_CHECK 5                                       // Pino do botão liga/desliga
 #define POWER_OFF 6                                         // Pino para ligar/desligar o sistema
+
 #define POWER_TIMER 2000                                    // Tempo de pressionar o botão para ligar/desligar para desligar o sistema, em milisegundos
 
 
@@ -106,6 +109,10 @@ unsigned long lastHeapSend = 0;                             // Variável para ar
 
 int sinalRadio = 0;                                         // Int para controlar o sinal de rádio (0-4)
 bool mensagemDeAlerta = false;                              // Flag para controlar se a mensagem recebida foi de alerta
+
+unsigned long statusRTKTime = 0;                            // Variável para armazenar o tempo para piscar o LED do status RTK
+bool statusRTKLEDPisca = false;                             // Flag para controlar se o LED do status RTK está piscando
+bool statusRTKLED = false;                                  // Flag para controlar o estado do LED do status RTK
 
 String mensagemStr;                                         // String para armazenar a mensagem a ser enviada para o escravo
 String mensagemStrBackup;                                   // String para armazenar a ultima mensagem que foi enviada para o escravo
@@ -167,6 +174,7 @@ String converterGrausDecimais(int graus, float minutos);
 void atualizaSinalRadio(int sinalRadio);
 void setCotaReferencia(float cota);
 void reenviaUltimoComando();
+void configuraLedRTK(char status);
 
 
 

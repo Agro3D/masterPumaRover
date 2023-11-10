@@ -116,8 +116,8 @@ function atualizaStatusRTK(valor) {
             break;
 
         default:
-            document.getElementById("statusRTKValor").className = "informacoesValor vermelho";
             document.getElementById("statusRTKValor").innerHTML = "ERRO";
+            document.getElementById("statusRTKValor").className = "informacoesValor vermelho";
             break;
     }
 }

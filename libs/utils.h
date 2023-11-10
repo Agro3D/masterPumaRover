@@ -208,6 +208,49 @@ void setCotaReferencia(float cota){
 }
 
 
+// Função para configurar LED do status RTK
+void configuraLedRTK(char status){
+
+  switch (status){
+  case 0:
+    digitalWrite(LED_STATUSRTK, LOW);
+    statusRTKLEDPisca = false;
+    statusRTKLED = false;
+    break;
+  
+  case 1:
+    digitalWrite(LED_STATUSRTK, LOW);
+    statusRTKLEDPisca = false;
+    statusRTKLED = false;
+    break;
+  
+  case 2:
+    digitalWrite(LED_STATUSRTK, LOW);
+    statusRTKLEDPisca = false;
+    statusRTKLED = false;
+    break;
+
+  case 4:
+    digitalWrite(LED_STATUSRTK, HIGH);
+    statusRTKLEDPisca = false;
+    statusRTKLED = true;
+    break;
+
+  case 5:
+    digitalWrite(LED_STATUSRTK, HIGH);
+    statusRTKLEDPisca = true;
+    statusRTKLED = true;
+    break;
+  
+  default:
+    digitalWrite(LED_STATUSRTK, LOW);
+    statusRTKLEDPisca = false;
+    statusRTKLED = false;
+    break;
+  }
+}
+
+
 
 
 #endif // UTILS_H
