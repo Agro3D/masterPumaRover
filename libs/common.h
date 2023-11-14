@@ -171,7 +171,7 @@ void proximoComando();
 void printListaComandos();
 void printFuncCore(String func);
 String converterGrausDecimais(int graus, float minutos);
-void atualizaSinalRadio(int sinalRadio);
+void atualizaSinalRadio(int sinalRadioNovo);
 void setCotaReferencia(float cota);
 void reenviaUltimoComando();
 void configuraLedRTK(char status);

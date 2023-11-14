@@ -187,10 +187,11 @@ String converterGrausDecimais(int graus, float minutos){
 
 
 // Atualizar sinal de rádio no servidor
-void atualizaSinalRadio(int sinalRadio){
-    Serial.println("Sinal de radio: " + String(sinalRadio));
+void atualizaSinalRadio(int sinalRadioNovo){
+    Serial.println("Sinal de radio: " + String(sinalRadioNovo));
+    sinalRadio = sinalRadioNovo;    
 
-    if(sinalRadio){
+    if(sinalRadioNovo){
       webSocket.broadcastTXT("{\"Mensagem\": \"SINAL_RADIO\", \"Valor\": 4}");
     }else{
       webSocket.broadcastTXT("{\"Mensagem\": \"SINAL_RADIO\", \"Valor\": 0}");
