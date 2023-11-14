@@ -187,10 +187,11 @@ String converterGrausDecimais(int graus, float minutos){
 
 
 // Atualizar sinal de rádio no servidor
-void atualizaSinalRadio(int sinalRadio){
-    Serial.println("Sinal de radio: " + String(sinalRadio));
+void atualizaSinalRadio(int sinalRadioNovo){
+    Serial.println("Sinal de radio: " + String(sinalRadioNovo));
+    sinalRadio = sinalRadioNovo;    
 
-    if(sinalRadio){
+    if(sinalRadioNovo){
       webSocket.broadcastTXT("{\"Mensagem\": \"SINAL_RADIO\", \"Valor\": 4}");
     }else{
       webSocket.broadcastTXT("{\"Mensagem\": \"SINAL_RADIO\", \"Valor\": 0}");
@@ -205,6 +206,49 @@ void setCotaReferencia(float cota){
   cotaRefSuperior = cotaRef + MARGEM_COTA_REFERENCIA / 100.0;
 
   webSocket.broadcastTXT("{\"Mensagem\": \"COTA_REFERENCIA\", \"Valor\": " + String(cotaRef, 3) + "}");
+}
+
+
+// Função para configurar LED do status RTK
+void configuraLedRTK(char status){
+
+  switch (status){
+  case 0:
+    digitalWrite(LED_STATUSRTK, LOW);
+    statusRTKLEDPisca = false;
+    statusRTKLED = false;
+    break;
+  
+  case 1:
+    digitalWrite(LED_STATUSRTK, LOW);
+    statusRTKLEDPisca = false;
+    statusRTKLED = false;
+    break;
+  
+  case 2:
+    digitalWrite(LED_STATUSRTK, LOW);
+    statusRTKLEDPisca = false;
+    statusRTKLED = false;
+    break;
+
+  case 4:
+    digitalWrite(LED_STATUSRTK, HIGH);
+    statusRTKLEDPisca = false;
+    statusRTKLED = true;
+    break;
+
+  case 5:
+    digitalWrite(LED_STATUSRTK, HIGH);
+    statusRTKLEDPisca = true;
+    statusRTKLED = true;
+    break;
+  
+  default:
+    digitalWrite(LED_STATUSRTK, LOW);
+    statusRTKLEDPisca = false;
+    statusRTKLED = false;
+    break;
+  }
 }
 
 
