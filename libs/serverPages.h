@@ -51,6 +51,14 @@ void setupServerPages() {
   });
 
 
+  // Rota para a página com o popupAlert do servidor web. (popupAlert.html)
+  server.on("/popupAlertFix.html", HTTP_GET, [](AsyncWebServerRequest *request){
+    Serial.println("\n\n##### Requisicao Recebida: /popupAlertFix.html");
+    Serial.println("Enviando popupAlertFix.html ...");
+    request->send(200, "text/html", POPUPALERTFIX_PAGE);
+  });
+
+
   // Rota para a página de arquivoss do servidor web. (arquivos.html)
   server.on("/arquivos.html", HTTP_GET, [](AsyncWebServerRequest *request){
     printString("\n\n##### Requisicao Recebida: /arquivos.html");
