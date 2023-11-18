@@ -66,6 +66,14 @@ void setupServerStyles(){
   });
 
 
+  // Rota para o estilo CSS do popup fixo de avisos do servidor. (popupAlertFixStyle.css)
+  server.on("/styles/popupAlertFix.css", HTTP_GET, [](AsyncWebServerRequest *request){
+    printString("\n\n##### Requisicao Recebida: /styles/popupAlertFix.css");
+    printString("Enviando popupAlertFix.css ...");
+    request->send(200, "text/css", POPUP_FIX_STYLE);
+  });
+
+
   // Rota para o estilo CSS da página de arquivos. (arquivosStyle.css)
   server.on("/styles/arquivos.css", HTTP_GET, [](AsyncWebServerRequest *request){
     printString("\n\n##### Requisicao Recebida: /styles/arquivos.css");

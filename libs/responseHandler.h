@@ -23,6 +23,11 @@ void slaveReceiveHandler() {
     proximoComando();
     break;
     
+  case GET_CARTAOSD:
+    cartaosd = resposta["Mensagem"].as<bool>();
+    // proximoComando();
+    break;
+    
   case NOVO_TRABALHO:
     receberMensagens = true;
     proximoComando();
