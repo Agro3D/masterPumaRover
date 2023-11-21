@@ -65,8 +65,6 @@ void setup() {
 
   IPAddress IP = WiFi.softAPIP();
   printString("Endereco de IP do Access Point: ........ " + IP.toString());
-  printString("Endereco de IP do gateway: ............. " + WiFi.gatewayIP().toString());
-  printString("Endereco de IP da mascara de subrede: .. " + WiFi.subnetMask().toString());
 
 
 

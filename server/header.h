@@ -8,13 +8,13 @@ char HEADER_PAGE[] PROGMEM = R"=====(
 <div id="headerLinks">
     <a href="/">Inicio</a>
     <a href="/arquivos">Arquivos</a>
-    <a href="/configuracoes">Configurações</a>
+    <!-- <a href="/configuracoes">Configurações</a> -->
 </div>
 
 <div id="mobileMenu">
     <a href="/">Inicio</a>
     <a href="/arquivos">Arquivos</a>
-    <a href="/configuracoes">Configurações</a>
+    <!-- <a href="/configuracoes">Configurações</a> -->
 </div>
 
 <!-- Icone de intensidade do sinal do rádio -->

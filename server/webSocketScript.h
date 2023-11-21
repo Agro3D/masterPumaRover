@@ -20,12 +20,14 @@ function initWebSocket() {
     ws.onmessage = async function (event) {
         // console.log('Server: ', event.data);
 
-        if (event.data == 'Conectado') {
-            if (window.location.href == 'http://192.168.4.1/') {    enableButton(); }
+        
+        // Verifica se o WebSocket foi conectado e esta na página de arquivos
+        if (window.location.href == 'http://192.168.4.1/arquivos') {
+            if (event.data == 'Conectado') { enableButton(); }
             return;
         }
 
-        if (window.location.href == 'http://192.168.4.1/') { return; }
+        
 
         if (event.data == 'ESPERANDO' || event.data == 'TRABALHANDO') { return; }
 
