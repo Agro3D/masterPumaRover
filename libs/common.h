@@ -209,6 +209,7 @@ void configuraLedRTK(char status);
 #include "../server/indexStatusScript.h"    // Script JS da página principal (status)
 #include "../server/sinalRadioScript.h"     // Script JS da torre de sinal do rádio
 #include "../server/pontosScript.h"         // Script JS da página arquivos
+#include "../server/arquivosScript.h"       // Script JS da página arquivos
 #include "../server/webSocketScript.h"      // Script JS do webSocket
 
 

@@ -6,7 +6,7 @@ function initIndex(){
     getPontos();
     getSinal();
     getCotaReferencia();
-    newPopup("cartaoSD", 0);
+    // newPopup("cartaoSD", 0);
 }
 
 function novoTrabalho() {

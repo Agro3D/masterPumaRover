@@ -19,13 +19,7 @@ async function loadFiles(){
         // A variável 'json' agora contém o seu JSON como um objeto JavaScript.
 
         var html = '';
-        json['Pastas'].forEach(function(dateItem) {
-            var pasta = dateItem["Pasta"]; // Pega a data atual
-            html += '<div class="folder">'; // Inicia a div da data
-            html += '<h2 class="folderName">' + pasta + '/</h2>'; // Adiciona a data
-
-            // Processa cada arquivo na data atual e adiciona-o ao HTML
-            dateItem["Arquivos"].forEach(function(fileItem) {
+        json['Pastas'].forEach(function(fileItem) {
                 html += '<div class="file">'; // Inicia a div do arquivo
                 
                 html += '<div class="informationFile">';
@@ -34,14 +28,11 @@ async function loadFiles(){
                 html += '</div>'; // Finaliza a div das informações
                 
                 html += '<div class="optionsFile">';
-                html += `<button class="btnDownload" onClick="window.open('http://192.168.4.2/downloadFile?Arquivo=` + pasta + "/" + fileItem["Arquivo"] + `')" disabled>Download</button>`; // Adiciona o arquivo
-                html += `<button class="btnExcluir"  onClick="deletarArquivo('` + pasta + "/" + fileItem["Arquivo"] + `')" disabled>Excluir</button>`; // Adiciona o arquivo
+                html += `<button class="btnDownload" onClick="window.open('http://192.168.4.184/downloadFile?Arquivo=` + fileItem["Arquivo"] + `')" disabled>Download</button>`; // Adiciona o arquivo
+                html += `<button class="btnExcluir"  onClick="deletarArquivo('` + fileItem["Arquivo"] + `')" disabled>Excluir</button>`; // Adiciona o arquivo
                 html += '</div>'; // Finaliza a div do download
                 
-                html += '</div>'; // Finaliza a div do arquivo
-            });
-        
-            html += '</div>'; // Finaliza a div da data
+                html += '</div>'; // Finaliza a div do arquivo        
         });
         
         // Agora nós temos uma string HTML que podemos adicionar ao nosso elemento de ID "arquivos"

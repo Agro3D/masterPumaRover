@@ -118,7 +118,7 @@ void setupServer() {
   server.on("/getFiles", HTTP_GET, [](AsyncWebServerRequest *request){
     printString("\n\n##### Requisicao Recebida: /getFiles");
     printString("Enviando lista de arquivos...");
-    // printString(listaArquivosStr);
+    printString(listaArquivosStr);
 
     request->send(200, "application/json", listaArquivosStr);
   });

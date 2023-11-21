@@ -65,9 +65,12 @@ void setup() {
 
   IPAddress IP = WiFi.softAPIP();
   printString("Endereco de IP do Access Point: ........ " + IP.toString());
+  printString("Endereco de IP do gateway: ............. " + WiFi.gatewayIP().toString());
+  printString("Endereco de IP da mascara de subrede: .. " + WiFi.subnetMask().toString());
 
 
 
+  printString("");
   printString("Inicializando o servidor WebSocket");
   webSocket.begin();                                              // Iniciar o servidor WebSocket
   webSocket.onEvent(webSocketEvent);                              // Configura a função de manipulação de eventos do servidor WebSocket.

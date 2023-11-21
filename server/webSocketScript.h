@@ -25,6 +25,8 @@ function initWebSocket() {
             return;
         }
 
+        if (window.location.href == 'http://192.168.4.1/') { return; }
+
         if (event.data == 'ESPERANDO' || event.data == 'TRABALHANDO') { return; }
 
         // Transform event.data to json

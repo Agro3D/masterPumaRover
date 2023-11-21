@@ -1,4 +1,4 @@
-//Página de scripts da página de pontos do servidor    
+//Página de scripts para os pontos do servidor
 char PONTOS_SCRIPT[] PROGMEM = R"=====(
 async  function novoPonto(){
 

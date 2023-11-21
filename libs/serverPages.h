@@ -60,7 +60,7 @@ void setupServerPages() {
 
 
   // Rota para a página de arquivoss do servidor web. (arquivos.html)
-  server.on("/arquivos.html", HTTP_GET, [](AsyncWebServerRequest *request){
+  server.on("/arquivos", HTTP_GET, [](AsyncWebServerRequest *request){
     printString("\n\n##### Requisicao Recebida: /arquivos.html");
     printString("Enviando arquivos.html ...");
     request->send(200, "text/html", ARQUIVOS_PAGE);

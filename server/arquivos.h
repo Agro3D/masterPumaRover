@@ -14,7 +14,7 @@ char ARQUIVOS_PAGE[] PROGMEM = R"=====(
         
         <script src="scripts/webSocket.js"></script>
         <script src="scripts/global.js"></script>
-        <script src="scripts/pontos.js"></script>
+        <script src="scripts/arquivos.js"></script>
     </head>
 
     <body onload="imports();startWebSocket();">

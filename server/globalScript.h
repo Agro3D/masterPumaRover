@@ -55,7 +55,7 @@ function newPopup(mensagem, dado){
     // Importa o popup para a pagina
     let xhttpPopup = new XMLHttpRequest();
     elementPopup = document.getElementsByTagName("body")[0];
-    let popup = "popupAlert.html";
+    let popup = "popupAlertFix.html";
 
     if (popup){
         xhttpPopup.onreadystatechange = function() {
@@ -68,7 +68,7 @@ function newPopup(mensagem, dado){
     }
 
     setTimeout(function(){
-        document.getElementById("messageAlertFix").className = "message show"; /* Mostrar a mensagem */
+        document.getElementById("messageAlertFix").className = "messageFix show"; /* Mostrar a mensagem */
         document.getElementById("messageAlertFix").style.backgroundColor = "#a011ff"; /* Muda a cor do fundo */
         
         if(mensagem == "cartaoSD"){
