@@ -76,6 +76,7 @@ void processaNMEAGGA(String nmeastr) {
       case 7:
         if(piece[0] != RTKAtual){
           RTKAtual = piece[0];
+          configuraLedRTK(RTKAtual);
           webSocket.broadcastTXT("{\"Mensagem\": \"RTK\", \"Valor\": " + String(RTKAtual) + "}");
         }
         break;

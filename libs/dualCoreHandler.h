@@ -16,6 +16,14 @@ void ProcessCoreLoop(void *arg) {
     }
 
 
+    // Pisca LED do status RTK caso esteja no float
+    if(statusRTKLEDPisca && millis() - statusRTKTime > 1000){
+      statusRTKTime = millis();
+      statusRTKLED = !statusRTKLED;
+      digitalWrite(LED_STATUSRTK, statusRTKLED);
+    }
+
+
     // Verifica o uso de memória do ESP32 e imprime um aviso caso o uso de memória tenha aumentado.
     static uint32_t lastHeapSize = 0;
     uint32_t currentHeapSize = ESP.getFreeHeap();

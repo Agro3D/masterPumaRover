@@ -9,9 +9,11 @@
 // Função para realizar a configuração inicial do mestre.
 void setup() {
 
-  // Inicializa o pino de verificação de energia e o pino de desligamento do sistema.
+  // Inicialização dos pinos Utilizados no sistema
   pinMode(POWER_CHECK, INPUT);
   pinMode(POWER_OFF, OUTPUT);
+  pinMode(LED_STATUSRTK, OUTPUT);
+
   digitalWrite(POWER_OFF, HIGH);
 
   // Delay inicial para prevenir bugs na inicialização.
