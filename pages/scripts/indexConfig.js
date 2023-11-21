@@ -64,7 +64,7 @@ function novoTrabalho() {
     //     configJson.alturaBastao = alturaBastao;
     // }
     
-    configJson.alturaBastao = 2;
+    configJson.alturaBastao = 1.5;
 
     var NomeArquivo = document.getElementById("arquivosSelect").value;
 
