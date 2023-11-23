@@ -82,7 +82,7 @@ char POPUP_FIX_STYLE[] PROGMEM = R"=====(
   
   @media only screen and (max-width: 800px) {
     .messageFix {
-      --marginTop: 15vh;
+      --marginTop: 11vh;
       --largura: 60%;
       --left: 67%;
       padding: 1vh;
@@ -92,11 +92,10 @@ char POPUP_FIX_STYLE[] PROGMEM = R"=====(
   
   @media only screen and (max-width: 600px) {
     .messageFix {
-      --marginTop: 17vh;
-      --largura: 45%;
-      --left: 0%;
+      --marginTop: 13vh;
+      --largura: 60%;
+      --left: 66%;
       padding: 1vh;
-      left: 76%;
       font-size: 0.8rem;
     }
   }

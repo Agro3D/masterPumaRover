@@ -82,7 +82,7 @@ void setup() {
   printString("Servidor HTTP iniciado em http://" + String(IP.toString()));
 
 
-  comandoEscravo = GET_STATUS;                                    // Envia o comando de lista de arquivos para o escravo.
+  comandoEscravo = GET_CARTAOSD;                                  // Envia o comando de lista de arquivos para o escravo.
   slaveSendHandler();                                             // Chama a função de manipulação de envio para o escravo.
   slaveReceiveHandler();                                          // Chama a função de manipulação de recebimento do escravo.
 

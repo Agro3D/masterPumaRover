@@ -38,7 +38,7 @@ using namespace std;
 
 #define SEND_DATA_TRIES 5                                   // Número de tentativas de envio de dados para o escravo
 
-#define MARGEM_COTA_REFERENCIA 10                           // Margem de erro para a cota de referência, em centímetros(100cm = 1M)
+#define MARGEM_COTA_REFERENCIA 2                            // Margem de erro para a cota de referência, em centímetros(100cm = 1M)
 
 
 // Definições dos pinos utilizados no sistema

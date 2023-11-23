@@ -8,13 +8,18 @@
         <link rel="stylesheet" type="text/css" href="styles/global.css">
         <link rel="stylesheet" type="text/css" href="styles/header.css">
         <link rel="stylesheet" type="text/css" href="styles/arquivos.css">
+        <link rel="stylesheet" type="text/css" href="styles/sinalRadio.css">
+
+        <link rel="stylesheet" type="text/css" href="styles/popupAlert.css">
+        <link rel="stylesheet" type="text/css" href="styles/popupAlertFix.css">
         
         <script src="scripts/webSocket.js"></script>
         <script src="scripts/global.js"></script>
         <script src="scripts/arquivos.js"></script>
+        <script src="scripts/sinalRadio.js"></script>
     </head>
 
-    <body onload="imports();startWebSocket();">
+    <body onload="imports();startWebSocket();getSinal();verificaCartaoSD()">
 
         <div id="header" class="header"></div>
         

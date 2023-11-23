@@ -24,7 +24,7 @@ async function loadFiles(){
                 
                 html += '<div class="informationFile">';
                 html += '<div class="nameFile">' + fileItem["Arquivo"] + '</div>'; // Adiciona o arquivo
-                html += '<div class="sizeFile">' + fileItem["Tamanho"] + '</div>'; // Adiciona o arquivo
+                html += '<div class="sizeFile">' + fileItem["Tamanho"]/1000 + ' KB</div>'; // Adiciona o arquivo
                 html += '</div>'; // Finaliza a div das informações
                 
                 html += '<div class="optionsFile">';
@@ -47,7 +47,7 @@ async function loadFiles(){
 }
 
 
-function enableButtons() {
+function enableButtosArquivos() {
     // Seleciona todos os botões
     var buttons = document.getElementsByTagName("button");
     

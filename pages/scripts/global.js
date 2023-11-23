@@ -79,7 +79,7 @@ function newPopup(mensagem, dado){
 
 
 function closePopup(){
-    document.getElementById("messageAlertFix").className = "message hide"; /* Esconder a mensagem */
+    document.getElementById("messageAlertFix").className = "messageFix hide"; /* Esconder a mensagem */
 }
 
 
