@@ -18,6 +18,7 @@ char INDEX_PAGE[] PROGMEM = R"=====(
 
         <link rel="stylesheet" type="text/css" href="styles/listaPontos.css">
         <link rel="stylesheet" type="text/css" href="styles/popupAlert.css">
+        <link rel="stylesheet" type="text/css" href="styles/popupAlertFix.css">
 
         <script src="scripts/webSocket.js"></script>
         <script src="scripts/global.js"></script>

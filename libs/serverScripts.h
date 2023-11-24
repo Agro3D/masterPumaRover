@@ -44,8 +44,16 @@ void setupServerScripts(){
   // Rota para o script JS da página de pontos.
   server.on("/scripts/pontos.js", HTTP_GET, [](AsyncWebServerRequest *request){
     printString("\n\n##### Requisicao Recebida: /scripts/pontos.js");
-    printString("Enviando script.js ...");
+    printString("Enviando pontos.js ...");
     request->send(200, "text/javascript", PONTOS_SCRIPT);
+  });
+
+
+  // Rota para o script JS da página de arquivos.
+  server.on("/scripts/arquivos.js", HTTP_GET, [](AsyncWebServerRequest *request){
+    printString("\n\n##### Requisicao Recebida: /scripts/arquivos.js");
+    printString("Enviando arquivos.js ...");
+    request->send(200, "text/javascript", ARQUIVOS_SCRIPT);
   });
 
 

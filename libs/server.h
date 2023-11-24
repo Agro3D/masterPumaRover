@@ -106,10 +106,19 @@ void setupServer() {
 
 
 // Rota para receber a lista de arquivos do escravo.
+  server.on("/getCartaoSD", HTTP_GET, [](AsyncWebServerRequest *request){
+    printString("\n\n##### Requisicao Recebida: /getCartaoSD");
+    printString("Enviando status do cartao SD...");
+
+    request->send(200, "application/json", String(cartaosd));
+  });
+
+  
+// Rota para receber a lista de arquivos do escravo.
   server.on("/getFiles", HTTP_GET, [](AsyncWebServerRequest *request){
     printString("\n\n##### Requisicao Recebida: /getFiles");
     printString("Enviando lista de arquivos...");
-    // printString(listaArquivosStr);
+    printString(listaArquivosStr);
 
     request->send(200, "application/json", listaArquivosStr);
   });
@@ -123,8 +132,8 @@ void setupServer() {
 
     // Define a cota de referência com base no ponto recebido, com uma margem de erro.
     cotaRef = request->getParam("Ponto")->value().toFloat();
-    cotaRefInferior = cotaRef - MARGEM_COTA_REFERENCIA / 100.0;
-    cotaRefSuperior = cotaRef + MARGEM_COTA_REFERENCIA / 100.0;
+    cotaRefInferior = cotaRef - (MARGEM_COTA_REFERENCIA / 2) / 100.0;
+    cotaRefSuperior = cotaRef + (MARGEM_COTA_REFERENCIA / 2) / 100.0;
 
 
     request->send(200, "text/plain", "Definindo cota de referencia...");

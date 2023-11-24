@@ -4,8 +4,10 @@ function initIndex(){
     getStatus();
     getFiles();
     getPontos();
-    getSinal();
     getCotaReferencia();
+    verificaCartaoSD();
+    getSinal();
+    // newPopup("cartaoSD", 0);
 }
 
 function novoTrabalho() {

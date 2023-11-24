@@ -68,6 +68,7 @@ void setup() {
 
 
 
+  printString("");
   printString("Inicializando o servidor WebSocket");
   webSocket.begin();                                              // Iniciar o servidor WebSocket
   webSocket.onEvent(webSocketEvent);                              // Configura a função de manipulação de eventos do servidor WebSocket.
@@ -79,6 +80,11 @@ void setup() {
   setupServer();                                                  // Configura o servidor HTTP.
   server.begin();                                                 // Inicia o servidor web
   printString("Servidor HTTP iniciado em http://" + String(IP.toString()));
+
+
+  comandoEscravo = GET_CARTAOSD;                                  // Envia o comando de lista de arquivos para o escravo.
+  slaveSendHandler();                                             // Chama a função de manipulação de envio para o escravo.
+  slaveReceiveHandler();                                          // Chama a função de manipulação de recebimento do escravo.
 
 
   comandoEscravo = INICIALIZAR;                                   // Envia o comando de lista de arquivos para o escravo.
