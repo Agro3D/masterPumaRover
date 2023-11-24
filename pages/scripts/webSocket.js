@@ -21,9 +21,8 @@ function initWebSocket() {
         
         // Verifica se o WebSocket foi conectado e esta na página de arquivos
         if (event.data == 'Conectado') {
-            if (window.location.href == 'http://192.168.4.1/arquivos') {
-                enableButtosArquivos();
-            }
+            enableButtonsArquivos();
+            enableButtonsIndex();
             return;
         }
 
@@ -62,7 +61,7 @@ function initWebSocket() {
 
             case 'NOVO_PONTO':
                 incluirPontoLista(valor);
-                enableButtonPonto();
+                enableButtonsIndex();
                 break;
 
             case 'LISTAR_PONTOS':
@@ -75,7 +74,7 @@ function initWebSocket() {
 
             case 'ALERT_MESSAGE':
                 showMessage(valor['Mensagem'], valor['Cor']);
-                enableButtonPonto();
+                enableButtonsIndex();
                 break;
 
             case 'SINAL_RADIO':
