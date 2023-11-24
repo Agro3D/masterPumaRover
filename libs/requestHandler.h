@@ -90,6 +90,10 @@ void slaveSendHandler() {
     printString("\nRequisição de status enviada para o escravo");
     break;
     
+  case GET_CARTAOSD:
+    printString("\nRequisição de cartão SD enviada para o escravo");
+    break;
+    
   case HEAP_SIZE:
     printString("\nEnviando tamanho da heap para o escravo");
     break;

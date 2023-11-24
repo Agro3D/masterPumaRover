@@ -38,7 +38,7 @@ using namespace std;
 
 #define SEND_DATA_TRIES 5                                   // Número de tentativas de envio de dados para o escravo
 
-#define MARGEM_COTA_REFERENCIA 10                           // Margem de erro para a cota de referência, em centímetros(100cm = 1M)
+#define MARGEM_COTA_REFERENCIA 2                            // Margem de erro para a cota de referência, em centímetros(100cm = 1M)
 
 
 // Definições dos pinos utilizados no sistema
@@ -77,6 +77,7 @@ using namespace std;
 
 #define SINAL_RADIO 95                                   // Mensagem para receber o status do sinal de rádio do escravo
 
+#define GET_CARTAOSD 97                                       // Mensagem para solicitar o status do cartão SD
 #define GET_STATUS 98                                       // Mensagem para solicitar o status do escravo
 #define ACK_MSG 99                                          // Mensagem de confirmação de comunicação com o escravo
 
@@ -102,6 +103,7 @@ AsyncWebServer server(SERVER_PORT);                         // Cria o servidor w
 WebSocketsServer webSocket = WebSocketsServer(81);          // Cria o servidor web socket na porta 81
 HardwareSerial MySerial(1);                                 // Use the 2nd hardware serial port. 0 is connected to the USB
 
+bool cartaosd = false;                                      // Flag para controlar se o escravo possui um cartão SD
 bool hasComunication = false;                               // Flag para controlar se a comunicação com o escravo está estabelecida
 bool serverStarted = false;                                 // Flag para controlar se o servidor web está iniciado
 bool receberMensagens = false;                              // Flag para controlar o recebimento de mensagens do escravo
@@ -184,6 +186,7 @@ void configuraLedRTK(char status);
 
 // Páginas do servidor web
 #include "../server/header.h"               // Cabeçalho da página do servidor web
+#include "../server/popupAlertFix.h"        // Popup de alerta fixo
 #include "../server/index.h"                // Página principal
 #include "../server/arquivos.h"             // Página arquivo
 
@@ -196,6 +199,7 @@ void configuraLedRTK(char status);
 #include "../server/indexStatusStyle.h"     // Estilo CSS da página principal (status)
 #include "../server/listaPontosStyle.h"     // Estilo CSS da lista de pontos
 #include "../server/popupStyle.h"           // Estilo CSS do popup de novo ponto
+#include "../server/popupFixStyle.h"        // Estilo CSS do popup de alerta fixo
 #include "../server/arquivosStyle.h"        // Estilo CSS da página arquivos
 
 
@@ -205,6 +209,7 @@ void configuraLedRTK(char status);
 #include "../server/indexStatusScript.h"    // Script JS da página principal (status)
 #include "../server/sinalRadioScript.h"     // Script JS da torre de sinal do rádio
 #include "../server/pontosScript.h"         // Script JS da página arquivos
+#include "../server/arquivosScript.h"       // Script JS da página arquivos
 #include "../server/webSocketScript.h"      // Script JS do webSocket
 
 

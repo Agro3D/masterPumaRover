@@ -1,4 +1,4 @@
-//Página de scripts da página de pontos do servidor    
+//Página de scripts para os pontos do servidor
 char PONTOS_SCRIPT[] PROGMEM = R"=====(
 async  function novoPonto(){
 
@@ -123,7 +123,7 @@ async function pontoReferencia(){
 
 
 // Função para habilitar o botão de novo ponto
-function enableButton(){
+function enableButtonPonto(){
     document.getElementById('botaoNovoPonto').disabled = false;
     document.getElementById('botaoNovoPonto').className = '';
 

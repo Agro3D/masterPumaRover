@@ -116,6 +116,23 @@ echo "$file" >| server/popupStyle.h
 echo "Gerando popupStyle.h... OK"
 
 
+
+# Página de estilos do popup fixo de avisos (popupStyleFix.css)
+echo "Gerando popupFixStyle.h..."
+
+start='//Página de estilos do popup fixo de avisos
+char POPUP_FIX_STYLE[] PROGMEM = R"=====(
+
+'
+end='
+
+)=====";'
+
+file="$start$(<pages/styles/popupAlertFix.css)$end"
+echo "$file" >| server/popupFixStyle.h
+echo "Gerando popupFixStyle.h... OK"
+
+
 # Página de estilos da página inicial do servidor (arquivosStyle.css)
 echo "Gerando arquivosStyle.h..."
 

@@ -1,3 +1,5 @@
+//Página de scripts da pagina de arquivos do servidor
+char ARQUIVOS_SCRIPT[] PROGMEM = R"=====(
 
 window.onload = loadFiles();
 
@@ -81,3 +83,5 @@ function deletarArquivo(Arquivo){
         });
     }
 }
+
+)=====";

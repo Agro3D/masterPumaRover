@@ -106,10 +106,19 @@ void setupServer() {
 
 
 // Rota para receber a lista de arquivos do escravo.
+  server.on("/getCartaoSD", HTTP_GET, [](AsyncWebServerRequest *request){
+    printString("\n\n##### Requisicao Recebida: /getCartaoSD");
+    printString("Enviando status do cartao SD...");
+
+    request->send(200, "application/json", String(cartaosd));
+  });
+
+  
+// Rota para receber a lista de arquivos do escravo.
   server.on("/getFiles", HTTP_GET, [](AsyncWebServerRequest *request){
     printString("\n\n##### Requisicao Recebida: /getFiles");
     printString("Enviando lista de arquivos...");
-    // printString(listaArquivosStr);
+    printString(listaArquivosStr);
 
     request->send(200, "application/json", listaArquivosStr);
   });

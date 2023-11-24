@@ -18,12 +18,18 @@ function initWebSocket() {
     ws.onmessage = async function (event) {
         // console.log('Server: ', event.data);
 
+        
+        // Verifica se o WebSocket foi conectado e esta na página de arquivos
         if (event.data == 'Conectado') {
-            if (window.location.href == 'http://192.168.4.1/') {    enableButton(); }
+            if (window.location.href == 'http://192.168.4.1/arquivos') {
+                enableButtosArquivos();
+            }
             return;
         }
 
-        if (event.data == 'ESPERANDO' || event.data == 'TRABALHANDO') { return; }
+        
+
+        if (event.data == 'ESPERANDO' || event.data == 'TRABALHANDO'){ return; }
 
         // Transform event.data to json
         console.log(event.data);
@@ -56,7 +62,7 @@ function initWebSocket() {
 
             case 'NOVO_PONTO':
                 incluirPontoLista(valor);
-                enableButton();
+                enableButtonPonto();
                 break;
 
             case 'LISTAR_PONTOS':
@@ -69,7 +75,7 @@ function initWebSocket() {
 
             case 'ALERT_MESSAGE':
                 showMessage(valor['Mensagem'], valor['Cor']);
-                enableButton();
+                enableButtonPonto();
                 break;
 
             case 'SINAL_RADIO':

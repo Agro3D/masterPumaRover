@@ -121,7 +121,7 @@ async function pontoReferencia(){
 
 
 // Função para habilitar o botão de novo ponto
-function enableButton(){
+function enableButtonPonto(){
     document.getElementById('botaoNovoPonto').disabled = false;
     document.getElementById('botaoNovoPonto').className = '';
 

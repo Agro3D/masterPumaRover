@@ -36,6 +36,21 @@ echo "$file" >| server/header.h
 echo "Gerando header.h... OK"
 
 
+# PopUp do servidor (popupAlert.html)
+echo "Gerando popupAlert.h..."
+
+start='//PopUp do servidor
+char POPUPALERTFIX_PAGE[] PROGMEM = R"=====(
+    
+'
+end='
+
+)=====";'
+file="$start$(<pages/popupAlertFix.html)$end"
+echo "$file" >| server/popupAlertFix.h
+echo "Gerando popupAlertFix.h... OK"
+
+
 # Página de arquivos do servidor (arquivos.html)
 echo "Gerando arquivos.h..."
 
