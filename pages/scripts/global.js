@@ -64,7 +64,7 @@ function newPopup(mensagem, dado){
         xhttpPopup.send();
     }
 
-    setTimeout(function(){
+    setTimeout(function asd(){
         document.getElementById("messageAlertFix").className = "messageFix show"; /* Mostrar a mensagem */
         document.getElementById("messageAlertFix").style.backgroundColor = "#a011ff"; /* Muda a cor do fundo */
         
@@ -73,6 +73,9 @@ function newPopup(mensagem, dado){
             document.getElementById("messageAlertFix").style.backgroundColor = "#CC2020"; /* Muda a cor do fundo */
             document.getElementById("messageAlertFixText").innerHTML = `Cartão SD não foi detectado. Por favor,
                                                                     insira um cartão SD e reinicie o aparelho.`; /* Mostrar a mensagem */
+    
+            // Renova a função de verificação do sinal de rádio, pois ambas utilizam o mesmo timer
+            getSinal();
         }
     }, 200);
 }

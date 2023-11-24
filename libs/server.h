@@ -132,8 +132,8 @@ void setupServer() {
 
     // Define a cota de referência com base no ponto recebido, com uma margem de erro.
     cotaRef = request->getParam("Ponto")->value().toFloat();
-    cotaRefInferior = cotaRef - MARGEM_COTA_REFERENCIA / 100.0;
-    cotaRefSuperior = cotaRef + MARGEM_COTA_REFERENCIA / 100.0;
+    cotaRefInferior = cotaRef - (MARGEM_COTA_REFERENCIA / 2) / 100.0;
+    cotaRefSuperior = cotaRef + (MARGEM_COTA_REFERENCIA / 2) / 100.0;
 
 
     request->send(200, "text/plain", "Definindo cota de referencia...");

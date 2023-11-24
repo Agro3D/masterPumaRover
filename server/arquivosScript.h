@@ -49,7 +49,7 @@ async function loadFiles(){
 }
 
 
-function enableButtosArquivos() {
+function enableButtonsArquivos() {
     // Seleciona todos os botões
     var buttons = document.getElementsByTagName("button");
     
