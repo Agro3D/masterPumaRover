@@ -63,6 +63,10 @@ function listarPontos(pontos){
     document.getElementById("listaPontos").innerHTML = "Nenhum ponto registrado";
     var html = "";
 
+    console.log(pontos);
+    pontos["Pontos"].reverse();
+    console.log(pontos);
+
     pontos["Pontos"].forEach(ponto => {
         html += "<div class='ponto' onclick='expandPonto(this)'>";
         html += "<div class='pontoNome'>" + ponto["Ponto"] + "</div>";
@@ -88,7 +92,7 @@ function incluirPontoLista(ponto){
     document.getElementById("listaPontos").innerHTML == "Carregando..." ){
         document.getElementById("listaPontos").innerHTML = html;
     }else{
-        document.getElementById("listaPontos").innerHTML += html;
+        document.getElementById("listaPontos").innerHTML = html + document.getElementById("listaPontos").innerHTML;
     }
 }
 

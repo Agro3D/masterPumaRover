@@ -23,9 +23,10 @@ function initWebSocket() {
         
         // Verifica se o WebSocket foi conectado e esta na página de arquivos
         if (event.data == 'Conectado') {
-            if (window.location.href == 'http://192.168.4.1/arquivos') {
+            // Verificar a URL
+            if(window.location.href.indexOf("arquivos") > -1) {
                 enableButtonsArquivos();
-            }else {
+            } else{
                 enableButtonsIndex();
             }
             return;
@@ -44,10 +45,12 @@ function initWebSocket() {
         switch(mensagem) {
             case 'Cota':
                 document.getElementById('cotaValor').innerHTML = valor.toFixed(3);
-                if (data['Status'] == "CERTO")
-                    document.getElementById('cotaQuadro').className = 'cotaCerta';
-                else
-                    document.getElementById('cotaQuadro').className = 'cotaErrada';
+                if (data['Precisao'] == 0)
+                    document.getElementById('cotaQuadro').style.backgroundColor = '#0b600c';
+                else if (data['Precisao'] == 1)
+                    document.getElementById('cotaQuadro').style.backgroundColor = '#0b2960';
+                else if (data['Precisao'] == -1)
+                    document.getElementById('cotaQuadro').style.backgroundColor = '#600b0b';
                 break;
 
             case 'LAT_LON':
