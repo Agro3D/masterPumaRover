@@ -46,9 +46,9 @@ function initWebSocket() {
                 if (data['Precisao'] == 0)
                     document.getElementById('cotaQuadro').style.backgroundColor = '#0b600c';
                 else if (data['Precisao'] == 1)
-                    document.getElementById('cotaQuadro').style.backgroundColor = '#0b2960';
+                    document.getElementById('cotaQuadro').style.backgroundColor = '#131e84';
                 else if (data['Precisao'] == -1)
-                    document.getElementById('cotaQuadro').style.backgroundColor = '#600b0b';
+                    document.getElementById('cotaQuadro').style.backgroundColor = '#840f0f';
                 else if (data['Precisao'] == 7)
                     document.getElementById('cotaQuadro').style.backgroundColor = '#050505';
                 break;

@@ -105,7 +105,9 @@ void processaNMEAGGA(String nmeastr) {
   // printString("");
   // printStringNoBreak("Cota: " + String(cota));
 
-  if (cota.toFloat() >= cotaRefInferior && cota.toFloat() <= cotaRefSuperior){
+  if (cotaRefInferior == FLT_MIN || cotaRefSuperior == FLT_MIN){
+    webSocket.broadcastTXT("{\"Mensagem\": \"Cota\", \"Valor\": " + cota + ", \"Precisao\": 7}");
+  } else if (cota.toFloat() >= cotaRefInferior && cota.toFloat() <= cotaRefSuperior){
     // printString(" dentro da faixa de referência");
     webSocket.broadcastTXT("{\"Mensagem\": \"Cota\", \"Valor\": " + cota + ", \"Precisao\": 0}");
   } else if(cota.toFloat() > cotaRefSuperior){
@@ -114,9 +116,6 @@ void processaNMEAGGA(String nmeastr) {
   } else if(cota.toFloat() < cotaRefInferior){
     // printString(" fora da faixa de referência");
     webSocket.broadcastTXT("{\"Mensagem\": \"Cota\", \"Valor\": " + cota + ", \"Precisao\": -1}");
-  } else {
-    // printString(" erro");
-    webSocket.broadcastTXT("{\"Mensagem\": \"Cota\", \"Valor\": " + cota + ", \"Precisao\": 7}");
   }
 
   // printString("Status code: " + String(RTKAtual));

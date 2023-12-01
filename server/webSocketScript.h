@@ -51,6 +51,8 @@ function initWebSocket() {
                     document.getElementById('cotaQuadro').style.backgroundColor = '#0b2960';
                 else if (data['Precisao'] == -1)
                     document.getElementById('cotaQuadro').style.backgroundColor = '#600b0b';
+                else if (data['Precisao'] == 7)
+                    document.getElementById('cotaQuadro').style.backgroundColor = '#050505';
                 break;
 
             case 'LAT_LON':
