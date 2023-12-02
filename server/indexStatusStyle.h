@@ -59,6 +59,7 @@ char INDEX_STATUS_STYLE[] PROGMEM = R"=====(
 #cotaQuadro{
     display: flex;
     flex-direction: column;
+    background-color: #050505;
     align-items: center;
     justify-content: center;
     width: 100%;
@@ -80,13 +81,6 @@ char INDEX_STATUS_STYLE[] PROGMEM = R"=====(
     letter-spacing: 0.8vh;
 }
 
-.cotaErrada{
-    background-color: #050505;
-}
-
-.cotaCerta{
-    background-color: #0b600c;
-}
 
 #cotaReferencia{
     display: flex;
