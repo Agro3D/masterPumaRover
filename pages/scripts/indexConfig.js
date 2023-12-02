@@ -55,7 +55,6 @@ function novoTrabalho() {
         return;
     }
 
-    configJson.velocidadeTransmissao = document.getElementById("velocidadeRadioSelect").value;
     configJson.taxaAtualizacao = document.getElementById("frequenciaTransmissao").value;
 
 
@@ -126,7 +125,6 @@ function limparConteudo(){
 
 
     document.getElementById("frequenciaRadioValor").value = 430;
-    document.getElementById("velocidadeRadioSelect").value = 1;
 
     document.getElementById("frequenciaTransmissao").value = 1;
 
