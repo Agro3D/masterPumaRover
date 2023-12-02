@@ -10,7 +10,6 @@ function initIndex(){
     getCotaReferencia();
     verificaCartaoSD();
     getSinal();
-    // newPopup("cartaoSD", 0);
 }
 
 function novoTrabalho() {
@@ -18,15 +17,29 @@ function novoTrabalho() {
     
     var configJson = {};
     var frequencia = document.getElementById("frequenciaRadioValor").value;
-
+    
     if (frequencia == ""){
         alert("Preencha todos os campos")
         document.getElementById("configuracoes").className = "visivel";
         document.getElementById("status").className = "naoVisivel";
+        document.getElementById("botaoNovaConfig").disabled = false;
         return;
-    }else{
-        configJson.radioFrequencia = frequencia;
-        }
+    }
+    
+    // Transforma a frequencia em um numero inteiro`
+    console.log(frequencia)
+    frequencia = parseInt(frequencia);
+    console.log(frequencia)
+    if (frequencia < 410 || frequencia > 470){
+        alert("Frequência de rádio inválida!\nFrequencia Permitida: 450 - 470 MHz");
+        document.getElementById("configuracoes").className = "visivel";
+        document.getElementById("status").className = "naoVisivel";
+        document.getElementById("botaoNovaConfig").disabled = false;
+            return;
+    }
+    configJson.radioFrequencia = frequencia - 410;
+
+
 
     var numConstelations = 0;
     // Verifica quais constelacoes estao selecionadas e atribui ao objeto configJson
@@ -45,6 +58,7 @@ function novoTrabalho() {
         alert("Selecione ao menos uma constelação!");
         document.getElementById("configuracoes").className = "visivel";
         document.getElementById("status").className = "naoVisivel";
+        document.getElementById("botaoNovaConfig").disabled = false;
         return;
     }
 

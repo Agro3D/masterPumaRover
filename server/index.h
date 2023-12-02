@@ -48,7 +48,7 @@ char INDEX_PAGE[] PROGMEM = R"=====(
                         <div id="frequenciaRadio" class="optionsRadio">
                             <p class="titulo">Frequencia do rádio</p>
                             <div id="frequenciaValor">
-                                <input type="number" id="frequenciaRadioValor" class="input" min="430" max="470" value="430"> MHZ
+                                <input type="number" id="frequenciaRadioValor" class="input" min="450" max="470" value="463"> MHZ
                             </div>
                         </div>
                     

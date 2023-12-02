@@ -110,7 +110,7 @@ end='
 
 file="$start$(<pages/scripts/sinalRadio.js)$end"
 echo "$file" >| server/sinalRadioScript.h
-echo "Gerando 
+echo "Gerando sinalRadioScript.h... OK"
 
 
 echo "Gerando arquivos .js em arquivos .h... OK"
